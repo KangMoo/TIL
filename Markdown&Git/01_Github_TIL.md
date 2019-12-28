@@ -109,7 +109,7 @@
 
 
 
-### (3) 저장 후 버전관리 : `add` , `commit` , `push`
+### (3) 저장 후 버전관리 : `add` , `commit` , `push`, `pull`
 
 * 작성이 완료되면 아래의 명령어를 통해 commit 이력을 남기고 원격 저장소로 push한다.
 
@@ -117,8 +117,9 @@
   $ git add README.md
   $ git commit -m "add README.md"
   $ git push origin master
-  ```
-
+  $ git pull origin master
+```
+  
   
 
 ## 4. 추가 학습 내용 관리
