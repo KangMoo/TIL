@@ -271,37 +271,293 @@
 
 ## 맵
 
+#### 맵
 
+* key와 value가 동시에 저장되는 컨테이너
+* 키는 중복될 수 없음
+* C++맵은 자동 정렬되는 컨테이너다..
+* 이진 탐색 트릭 기반
+  * 오름차순
+
+
+
+#### 맵 만들기
+
+* `map<<key_type>,<value_type>><name>` :빈 맵 생성
+* `map<<key_type>,<value_type>><name>(const map& x)` : x라는 map과 같은 크기(size)와 데이터를 갖는 map을 생성
+
+> ```c++
+> std::map<std::string, int> simpleScoreMap;
+> std::map<StudentInfo, int> simpleScoreMap;
+> std::map<std::string, int> copiedSimpleScoreMap(copiedSimpleScoreMap);
+> ```
+
+
+
+#### 맵 사용 예시
+
+>```c++
+>#include<map>
+>int main()
+>{
+>    std::map<std::string, int> simpleScoreMap;
+>
+>    simpleScoreMap.insert(std::pair<std::string, int>("Mocha",100));
+>    simpleScoreMap.insert(std::pair<std::string, int>("Coco", 50));
+>
+>    simpleScoreMap["Mocha"] = 0;
+>
+>    std::cout<<"Current size: " << simpleScoreMap.size() << std::endl;
+>
+>    return 0;
+>}
+>```
+
+
+
+#### 페어(pair), 쌍
+
+* `pair<first_type, second_type>`
+* 두 데이터를 한 단위로 저장하는 구조
+
+
+
+#### insert
+
+* 새 요소를 map에 삽입한다
+
+* 반복자와 bool값을 쌍으로 반환
+
+  * 반복자는 요소를 가리키고
+  * bool값은 삽읍 결과를 알려줌
+
+* **키를 중복으로 삽입할 수 없음**
+
+  > ```c++
+  > //<iterator, true>를 반환한다
+  > simpleScoreMap.insert(std::pair<std::string, int>("Mocha", 100));
+  > 
+  > //<iterator, false>를 반환한다
+  > simpleScoreMap.insert(std::pair<std::string, int>("Mocha",0));
+  > ```
+
+
+
+#### operator[]
+
+* `mapped_type& operator[](const key& key);`
+
+* key에 대응하는 값을 참조로 반환한다
+
+* map에 키가 없으면 새 요소를 삽입한다
+
+* map에 키가 있으면 그 값을 덮어씀 (주의 필요!!)
+
+  > ```c++
+  > std::map<std::string, int>simpleScoreMap;
+  > 
+  > simpleScoreMap["Coco"] = 10; //새 요소를 삽입
+  > simpleScoreMap["Coco"] = 50; //"Coco"의 값을 덮어쓴다
+  > ```
+
+
+
+#### 자동 정렬
+
+* key값에 따라 오름차순으로 정렬됨
+
+
+
+#### 요소 찾기
+
+* `operator[]`를 사용할 시 문제 생길 수 있음
+
+* `find()`
+
+  * map안에서 찾으면 그에 대응하는 값을 참조로 반환
+  * 찾지 못하면 `end()`반환
+
+* 예시
+
+  > ```c++
+  > std::map<std::string,int>::iterator it = simpleScoreMap.find("Mocha");
+  > if(it != simpleScoreMap.end())
+  > {
+  >     it->second = 80;
+  > }
+  > ```
+
+
+
+#### `swap()`, `clear()`, `erase()`
+
+* `swap()`
+
+  * 두 map의 키와 값을 바꾼다
+
+* `clear()`
+
+  * 맵을 비운다
+
+* `erase()`
+
+  * map의 요소들을 제거한다
+
+    > ```c++
+    > std::map<std::string,int>::iterator foundIt = simpleScoreMap.find("Mocha");
+    > simpleScoreMap.erase(foundIt);
+    > 
+    > simpleScoreMap.erase("Coco");
+    > ```
+
+
+
+#### 개체를 키로 사용하기
+
+* 개체를 키로 정렬하려면 `operator<()`를 정의해야함
+
+  * 정렬이 되야 하기 때문
+
+  > 예시
+  >
+  > ```c++
+  > bool StudentInfo::operator<(const StudentInfo& other) const
+  > {
+  >     if (mName == other.mName)
+  >     {
+  >         return mStudentID < other.StudentID;
+  >     }
+  >     return mName < other.mName;
+  > }
+  > ```
+
+* 다른 방법 : map을 만들 때 비교함수(compare)를 넣을 수도 있음
+
+  * 남이 만든 구조체를 바꾸고 싶을 때 사용
+
+    > 예시
+    >
+    > ```c++
+    > struct StudentInfoComparer
+    > {
+    >     bool operator()(const StudentInfo& left, const StudentInfo& right) const
+    >     {
+    >         return (left.getName() < right.getName());
+    >     }
+    > }
+    > std::map<StudentInfo, int, StudentInfoComaprer> scores;
+    > ```
+
+
+
+#### map의 장단점
+
+* 장점
+  * list나 vector보다 탐색 속도가 빠름
+    * O(logN)
+* 단점
+  * 자동으로 정렬됨
+  * 해쉬맵이 아님, 따라서 O(1)이 아님
+  * C++에 해결책이 있음
 
 
 
 ## 셋
 
+#### 셋
 
+- 정렬되는 컨테이너
+
+- 중복되지 않는 키를 요소로 저장함
+
+- 이진 탐색 트리 기반
+
+- - 오름 차순
+
+- 맵에서 value를 없앤거…
+
+ 
+
+#### 장점과 단점
+
+- map과 같음
 
 
 
 ## 큐
 
-
+- 선입 선출 자료구조
 
 
 
 ## 스택
 
-
+* 후입 선출 자료구조
 
 
 
 ## 리스트
 
+#### 리스트
 
+* 실무에서는 거의 벡터와 맵으로 끝나긴 함...
+* C++에서 STL리스트란?
+  * 양방향 연결 리스트(이중 연결 리스트)
+  * `operator[]`가 없음
+  * 양쪽 긑에서 삽입/제거 가능
+
+
+
+#### 요소 삽입 삭제
+
+* `push_front()`, `push_back()`
+* `pop_front()`, `pop_back()`
+* `erase()`
+
+
+
+#### 리스트의 다른 메서드들
+
+* 정렬하기
+* 두 리스트 합치기
+* 한 리스트에서 빼 내어 다른 리스트에 넣기
+* 중복인 요소들 제거하기
+* ...
+
+
+
+#### 장점과 단점
+
+* 장점
+  * 삽입과 제거에 걸리는 시간 : O(1)
+  * 어느 위치든 삽입/삭제 가능
+* 단점
+  * 탐색이 느린 편
+  * 임의적으로 접근 불가
+  * 메모리가 불연속적
+    * cpu 캐쉬와 잘 작동하지 않음
 
 
 
 ## 기타
 
+#### 멀티셋
 
+- 중복 키를 허용
+- 요소를 수정하면 안 됨
+
+#### 멀티맵
+
+- 중복 키를 허용
+
+#### 덱(디큐)
+
+- Double-ended     queue의 약자
+- 양쪽 끝에서 요소 삽입과 삭제 가능
+
+- 우선순위 큐
+
+- 자동 정렬되는 큐
 
 
 
