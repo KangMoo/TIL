@@ -47,13 +47,21 @@
 
 
 
-#### 코드로 관리하는 인프라 와 불변 인프라
+#### Dockerfile
 
-* Infrastructure as Code & Immutable Insfrastructure
+* Docker Image를 생성하기 위한 스크립트 파일
+* 자체 DSL(Domain-Specific language) 언어 사용 -> 이미지 생성과정 기술
+  * 서버에 프로그램을 설치하는 과정을 메모장이 아닌 Dockerfile로 관리
+  * 소스와 함께 버전 관리가 되며, 누구나 사용 가능
+
+* 대소문자 구분 해야함
+* 확장자 없음
+* Dockerfile하나 당 컨테이너 하나! (FROM 하나!)
+  * 추가적인 설치는 RUN명령어 등을 사용
 
 
 
-#### Docker사용법 예제
+#### Dockerfile 사용법 예제
 
 * 일반적인 개발 방식 예시
 
@@ -87,7 +95,7 @@
   > > CMD ["npm", "start"]
   > > ```
   >
-  >  	2. Docker이미지 생성
+  >   2. Docker이미지 생성
   >
   > > 예시
   > >
@@ -100,6 +108,14 @@
   > > `docker run -d -p 8080 hkm0629/simpleweb:latest`
 
   
+
+
+
+#### 코드로 관리하는 인프라 와 불변 인프라
+
+* Infrastructure as Code & Immutable Insfrastructure
+
+
 
 
 
