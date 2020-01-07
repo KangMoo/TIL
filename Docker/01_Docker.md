@@ -44,7 +44,6 @@
 #### Docker Container
 
 * 도커 이미지를 기반으로 생성되며, 파일 시스템과 어플리케이션이 구체화 되어 실행되는 상태
-* 
 
 
 
@@ -54,7 +53,61 @@
 
 
 
+#### Docker활용
 
+1. 일단 개발..
+2. `npm install`, `npm start`
+3. 
+
+
+
+## 명령어
+
+* 기본명령어
+
+  > ```shell
+  > $ docker login // 로그인
+  > $ docker version // 버전 확인
+  > ```
+
+* 이미지
+
+  > ```shell
+  > $ docker image ls	// 이미지 리스트 확인
+  > $ docker image pull ~	// ~로부터 이미지 당겨오기
+  > ```
+
+* 컨테이너
+
+  > ```shell
+  > $ docker contianer ls	// 컨테이너 리스트 확인
+  > $ docker ps	//컨테이너 리스트 확인
+  > 		-a // 모든 컨테이너 리스트 확인
+  > 		-q // 컨테이너 이름만 확인
+  > $ docker container rm	// 컨테이너 삭제 (먼저 stop되어 있어야 함)
+  > $ docker container prun	// stop되어 있는 컨테이너 모두 삭제
+  > ```
+
+* 실행 & 종료
+
+  > ```shell
+  > $ docker run ~	// ~이미지 실행하여 컨테이너로 생성
+  > 		-p [port]	// [port]번호로 포트 연결 (앞에 값이 없으면 호스트 포트 알아서 연결) \
+  > 					// [host포트]:[contianer포트] 호스트 포트와 컨테이너 포트 연결
+  > 		--name [name]	// 컨테이너 이름 지정
+  > 		-d			// 백그라운드로 실행
+  > $ docker stop ~ // ~에 해당하는 이름 혹은 ID의 컨테이너 종료 (뒤에 여러 개 올 수 있음)
+  > 
+  > ```
+
+* 기타
+
+  > ```shell
+  > $ docker stop $(docker ps -q)	// 실행중인 모든 컨테이너 중지
+  > $ docker rm $(docker ps -qa)	// 모든 컨테이너 제거
+  > ```
+  >
+  > 
 
 
 
