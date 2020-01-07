@@ -53,7 +53,7 @@
 
 
 
-#### Docker활용
+#### Docker사용법 예제
 
 * 일반적인 개발 방식 예시
 
@@ -70,6 +70,7 @@
   > >
   > >```dockerfile
   > >FROM alpine
+  > >WORKDIR [dir]
   > >COPY [소스][대상]
   > >RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
   > >RUN npm install
@@ -80,6 +81,7 @@
   > >
   > > ```dockerfile
   > > FROM node:alpine
+  > > WORKDIR [dir]
   > > COPY [소스][대상]
   > > RUN npm install
   > > CMD ["npm", "start"]
@@ -87,10 +89,14 @@
   >
   >  	2. Docker이미지 생성
   >
+  > > 예시
+  > >
   > > `docker build -t hkm0629/simpleweb:latest .`
   >
   > 3. 컨테이너 생성
   >
+  > > 예시
+  > >
   > > `docker run -d -p 8080 hkm0629/simpleweb:latest`
 
   
@@ -102,63 +108,75 @@
 * 기본명령어
 
   > ```shell
-  > $ docker login // 로그인
-  > $ docker version // 버전 확인
+  > $ docker login # 로그인
+  > $ docker version # 버전 확인
   > ```
 
 * 이미지
 
   > ```shell
-  > $ docker images		// 이미지 리스트 확인
-  > $ docker image ls	// 이미지 리스트 확인
+  > $ docker images		# 이미지 리스트 확인
+  > $ docker image ls	# 이미지 리스트 확인
   > 
-  > $ docker image pull [ImageName]	// [ImageName]로부터 이미지 pull
-  > $ docker image push [ImageName]	// [ImageName]로 이미지 push
+  > $ docker image pull [ImageName]	# [ImageName]로부터 이미지 pull
+  > $ docker image push [ImageName]	# [ImageName]로 이미지 push
   > 
-  > $ docker image build -t [저장소이름] [디렉토리]
+  > $ docker image build -t [저장소이름] [디렉토리]	# 이미지 빌드
   > 
-  > $ docker image rm [ImageName]	// 이미지 삭제
-  > $ docker rmi [ImageName]		// 이미지 삭제
+  > $ docker image rm [ImageName]	# 이미지 삭제
+  > $ docker rmi [ImageName]		# 이미지 삭제
   > ```
 
 * 컨테이너
 
   > ```shell
-  > $ docker contianer ls	// 컨테이너 리스트 확인
+  > $ docker contianer ls	# 컨테이너 리스트 확인
   > 
-  > $ docker ps	//컨테이너 리스트 확인
-  > 		-a // 모든 컨테이너 리스트 확인
-  > 		-q // 컨테이너 이름만 확인
-  > 		
-  > $ docker container rm	// 컨테이너 삭제 (먼저 stop되어 있어야 함)
+  > $ docker ps	#컨테이너 리스트 확인
+  > 		-a # 모든 컨테이너 리스트 확인
+  > 		-q # 컨테이너 이름만 확인
+  >         
+  > $ docker restart [ContainerID]	# 컨테이너 재시작
+  > $ docker container rm	# 컨테이너 삭제 (먼저 stop되어 있어야 함)
   > 
-  > $ docker container prun	// stop되어 있는 컨테이너 모두 삭제
+  > $ docker container prun	# stop되어 있는 컨테이너 모두 삭제
+  > 
+  > $ docker exec -i -t [ContainerID] [command]	# 컨테이너의 Shell에 [command] 명령 전달&수행
+  > $ docker exec -it [ContainerID] [command]	# 컨테이너의 Shell에 [command] 명령 전달&수행
+  > $ docker exec -it [ContainerID] sh	# 컨테이너에 입력모드로 터미널 연결
   > ```
 
 * 실행 & 종료
 
   > ```shell
-  > $ docker run [ImageName]	// [ImageName]이미지 실행하여 컨테이너로 생성
-  > 		-p [port]	// [port]번호로 포트 연결 (앞에 값이 없으면 호스트 포트 알아서 연결) \
-  > 					// [host포트]:[contianer포트] 호스트 포트와 컨테이너 포트 연결
-  > 		--name [name]	// 컨테이너 이름 지정
-  > 		-d			// 백그라운드로 실행
+  > $ docker run [ImageName]	# [ImageName]이미지 실행하여 컨테이너로 생성
+  > 		-p [port]	# [port]번호로 포트 연결 (앞에 값이 없으면 호스트 포트 알아서 연결) \
+  > 					# [host포트]:[contianer포트] 호스트 포트와 컨테이너 포트 연결
+  > 		--name [name]	# 컨테이너 이름 지정
+  > 		-d			# 백그라운드로 실행
   > 		
-  > $ docker stop ~ // ~에 해당하는 이름 혹은 ID의 컨테이너 종료 (뒤에 여러 개 올 수 있음)
-  > 
+  > $ docker stop [ContainerID] # [ContainerID] 에 해당하는 컨테이너 종료 (뒤에 여러 개 올 수 있음)
   > ```
 
 * 기타
 
   > ```shell
-  > $ docker logs [ContainerName]	//
+  > $ docker tag [ImgName]:[tag] [ImgName]:[NewTag]	# 태그 추가
   > 
-  > $ docker stop $(docker ps -q)	// 실행중인 모든 컨테이너 중지
+  > $ docker logs [ContainerName]	# 컨테이너의 로그 확인
   > 
-  > $ docker rm $(docker ps -qa)	// 모든 컨테이너 제거
+  > $ docker stop $(docker ps -q)	# 실행중인 모든 컨테이너 중지
+  > 
+  > $ docker rm $(docker ps -qa)	# 모든 컨테이너 제거
   > ```
-  >
-  > 
+
+
+
+#### 기타사항
+
+* 컨테이너의 `CONTAINER ID`는 Host name이다
+
+
 
 
 
