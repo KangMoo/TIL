@@ -55,4 +55,37 @@
 > nova volume-attach cm _uuid auto
 > ```
 >
-> 
+
+
+
+## NEUTRON
+
+> ```shell
+> neutron net-list
+> neutron port-list
+> neutron router-create
+> neutron net-create net1
+> neutron subnet-create
+> neutron router-gateway-set
+> neutron router-interface-add
+> neutron floatingip-create
+> neutron floatingip-list
+> neutron floatingip-associate
+> neutron agent-list
+> ```
+
+
+
+## Swift
+
+> ```shell
+> #swift post c1
+> #swift post c2
+> #swift upload c1 /etc/passwd
+> #swift list c1 –lh
+> #cd /var/tmp
+> #swift download c1
+> ```
+
+
+
