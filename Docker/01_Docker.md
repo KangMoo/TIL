@@ -170,7 +170,7 @@
   > 					# [host포트]:[contianer포트] 호스트 포트와 컨테이너 포트 연결
   > 		--name [name]	# 컨테이너 이름 지정
   > 		-d			# 백그라운드로 실행
-  > 		
+  > 		-v [host경로]:[Container경로]	# 볼륨 마운트 (공유폴더). (컨테이너를 마운트 시킬 수도 있음)
   > $ docker stop [ContainerID] # [ContainerID] 에 해당하는 컨테이너 종료 (뒤에 여러 개 올 수 있음)
   > ```
 
@@ -191,8 +191,3 @@
 #### 기타사항
 
 * 컨테이너의 `CONTAINER ID`는 Host name이다
-
-
-
-
-
