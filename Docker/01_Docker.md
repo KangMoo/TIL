@@ -184,6 +184,8 @@
   > $ docker stop $(docker ps -q)	# 실행중인 모든 컨테이너 중지
   > 
   > $ docker rm $(docker ps -qa)	# 모든 컨테이너 제거
+  > 
+  > $ docker inspect [ContainerName]	# 컨테이너의 정보 확인
   > ```
 
 
