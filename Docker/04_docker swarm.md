@@ -29,3 +29,55 @@ Dockerfile -> Compose -> Service -> Stack
 
 
 
+#### Manager에 Swarm설정
+
+* Manager container에 docker swarm init 설정 -> Swarm 모드 활성화
+* worker 컨테이너 등록 with join token
+
+
+
+#### 레지스트리에 등록 방법
+
+* 이미지 태그를 변경
+
+  > 예시
+  >
+  > `docker tag busybox:latest localhost:5000/busybox:latest`
+
+* 이미지를 로컬 호스트로 추가
+
+  > 예시
+  >
+  > `docker push localhost:5000/busybox:latest`
+
+#### 레지스트리에서 사용 방법
+
+* 레지스트리로부터 이미지 pull
+
+  > 예시
+  >
+  > `docker pull registry:5000/busybox:latest`
+  >
+  > registry 대신 ip주소 사용해도 됨.
+  >
+  > registry는 컨테이너명
+
+  
+
+  
+
+
+
+
+
+#### 명령어
+
+> ```shell
+> $ docker swarm init	# 스웜 초기화
+> $ docker swarm join ... # ...에 참여
+> ```
+
+
+
+
+
