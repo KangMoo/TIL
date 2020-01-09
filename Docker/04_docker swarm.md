@@ -12,3 +12,20 @@
 | Service | 스웜에서 클러스트 안의 서비스(컨테이너 하나 이상의 집합)을 관리 | docker service  |
 | Stack   | 스웜에서 여러 개의 서비스를 합한 전체 어플리케이션을 관리    | docker stack    |
 
+
+
+Dockerfile -> Compose -> Service -> Stack
+
+
+
+#### Swarm vs 쿠버네티스
+
+* 적은 호스트 : Swarm이 유리
+* 많은 호스트 : 쿠버네티스가 유리
+
+
+
+**Swarm을 경험하기 위해서 dind(Docker in Docker)사용**
+
+
+
