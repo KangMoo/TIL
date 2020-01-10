@@ -84,25 +84,32 @@ Dockerfile -> Compose -> Service -> Stack
 > 	docker service create --replicas 1 --publish 8000:8080 --name echo\
 > 	registry:5000/example/echo:latest
 > $ docker exeic -it manager ls
-> $ docker exeic -it manager sclae echo =6
-> $ docker exeic -it manager ps echo
-> $ docker exeic -it manager rm echo
+> $ docker exeic -it manager sclae echo=6
+> $ docker exeic -it manager ps [ServiceName]
+> $ docker exeic -it manager rm [ServiceName or ServiceID]
 > ```
 >
-> 
 
 
 
+## Docker Stack
+
+#### Docker Stack
+
+* 하나 이상의 서비스를 그룹으로 묶은 단위, 어플리케이션 전체 구성 정의
+  * 서비스는 어플리케이션 이미지를 하나 밖에 다루지 못함
+* 여러 서비스를 함께 다룰 수 있음
+* 스택을 사용해 배포된 서비스 그룹은 overlay 네트워크에 속함
 
 
 
+#### overlay
 
+> 오버레이 생성
+>
+> `$ docker network create --driver=overlay --attachable [name]`
 
+> `$ docker stack deploy -c "[filePath]" [stack name]`
+>
+> > `docker stack deploy -c "file path" echo`
 
-
-
-* docker exec -it manager sh
-  * docker service create --replicas 1 --publish 80:8080 --name echo registry:5000/example/echo:latest
-    * 이미지 이름을 그냥 busybox라고 쓰면 허브에서 가져옴
-
-* 
