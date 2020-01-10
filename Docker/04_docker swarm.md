@@ -109,7 +109,7 @@ Dockerfile -> Compose -> Service -> Stack
 >
 > `$ docker network create --driver=overlay --attachable [name]`
 
-> `$ docker stack deploy -c "[filePath]" [stack name]`
+> `$ docker stack deploy -c [filePath] [stack name]`
 >
-> > `docker stack deploy -c "file path" echo`
+> > `docker stack deploy -c /stack/my-webapi.yml echo`
 
