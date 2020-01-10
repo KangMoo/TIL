@@ -62,11 +62,6 @@ Dockerfile -> Compose -> Service -> Stack
   >
   > registry는 컨테이너명
 
-  
-
-  
-
-
 
 
 
@@ -79,5 +74,35 @@ Dockerfile -> Compose -> Service -> Stack
 
 
 
+#### Docker Service
+
+* Service
+  * 어플리케이션을 구성하는 일부 컨테이너 (단일 또는 복수)를 제어하기 위한 단위
+
+> ```shell
+> $ docker exec -it manager \
+> 	docker service create --replicas 1 --publish 8000:8080 --name echo\
+> 	registry:5000/example/echo:latest
+> $ docker exeic -it manager ls
+> $ docker exeic -it manager sclae echo =6
+> $ docker exeic -it manager ps echo
+> $ docker exeic -it manager rm echo
+> ```
+>
+> 
 
 
+
+
+
+
+
+
+
+
+
+* docker exec -it manager sh
+  * docker service create --replicas 1 --publish 80:8080 --name echo registry:5000/example/echo:latest
+    * 이미지 이름을 그냥 busybox라고 쓰면 허브에서 가져옴
+
+* 
