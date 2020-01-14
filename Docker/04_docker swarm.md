@@ -83,10 +83,10 @@ Dockerfile -> Compose -> Service -> Stack
 > $ docker exec -it manager \
 > 	docker service create --replicas 1 --publish 8000:8080 --name echo\
 > 	registry:5000/example/echo:latest
-> $ docker exeic -it manager ls
-> $ docker exeic -it manager sclae echo=6
-> $ docker exeic -it manager ps [ServiceName]
-> $ docker exeic -it manager rm [ServiceName or ServiceID]
+> $ docker exec -it manager service ls
+> $ docker exec -it manager sclae echo=6
+> $ docker exec -it manager service ps [ServiceName]
+> $ docker exec -it manager service rm [ServiceName or ServiceID]
 > ```
 >
 
@@ -101,7 +101,12 @@ Dockerfile -> Compose -> Service -> Stack
 * 여러 서비스를 함께 다룰 수 있음
 * 스택을 사용해 배포된 서비스 그룹은 overlay 네트워크에 속함
 
+####  명령어
 
+> ```shell
+> $ docker stack ls
+> $ docker stack services [Service Name]
+> ```
 
 #### overlay
 
