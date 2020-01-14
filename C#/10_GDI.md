@@ -1,9 +1,9 @@
 # INDEX
 
-1. GDI+
-2. Color 구조체
-3. Pen
-4. Brush
+1. [GDI+](#gdi)
+2. [Color 구조체](#color-구조체)
+3. [Pen](#pen)
+4. [Brush](#brush)
 
 
 
