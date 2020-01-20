@@ -91,4 +91,10 @@
 > ```shell
 > $ kubectl get pods
 > $ kubectl get services
+> 
+> $ kubectl exec -it [PodName] [ShellScirpt]
+> 
+> $ kubectl logs -f [PodName] -c [ContianerNaime]
+> 
+> $ kubectl delete pod [PodName]
 > ```
