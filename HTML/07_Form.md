@@ -12,6 +12,7 @@
 
     - 서버로부터 사용자가 데이터를 가져올 때 사용
     - url로 데이터 전송
+    - querystring으로 값을 전달
 
   - method = "post"
 
@@ -39,4 +40,33 @@
   > </form>
   > ```
 
-  
+  > ```html
+  > <form action="regist.html" method="POST">
+  >     이름 : <input type="text" placeholder="이름을 입력하십시오" name="name"> <br/>
+  >     아이디 : <input type="text" placeholder="아이디를 입력하십시오" name="id"> <br/>
+  >     비밀번호 : <input type="password" placeholder="비밀번호를 입력하십시오"name="pwd"> <br/>
+  >     남성 : <input type="radio" name="gender">
+  >     여성 : <input type="radio" name="gender"> <br/>
+  >     사용하는 SNS :
+  >     <input type="checkbox" name="sns"> Facebook
+  >     <input type="checkbox" name="sns"> Twitter
+  >     <input type="checkbox" name="sns"> Instagram
+  >     <input type="checkbox" name="sns"> Google+
+  >     <br/>
+  >     연령 : 
+  >     <select name="age">
+  >         <option value="10">10대</option>
+  >         <option value="20">20대</option>
+  >         <option value="30">30대</option>
+  >     </select>
+  >     <br/>
+  >     사진 : 
+  >     <input type="file" name="profile"> <br/>
+  >     자기소개 : 
+  >     <textarea cols = "40" rows="5" name="intro"> </textarea><br/>
+  >     <input type="submit" value="회원가입">
+  >     <input type="reset" value="초기화">
+  >     <input type="button" value="임시 저장">
+  > </form>
+  > ```
+
