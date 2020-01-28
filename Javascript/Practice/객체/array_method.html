@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let array = [50,203,227,2,158,34,23,6,256,10];
+
+        // forEach()
+        array.forEach(element => {
+            console.log(element);
+        });
+        
+        // filter()
+        let array_odd = array.filter(element=>{
+            return element%2 == 1
+        })
+        console.log(array_odd);
+
+        // map()
+        let array_map = array.map(element=>{
+            return ++element;
+        })
+        console.log(array_map);
+
+        // every()
+        console.log(array.every(element=>{
+            return element > 0;
+        }))
+        console.log(array.every(element=>{
+            return element > 100;
+        }))
+
+
+        //some()
+        console.log(array.some(element=>{
+            return element > 100;
+        }))
+        console.log(array.some(element=>{
+            return element > 1000;
+        }))
+
+    </script>
+</head>
+<body>
+</body>
+</html>
