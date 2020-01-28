@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        var students = [];
+        students.push({이름:'AAA',국어:78,수학:15,영어:90});
+        students.push({이름:'BBB',국어:79,수학:98,영어:84});
+        students.push({이름:'CCC',국어:85,수학:77,영어:87});
+        students.push({이름:'DDD',국어:66,수학:68,영어:88});
+        students.push({이름:'EEE',국어:59,수학:95,영어:75});
+        
+        let totalSum=0;
+        let totalAvg=0;
+        for(let i in students)
+        {
+            with(students[i]){
+                sum = 국어+수학+영어;
+                avg = sum/3;
+                totalSum +=sum;
+                console.log(이름+'의 총점:'+sum);
+                console.log(이름+'의 평균:'+avg);
+            }
+        }
+        totalAvg = (totalSum / students.legnth) /3;
+
+        console.log('총점:'+sum);
+        console.log('평균:'+avg);
+        
+    </script>
+</head>
+<body>
+</body>
+</html>
