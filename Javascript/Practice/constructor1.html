@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function Student (name, kor, eng, mat, sci){
+            this.이름 = name;
+            this.수학 = mat;
+            this.과학 = sci;
+            this.국어 = kor;
+            this.영어 = eng;
+
+            this.sum = function(){
+                return this.국어+this.영어+this.수학+this.과학;
+            }
+            this.avg = function(){
+                return this.sum()/4;
+            }
+        }  
+        let student1 = new Student('홍길동',100,90,80,70);
+        let student2 = new Student('이영희',87,90,75,100);
+
+        console.log(student1.sum() + '/' + student1.avg());
+        console.log(student2.sum() + '/' + student2.avg());
+    </script>
+</head>
+<body>
+</body>
+</html>
