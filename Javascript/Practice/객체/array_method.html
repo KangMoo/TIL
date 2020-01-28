@@ -4,24 +4,28 @@
     <script>
         let array = [50,203,227,2,158,34,23,6,256,10];
 
-        // forEach()
+        
+        // --------- forEach() --------- 
         array.forEach(element => {
             console.log(element);
         });
         
-        // filter()
+        // --------- filter() --------- 
         let array_odd = array.filter(element=>{
             return element%2 == 1
         })
         console.log(array_odd);
 
-        // map()
+        // --------- map() --------- 
         let array_map = array.map(element=>{
-            return ++element;
+            if(element%2==1)
+                return '홀수'
+            MediaElementAudioSourceNode
+                return '짝수'
         })
         console.log(array_map);
 
-        // every()
+        // --------- every() --------- 
         console.log(array.every(element=>{
             return element > 0;
         }))
@@ -30,13 +34,14 @@
         }))
 
 
-        //some()
+        // --------- some() --------- 
         console.log(array.some(element=>{
             return element > 100;
         }))
         console.log(array.some(element=>{
             return element > 1000;
         }))
+
 
     </script>
 </head>
