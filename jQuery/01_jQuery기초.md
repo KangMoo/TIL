@@ -188,7 +188,13 @@
 
 
 
-## Get
+## 배열관리
+
+* jQuery로 배열을 관리할 때는 `each()`메서드를 사용
+* `each()`메서드는 매개변수로 입력한 함수로 for in반복문처럼 객체나 배열의 요소를 검사하는 메서드
+* `each()`메서드는 다음과 같이 두가지 형태로 사용됨
+  * `$.each(obejct, function(index, item) { ... })`
+  * `$(selector).each(function(index, item) { ... })`
 
 
 
