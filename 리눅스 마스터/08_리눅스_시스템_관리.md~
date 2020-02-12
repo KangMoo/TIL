@@ -19,4 +19,38 @@
   - TMOUT 환경변수를 사용해 일정시간 미사용시 자동으로 로그아웃 되도록 설정하여 보안을 강화한다
   - 일반 사용자에게 특정 명령어에 대한 root 권한이 필요할 때는 su 명령어보다는 sudo 명령어를 ㅣ용하도록 한다.
 
+#### 사용자 계정 관리
 
+- 계정 관리 관련 파일
+  - /etc/passwd 파일
+    - 파일 내용 구성
+      > `[user_account] : [user_password] : [UID] : [GID] : [comment] : [home_directory] : [login_shell]`
+      > - user_account : 사용자 계정
+      > - user_password : /etc/shadow 파일에 암호돠되어 저장되어 있다
+      > - UID : User ID. 보통 100번 이하는 시스템이 사용, 0qjsdms tltmxpa rhksflwkfmf skxksosek
+      > - GID : Group ID
+      > - comment
+      > - home_directory : 로그인 성공 후에 사용자가 위치할 홈 디렉토리의 절대경로
+      > - login_shell : 로그인 셸의 절대경로
+  - /etc/shadow 파일
+    - 파일 내용 구성
+      > `[user_id] : [encryption_pw] :[last_change] : [minilife] : [maxlife] : [warn] : [inactive] : [expires]
+      > - user_id : 사용자 계정
+      > - encryption_pw : 일방향 해시 알고리즘을 암호화한 패스워드
+      > - last_change : 마지막으로 패스워드를 변경한 날
+      > - minilife : 최소 패스워드 변경 일수 (패스워드를 변경할 수 없는 기간)
+      > - maxlife : 최대 패스워드 변경 일수 (패스워드 변경 없이 사용할 수 있는 일수)
+      > - warn : 경고 일수 (maxlife 필드에 지정한 일수가 얼마 남지 않았음을 알림)
+      > - inactive : 최대 비활성 일수
+      > - expires : 계정이 만료되는 날
+    - enctyption_pw 필드의 기호 뜻
+      > * : 패스워드 잠긴 상태. 별도의 인증방식을 사용하여 로그인
+      > !! : 패스워드 잠긴 상태. 모든 로그인이 불가능
+      > 빈 값 : 패스워드가 설정되지 않은 상태
+  - /etc/login.def 파일
+    - 사용자 계정의 설정과 기본 값을 정의한 파일
+    - 기본 메일 디렉토리, 패스워드 에이징, 사용자 계정의 UID/GID값 범위 등의 기본값을 설정할 수 있음
+  - /etc/skel 디렉토리
+    - 사용자 계정 생성 시 공통으로 배포할 파일이나 디렉토리를 지정하는 디렉토리
+  - /etc/default/useradd 파일
+    - useradd 명령어로 계정 생성 시 기본 값을 지정한 파일
