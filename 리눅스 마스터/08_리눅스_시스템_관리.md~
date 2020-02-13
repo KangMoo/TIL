@@ -79,4 +79,81 @@
     - [-D] : 기본 값을 설정하거나 출력 (/etc/default/useradd 파일 내용)
     - [-e] : 유효 기간 지정 (/etc/shadow 파일의 expires 항목)
     - [-f] : 비활성 일수 지정 (/etc/shadow 파일의 inactive 항목)
-  - 옵션 없이 계정 생성할 경우 패스워드를 설정하지 않았기 때문에 /etc/shadow 파일에 패스워드 항목이 !!로 지정되어 있다 (패스워드가 잠겨 있다는 기호)
+      > `# useradd -u 500 -G 10 -s /bin/bash -e 2018-12-31 testuser` : testuser사용자의 UID는 500, GID가 10인 2차 그룹, 기본 쉘은 bash, 유효기간은 2018-12-31까지로 설정하여 생성
+  - 옵션 없이 계정 생성할 경우 패스워드를 설정하지 않았기 때문에 /etc/shadow 파일에 패스워드 항목이 `!!`로 지정되어 있다 (패스워드가 잠겨 있다는 기호)
+
+- usermod 명령어
+  - 사용자 계정의 정보를 변경하는 명령어
+  - 주요 옵션
+    - useradd 명령어와 옵션이 동일
+    - [-l] : 게정 이름 변경
+      > `# useradd -l usertest testuser` testuser 사용자의 이름을 usertest로 변경
+
+- userdel 명령어
+  - 사용자 계정을 삭제하는 명령어
+  - [-r] 옵션 : 홈 디렉토리 제거
+
+- chage 명령어
+  - 패스워드 에이징에 관한 설정을 하는 명령어
+  - 주요 옵션
+    - [-m] : /etc/shadow 파일의 minilife 항목 설정 (passwd -n)
+    - [-M] : /etc/shadow 파일의 maxlife 항목 설정 (passwd -x)
+    - [-W] : /etc/shadow 파일의 warn 항목 설정 (passwd -w)
+    - [-l] : /etc/shadow 파일의 inactive 항목 설정 (usermod -f)
+    - [-E] : /etc/shadow 파일의 expires 항목 설정 (usermod -e)
+
+- passwd 명령어
+  - 사용자 계정의 패스워드 변경/관리하는 명령어
+  - 주요 옵션
+    - [-n] : /etc/shadow 파일의 minilife 항목 설정
+    - [-x] : /etc shadow 파일의 maxlife 항목 설정
+    - [-w] : /etc/shadow 파일의 warn 항목 설정
+    - [-l] : 계정 잠금
+    - [-u] : 계정 잠금 해제
+
+- groupadd 명령어
+  - 그룹을 생성하는 명령어
+  - 주요 옵션
+    - [-g] : GID 지정
+    - [-d] : GID의 중복을 허용
+
+- groupmod 명령어
+  - 그룹의 정보를 변경하는 명령어
+  - 주요 옵션
+    - groupadd 명령어와 옵션이 동일
+    - [-n] : 그룹 이름 변경
+
+- groupdel 명령어
+  - 그룹을 삭제하는 명령어
+
+- gpasswd 명령어
+  - 그룹의 패스워드를 변경하거나 그룹에 계정을 추가/삭제하는 명령어
+  - 주요 옵션
+    - [-a] : 사용자 계정을 그룹에 추가
+      > `#gpasswd -a testuser testgroup` : testgroup 그룹에 testuser 사용자를 추가
+    - [-d] : 사용자 계정을 그룹에서 삭제
+    - [-r] : 그룹 암호를 삭제
+    - [-A] : 그룹의 관리자를 지정
+      > `# gpasswd -A testuser testgroup` : testgroup 그룹의 관리자를 testuser 사용자를 관리자로 설정
+
+- newgrp 명령어
+  - 계정의 소속 그룹을 변경하는 명령어
+    > `# newgrp grp01` : grp01로 그룹을 변경
+
+- 사용자 정보 확인 명령어
+  - who 명령어 : 현재 시스템을 사용하는 사용자의 정보를 출력하는 명령어
+    - [-q] : 사용자의 이름만 출력
+    - [-H] : 출력 항목의 제목도 함께 출력
+    - [-b] : 마지막으로 재시작한 날짜와 시간을 출력
+    - [-r] : 현재 런레벨을 출력
+  - w 명령어 : 현재 시스템을 사용하느 사용자의 정보와 작업 정보를 출력하는 명령어
+  - whoami 명령어 : 현재 작업하고 있는 자신의 계정을 출력
+  - id 명령어 : 현재 작업하고 있는 자신의 계정명, 그룹명, UID, GID를 출력하는 명령어
+  - users 명령어 : 현재 로그인 되어 있는 사용자의 계정을 출력
+  - gropus 명령어 : 사용자 계정이 속한 그룹을 출력
+  - lslogins 명령어 : 시스템 내에 있는 사용자 계정에 대한 정보를 출력
+
+- 무결성 검사 명령어
+  - pwck 명령어 : /etc/passwd 파일과 /etc/shadow 파일 내용의 무결성을 검사하는 명령어
+  - grpck 명령어 : /etc/group 파일과 /etc/gshadow 파일 내용의 무결성을 검사하는 명령어
+
