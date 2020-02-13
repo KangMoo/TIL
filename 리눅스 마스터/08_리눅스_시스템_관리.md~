@@ -130,7 +130,7 @@
   - 그룹의 패스워드를 변경하거나 그룹에 계정을 추가/삭제하는 명령어
   - 주요 옵션
     - [-a] : 사용자 계정을 그룹에 추가
-      > `#gpasswd -a testuser testgroup` : testgroup 그룹에 testuser 사용자를 추가
+      > `#gpasswd리 -a testuser testgroup` : testgroup 그룹에 testuser 사용자를 추가
     - [-d] : 사용자 계정을 그룹에서 삭제
     - [-r] : 그룹 암호를 삭제
     - [-A] : 그룹의 관리자를 지정
@@ -157,3 +157,11 @@
   - pwck 명령어 : /etc/passwd 파일과 /etc/shadow 파일 내용의 무결성을 검사하는 명령어
   - grpck 명령어 : /etc/group 파일과 /etc/gshadow 파일 내용의 무결성을 검사하는 명령어
 
+### 파일 시스템 관리
+
+#### 파일 및 디렉토리 관리
+
+- ls -l 명령어ㅓ 수행시 각 필드 항목
+|파일 종류|파일 권한|하드링크 수|소유자|소유 그룹|크기|마지막 수정 시간|파일 명|
+|---|---|---|---|---|---|---|
+|d|rwxr-xr-x|3|fedora|fedora|4096|7월 26 21:41|linuxmaster|
