@@ -121,20 +121,3 @@
       > `# bg %3` : jobs 명령어로 확인한 작업번호 3의 작업을 백그라운드로 실행하도록 함
     - 작업번호 지정 없이 실행 시 가장 최근 작업에 대한 명령을 수행
 
-- 작업 예약 관련 명령어
-  - at 명령어
-    - 지정한 시간에 지정한 명령을 한번만 실행하는 명령어
-    - [-l] : 예약 중인 명령어 목록을 출력 = atq 명령어와 같은 기능
-    - [-r] : 지정한 예약된 작업을 삭제 = atrm 명령어와 같은 기능
-    - 접근제어 파일 : /etc/at.allow, /etc/at.deny (at.allow 파일 우선)
-  - crontab 명령어
-    - 지정한 시간에 지정한 명령어를 주기적으로 실행하는 명령어
-    - [-e] : 사용자의 crontab 파일을 편집
-    - [-l] : crontab 파일의 목록을 출력
-    - [-r] : crontab 파일을 삭제
-    - crontab 파일 형식 : [분][시][일][월][요일][작업내용]
-      > `30 20 1 * * /usr/bin/ls -l ~fderoa > ~fdeora/cron.out` : 매월 1일 20시 30분에 `ls -l ~fedora`명령의 실행 결과를 cron.out 파일에 저장한다
-      > `0 12-22/2 * * 1 /usr/bin/ps -ef` 매주 월요일 12시부터 22시 정각 2시간마다 'ps -ef'명령어를 실행
-      > `*/30 0-2 1 * * /usr/bin/ls -l ~guest > ~root/guest.out` : 매월 1일 0시부터 2시까지 30분마다 'ls -l ~guest명령의 실행 결과를 ~root/guest.out 파일에 저장한다
-    - 접근제어 파일 : /etc/cron.allow, /etc/cron.deny (cron.allow 파일 우선)
-
