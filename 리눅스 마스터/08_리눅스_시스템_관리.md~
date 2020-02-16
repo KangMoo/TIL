@@ -246,3 +246,31 @@
   - 옵션 필드 종류
     - defaults : 기본 값. rw, nouser, auto, exec, suid 속성을 포함
     - auto : 부팅시 자동으로 마운트 (↔ nouauto)
+    - exec : 실행 파일이 실행되는 것을 허용 (↔ noexec)
+    - suid : SUID/SGID의 사용 허용 (↔ nosuid)
+    - ro : 읽기 전용
+    - rw : 읽기/쓰기 허용
+    - user : 일반 사용자도 마운트 가능
+    - nouser : 일반 사용자의 마운트 불가능 (root만 가능)
+    - usrquota : 사용자별로 디스크 쿼터 설정 허용
+    - grpquota : 그룹별로 디스크 쿼터 설정 허용
+  - 덤프 설정
+    - 1 : dump 등의 데이터 백업 명령어 사용으로 파일 시스템의 내용 덤프 가능
+    - 0 : 파일 시스템의 내용을 덤프 불가능
+  - 파일 점검 옵션
+    - 0 : 부팅 시 fsck 명령어로 파일 시스템 점검 미수행
+    - 1 : 루트 파일 시스템에 대한 설정. 부팅 시 파일 시스템 점검 수행
+    - 2 : 루트 파일 시스템 이외의 파일 시스템 점검 수행
+
+- mount 명령어
+  - 파일 시스템을 마운트하는 명령어
+  - 형식 : `# mount [옵션][장치 이름][마운트 포인트]
+  - 주요 옵션
+    - [-t] : 파일 시스템 종류를 지정
+      > `# mount -t iso9660 /dev/cdrom /mnt/cdrom` : CD-ROM을 /mnt/cdrom 디렉토리에 마운트
+    - [-f] : 마운트가 가능한지 확인만 수행
+    - [-o] : 마운트 옵션을 지정
+      > `# mount -t ext4 -o ro,user /dev/sdb/mnt` : /dev/sdb 장치를 /mnt에 마운트 읽기 전용, 일반 사용자들도 마운트할 수 있도록 허용
+      > `# mount -t iso9660 -o loop /linuxmaster/temp.iso /mnt/iso` : temp/iso ISO 이미지를 /mnt/iso에 마운트
+  - 언마운트는 `unmount` 명령어를 사용
+  - CD-ROM 장치 언마운트 후 CD를 꺼낼 때 `eject` 명령어를 사용
