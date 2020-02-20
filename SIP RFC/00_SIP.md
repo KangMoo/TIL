@@ -35,4 +35,10 @@
         - Dialog 상태 유지 
         - 서비스 제공에 더 적합
   - Redirect Server
+    - 수신한 Request를 다른 UA나 Proxy Server에게 직접 전달하지 않고, Request를 보내 오 ㄴ해당 UA나 Proxy Server에게 그들이 Request를 재전송할 UA나 Proxy Serverㄹ의 주소를 알려주는 역할
   - Registrar
+    - REGISTER request메시지를 수용하는 서버
+    - 사용자의 현재 위치 등록, 수정, 삭제 및 현재 리스트를 보여주는 기능 수행
+    - User Agent의 Registration 메시지를 받아서 DB에 저장
+    - 가입자의 현재 위치를 파악하여 Routing에 사용
+
