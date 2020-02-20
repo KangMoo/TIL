@@ -22,5 +22,17 @@
     - UAC (UA Client) : End System, SIP Request 전송, SIP Transaction 개시
     - UAS (UA Server) : End System, SIP Request accept, refuse, redirect
   - Proxy Server
+    - UA로부터 수신한 접속 요청 메시지를 다른 도메인의 Proxy또는 Redirect Server로 전달하거나, 해당 도메인 내의 UA로 전달하는 기능 수행 및 과금을 위한 정보 유지
+    - 종류
+      - Stateless Proxy
+        - Request를 받고, 위치를 확인한 이후 Request를 전송
+        - Request를 받고 전송한 이후에는 아무런 정보가 남지 않음
+        - Response를 받으면 Via를 이용하여 어디로 전송할 지를 판단
+        - 메모리 need가 없고 Socket nee가 작음
+      - Stateful Proxy
+        - 받아서 전송한 Request에 대한 정보를 기억 
+        - Response가 돌아오면 기억한 정보를 이용해 추가적인 처리 가능
+        - Dialog 상태 유지 
+        - 서비스 제공에 더 적합
   - Redirect Server
   - Registrar
