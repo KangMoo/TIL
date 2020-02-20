@@ -1,0 +1,31 @@
+## Basic Header Field
+
+#### Request Line
+- SIP Message에서 첫 라인을 뜻하며 이는 해당 SIP가 어떤 Message인지를 나타내는 역할을 함
+- Request-Line에 표시되는 Method(INIVDE, BYE, SUBSCRIBE, REGISTER 등...)에 따라 Message를 구분함
+- 사용 형식
+  > `Method Request=RUI SIP-Version`
+
+#### 기본적으로 사용되는 헤더
+
+**Via**
+- Request 메시지의 경로 표시
+- 한 Transaction 내 Response.Request동일 경로를 보장해 줌
+- 다른 SIP헤더와 달리 순서가 중요한데 항상 Request메시지를 Forwarding하게 되면 추가되는 Via 헤더는 기존 Via 헤더 리스트의 첫 번째에 추가함
+- 파라미터
+  - received : Via 헤더 List 중 첫 번째 헤더에 있는 address와 다른 주소로부터 받은 경우 추가되는 tag.
+  - rport : Request에 포함되어 있으면 Proxy에서는 수신한  Request 메시지에 해당 값을 Setting (Real Port라는 의미로 생각하면 됨)
+  - branch : Mandatory이며 반드시 Magic Coockie("z9hG4bk")로 시작해야함(To tag, From tag, Call-ID, CSeq, Proxy-Require, Route,Proxy-Authrization 등)
+  - maddr, ttl : 이 두 파라미터는 Multicast 전송에 사용됨
+- Message Loop를 탐지하기 위해 사용됨
+  - 수신한 메시지의 Via에 자신의 주소가 이미 있는 경우 Loop
+  - 이전 기록된 branch 값과 새로 생성한 branch 값 비교, 동일하면 Loop
+
+**To**
+- 요청 수신자를 나타내는 헤더
+- SIP Message가 최종 도착해야 할 수신 URI
+- Routing 목적으론 절대 사용하지 않음
+- Parameter중 tag의 경우 Request를 수신한 UA 혹은 Proxy에서 Response를 전송할 때 반드시 추가해야 함
+- SIP-URI는 `< >`으로 묶어 사용함
+
+
