@@ -14,6 +14,21 @@
     - 멀티 파티, 안내방송 재생 등
     - 컨퍼런스 콜, 오디오 트랜스코딩 등
 
+#### 시스템 규격
+#### 표준 규격
+**3GPP**
+- 3GPP TS 23.228, IP Multimedia Subsystem (IMS); stage 2
+- 3GPP TS 23.229, IMS Call control protocol bases on SIP and SDP
+- 3GPP TS 24.228, Signaling flows for the IP multimedia call ontrol based on Session initiation Protocol(SIP) and Session Description Protocol(SDP); stage3
+- 3GPP TS 24.229, Internet Protocol (IP) multimedia call control protocol based on Session Initiation Protocol(SIP) and Session Description Protocol(SDP); stage3
+
+**Interface & Protocol**
+- MRFC-S-CSCF(Mr), MRFC-TAS(Mr'): SIP(RFC3261)
+- MRFC-MRFP (Mp):H.248(MEGACO)
+- MRFP-IP Multimedia Networks (Mb): RTP(RFC 3550), RTCP(RFC 3551)
+- MSML(Media Server Markup Language) (RFC 5707)
+
+
 #### MRF 솔루션의 주요 기능
 - SIM/IMS 호 처리
   - IMS 망 연동 기능
@@ -64,21 +79,6 @@
 - 멀티미디어 회의
 - 음성 트랜스코딩
 - 영상 트랜스코딩
-
-## 시스템 규격
-
-#### 표준 규격
-**3GPP**
-- 3GPP TS 23.228, IP Multimedia Subsystem (IMS); stage 2
-- 3GPP TS 23.229, IMS Call control protocol bases on SIP and SDP
-- 3GPP TS 24.228, Signaling flows for the IP multimedia call ontrol based on Session initiation Protocol(SIP) and Session Description Protocol(SDP); stage3
-- 3GPP TS 24.229, Internet Protocol (IP) multimedia call control protocol based on Session Initiation Protocol(SIP) and Session Description Protocol(SDP); stage3
-
-**Interface & Protocol**
-- MRFC-S-CSCF(Mr), MRFC-TAS(Mr'): SIP(RFC3261)
-- MRFC-MRFP (Mp):H.248(MEGACO)
-- MRFP-IP Multimedia Networks (Mb): RTP(RFC 3550), RTCP(RFC 3551)
-- MSML(Media Server Markup Language) (RFC 5707)
 
 ## 컨퍼런스 콜
 
