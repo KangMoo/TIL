@@ -174,4 +174,55 @@
   - 이는 PRACK에 offer가 포함된 경우에만 한 해 적용됨을 유의
 - 이는 Offer/Answer Model을 기초한 내용이며 PRACK를 통해 다양한 상황에서 Session Parameter의 협상이 가능함을 나타냄
 
+
+
+#### SUBSCRIBE / NOTIFY
+
+**SUBSCRIBE**
+
+- Subscriber가 특정 사용자의 등록 상태와 상태 정보 업데이트를 요청하여 향후 이벤트 발생 시에 통지해 줄 것을 요청
+- 쉽게 설명하면 특정 이벤트를 살펴보기 위한 Method
+- 등록 후 등록 해제는 헤더에 포함되어 있는 Expires의 값(Sec)에 따라 결정됨
+  - Expires의 값을 갱신하고자 할 때는 SUBSCRIBE Message를 사용해야 함. 여기서 주의할 점은 갱신은 주기적으로 이루어져야 ㅓ하며 동일ㄴ한 Dialog정보를 가져야 함
+- SUBSCRIBE Request와 그에 대한 2xx Response에는 Expires 헤더가 포함되어야 함
+  - 2xx Response의 경우 Expires의 값이 Request Expires의 값보다 작을 수 있지만 절대 크면 안됨
+- Subscribe Request에 대한 성공 Response
+  - 200 OK : 등록 및 사용자 인증 모두 성공
+  - 202 Accepted : 등록엔 성공했지만, 인증 성공 유무는 경우에 따라 나타냄 (200 OK를 받지 않으면 NOTIFY가 전송 되지 않음을 유의)
+
+
+**NOTIFY**
+
+- SUBSCRIBE에 의해 요청된 이벤트 발생시 통지하거나, Subscription(신청)된 단말의 상태 변화를 Notifier가 Subscriber에게 통지
+- 주의할 점은 SUBSCRIBE Method 말고도 REFER Method 에서도 사용됨
+- 쉽게 설명하면 특정 이벤트 발생 시 사용자의 상태 정보를 통보하기 위한 Method
+- SUBSCRIBE를 통해 등록된 대상에게만 전송함
+- SUBSCRIBE를 통해 등록된 이후 전송되는 최초 Notifiy는 초기화 목적으로 현재 상태 전송, 이후 전송되는 Notify는 이벤트 발생 시마다 상태 정보를 전송함
+- NOTIFY Request에 대해 481 Call/Transaction Does Not Exist로 응답 받은 경우 등록 해지를 해서 더 이상 NOTIFY를 전송하지 않음
+
+
+
+#### INFO
+
+- 정의
+  - SIP Message Session 성립과 종료에 대한 메시지들 중 Session이 성립된 이후 (200 OK ~ BYE  수신) 두 UA간에는 Session 제어 정보 교환을 할 수 없음
+  - 이에 Session 성립 이후 Session 제어 정보를 전송하는 것을 목적
+
+- 특징
+  - 다양한 정보 변경이 가능하지만 아래의 경우에 대해선 정보 변경 불가
+    - SIP호의 상태 변경
+    - 초기 설정된 Session Parameter
+      - 위의 경우 상태 정보 변경을 하려면 UPDATE, re-INVITE등을 이용해야 함
+  - INFO Request를 받으면 무조건 response를 보내야 함
+  - SIP Signaling Path를 통해 Application 관련 제어 정보를 전송할 때 이용됨
+    - SIP Signaling Path는 Call Set up 결과로서 생성되는 경로
+  - INFO의 헤더를 통해 정보 전달를 할 수 있지만 일반적으론 Message Body를 통해 전달함
+  - INFO Method도 별개의 Transaction으로 구분하기 때문에 CSeq값을 증가함
+  - INFO 가 전송하는 주요 정보는 아래와 같음
+    - PSTN Gateway 간의 PSTN Signaling 메시지 전송
+    - DTMF Digits 전송
+    - Wireless Mobility Application 지원을 위해 무선 신호의 세기를 전송
+      - 예시) 선불식 카드의 경우 결제 금약, 남은 액수, 결제 위치, 시간 등의 정보를 전송한다 함
+    - Session 참가자 간의 이미지 or 비 스트리밍 정보 전송
+
    
