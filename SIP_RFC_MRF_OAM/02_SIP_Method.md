@@ -136,3 +136,42 @@
   - REGISTER Request에는 Message Body를 포홤할 수도 있지만 이와 관련해선 규격상에 정의되어 있지 않음
 
 
+#### PRACK
+
+- 정의
+  - Provisional Response Acknowledgement의 약자
+  - 아직 성립되지 않은 Session에 대한 신뢰할 수 잇는 Provision ACK를 제공하기 위함
+
+- 특징
+  - INVITE의 Response로 101 ~ 199 Response에 대해서만 PRACK을 제공함
+     100 Trying의 경우 Hop-by-Hob방식으로 처리됨으로 제공하지 않음
+  - PRACK도 새로운 Transaction으로 분료되기 때문에 CSeq값 증가
+  - PRACK에선 Response 식별을 위한 목적으로 추가로 RSeq 헤더도 포함
+    - 이 경우는 시나리오에 따라 달라질 수 있음
+  - PRACK을 사용하기 위해선 Supported, Requires 헤더에 "100rel"값을 설정해야 함
+
+**유의사항**
+- CSeq의 값은 PRACK 사용 시 증가하는데 INVITE에 대해 200OK를 받고 Session이 성립되는 시점에서 INVITE요청 시 생성한 CSeq값으로 초기화 해야 함
+  - 초기화 하지 않으면 이후 호는 모두 실패 처리됨
+- RAck의 경우엔 RSeq, CSeq의 값을 조합하여 쓰는데 이 값에 문ㄷ제가 있으면 매칭되는 Dialog를 찾지 못해서 481 Call/Transaction Does Not Exist 응답 받고 호 종료됨
+- 1xx 계열의 Provisional Response를 여러 번 전송하면 전송할 때마다 RSeq 값은 1씩 증가되어야 함
+  - 실제 망에선 이런 경우는 없다고 하나 혹시 모름
+- Session 성립 이후 1xx Response를 받으면 무시함
+  - UDP를 사용할 경우에 발생할 수 있는데 이럴 땐 무시하고 PRACK 전송 안함
+- UAC에서 PRACK를 전송하지 않아 UAS가 해당 Transaction에 대해 Expire가 발생할 경우 5xx Response로 응답하고 호 실패 처리함
+  - Expire 시간은 규격상 64 * T1(500ms) 즉 32sec 라고 보면 됨
+  - 여기선 Expire라고 표현했지만 규격서 상에는 PRACK를 수신하지 못해서 Provisional Response를 재전상하는 경우라고 되어 있으니 유의
+- UAS에서 100rel에 대해서 지원하지 않을 경우 420 Bad Extension Response의 Unsupported 헤더에 "100rel"의 options tag를 포함하여 전송
+- 수신한 PRACK에 대해 매칭되는 Provisional Response의 Transaction을 찾지 못한 경우 481 Response를 전송
+
+
+**Offer/Answer Model과 PRACK**
+
+- 일반적으로 UAC가 INVITE with offer를 제공하면 UAS의 경우 Provisional Response with answer로 응답하여 Final Response 이전에 Session Parameter에 대한 협상 진행함
+- UAS에서 Provisional Response with offer를 한다고 가정한 경우 (UAC가 INVITE without offer를 전송한 경우) 이 때는 반드시 PRACK with answer로 처리되어야 함
+  - 이는 Provisional Response에 offer가 포함된 경우에만 한 해 적용됨을 유의
+- PRACK with offer인 경우라면 PRACK에 대한 200 OK Response에 반드시 answer가 포함되어야 함
+  - 이는 PRACK에 offer가 포함된 경우에만 한 해 적용됨을 유의
+- 이는 Offer/Answer Model을 기초한 내용이며 PRACK를 통해 다양한 상황에서 Session Parameter의 협상이 가능함을 나타냄
+
+   
