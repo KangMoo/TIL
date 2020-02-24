@@ -250,4 +250,17 @@
   - 488 Response에는 Warining 헤더 반드시 포함
 
 
- 
+#### REFER
+
+- 개요
+  - 하나의 UA가 다른 UA에게 직접 INVITE를 요청하도록 할 때 사용함
+  - REFER를 수신한 UA는 제 3자와 Session 성립(INVITE - 200 OK/ACK) 후, NOTIFY를 통해 REFER를 전송한 UA에게 공지
+  - REFER에 대한 응답으로는 202 Accpted를 사용하고 Transaction만큼 전에 전송해야 함
+    - REFER 성공 시 200 OK를 사용하지 않음을 주의
+  - 대표적인 예로 Call Transfer(호 전환) 서비스가 있음때 사용됨
+    - 구체적으로 예를 들면 Call Center 상담원과 통화 중 담당 부서의 담당자와 연결해줄 경우 상담원의 단말에서 담당 부서의 담당자 정보를 REFER로 전달해서 고객과 통화를 연결할  
+  - 주의 할 점은 Contact과 Refer-To 헤더에는 하나의 값만 가져야 함
+
+
+
+
