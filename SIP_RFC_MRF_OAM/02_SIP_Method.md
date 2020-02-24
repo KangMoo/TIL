@@ -263,4 +263,35 @@
 
 
 
+#### PUBLISH
 
+- 개요
+  - AoR과 연결된 Event State를 생성, 변경, 삭제하기 위한 Method
+  - PUBLISH를 이용한 Evnet State의 생성, 변경, 삭제 등을 통해 Google, NateOn같은 메신저에서 상대방의 Presence State를 확인할 수 있음 (예. 접속 여부, 회의 중, 통화 중, 자리 비움 등의 상태 정보)
+  - Presence State 정보 교환을 위해서는 REGISTER, PUBLISH, SUBSCRIBE, NOTIFY의 유기적인 동작이 필요함
+  - 실제 예로 PC용 메신저의 접속자 상태 정보를 나타내는 용도로 사용된다 함
+  - PUBLISH는 각 단말에서 개별로 전송되어 처리되는 특징이 있음
+  - PUBLISH Request에는 꼭 Expires와 Min-Expires 헤더를 포함해야 함
+    - 단, Expires와 Min-Expires의 값은 동일하면 안됨
+    - Min-Expires의 값이 너무 작은 경우, 423 Interval Too Brief Response 처리됨
+  - PUBLISH Request에 대해 200 OK Response가 전송될 때 SIP-Etag 헤더가 추가됨
+    - SIP-Etag는 Event 상태 정보의 식별자를 나타내며, 이후 Event 상태 정보 갱신이나 만료시간 갱신을 위해 전송될 때 활용됨
+
+**특징**
+- PUBLISH는 REGISTER와 비슷하지만, REGISTER와 달리 Dialog를 생성하지 않으므로, Event State 변화에 따른 즉각적인 반영이 가능하고 이런 이유로 인해 Dialog 영향을 미치지 않는 Method임
+- REGISTER보다 더욱 다양한 형태의 정보 교환이 가능
+
+**구성요소**
+- Event State
+  - 자원의 상태 정보
+- EPA (Event Publication Agent)
+  - PUBLISH요청을 발행하는 UAC
+- ESC (Event State Compositor)
+  - PUBLISH요청을 수신받아 처리하는 UAS
+- Event Hard State
+  - 자원의 Default Event state를 의미
+  - AoR에 대한 고정된 상태 정보
+  - Soft State Publication이 없을 때 사용
+- Event Soft State
+  - PUBLISH 메커니즘을 통해 EPA가 발행하는 Event State
+  - Event State에 대해 유효 시간을 가지고 있음
