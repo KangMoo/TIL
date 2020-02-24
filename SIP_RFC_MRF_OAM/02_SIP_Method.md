@@ -225,4 +225,29 @@
       - 예시) 선불식 카드의 경우 결제 금약, 남은 액수, 결제 위치, 시간 등의 정보를 전송한다 함
     - Session 참가자 간의 이미지 or 비 스트리밍 정보 전송
 
-   
+
+#### UPDATE
+
+- 정의
+  - Session을 유지하면서 기존 협상된 Media Stream이나 Codec과 같은 Session Parameter를 변경하기 위해 사용
+    - re-INVITE도 Session Parameter를 변경하는 것은 동일하나 UPDATE는 기존 Session을 유지하고 re-INVITE는 새로운 Session을 생성하는 점이 다름
+
+- 특징
+  - re-INVITE와 다르게 기존 Session을 유지하면서 Session Parameter를 변경함
+  - UPDATE도 INVITE, PRACK, BYE등과 같이 새로운 Transaction으로 분류되기 때문이 CSeq의 값이 증가
+  - UPDATE는 Session 설립 이전 구간(INVITE ~ 200 OK/ACK)과 Session 성립된 구간(Media 교환이 일어나는 구간) 모두 사용 가능함. 단, Session 성립 이후에 사용될 경우 그 용도는 Session의 Expire Time을 갱신하기 위한 목적으로 사용됨을 유의 (Session 변경을 위한 목적으론 사용되지 않음)
+    - Expire Time 갱신은 주기적으로 이루어지며 그 시간은 Expires 헤더에 설정된 시간 값의 절반에 해당하는 시간이 지나면 UPDATE 전송해 갱신한다 함. 실제 회사 IBCF도 그렇게 사용중
+
+**유의사항**
+- UPDATE는 Response를 수신하기 전까지 중복 전송하면 안됨
+  - 중복 전송할 경우 500 Server Internal Error로 응답
+- Offer/Answer Model 규칙을 따라야 함
+  - Offer에 대한 Answer를 받기 전 Offer를 전송할 경우 500 Server Internal Error 응답
+  - Offer를 받고 Answer를 보내기 전 Offer를 보내면 491 Request Pending 응답받음
+- Session 성립 이후에 Media 변경 처리 시에는 re-INVITE 사용
+  - UPDATE의 단점은 Response가 제대로 수신 되었는지 확인할 수 없음. 이에 따라 RFC3311 규격서에는 Session 성립 이후라면 re-INVITE를 사용해서 Media 변경 처리를 권고하고 있음
+- SDP를 처리할 수 없는 경우 488 Not Acceptable Here로 응답
+  - 488 Response에는 Warining 헤더 반드시 포함
+
+
+ 
