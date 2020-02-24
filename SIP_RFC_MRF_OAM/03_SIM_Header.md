@@ -50,6 +50,14 @@
 - 새로운 Transaction이 시작할 때 반드시 1 증가
 - 재전송의 경우 같은 값 사용
 
+**Contact**
+- 단말간에 직접 통신이 가능한 접속 주소를 가리킴
+  - AoR 형태의 SIP-URI가 아닌 직접 접속 가능한 FQDN의형태의 SIP-URI
+- INVITE/200 OK Response에는 반드시 포함되어야 함
+- INVITE/200 OK response/ACk 이후에는 Proxy 경유 없이 Contact 헤더 정보를 이용해 직접 통신 가능
+  - Record0Rout 헤더를 사용해 초기 Signaling의 경로 유지 가능
+- Request에 대한 Response는 Via 헤더를 참조하며, 신규 Request를 생성할 경우 Contact 헤더 필드를 참조
+
 **Max-Forwards**
 - 최대 Proxh를 거쳐갈 수 있는 수 (0 ~ 255)(추천 초기값 : 70)
 
