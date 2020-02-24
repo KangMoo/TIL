@@ -2,6 +2,7 @@
 
 #### **정의**
 - Session Description Protocol. Media의 속성을 정의하고, 단말간의 Multimedia Session과 관련된 Parameter를 협상
+  - 즉, 멀티미디어 전송을 위한 RTP 프로토콜에 대한 새부적인 내용 협상
 - SDP는 현재 RFC 2327을 개정한 RFC 4566이 표준화되어 있으며, SIP뿐만 아니라 MGCP.MEGACO에서도 Multimedia Session을 설정.
 
 #### **SDP Message**
