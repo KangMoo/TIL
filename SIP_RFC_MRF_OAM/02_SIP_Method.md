@@ -56,7 +56,7 @@
 - 정의 : 성립된 Session을 종료하기 위한 Method
 - 특징
   - Session에 참여한 UA(Caller/Callee)에서만 정송되며 Proxy나 제 3자가 전송하지 않음
-  - Transaction이 존재하지 않는 알 수 없는 Dialog에 대해서만 BYE대신 481 Call/Transaction Does Not Exsist로 응답
+  - Transaction이 존재하지 않는 알 수 없는 Dialog에 대해서만 BYE대신 481 Call/Transaction Does Not Exist로 응답
   - UAC의 경우
     1. Session종료와 Media에 대한 Sending/Listening을 중단하고 BYE 전달
     2. BYE에 대한 응답으로 아래와 같은 Code를 받거나 경우가 발생할 경우 반드시 Session 종료
@@ -64,9 +64,44 @@
       - 480 Request Timeout
       - Transaction의 Timeout(Expire) 발생으로 UAS로부터 Response를 받지 못한 경우
   - UAS의 경우
-    1. BYE를 받으면 매칭되는 Dialog를 찾음. 단, 찾지 못한 경우 481 Call/Transaction Does Not Exsist로 응답.
+    1. BYE를 받으면 매칭되는 Dialog를 찾음. 단, 찾지 못한 경우 481 Call/Transaction Does Not Exist로 응답.
     2. 정상적으로 BYE에 대해 처리한 후 종료된 Session과 연관된 UAC의 Session의 종료 여부와 관계없이 2xx계열의 Response 전달
     3. 종료된 Session에 대해서도 수신대기 중인 Request에 대해 응답을 해야하는 데 규격서에서는 487 Request Terminated로 응답을 줄 것을 권고하고 있음
       - 권고사항이라 장비/회사마다 다르겠지만, 회사 IVCF의 경우 487을 전송함
+
+
+#### CANCEL
+
+- 정의 : INVITE 요청을 취소하기 위한 Method
+- CANCEL을 사용할 경우는 아래와 같음
+  - 발신자가 전화번호를 누른 후 Ring Back Tone을 듣다가 바로 수화기를 내려놓는 경우
+  - Call Forking과 같은 기능 사용 시 받지 않는 나머지 전화에 대한 INVITE요청 취소
+  - 상대방이 일정시간 동안 전화를 받지 않는 경우
+
+- 특징
+  - ACK와 마찬가지로 새로운  Transaction으로 분류되지 않기 때문에 CSeq를 증가시키지 않음
+  - INVITE 요청에 대해나 취소 요청이므로 해당 INVITE를 식별할 수 있는 Call-ID, CSeq등의 주요 헤더값은 INVITE와 동일함
+  - INVITE요청에 대해 Provisional Code(1xx)를 받지 못한 경우 CANCEL을 요청할 수 없음
+  - UAC나 PRroxy Client가 어느 때나 발생 가능
+    - Proxy는 Forking된 Request 중 하나로부터 2xx 혹은 6xx Response를 수신한 경우, Final Response가 없는 경우 CANCEL을 발생
+    - Via 헤더는 CANCEL을 요청한 발신자의 주소로 초기화 (Response 경로를 제한하기 위한 목적)
+  - CANCEL 수신 시 동작
+    - Stateful Proxy의 경우 CANCEL을 수신한 즉시 200 OK로 응답하고 모든 Pending Request에 새로운 CANCEL 생성함
+    - UA 또는 Redirect Server 경우는 아래와 같음
+      - INVITE에 대해 Final Response를 보낸 경우
+        - 영향 없음
+      - INVITE에 대해 Final Response를 보내지 않은 경우
+        - CANCEL에 대해 200 OK로 응답
+        - INVITE에 대해 487 Request Terminated로 응답하고 이에 대해 ACK 수신
+      - CANCEL에 일치되는 Call이 없는 경우
+        - 481 Call/Transaction Does Not Exist로 응답
+  - BYE와 마찬가지로 경우에 따라 E2E, Hop-by-Hob 방식으로 ㅈ처리됨
+
+**Call Forking에서의 CANCEL**
+
+- Call Forking 서비스는 한 번에 다수의 UA에 INVITE를 동시 또는 순차적으로 전달하는 것을 의미. 이 중 하나의 UA에서 200 OK를 전송하면 나머지 UA에게 CANCEL를 전송하여 요청을 취소하는 서비스
+
+- 예시
+  - 콜 센터의 경우 대표 전번호를 1개로 두고 내부직원들이 여러 전화로 공유할 경우 전화가 오면 내부 전화가 울리는 데 직원 중 한 사람이 받으면 나머지 전화에 대해 끊어야 할 상황에 사용될 수 있음
 
 
