@@ -51,3 +51,22 @@
   - Response Code 중 2xx 계열의 경우 E2E방식이지만 다른 계열(3xx ~ 6xx)의 경우 Dialog 상태 유지를 위해 Proxy를 사용할 경우 Hop-by-Hop방식으로 처리
     - 실질적으론 Hop-by-Hop방식으로 동작한다 함
 
+#### BYE
+
+- 정의 : 성립된 Session을 종료하기 위한 Method
+- 특징
+  - Session에 참여한 UA(Caller/Callee)에서만 정송되며 Proxy나 제 3자가 전송하지 않음
+  - Transaction이 존재하지 않는 알 수 없는 Dialog에 대해서만 BYE대신 481 Call/Transaction Does Not Exsist로 응답
+  - UAC의 경우
+    1. Session종료와 Media에 대한 Sending/Listening을 중단하고 BYE 전달
+    2. BYE에 대한 응답으로 아래와 같은 Code를 받거나 경우가 발생할 경우 반드시 Session 종료
+      - 481 Call/Transaction Does Not Exist
+      - 480 Request Timeout
+      - Transaction의 Timeout(Expire) 발생으로 UAS로부터 Response를 받지 못한 경우
+  - UAS의 경우
+    1. BYE를 받으면 매칭되는 Dialog를 찾음. 단, 찾지 못한 경우 481 Call/Transaction Does Not Exsist로 응답.
+    2. 정상적으로 BYE에 대해 처리한 후 종료된 Session과 연관된 UAC의 Session의 종료 여부와 관계없이 2xx계열의 Response 전달
+    3. 종료된 Session에 대해서도 수신대기 중인 Request에 대해 응답을 해야하는 데 규격서에서는 487 Request Terminated로 응답을 줄 것을 권고하고 있음
+      - 권고사항이라 장비/회사마다 다르겠지만, 회사 IVCF의 경우 487을 전송함
+
+
