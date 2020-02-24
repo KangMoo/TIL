@@ -40,6 +40,8 @@
 
 ** Application Model **
 
+- SIP 시그널 시, Early Media에 대한 Offer/Answer를 가능하게 함.
+  - Concept-Disposition 헤더 Session 또는 Early-Session의 새로운 Dispostion Type을 설정하여 Early Media가 가능하게 함.
 - Forking 시 Media Clipping을 방지
   - Gateway Model의 문제점 해결
 - Early Media Session과 Regular Media Session을 동시에 Offer/Answer를 통해 처리
