@@ -42,3 +42,4 @@
     - User Agent의 Registration 메시지를 받아서 DB에 저장
     - 가입자의 현재 위치를 파악하여 Routing에 사용
 
+- SIP는 서비스를 제공하지 않고, 서비스를 구현하기 위해 사용될 Primitives(매개 변수)를 제공함. 예를 들면 "발신자 정보 표시 서비스"가 구현될 때, SIP가 서비스를 ㅈ공하는 것이 아니라 Primitives에 의해 단순히 SDP를 사용해 Session 정보를 전송만 함.
