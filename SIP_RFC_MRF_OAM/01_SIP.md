@@ -28,7 +28,7 @@
         - Request를 받고, 위치를 확인한 이후 Request를 전송
         - Request를 받고 전송한 이후에는 아무런 정보가 남지 않음
         - Response를 받으면 Via를 이용하여 어디로 전송할 지를 판단
-        - 메모리 need가 없고 Socket nee가 작음
+        - 메모리 need가 없고 Socket need가 작음
       - Stateful Proxy
         - 받아서 전송한 Request에 대한 정보를 기억 
         - Response가 돌아오면 기억한 정보를 이용해 추가적인 처리 가능
