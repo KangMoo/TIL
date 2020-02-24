@@ -120,5 +120,19 @@
   - Contact 헤더에는 audio, video, isfocus와 같은 tag가 포함되어야 함
 
 
+#### REGISTER
+
+- 정의
+  - UA가 Registrar Server에 등록하기 위한 Method
+
+- 특징
+  - UA가 Registrar Server에 등록하는 이유는 통신망에서 통신을 위한 Routing등에 필요한 단말의 현재 위치 정보가 포함된 기본 정보를 등록하기 위함
+    - 단말이 RERGISTER를 요청할 기지국에 대한 정보는 USIM칩에 있다고 함
+  - Contact와 Expires 헤더 값을 통해 등록에 대한 다양한 처리를 요구할 수 있음.
+  - REGISTER는 새로운 Transaction으로 분류되기 때문에 CSeq값이 증가함
+  - Request-URI에는 Registrar Server 도메인 정보만 포맣하는데 항상 최종 목저지가 Registrar Server임을 나타냄
+  - REGISTER의 200 OK Response에는 항상 현재 등록된 주소 정보를 포시
+  - REGISTER의 200 OK Response에 포함된 헤더 중 Service-Route 헤더가 있는 데 이는 등록과정을 통해 서비스한 경로 정보를 얻기 위함으로 3GPP환경에서 SIP단말이 Session을 생성하고자 할 경우, Home 서비스의 Proxy에 대한 정보를 미리 알아야 할 필요가 있기 때문에 사용
+  - REGISTER Request에는 Message Body를 포홤할 수도 있지만 이와 관련해선 규격상에 정의되어 있지 않음
 
 
