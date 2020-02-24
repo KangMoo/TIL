@@ -71,7 +71,8 @@
 
 **Content-Length**
 - SIP에 포함된 Message Body의 길이 표시
-- 0 dltkddml rkqtaks dbgy
-
+- 헤더와 Body의 구분자는 CRLF(개행문자)는 계산에 포함하지 않음
+- 0 이상의 값만 휴효하며, 0인 경우는 Body를 가지지 않음을 의미
 - Content-Length가 없어도 Message처리는 가능해야 함
+- TCP 전송 시에는 반드시 표기해야 함
 
