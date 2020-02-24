@@ -105,3 +105,20 @@
   - 콜 센터의 경우 대표 전번호를 1개로 두고 내부직원들이 여러 전화로 공유할 경우 전화가 오면 내부 전화가 울리는 데 직원 중 한 사람이 받으면 나머지 전화에 대해 끊어야 할 상황에 사용될 수 있음
 
 
+#### OPTIONS
+
+- 정의
+  - UA또는 Server의 기본적인 Capability나 현재 Capability를 요청하기 위한 Method
+  - 타 UA의 사용 가능한 자원 정보에 대한 요청
+
+- 특징
+  - OPTIONS는 Message Body를 포함하지 않음
+  - OPTIONS에 대한 Response에 요청한 정보가 포함됨
+  - Proxy의 경우 OPTIONS Response를 전송하지 않은
+  - OPTIONS도 INVITE, CANCEL등 과 동일하게 RESPONSE를 받음. 단, 실패 시에는 Redirect관련 3xx를 제외한 나머지 4xx ~ 6xx사이의 Code만 사용
+  - 성공 시엔 200 OK로 응답을 받으며 Allow, Accept, Accept-Encoding, Accept-Lanugage등의 헤더에 요청한 정보가 있음
+  - Contact 헤더에는 audio, video, isfocus와 같은 tag가 포함되어야 함
+
+
+
+
