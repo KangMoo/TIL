@@ -118,7 +118,7 @@
     > - `a=inactive` : 단말은 송신 및 수신을 할 수 없음 (Hold 버튼 누른 경우)
     > - ex) `a=sendrecv`
   - framerate 형식
-    > `a=framerate:<frame rate>
+    > `a=framerate:<frame rate>`
     > - Video의 Max Framerate를 나타나며, frame/sec로 펴시
     > - ex) `a=framerate:15`  
   - ptime 형식
@@ -126,12 +126,18 @@
     > - packet time : 한 패킷에 있는 Media에 대한 시간 길이를 ms단위로 표현
     > - ex) `a=ptime:20`
   - rtpmap 형식
-    > `a=rtpmap:<payload type> <encoding name>/<clock rate>/[encoding parameters] 
+    > `a=rtpmap:<payload type> <encoding name>/<clock rate>/[encoding parameters]` 
     > - payload type : m필드의 fmt Payload 값
     > - encoding name : 해당 payload의 encoding name
     > - clock rate : 해당 payload의 clockf rate
     > - encoding parameters : 해당 payload의 encoding parameters로 생략 가능
     > - ex) `a=rtpmap:101 telephone-event/8000` 
+  - fmtp 형식
+    > `a=fmtp:<format> <format specific parameters>`
+    > - format : 해당하는 이벤트 타입의 payload type
+    > - format specific parameters : SDP가 이해하지 못하는 방향으로 전달될 수 있다는 것을 표시
+    > - ex) `a=fmtp:101 0-11`
+    >   - 0~11까지 작동할 수 있다는 것을 말해줌. 0~9, *, #
 
 
 **예시**
