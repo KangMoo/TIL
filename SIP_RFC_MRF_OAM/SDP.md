@@ -19,17 +19,54 @@
 ** Session Level Part**
 - Version
   - SDP 프로토콜의 버전을 의미 "v="부터 media level part 전까지 Session Level Part
+  - 형식
+    > `v=<protocol version>
+    > - protocol version : SDP 프로토콜 버전 (0 버전만 존재하며, minor 버전 존재하지 않음)
+    > - ex) `v=0`
+
 - Origin
-  - Username, Sessio-ID, Version, Network Type, Address Type, Unicast Address 등의 기본 정보
+  - Username, Session-ID, Version, Network Type, Address Type, Unicast Address 등의 기본 정보
+  - 형식
+    > `o=<username> <sess id> <sess-version> <nettype> <unicast-address>
+    > - username : username or '-'로 표시
+    > - sess id : 단말에서 랜덤으로 생성하는 고유 식별 숫자
+    > - sess-version : SDP Version이 아닌 단말에서 랜덤으로 생성하는 고유 식별 숫자
+    > - nettype : 현재 정의되어 있는 것은 INTERNET(IN).
+    > - addrtype : IP4 or IP6
+    > - unicast-address : Global Unique Address
+    > - ex) `o=LGU+IBCF 1355236520 1391439347 IN IP4 203.83.243.197` 
+
 - Session Name
   - Session을 나타내는 이름을 의미
+  - 형식
+    > `s=<session name>`
+    > - session name : Session에 의미있는 이름이 없는 경우 "s= "이라도 반드시 사용 (비어 있으면 안됨)
+    > - ex) `s=-`
+
 - Session Information
   - Session에 관한 Information을 의미
+  - 형식
+    > `i=<session description>`
+    > - session description : text기반으로 Session에 대한 정보 제공
+    > - ex) `i=A VT Session`
+
 - Connection Information
   - Session Level Part 또는 Media Level Part에 해당 필드가 있어야 함
   - 모두 있을 경우 Media Level Part의 Connection 정보가 우선시
+  - 형식
+    > `c=<nettype> <addrtype> <connection-address>`
+    > - Nettype : INTERNET(IN)
+    > - Addrtype : IP4 or IP6
+    > - connection-address : Connection address
+    > - ex) `c=IN IP4 203.83.243.197`
+
 - Timing
   - Session에 대한 start-time과 stop-time 정보
+  - 형식
+    > `t=<start-time> <stop-time>
+    > - 전화통화 같은 경우 start-time, stop-time 둘 다 0ㅇ로 설정. (즉시 시작해서 언제 끝날 줄 모름)
+    > - ex) `t= 0 0`
+    > - ex) `t= 3073397496 3073404696`
 
 **예시**
 ```
@@ -61,7 +98,6 @@ a=rtpmap:0 PCMU/8000
   - 순서대로 Network Type, Address Type, Connection-Address 를 나타내며 미디어의 주소를 정의한다.
 - t=0 0 (필수)
   - Timing 으로 Start-time과 End-Time을 표시한다. 0 0 은 고정 세션을 의미한다.
-
 
 
 
