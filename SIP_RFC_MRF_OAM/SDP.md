@@ -110,10 +110,17 @@
     > `a=<attribute>`
     > `a=<attribute>:<value>`
 - Attributes 별 사용법
-  - Media Direction
-  - 형식
-    > a=<Media Direction>
-  
+  - Media Direction 형식
+    > `a=<Media Direction>`
+    > - `a=recvonly` : 단말은 수신만을 할 수 있으며, 송신하지 않음
+    > - `a=sendonly` : 단말은 송신만을 할 수 있으며, 수신하지 않음
+    > - `a=sendrecv` : 단말은 Media를 송신 및 수신할 수 있음
+    > - `a=inactive` : 단말은 송신 및 수신을 할 수 없음 (Hold 버튼 누른 경우)
+    > - ex) `a=sendrecv`
+  - framerate 형식
+    > `a=framerate:<frame rate>
+    > - Video의 Max Framerate를 나타나며, frame/sec로 펴시
+    > - ex) `a=framerate:15`  
     
 
 
