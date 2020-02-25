@@ -63,7 +63,7 @@
 - Timing
   - Session에 대한 start-time과 stop-time 정보
   - 형식
-    > `t=<start-time> <stop-time>
+    > `t=<start-time> <stop-time>`
     > - 전화통화 같은 경우 start-time, stop-time 둘 다 0ㅇ로 설정. (즉시 시작해서 언제 끝날 줄 모름)
     > - ex) `t= 0 0`
     > - ex) `t= 3073397496 3073404696`
@@ -73,7 +73,7 @@
 - Media Announcements
   - media, port, proto, fmt 정보 "m="부터 SDP의 끝까지 Media Level Part
   - 형식
-    > `m=<media> <port> <proto> <fmt>
+    > `m=<media> <port> <proto> <fmt>`
     > - media : media 유형 (audio, video, text, application, message)
     > - port : media를 전송하기 위한 port
     > - proto : transport protocol (UDP, RTP/AVP, RTP/SAVP) (SAVP에서 S는 암호화를 의미함)
@@ -87,7 +87,7 @@
   - Session level에서의 Bandwidth는 Session 전체에 대한 요구 대역폭을 정의
   - Media level에서의 Bandwidth는 각 Media채널 별 요구 대역폭을 정의
   - 형식
-    > `b=<bwtype>:<bandwidth>
+    > `b=<bwtype>:<bandwidth>`
     > - bwtype의 종류
     >   - TIAS
     >     - Transport Independent Application Specific으로 bit/sec로 표시
@@ -103,11 +103,18 @@
     > - ex) `b=AS:41`
     > - ex) `b=RS:0`
     > - ex) `b=RR:1000` 
+
 - Attributes
   - 각 Medai에 해당하는 Attributes를 말한다. 여러 Attributes가 존재한다
   - 형식
     > `a=<attribute>`
     > `a=<attribute>:<value>`
+- Attributes 별 사용법
+  - Media Direction
+  - 형식
+    > a=<Media Direction>
+  
+    
 
 
 **예시**
