@@ -68,6 +68,31 @@
     > - ex) `t= 0 0`
     > - ex) `t= 3073397496 3073404696`
 
+
+** Media Level Part**
+- Media Announcements
+  - media, port, proto, fmt 정보 "m="부터 SDP의 끝까지 Media Level Part
+  - 형식
+    > `m=<media> <port> <proto> <fmt>
+    > - media : media 유형 (audio, video, text, application, message)
+    > - port : media를 전송하기 위한 port
+    > - proto : transport protocol (UDP, RTP/AVP, RTP/SAVP) (SAVP에서 S는 암호화를 의미함)
+    > - fmt : media format (Payload Type) 리스트
+    > - ex) `m=audio 35906 RTP/AVP 100 96`
+    > - ex) `m=video 50298 RTP/AVP 104 103 105 102 34`
+
+- Bandwidth
+  - 단말이 최대 지원할 수 있는 대역폭을 표시
+  - 이 Bandwidth는 Session Level과 Media Level에 존재할 수 있음
+  - Session level에서의 Bandwidth는 Session 전체에 대한 요구 대역폭을 정의
+  - Media level에서의 Bandwidth는 각 Media채널 별 요구 대역폭을 정의
+- Attributes
+  - 각 Medai에 해당하는 Attributes를 말한다. 여러 Attributes가 존재한다
+  - 형식
+    > `a=<attribute>`
+    > `a=<attribute>:<value>`
+
+
 **예시**
 ```
 v=0
@@ -100,21 +125,6 @@ a=rtpmap:0 PCMU/8000
   - Timing 으로 Start-time과 End-Time을 표시한다. 0 0 은 고정 세션을 의미한다.
 
 
-
-** Media Level Part**
-- Media Announcements
-  - media, port, proto, fmt 정보 "m="부터 SDP의 끝까지 Media Level Part
-- Bandwidth
-  - 단말이 최대 지원할 수 있는 대역폭을 표시
-  - 이 Bandwidth는 Session Level과 Media Level에 존재할 수 있음
-  - Session level에서의 Bandwidth는 Session 전체에 대한 요구 대역폭을 정의
-  - Media level에서의 Bandwidth는 각 Media채널 별 요구 대역폭을 정의
-- Attributes
-  - 각 Medai에 해당하는 Attributes를 말한다. 여러 Attributes가 존재한다
-  - 형식
-    > `a=<attribute>`
-    > `a=<attribute>:<value>`
-
 #### **Offer/Answer Model**
 
 - Offer/Answer Model은 기존 전화망에서 사용하던 기술인데 이를 활용해 SIP에 적용함.
@@ -123,4 +133,4 @@ a=rtpmap:0 PCMU/8000
   - Answer : Offer를 받은 UA에서 그에 대한 응답으로 SDP Message를 전송한 경우
 - with, without의 이미는 SDP Message의 포함 여부를 뜻함
 - 주의할 점으로 Offer/Answer의 Case는 시나리오에 따라 다양하게 달라지며 경우에 맞는 Offer/Answer의 처리가 이루어져야 함.
-- SIP는 Offer/Answer를 통해 SDP에 포함된 Media Capability를 교환하고 , 협상을 통해 RTP가 개방될 수 있도록 함
+- SIP는 Offer/Answer를 통해 SDP에 포된 Media Capability를 교환하고 , 협상을 통해 RTP가 개방될 수 있도록 함
