@@ -86,6 +86,23 @@
   - 이 Bandwidth는 Session Level과 Media Level에 존재할 수 있음
   - Session level에서의 Bandwidth는 Session 전체에 대한 요구 대역폭을 정의
   - Media level에서의 Bandwidth는 각 Media채널 별 요구 대역폭을 정의
+  - 형식
+    > `b=<bwtype>:<bandwidth>
+    > - bwtype의 종류
+    >   - TIAS
+    >     - Transport Independent Application Specific으로 bit/sec로 표시
+    >     - Transport Layer의 오버헤드를 고려하지 않은 대역폭으로 RTP만의 대역폭 의미
+    >   - AS
+    >     - Application Specific Bandwidth로 kbps로 표시
+    >     - TCP/UDP와 같은 Transport Layer의 오버헤드를 고려한 대역폭으로 RTP/UDP/IP의 대역폭
+    >   - CT
+    >     - Conference Total로 kbps로 표시
+    >     - 다자간 회의 Session을 사용할 경우 최대 대역폭
+    >   - RS : RTCP for Senders로 bit/sec로 표시 
+    >   - RR : RTCP for Receivers로 bit/sec로 표시
+    > - ex) `b=AS:41`
+    > - ex) `b=RS:0`
+    > - ex) `b=RR:1000` 
 - Attributes
   - 각 Medai에 해당하는 Attributes를 말한다. 여러 Attributes가 존재한다
   - 형식
