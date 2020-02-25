@@ -294,4 +294,4 @@
   - Soft State Publication이 없을 때 사용
 - Event Soft State
   - PUBLISH 메커니즘을 통해 EPA가 발행하는 Event State
-  - Event State에 대해 유효 시간을 가지고 있음
+  - Egvent State에 대해 유효 시간을 가지고 있음
