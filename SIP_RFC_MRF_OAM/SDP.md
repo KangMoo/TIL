@@ -20,22 +20,24 @@
 - Version
   - SDP 프로토콜의 버전을 의미 "v="부터 media level part 전까지 Session Level Part
   - 형식
-    > `v=<protocol version>
+    > `v=<protocol version>`
+    >
     > - protocol version : SDP 프로토콜 버전 (0 버전만 존재하며, minor 버전 존재하지 않음)
-    > - ex) `v=0`
-
+  > - ex) `v=0`
+  
 - Origin
   - Username, Session-ID, Version, Network Type, Address Type, Unicast Address 등의 기본 정보
   - 형식
-    > `o=<username> <sess id> <sess-version> <nettype> <unicast-address>
+    > `o=<username> <sess id> <sess-version> <nettype> <unicast-address>`
+    >
     > - username : username or '-'로 표시
     > - sess id : 단말에서 랜덤으로 생성하는 고유 식별 숫자
     > - sess-version : SDP Version이 아닌 단말에서 랜덤으로 생성하는 고유 식별 숫자
     > - nettype : 현재 정의되어 있는 것은 INTERNET(IN).
     > - addrtype : IP4 or IP6
     > - unicast-address : Global Unique Address
-    > - ex) `o=LGU+IBCF 1355236520 1391439347 IN IP4 203.83.243.197` 
-
+  > - ex) `o=LGU+IBCF 1355236520 1391439347 IN IP4 203.83.243.197` 
+  
 - Session Name
   - Session을 나타내는 이름을 의미
   - 형식
