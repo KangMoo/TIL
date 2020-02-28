@@ -21,9 +21,15 @@
       - outgoing Process Response OK ()
         - signal, dialog, respons, cseq 로 ackRequest생성
         - dailog.sendAck(ackRequest)
-      - 
       - sendResponse()
 - else if(BYE)
   - 미구현
 - else
   - 그냥 로그만 남김
+
+
+
+
+
+
+
