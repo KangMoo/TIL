@@ -1,3 +1,17 @@
+#### Sipsignal init
+
+- sipFactory에서 인스턴스 받음
+- new Properties
+- setProprery
+  - IP주소, stack이름, 디버그 로그, 서버 로그 등
+- property를 토대로 sipStack 생성
+- SipStack Create
+- SipProvider Create
+  - 이벤트 리스너 등의 
+- Sipfactory Create
+
+
+
 #### SIP INVITE
 
 **Process Request**
