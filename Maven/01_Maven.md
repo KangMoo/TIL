@@ -125,3 +125,26 @@ POM은 메이븐 아티펙트를 식별하는 코디네이트라는 5가지 요�
 - deploy : 최종 아티팩트를 원격 리포지토리에 업로드해 다른 개발자와 프로젝트에서
     공유할 수 있게 한다
 
+#### 플러그인
+메이븐은 모든 빌드 수명주기 단계를 실행하지만 모두 직접 구현하는 것은 아니며,
+maven-plugin(JAR파일로 포장됨)이라는 형식의 아티팩트인 플러그인에 작업을 위임한
+다. 아파치 메이븐 프로젝트는 표준 빌드 수명주기로 정의된 모든 작업을 위한 플러그
+인을 제공하며, 이 밖에도 여러 타사에서 다양한 유형의 커스텀 작업을 처리하기 위한
+많은 플러그인을 제작했다.
+
+- 플러그인은 개별적으로 호출할 수 있는 여러 내부 단계나 목표를 가질 수 있다. 예
+    를 들어 JAR프로젝트에서 default 수명주기는 maven-jar-plugin에 의해 처리되며,
+    여기서 빌드의 여러 단계를 자체 목표 또는 다른 플러그인의 목표로 매핑한다.
+
+    |단계|플러그인:목표|
+    |---|---|
+    |process-resources|resourcese:resources|
+    |compile|compiler:compiler|
+    |process-test-resources|resources:testResourcdes|
+    |test-compile|compiler:testCompile|
+    |test|surefire:test|
+    |package|jar:jar|
+    |install|install:install|
+    |deploy|deploy:deploy|
+
+##
