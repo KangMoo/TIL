@@ -97,3 +97,14 @@ POM은 메이븐 아티펙트를 식별하는 코디네이트라는 5가지 요�
       는 전이 의존성으로 나타나지 않음
   - test : 테스트를 위한 컴파일과 실행에만 필요함
   - import : 
+
+#### 의존성 관리
+- POM의 <dependencyManagement> 요소는 다른 프로젝트에 이용되는 <dependency> 선언
+    을 포함한다. 이러한 POM의 자식 프로젝트는 이러한 선언을 자동으로 상속한다.
+    다른 프로젝트는 <scope> 요소의 import값을 이용해 이를 가져올 수 있다.
+- 프로젝트에서 <dependencyManagment>요소를 참조하면 여기서 선언한 의존성을 해당
+    하는 <version>코디네이트를 지정하지 않아도 이용할 수 있다.
+    <dependencyManagemenrt>안에서 <version>이 변경되는 경우, 이를 참조하는 모든
+    POM에서 이 값이 이용된다.
+
+
