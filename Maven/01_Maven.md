@@ -147,3 +147,74 @@ maven-plugin(JAR파일로 포장됨)이라는 형식의 아티팩트인 플러�
     |install|install:install|
     |deploy|deploy:deploy|
 
+
+## 네티의 핵심 인터페이스
+- Channel
+- ChannelFuture
+- ChannelHandler
+- ChannelHandlercontext
+- ChannelPipeline
+- EventLoop
+
+#### Channel
+- 읽기, 쓰기, 연결(connect), 바인드(bind)등의 I/O작업을 할 수 있는 요소 또는 네
+    트워크 연결
+- 모든 I/O작업은 비동기 -> `ChannelFuture`
+- 핵심 메서드
+  - `ChannelFutue write(Object obj)`
+  - `ChannelFuture flush(Object obj)`
+  - `ChannelFuture writeAndFlush(Object obj)`
+  - `ChannelFuture closeFuture()`
+  - `ChannelPipeline pipeline()`
+  - `SocketAddress remoteAddress()`
+
+#### ChannelFuture
+- `Channel`의 I/O작업의 결과
+- `ChannelFutureListener`를 등록 결과에 따른 작업
+- 핵심 메서드
+  - `ChannelFuture addListener(GenericFutureListener listener)`
+  - `Channel channel()`
+  - `boolean isSuccess()`
+  - `Throwable cause()`
+  - `ChannelFuture await()`
+  - `ChannelFuture sync()`
+
+#### ChannelHandler
+- Netty의 핵심 요소!!
+- Netty의 I/O이벤트를 처리하는 인터페이스
+- `ChannelInboundHandlerAdapter`
+- `ChannelOutboundHandlerAdapter`
+- 전체 메서드
+  - `void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)`
+  - `void handlerAdded(ChannelHandlerContext ctx)`
+  - `void HandlerRemoved(ChannelHandlerContext ctx)`
+
+#### ChannelHandlerContext
+- `ChannelHandler`는 `ChannelHandlerContext`를 통해 다음 `ChannelHandler`에게 이
+    벤트를 넘기거나 동적으로`ChannelPipeline`을 변경할 수 있음
+- 핵심 메서드
+  - `Channel channel()`
+  - `ChannelPipeline pipeline()`
+  - `ChannelFuture write(Object msg)`
+  - `ChannelHandlerContext fireChannelActive(Object msg)`
+  - `ChannelHandlerContext fireChannelRead(Object msg)`
+
+#### ChannelPipeline
+- `Channel`에 드나드는 inbound/outbound이벤트를 처리
+- Intercepting Filter 패턴 처리, `ChannelHandler`리스트
+- 주요 메서드
+  - `ChannelPipeline addLast(ChannelHandler... handlers)`
+  - `ChannelPipeline addLast(String name, ChannelHandler handler)`
+  - `ChannelHandler remove(String name)`
+  - `<T extends ChannelHandelr> T remove(Class<T> handlerType)`
+
+#### EventLoop
+- 등록된 `Channel`들의 모든 I/O작업을 처리
+- 구현체 `NioEventLoopGroup`를 주로 사용
+- 주요 메서드
+  - `boolean inEventLoop()`
+  - `<T> Future<T> submit(Callable<T> task)`
+  - `<V> Promise<V> newPromise()`
+  - `<V> ScheduledFuture<V> schelude<Callable<V> callable, long delay, TimeUnit
+      unit>`
+
