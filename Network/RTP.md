@@ -71,7 +71,7 @@
 #### RTP (Real-time Transport Protocol)
 - 응용층의 프로토콜
 - Video/Audio "데이터"를 전송하기 위한 프로토콜
-- 헤더는 코덱정보, 순서정보, 탕미스탬프, SSRC(Synchronized Source Identifier)양 단말간 여러 RTP세션을 구분 - 한 웹브라우저에서 2개 동영상 재생
+- 헤더는 코덱정보, 순서정보, 타임스탬프, SSRC(Synchronized Source Identifier)양 단말간 여러 RTP세션을 구분 - 한 웹브라우저에서 2개 동영상 재생
   - 헤더마다 코덱이 들어가므로 네트워크 상황에 따라 코덱을 바꿀 수 있다. 품질이 떨어지는 코덱
 - UDP/IP로 패킷 전송
 
