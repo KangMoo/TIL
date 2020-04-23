@@ -1,3 +1,0 @@
-testetesttrest
-
-test for config
