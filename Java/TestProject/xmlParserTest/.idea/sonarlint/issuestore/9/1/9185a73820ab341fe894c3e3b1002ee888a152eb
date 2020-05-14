@@ -1,0 +1,12 @@
+
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(³ù‰
+u	java:S116"TRename this field "nalu_size" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÉÌëÖıÿÿÿÿ8÷°åñ .
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(™ê¸ÿÿÿÿÿ
+t	java:S116
+"XRename this field "profile_level" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(õµ…‰8÷°åñ .
+l	java:S117/"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—æÚ:8¬œó .
+m	java:S117_"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯‹ƒî8¬œó .
+o	java:S100+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÒÄÏ†úÿÿÿÿ8¬œó .
+i	java:S100/"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(—æÚ:8¬œó .
+o	java:S100["NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¹ŠÛúÿÿÿÿ8¬œó .
+j	java:S100_"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¯‹ƒî8¬œó .
