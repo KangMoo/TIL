@@ -3,8 +3,10 @@
 ### 스트림이란
 
 - **데이터 처리 연산을 지원하도록 소스에서 추출된 연속된 요소**
+- **컬렉션, 배열 등의 저장요소를 하나씩 참조하며 함수형 인터페이스(람다식)을 적용하여 반복적으로 처리할 수 있도록 해주는 기능**
 - 스트림은 Array, Collections와 같이 연속된 형태의 객체이다. 하지만 자료구조는 아니다. **원래의 자료를 바꾸지는 못하고**, 대신 파이프라인 형태로 연결된 메소드의 결과를 제공한다. 원본 데이터를 바꾸지 못하는 특성 덕분에 side efferct를 제거할 수 있다.
 - 스트림을 이용하면 선언형으로 컬렉션 데이터를 처리할 수 있다. 즉, 스트림이 데이터 컬렉션 반복을 멋지게 처리하는 기능이라고 생각하면 이해하기 쉽다
+- 
 - 스트림을 이용하면 멀티스레드 코드를 구현하지 않아도 데이터를 투명하게 병렬로 처리할 수 있다
 - 특징
   - 선언형 : 더 간결하고 가독성이 좋아진다
@@ -44,12 +46,26 @@
 >Stream<String> parallelStream = list.parallelStream(); // 병렬 처리 스트림
 >```
 
+### File -> Stream
+
+- 파일의 경우 자바 NIO 의 Files클래스를 이용해 문자열 스트림 생성이 가능
+
+> ```java
+> Path path = Paths.get("C:/Tmp/testfile.txt");
+> Stream<String> streamOfStrings = Files.lines(path);
+> Stream<String> streamWithCharset = Files.lines(path, Charset.forName("UTF-8"));
+> ```
+
 ## 직접 생성
 
 ### 빈 스트림 생성 (null 대신 사용 가능)
 
 > ```java
 > Stream stream = Stream.empty();
+> ```
+>
+> ```java
+> Stream<String> streamEmpty = Stream.empty();
 > ```
 
 ### Build
@@ -102,7 +118,18 @@
 > DoubleStream doubles = new Random().doubles(3); // 난수 3개 생성
 > ```
 
-## 
+### 병렬스트림
+
+- 병렬 스트림은 내부적으로 'fork & join'프레임워크를 이용해 자동적으로 연산을 병렬로 수행한다.
+- 병렬 스트림을 중단하려면 `sequentail()`을 호출하면 된다
+
+> ```java
+> int sum = strStream.parallel()
+>                    .mapToInt(s -> s.length())
+>                    .sum();
+> ```
+
+
 
 # 중간 연산
 
