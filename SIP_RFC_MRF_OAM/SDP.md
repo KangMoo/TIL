@@ -75,14 +75,19 @@
 - Media Announcements
   - media, port, proto, fmt 정보 "m="부터 SDP의 끝까지 Media Level Part
   - 형식
-    > `m=<media> <port> <proto> <fmt>`
-    > - media : media 유형 (audio, video, text, application, message)
-    > - port : media를 전송하기 위한 port
-    > - proto : transport protocol (UDP, RTP/AVP, RTP/SAVP) (SAVP에서 S는 암호화를 의미함)
-    > - fmt : media format (Payload Type) 리스트
+    > `m=<media> <port> <protocol> <format>`
+    >
+    > - media : media 유형. RTP 프로토콜의 페이로드가 무엇인지를 선언
+    >   - audio, video, text, application, message
+    > - port : media를 전송하기 위한 port.
+    > - protocol : transport protocol (SAVP에서 S는 암호화를 의미함), (AVP는 Audio Video Profile의 약자)
+    >   - UDP, RTP/AVP, RTP/SAVP
+  > - format : media format (Payload Type) 리스트. 미디어의 포맷을 서브 필드 (a=)로 표시함을 의미.
+    >   - Payload Type 0 8 18의 순서는 코덱 협상의 우선순위를 표시.
+    >   - Payload Type 101은 DTMF이벤트를 정의
     > - ex) `m=audio 35906 RTP/AVP 100 96`
     > - ex) `m=video 50298 RTP/AVP 104 103 105 102 34`
-
+  
 - Bandwidth
   - 단말이 최대 지원할 수 있는 대역폭을 표시
   - 이 Bandwidth는 Session Level과 Media Level에 존재할 수 있음
