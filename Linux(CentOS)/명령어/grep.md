@@ -84,3 +84,11 @@ grep [OPTION...] PATTERN [FILE...]
 - --color=always
 - --color=never
 
+### Context Line Control
+
+| 옵션   | 내용                                                  |
+| ------ | ----------------------------------------------------- |
+| -B NUM | 패턴 매칭된 이전 행도 NUM 개수만큼 출력               |
+| -A NUM | 패턴 매칭된 이후 행도 NUM 개수 만큼 출력              |
+| -C NUM | 패턴 매칭된 행을 중심으로 앞/뒤 행도 NUM개수만큼 출력 |
+
