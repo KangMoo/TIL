@@ -84,6 +84,12 @@ grep [OPTION...] PATTERN [FILE...]
 - --color=always
 - --color=never
 
+`grep --color` 앞부분에 `GREP_COLOR="1;32"`로 패턴과 매칭되는 부분의 색깔을 지정할 수 있다
+
+- `GREP_COLOR="1;32"` : 초록색
+- `GREP_COLOR="1;34"` : 보라색
+- `GREP_COLOR="1;36"` : 하늘색
+
 ### Context Line Control
 
 | 옵션   | 내용                                                  |
