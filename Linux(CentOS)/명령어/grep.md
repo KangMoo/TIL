@@ -75,3 +75,12 @@ grep [OPTION...] PATTERN [FILE...]
 | 정규 표현식 메타 문자를 일반 문자로 검색하기                 | `grep "\*" [FILE]`         |
 | 문자열 라인 처음 시작 패턴 검색하기                          | `grep "^STR" [FILE]`       |
 | 문자열 라인 마지막 종료 패턴 검색하기                        | `grep "$STR" [FILE]`       |
+
+### 기타
+
+#### 컬러 출력
+
+- --color=auto
+- --color=always
+- --color=never
+
