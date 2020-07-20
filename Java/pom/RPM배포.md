@@ -20,8 +20,8 @@
         <release>[릴리즈 버전]</release>
         <autoRequires>false</autoRequires>
         <targetOS>linux</targetOS>
-        <defaultDirmode>755</defaultDirmode>
-        <defaultFilemode>644</defaultFilemode>
+        <defaultDirmode>[기본 경로 권한 ex)755]</defaultDirmode>
+        <defaultFilemode>[기본 파일 권한 ex)644]</defaultFilemode>
         <defaultUsername>[계정 명]</defaultUsername>
         <defaultGroupname>[그룹 명]</defaultGroupname>
         <mappings>
