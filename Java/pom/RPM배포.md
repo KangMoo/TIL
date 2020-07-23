@@ -50,7 +50,34 @@
 
 이제 RPM 생성을 위한 메이븐 명령어를 실행할 차례다. `rpm:rpm` 골을 이용해서 메이븐을 실행하면 된다.
 
-mvn clean package rpm:rpm
+```xml
+<plugin>
+  <groupId>org.codehaus.mojo</groupId>
+  <artifactId>rpm-maven-plugin</artifactId>
+  <version>2.0.1</version>
+  <configuration>
+    <copyright>[저작권자]</copyright>
+    <group>[그룹명]</group>
+    <release>[릴리즈 버전]</release>
+    <defaultDirmode>[기본 경로 권한 ex)755]</defaultDirmode>
+    <defaultFilemode>[기본 파일 권한 ex)644]</defaultFilemode>
+    <defaultUsername>[계정 명]</defaultUsername>
+    <defaultGroupname>[그룹 명]</defaultGroupname>
+    <mappings>
+      <mapping>
+        <directory>[파일 복사 위치]/</directory>
+        <sources>
+          <source>
+            <location>[복사할 대상]</location>
+          </source>
+        </sources>
+      </mapping>
+    </mappings>
+  </configuration>
+</plugin>
+```
+
+
 
 
 
