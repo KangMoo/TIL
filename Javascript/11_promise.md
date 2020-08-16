@@ -2,7 +2,7 @@
 
 - 비동기 작업을 더 편리하게 쳐리할 수 있도록 ES6에 도입된 기능
 - 이전에는 콜백함수로 처리했지만, 그럴 경우 코드가 난잡해질 수 있음
-
+![promise](/Users/heokangmoo/Documents/TIL/Javascript/images/promise.svg)
 
 
 ### promise 만들기
@@ -89,4 +89,6 @@ increaseAndPrint(0)
 // 4
 // ValueIsFiveError
 ```
+
+
 
