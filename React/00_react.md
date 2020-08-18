@@ -25,3 +25,85 @@
   - Virtual Dom
 
   > VIrtual Dom은 가상의 DOM을 의미한다. 일반적으로 html코드를 짜고 웹 브라우저에서 html파일을 열게 되면, html코드들이 DOM을 만들게된다. 그리고 만약 html코드의 특정 한 부분이 변경되게 된다면 전체 DOM을 새롭게 만들게 되어 비효율적인 구조이다. 이런 문제점들은 리액트에서 해결된다. 리액트는 가상의 DOM을 만들어서 진짜 DOM과 비교하여 변경 사항이 있을 경우 전체를 새롭게 만드는 게 아니라 변경된 부분만 진짜 DOM의 반영하는 방식으로 작업을 수행한다.
+
+
+
+## JSX
+
+- JSX는 리액트에서 생김새를 정의할 때 사용하는 문법이다
+- 얼핏 HTML처럼 생겼지만 JavaScript이다
+- 리액트 컴포넌트 파일에서 XML 형태로 코드를 작성하면 babel이 JSX를 JavaScript로 변환해준다.
+
+**Babel**
+
+>  Babel은 자바스크립트의 문법을 확장해주는 도구이다. 아직 지원되지 않는 최신 문법이나 편의상 사용하거나 실험적인 자바스크립트 문법들을 정식 자바스크립트 형태로 변환해줌으로써 구형 브라우저같은 환경에서도 제대로 실행 할 수 있게 해주는 역할을 한다
+
+**규칙**
+
+- 꼭 닫혀야 하는 태그
+
+  - 태그는 꼭 닫혀있어야 한다.
+    - HTML에서는 닫히지 않는 태그여도 리엑트에선 닫혀야 한다
+      - `<br />`
+      - `<input />`
+
+- 꼭 감싸져야 하는 태그
+
+  - 두개 이상의 태그는 무조건 하나의 태그로 감싸져 있어야 한다
+
+    ```react
+    import React from 'react';
+    import Hello from './Hello';
+    
+    function App() {
+      return (
+        <Hello />
+        <div>안녕히계세요.</div>
+        // Error!
+      );
+    }
+    
+    export default App;
+    ```
+
+    
+
+    ```react
+    import React from 'react';
+    import Hello from './Hello';
+    
+    function App() {
+      return (
+        <>
+          <Hello />
+          <div>안녕히계세요</div>
+        </>
+      );
+    }
+    
+    export default App;
+    ```
+
+**JSX안에 자바스크립트 값 사용하기**
+
+-  JSX내부에 자바스크립트 변수를 보여줘야 할 때는 `{}`로 감싸서 보여준다
+
+> ```react
+> import React from 'react';
+> import Hello from './Hello';
+> 
+> function App() {
+>   const name = 'react';
+>   return (
+>     <>
+>       <Hello />
+>       <div>{name}</div>
+>     </>
+>   );
+> }
+> 
+> export default App;
+> ```
+
+
+
