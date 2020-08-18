@@ -105,5 +105,77 @@
 > export default App;
 > ```
 
+**style과 className**
 
+JAX에서 태그에 style과 CSS class를 설정하는 방법은 HTML에서 설정하는 방법과 다르다.
 
+- style
+
+  인라인 스타일은 객체 형태로 작성해야 하며, `background-color`처럼 `-` 로 구분되어있는 이름들은 `backgoundColor` 처럼 camelCase형태로 네이밍 해줘야 한다
+
+> ```react
+> import React from 'react';
+> import Hello from './Hello';
+> 
+> function App() {
+>   const name = 'react';
+>   const style = {
+>     backgroundColor: 'black',
+>     color: 'aqua',
+>     fontSize: 24, // 기본 단위 px
+>     padding: '1rem' // 다른 단위 사용 시 문자열로 설정
+>   }
+> 
+>   return (
+>     <>
+>       <Hello />
+>       <div style={style}>{name}</div>
+>     </>
+>   );
+> }
+> 
+> export default App;
+> ```
+
+- class
+
+  CSS class를 설정할 때에는 `class=`가 아닌 `className=`으로 설정해줘야 한다.
+
+- 주석
+
+  주석의 형태는 `{/* 이런 형태로 */}` 작성해야 한다
+
+  열리는 태그 내부에서는 `//`를 사용해 주석을 작성한다
+
+> ```react
+> import React from 'react';
+> import Hello from './Hello';
+> import './App.css';
+> 
+> 
+> function App() {
+>   const name = 'react';
+>   const style = {
+>     backgroundColor: 'black',
+>     color: 'aqua',
+>     fontSize: 24, // 기본 단위 px
+>     padding: '1rem' // 다른 단위 사용 시 문자열로 설정
+>   }
+> 
+>   return (
+>     <>
+>       {/* 주석은 화면에 보이지 않습니다 */}
+>       /* 중괄호로 감싸지 않으면 화면에 보입니다 */
+>       <Hello 
+>         // 열리는 태그 내부에서는 이렇게 주석을 작성 할 수 있습니다.
+>       />
+>       <div style={style}>{name}</div>
+>       <div className="gray-box"></div>
+>     </>
+>   );
+> }
+> 
+> export default App;
+> ```
+>
+> 
