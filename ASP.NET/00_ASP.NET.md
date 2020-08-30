@@ -31,3 +31,12 @@ ASP.NET은 C#또는 Visual Basic 등의 프로그래밍 언어를 사용해 웹 
 - 윈도우 서버 또는 윈도우 클라이언트
 - SQL 서버
 
+### ASP.NET관련 확장자
+
+ASP.NET관련 파일의 확장자는 html., css, js 등을 비롯해 새로운 형태가 많다
+
+- aspx : ASP.NET의 기본 확장자. 웹 폼을 의미한다
+- ascx : 단독르노는 실행되지 않으며 aspx에 포함되어 실행되는 웹 폼 사용자 정의  컨트롤을 의미한다
+- master : 웹 사이트의 공통 레이아웃을 답고 있는 마스터 페이지에 대한 확장자이다
+- cshtml : ASP.NET MVC에서의 뷰 페이지를 C#문법으로 작성하는 페이지이다
+- config : 각종 환경 설정을 하는 파일이다. web.conifg, bundle.config 등이 있다
