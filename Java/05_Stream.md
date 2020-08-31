@@ -408,6 +408,20 @@
   - 제공 메서드 : getCount(), getSum(), getAverage(), getMin(), getMax()
 - 이를 이용하면 스트림을 여러번 생성하지 않고 원하는 결과를 한 번에 모두 만들 수 있다
 
+## Collect vs Reduce
+
+**Reduce를 쓰는 경우**
+
+- 리스트와 output타입이 같을 때
+- 이항 연산의 연쇄 작용으로서의 의미가 강할 때
+- identifty가 정말로 identity(항등원)의 성질을 가지고 있는 경우
+- non-parallel한 경우
+
+**Collect를 쓰는 경우**
+
+- 리스트와 타입이 다른 output을 내는 경우
+- parallel한 경우
+
 ## anyMatch(), allMatch(), noneMatch()
 
 - Predicate로 특정 조건을 받아 해당 조건을 만족하는지 확인하여 결과를 boolean값으로 반환한다
