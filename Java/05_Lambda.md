@@ -70,10 +70,10 @@ lamT -> { lamT.start(); }
 
 ```java
 new Thread(new Runnable() {
-   @Override
-   public void run() { 
-      System.out.println("Welcome Heejin blog"); 
-   }
+  @Override
+  public void run() { 
+    System.out.println("Welcome Heejin blog"); 
+  }
 }).start();
 ```
 
@@ -81,7 +81,7 @@ new Thread(new Runnable() {
 
 ```java
 new Thread(()->{
-      System.out.println("Welcome Heejin blog");
+  System.out.println("Welcome Heejin blog");
 }).start();
 ```
 
