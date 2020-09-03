@@ -28,7 +28,7 @@
 - Origin
   - Username, Session-ID, Version, Network Type, Address Type, Unicast Address 등의 기본 정보
   - 형식
-    > `o=<username> <sess id> <sess-version> <nettype> <unicast-address>`
+    > `o=<username> <sess id> <sess-version> <nettype> <addrtype> <unicast-address>`
     >
     > - username : username or '-'로 표시
     > - sess id : 단말에서 랜덤으로 생성하는 고유 식별 숫자
@@ -175,6 +175,9 @@ a=rtpmap:0 PCMU/8000
   - Phone number - contact detail.
 - c=IN IP4 10.1.3.33 (optional)
   - 순서대로 Network Type, Address Type, Connection-Address 를 나타내며 미디어의 주소를 정의한다.
+- b=(zero or more)
+
+  - bandwidth 정보
 - t=0 0 (필수)
   - Timing 으로 Start-time과 End-Time을 표시한다. 0 0 은 고정 세션을 의미한다.
 
@@ -188,3 +191,55 @@ a=rtpmap:0 PCMU/8000
 - with, without의 이미는 SDP Message의 포함 여부를 뜻함
 - 주의할 점으로 Offer/Answer의 Case는 시나리오에 따라 다양하게 달라지며 경우에 맞는 Offer/Answer의 처리가 이루어져야 함.
 - SIP는 Offer/Answer를 통해 SDP에 포된 Media Capability를 교환하고 , 협상을 통해 RTP가 개방될 수 있도록 함
+
+
+
+
+
+### SDP
+
+**Session Description**
+
+v= (protocol version)
+
+o= (originator and session identifier)
+
+s= (session name)
+
+i=* (session information)
+
+u=* (URI of description)
+
+e=* (email address)
+
+p=* (phone number)
+
+c=* (connection infromation --not required if included in all media)
+
+b=* (zero or more bandwidth infromation lines)
+
+z=* (time zone adjustments)
+
+k=* (encryption key)
+
+a=* (zero or more session attribute lines)
+
+**Time Description**
+
+t= (time the session is active)
+
+r=* (zero or more repeat times)
+
+**Media Description**
+
+m= (media name and transport address)
+
+i=* (media title)
+
+c=* (connection information --optional if inclued at session level)
+
+b=* (zero or more bandwidth infromation lines)
+
+k=* (encryption key)
+
+a=* (zero or more media attribute lines)
