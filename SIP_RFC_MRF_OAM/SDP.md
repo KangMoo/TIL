@@ -17,6 +17,7 @@
     - "="양쪽 모두 공백 사용 불가
 
 ** Session Level Part**
+
 - Version
   - SDP 프로토콜의 버전을 의미 "v="부터 media level part 전까지 Session Level Part
   - 형식
@@ -66,6 +67,7 @@
   - Session에 대한 start-time과 stop-time 정보
   - 형식
     > `t=<start-time> <stop-time>`
+    >
     > - 전화통화 같은 경우 start-time, stop-time 둘 다 0ㅇ로 설정. (즉시 시작해서 언제 끝날 줄 모름)
     > - ex) `t= 0 0`
     > - ex) `t= 3073397496 3073404696`
@@ -198,48 +200,30 @@ a=rtpmap:0 PCMU/8000
 
 ### SDP
 
-**Session Description**
-
-v= (protocol version)
-
-o= (originator and session identifier)
-
-s= (session name)
-
+**Session description**
+v=  (protocol version)
+o=  (originator and session identifier)
+s=  (session name)
 i=* (session information)
-
 u=* (URI of description)
-
 e=* (email address)
-
 p=* (phone number)
-
-c=* (connection infromation --not required if included in all media)
-
-b=* (zero or more bandwidth infromation lines)
-
+c=* (connection information -- not required if included in all media)
+b=* (zero or more bandwidth information lines)
+One or more time descriptions ("t=" and "r=" lines; see below)
 z=* (time zone adjustments)
-
 k=* (encryption key)
-
 a=* (zero or more session attribute lines)
+Zero or more media descriptions
 
-**Time Description**
-
-t= (time the session is active)
-
+**Time description**
+t=  (time the session is active)
 r=* (zero or more repeat times)
 
-**Media Description**
-
-m= (media name and transport address)
-
+**Media description, if present**
+m=  (media name and transport address)
 i=* (media title)
-
-c=* (connection information --optional if inclued at session level)
-
-b=* (zero or more bandwidth infromation lines)
-
+c=* (connection information -- optional if included at session level)
+b=* (zero or more bandwidth information lines)
 k=* (encryption key)
-
 a=* (zero or more media attribute lines)
