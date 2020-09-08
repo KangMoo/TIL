@@ -227,3 +227,78 @@ c=* (connection information -- optional if included at session level)
 b=* (zero or more bandwidth information lines)
 k=* (encryption key)
 a=* (zero or more media attribute lines)
+
+
+
+## 예시
+
+```
+v=0
+o=alice 2890844526 2890844526 IN IP4 atlanta.com
+s=
+c=IN IP4 10.1.3.33
+t=0 0
+m=audio 49172 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+```
+
+>**v=0 (필수)**
+>SDP 프로토콜의 버전을 표시한다. SDP 버전은 0이다.
+>**o=alice 2890844526 2890844526 IN IP4 atlanta.com (필수)**
+>SDP 메시지를 생성한 Owner/Creator 를 표시한다. 순서대로 Username, Session-ID, Session Version, Network Type, Address Type, Unicast Address 를 표시한다.
+>**s= (필수)**
+>세션 이름을 표시한다.
+>**i=(optional)**
+>Session information.
+>**u=(optional)**
+>URI of description.
+>**e=(optional)**
+>Email address - contact detail.
+>**p=(optional)**
+>Phone number - contact detail.
+>**c=IN IP4 10.1.3.33 (optional)**
+>순서대로 Network Type, Address Type, Connection-Address 를 나타내며 미디어의 주소를 정의한다.
+>**t=0 0 (필수)**
+>Timing 으로 Start-time과 End-Time을 표시한다. 0 0 은 고정 세션을 의미한다.
+
+```
+m=audio 16444 RTP/AVP 0 8 18 101
+a=rtpmap:0 PCMU/8000
+a=ptime:20
+a=rtpmap:8 PCMA/8000
+a=ptime:20
+a=rtpmap:18 G729/8000
+a=ptime:20
+a=sendrecv
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15 
+```
+
+>**m= (미디어 설명)**
+>Media Description으로 Media, Port, Protocol, Format 을 정의한다.
+>Media : audio, video, text, application, message 로 표시.
+>Port : 미디어가 전송될 전송포트(Transport port) 표시.
+>Protocol : UDP, RTP/AVP, RTP/SAVP로 표시하며 AVP는 Audio Video Profile의 약자이다.
+>Format : 미디어의 포멧을 서브필드 (a=)로 표시함을 의미.
+>Payload Type 0 8 18 의 순서는 코덱 협상의 우선순위를 나타내며, Payload Type 101은 DTMF 이벤트를 정의한다. 각 포멧에 대한 상세 설명은 a= 에 표시된다.
+>**a= (미디어 속성)**
+>미디어 속성(attributer)을 정의한다.
+>a=rtpmap : Payload type, encoding name/clock rate 를 표시
+>a=ptime : Packet time으로 미디어 패킷 한 개가 포함된 시간 정보로 ms로 표시 (보통 20ms).
+>a=fmtp : 미디어 포멧에 대한 파라미터를 정의
+>**a= (미디어의 방향)**
+>미디어 속성 뿐만 아니라 미디어 방향도 표시한다. 미디어의 방향은 아래와 같이 4가지로 나타낸다.
+>a=sendrecv : 단말은 미디어를 송신 및 수신할 수 있음.
+>a=recvonly : 단말은 수신만을 할 수 있으며 송신하지 않음.
+>a=sendonly : 단말은 송신만을 할 수 있으며 수신하지 않음.
+>a=inactive : 단말은 송신 및 수신을 할 수 없음 (Hold 버튼을 누를 경우)
+>별도의 언급이 없을 경우에는 a=sendrecv 로 설정되었다고 가정한다. 미디어의 방향은 다양한 부가 서비스 구현시 유용하다.
+>**a= (DTMF 협상)**
+>DTMF 전달에 관한 협상도 진행한다.
+>a=rtpmap:101 telephone-event.8000 : RFC 2833에 의한 In-band DTMF를 의미.
+>a=fmtp 101 0-15 : DTMF Tone 은 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, *, #, A, B, C, D 총 15 가지를 송수신 함.
+
+
+
+
+
