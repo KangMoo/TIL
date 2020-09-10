@@ -11,7 +11,7 @@
 - `awk '{action}' filename`
 - `awk 'pattern {action}' filename`
 
-### 
+
 
 ### awk 동작원리
 
