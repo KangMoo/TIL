@@ -94,3 +94,73 @@ a=fmtp:100 mode-set=8; octet-align=1
 >
 > ​	Mode-set이 없는 경우 모두 허용한다. Mode-indication 이 외의 Frame Type의 경우 SID, Speech lost, No Data만 사용할 수 있다 그 외 모든 패킷 수신 시 폐기한다
 
+
+
+### AMR-NB
+
+![AMR](./image/AMR.png)
+
+| Frame Type | Mode Indication | Mode Request | Frame Content (AMR mode, comfort noise, or other) |
+| ---------- | --------------- | ------------ | ------------------------------------------------- |
+| 0          | 0               | 0            | AMR 4.75 kbit/s                                   |
+| 1          | 1               | 1            | AMR 5.15 kbit/s                                   |
+| 2          | 2               | 2            | AMR 5.90 kbit/s                                   |
+| 3          | 3               | 3            | AMR 6.79 kbit/s (PDC-EFR)                         |
+| 4          | 4               | 4            | AMR 7.40 kbit/s (TDMA-EFR)                        |
+| 5          | 5               | 5            | AMR 7.95 kbit/s                                   |
+| 6          | 6               | 6            | AMR 10.2 kbit/s                                   |
+| 7          | 7               | 7            | AMR 12.2 kbit/s (GSM-EFR)                         |
+| 8          | -               | -            | AMR SID                                           |
+| 9          | -               | -            | GSM-EFR SID                                       |
+| 10         | -               | -            | TDMA-EFR SID                                      |
+| 11         | -               | -            | PDC-EFR SID                                       |
+| 12 - 14    | -               | -            | For Future use                                    |
+| 15         | -               | -            | No Data (No Transmission/ No reception)           |
+
+
+
+### AMR-WB
+
+![AMR-WB](./image/AMR-WB.png)
+
+| Frame Type | Mode Indication | Mode Request | Frame Content (AMR-WB mode, Comfort noise, or other) |
+| ---------- | --------------- | ------------ | ---------------------------------------------------- |
+| 0          | 0               | 0            | AMR-WB 6.60 kbit/s                                   |
+| 1          | 1               | 1            | AMR-WB 8.85 kbit/s                                   |
+| 2          | 2               | 2            | AMR-WB 12.65 kbit/s                                  |
+| 3          | 3               | 3            | AMR-WB 14.25 kbit/s                                  |
+| 4          | 4               | 4            | AMR-WB 15.85 kbit/s                                  |
+| 5          | 5               | 5            | AMR-WB 18.25 kbit/s                                  |
+| 6          | 6               | 6            | AMR-WB 19.85 kbit/s                                  |
+| 7          | 7               | 7            | AMR-WB 23.05 kbit/s                                  |
+| 8          | 8               | 8            | AMR-WB 23.85 kbit/s                                  |
+| 9          | -               | -            | AMR-WB SID (Comfort Noise Frame)                     |
+| 10 -13     | -               | -            | For Future use                                       |
+| 14         | -               | -            | speech lost                                          |
+| 15         | -               | -            | NO Data (No Transmission/ NO Reception)              |
+
+
+
+- FT=14 (SPEECH_LOST, only available for AMR-WB): packet이 손실되었다
+- FT=15 (No Data) 현재 Payload에 업쇼고, 이전 또는 이 후 패킷에 존재한다.
+  - No Data로만 구성된 packet 또는 마지막 frame이 No Data 페킷인 경우는 interleaving의 경우에만 전달할 수 있다 (SHOULD)
+
+- Interleaving : octet-aligned mode에서만 사용 가능. Interleaving group에서 사용되는 최대 frame-blocks 개수
+- crc : octet-aligned mode에서만 사용가능
+  - 0 : CRC 사용안함
+  - 1 : CRC 사용
+- mode-change-period : N frame blocks 주기로 codec-mode 변경이 허용된다
+  - N 은 1 or 2로 default=1이다
+- mode-change-capability
+  - 1 : client가 mode 변경 주기를 제한할 수 있다 (default)
+  - 2 : client가 mode 변경 주기를 2로 제한할 수 있다 (권장)
+- mode-change-neighbor
+  - 0 : neighboring modes 가 아닌 모드로 변경이 가능하다 (default)
+  - 1 : neighboring modes로 만 변경이 가능하다. neighboring modes는 현재 mode보다 한 단계 높은 또는 낮은 레벨 (5인경우 4 or 6)
+- robust-sorting: octet-aligned mode에서만 사용가능
+  - 0 : simple payload sorting이 사용됨
+  - 1 : robust payload sorting이 사용됨
+- max-red : 중복 전송 사용 시 중복 packet의 최대 전송 지연시간 (msec). 0 - 65535로 default=0 (제약없음)
+
+
+
