@@ -164,3 +164,44 @@ a=fmtp:100 mode-set=8; octet-align=1
 
 
 
+## Payload 구조
+
+![AMR Payload Structure](./image/AMR_payload_structure.png)
+
+AMR과 AMR-WB모두 payload header + table of contents(TOC) + speech data로 구성된다
+
+
+
+### Payload Header
+
+> Bandwidth-Efficient Mode
+>
+> ![AMR Payload Header Bandwidth-Efficient Mode](./image/AMR_payload_header_BE.png)
+
+> Octet-Aligned Mode
+>
+> ![AMR Payload Header Octet-Aligned Mode](./image/AMR_payload_header_OA.png)
+
+- Codec Mode Request (CMR) : 4bit
+
+  - Optional Parameter로 지정된 Mode-set 범위 또는 No-Data로 설정된다. 해당 값을 벗어나는 모든 packet은 drop한다
+  - CMR=15 (No-DATA)는 수신기의 선택사항으로 송신기에서 정하지 않는 경우이다
+
+- Reversed (R) : 1bit *4
+
+  - 예약 bit로 0으로 설정한다
+
+- ILL (4bit, unsigned integer)
+
+  - Optional parameter인 interlieaving이 정의된 경우에 존재한다
+  - ILL = L 인 경우 interleaving length = L + 1
+
+- ILP (4bit, unsigned integer)
+
+  - Optional parameter인 interleaving이 정의된 경우에 존재한다
+  - 0 ~ ILL값의 range로 index를 표시하며 범위 밖의 packet은 폐기한다
+  - ex) speech frame-block (time-synchronized set of speech frames in a multi-channel) n에서 시작하는 interleaving group의 ILL=L이라고 한다면
+    - s : first payload packet of the interleaving group
+    - N : payload 내의 speech frame-blocks 개수
+
+  
