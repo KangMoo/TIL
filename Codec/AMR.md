@@ -27,3 +27,52 @@ AMR은 12.2, 10.2, 7.95, 7.40, 6.70, 5.90, 5.15, 4.75 kbit/s 비트레이트의 
 - SSRC : 32bits. Synchrosization Source Identifier (RTP session에서 source를 구분하는 고유 식별자)
 - CSRC list : 0 to 15 items, 32bits each. 다수의 음원이 mixer로 통합될 때 원음의 식별자 리스트
 
+
+
+## AMR In SDP
+
+### 주요 Parameter
+
+m=audio 10048 RTP/AVP 100 98
+
+> "m=" attribute에 Media Type name과 payload type(PT)을 정의한다
+>
+> Media type : audio
+>
+> PT = AMR-WB:100, AMR:98 (96 ~ 127 의 Dynamic range에서 nego된다)
+
+a=rtpmap:100 AMR-WB/16000/1
+
+> "a=rtpmap:{PT}" attribute에 해당 payload type에 대한 Media subtype name, RTP clock rate, channels를 정의한다
+>
+> Media subtype name은 AMR or AMR-WB로 표기한다
+>
+> RTP clock rate는 AMR=8000, AMR-WB=16000이다
+>
+> Channles는 audio channel 개수로 1 ~6의 range를 갖는다 (default = 1)
+
+a=ptime:20
+
+a=maxptime:120
+
+> option parameter중 ptime과 maxptime은 "a=" attribute로 별도 지정한다
+>
+> ptime: packet당 media가 나타내는 시간으로 20으로 고정되며, audio에서는 해석이 무의미하다
+>
+> maxptime: 하나의 packet에 포함할 수 있는 최대 media 시간 (ms). frame size의 정수 배로(SHOULD) 없는 경우 임의의 개수를 포함 가능하다.
+
+a=fmtp:100 mode-set=8; octet-align=1
+
+> "a=fmtp:{PT}" attribute에 해당 payload type에 대한 기타 optional parameter를 정의한다
+>
+> 각 parameter는 parameter=value 쌍으로 열거하며, semicolon으로 구분한다
+>
+> octet-align: operation mode로 각각의 방식에 따른 packet field 및 지원 기능이 달라진다
+>
+> - 0: badwidth-efficient mode
+> - 1: octet-aligned mode
+>
+> mode-set: 허용하는 modeindication의 열거형으로 comma로 구분한다.
+>
+> ​	Mode-set이 없는 경우 모두 허용한다. Mode-indication 이 외의 Frame Type의 경우 SID, Speech lost, No Data만 사용할 수 있다 그 외 모든 패킷 수신 시 폐기한다
+
