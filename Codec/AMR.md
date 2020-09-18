@@ -205,3 +205,4 @@ AMR과 AMR-WB모두 payload header + table of contents(TOC) + speech data로 구
     - N : payload 내의 speech frame-blocks 개수
 
   
+
