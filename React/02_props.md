@@ -12,9 +12,9 @@
 > import Hello from './Hello';
 > 
 > function App() {
->   return (
->     <Hello name="react" />
->   );
+>     return (
+>        <Hello name="react" />
+>     );
 > }
 > 
 > export default App;
@@ -24,7 +24,7 @@
 > import React from 'react';
 > 
 > function Hello(props) {
->   return <div>안녕하세요 {props.name}</div>
+>     return <div>안녕하세요 {props.name}</div>
 > }
 > 
 > export default Hello;
@@ -37,9 +37,9 @@
 > import Hello from './Hello';
 > 
 > function App() {
->   return (
->     <Hello name="react" color="red"/>
->   );
+>     return (
+>        <Hello name="react" color="red"/>
+>     );
 > }
 > 
 > export default App;
@@ -49,7 +49,7 @@
 > import React from 'react';
 > 
 > function Hello({ color, name }) {
->   return <div style={{ color }}>안녕하세요 {name}</div>
+>     return <div style={{ color }}>안녕하세요 {name}</div>
 > }
 > 
 > export default Hello;
@@ -64,12 +64,12 @@ defaultProps로 기본값 설정
 > import Hello from './Hello';
 > 
 > function App() {
->   return (
->     <>
->       <Hello name="react" color="red"/>
->       <Hello color="pink"/>
->     </>
->   );
+>     return (
+>        <>
+>        <Hello name="react" color="red"/>
+>        <Hello color="pink"/>
+>        </>
+>     );
 > }
 > 
 > export default App;
@@ -79,11 +79,11 @@ defaultProps로 기본값 설정
 > import React from 'react';
 > 
 > function Hello({ color, name }) {
->   return <div style={{ color }}>안녕하세요 {name}</div>
+>     return <div style={{ color }}>안녕하세요 {name}</div>
 > }
 > 
 > Hello.defaultProps = {
->   name: '이름없음'
+>     name: '이름없음'
 > }
 > 
 > export default Hello;
@@ -97,15 +97,15 @@ props.children 예시
 > import React from 'react';
 > 
 > function Wrapper({ children }) {
->   const style = {
->     border: '2px solid black',
->     padding: '16px',
->   };
->   return (
->     <div style={style}>
->       {children}
->     </div>
->   )
+>     const style = {
+>        border: '2px solid black',
+>        padding: '16px',
+>     };
+>     return (
+>        <div style={style}>
+>          {children}
+>        </div>
+>     )
 > }
 > 
 > export default Wrapper;
@@ -119,16 +119,17 @@ props.children 예시
 > import Wrapper from './Wrapper';
 > 
 > function App() {
->   return (
->     <Wrapper>
->       <Hello name="react" color="red"/>
->       <Hello color="pink"/>
->     </Wrapper>
->   );
+>     return (
+>        <Wrapper>
+>          <Hello name="react" color="red"/>
+>          <Hello color="pink"/>
+>        </Wrapper>
+>     );
 > }
 > 
 > export default App;
 > ```
 >
-> 
+
+
 

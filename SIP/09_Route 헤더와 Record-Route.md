@@ -6,3 +6,4 @@ Dialog Stateful SIP Proxy를 사용한다. SIP 프로토콜은 새롭게 두 개
    - SIP Proxy를 경유하는 다이얼로그에 대한 요청과 응답에 사용된다.
    - 여러 대의 SIP Proxy를 경우할 경우 ','
 2. Route Header
+
