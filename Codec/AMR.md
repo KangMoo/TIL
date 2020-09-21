@@ -32,12 +32,12 @@ AMR-WB는  6.60, 8.85, 12.65, 14.25, 15.85, 18.25, 19.85, 23.05, 23.85 kbps 비�
 
 - Version (V) : 2bits. RTP Version으로 2로 고정
 - Padding (P) : 1bit. 설정된 경우 1개 이상의 추가 padding octests가 끝에 포함됨을 의미한다
-- Extension (X) : 1bit. 설정된 경우 한 개의 header extension이 포함된다
+- Extension (X) : 1bit. 설정된 경우 한 개의 header extension이 포함된다.
 - CSRC count (CC) : 4bits. CSRC identifier의 개수
 - Maker bit (M): 1bit.
   - 1 : talkspurt의 첫번째 sppech frame을 표시 (다시말해, 첫 번째 SID 이 후의 음성의 시작을 의미)
   - 0 : 그 외의 모든  packet
-- Payload type (PT) : 7bits. 96 ~ 127 사이의 Dynamic Range를 사용한다. (Nego 과정에서 값이 결정된다)
+- Payload type (PT) : 7bits. 96 ~ 127 사이의 Dynamic Range를 사용한다. (Nego 과정에서 값이 결정된다).
 
 - Sequence number (SN) : 16bits. RFC3550(RTP)에 따르며, decoding 순서를 결정한다
 
@@ -205,4 +205,71 @@ AMR과 AMR-WB모두 payload header + table of contents(TOC) + speech data로 구
     - N : payload 내의 speech frame-blocks 개수
 
   
+
+## The Payload Table of Contents (ToC)
+
+> Bandwidth-Efficient Mode
+>
+> ![AMR_ToC_BE](./image/AMR_ToC_BE.png)
+
+> Octet-Aligned Mode
+>
+> ![AMR_ToC_OA](./image/AMR_ToC_OA.png)
+
+-  F (1 bit)
+  - 0 : payload 내에 마지막 speech frame
+  - 1 : payload 내에 추가적인 speech frame이 존재
+- FT (4 bits)
+  - Speech coding mode or comport noise (SID) mode 를 지정
+- Q (1 bit)
+  - 0 : 해당 frame이 심각하게 손상됨 (packet drop하는 것보다는 품질향상에 도움을 줌)
+  - 1: 정상 packet
+  - unequal error protection and detection (UEP and UED) 메커니즘에 따라 frame의 speech bit를 A, B, C 클래스로(민감도 순) 구분하여 class A 의 bit error가 감지된 경우에만 Q=1로 설정한다
+
+![AMR Class A bits](./image/AMR_Class_A_bits.png)
+
+![AMR-WB Class A bits](./image/AMR_WB_Class_A_bits.png)
+
+- P bits : padding bits
+  - 반드시 0으로 설정하며, 수신기에서는 무시된다.
+
+
+
+
+
+N Channel의 K speech frame-block으로 구성된 packet은 N*K의 ToC가 존재하며 생성 시간 순으로 정렬한다.
+
+List of frame CRCs는 optional parameter인 crc=1인 경우에만 존재한다
+
+각 CRC는 8bit로 구성되며, AMR / AMR-WB codec의 Class A bit에 대해서만 계산된다
+
+수신기는 CRC 검사를 통해 packet의 무결성을 검사해야 한다 (SHOULD)
+
+CRC값이 틀린 경우 Q=0으로 설정해야 한다 (MUST)
+
+
+
+## Speech Data
+
+0개 이상의 speech frames or SID로 구성된다
+
+FT=14 or 15인 경우 연관 speech frame이 존재한다
+
+각 speech frame은 FT field로 encoded된 20ms speech를 나타낸다
+
+speech frame length는 FT mode 기준으로 정해진다
+
+octet-aligned mode 경우에는 각 speech frame은 octet-aligned되어야 한다 (zero-padding)
+
+
+
+## Payload Example
+
+
+
+
+
+
+
+
 
