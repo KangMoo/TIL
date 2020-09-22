@@ -69,5 +69,5 @@
 
 `$ tcpdump dst port 3389` : dst 포트가 이것인 것.
 
-`$ tcpdump -nn -vvv -A -G 3600 -w /home/ec2-user/dump_%Y%m%d-%H%M%S.pcap -Z ec2-user host github.com and port 443` : 3600초 (1시간) 단위로 https://github.com 과 주고 받는 패킷을 남김
+`$ tcpdump -nn -vvv -A -G 3600 -w /home/ec2-user/dump_%Y%m%d-%H%M%S.pcap -Z ec2-user host github.com and port 443` : 3600초 (1시간) 단위로 https://github.com 과 주고 받는 패킷을 남김. 만약 pcap 파일명에 타임스탬프 ( `%Y%m%d-%H%M%S` ) 를 추가하지 않으면 3600초 마다 파일에 새로운 내용으로 덮어쓰게 된다.
 
