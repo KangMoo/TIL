@@ -371,6 +371,16 @@
 >         BinaryOperator<U> combiner);
 > ```
 
+> ```java
+> <R> R collect(Supplier<R> supplier,
+>               BiConsumer<R, ? super T> accumulator,
+>               BiConsumer<R, R> combiner);
+> ```
+
+> ```java
+> <R, A> R collect(Collector<? super T, A, R> collector);
+> ```
+
 ## Collecting
 
 - Stream값을 모아 Map, Set, List와 같은 컬렉션 형태로 변환해준다. (아마 가장 많이 쓰이는 최종 연산자..)
