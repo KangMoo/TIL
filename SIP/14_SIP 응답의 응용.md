@@ -36,3 +36,10 @@ Bob이 통화중이라 486 Busy Here응답
 
 - 600 Busy Everywhere : 밥이 가진 여러 단말 중에서 응답할 수 있는 단말이 없을 경우.
 - 488 Not Acceptable Here : 밥이 통화중이어서 호를 거절할 경우. 488 응답은 정확한 거절 이유를 명시해야한다.
+
+5. Call Forward Busy : 181 Call Forwarded
+
+![착신전환 통화중 181 Call Forwarded](./image/14_5.png)
+
+Bob의 IP 전화기가 488응답을 할 경우. SIP Proxy 서버는 밥의 프로파일에 설정된 Call Forward Busy (통화중 착신전환 번호)로 re-INVITE를 발행하고, 앨리스에게 착신 전환된 번호로 연결을 시도하고 있음을 181 Call Forwarded로 통지한다
+
