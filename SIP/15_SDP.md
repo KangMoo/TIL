@@ -117,3 +117,56 @@ a=fmtp:101 0-15
 - a=rtpmap:101 telephone-event/8000
 
 - a=fmtp:101 0-15 
+
+
+
+## SDP협상의 이해
+
+1. 앨리스의 Offer
+
+```sdp
+v=0
+o=alice 2890844526 2890844526 IN IP4 host.anywhere.com
+s=
+c=IN IP4 host.anywhere.com
+t=0 0
+m=audio 49170 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+m=video 51372 RTP/AVP 31
+a=rtpmap:31 H261/90000
+m=video 53000 RTP/AVP 32
+a=rtpmap:32 MPV/90000
+```
+
+Alice의 제안
+
+- 음성 스트림 채널 1
+  G.711 ulaw 코덱(PCMU) , 49170 UDP 포트, 별도로 언급이 없으므로 양방향 채널
+- 영상 스트림 채널 1
+  H.261 코덱 (페이로드 타입 31),  51372 UDP 포트, 별도로 언급이 없으므로 양방향 채널
+- 영상 스트림 채널 2
+  MPEG 코덱 (페이로드 타입 32), 53000 UDP 포트, 별도로 언급이 없으므로 양방향 채널
+
+2. 밥의 Answer
+
+```sdp
+v=0
+o=bob 2890844730 2890844730 IN IP4 host.example.com
+s=
+c=IN IP4 host.example.com
+t=0 0
+m=audio 49920 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+m=video 0 RTP/AVP 31
+m=video 53000 RTP/AVP 32
+a=rtpmap:32 MPV/90000
+```
+
+밥의 Answer
+
+- 음성 스트림 채널 1
+  G.711 ulaw (PCMU) 코덱, 49920 UDP 포트, 별도로 언급이 없으므로 양방향 채
+- 영상 스트림 채널 1
+  H.261 코덱을 사용하는 영상 스트림 채널의 개방을 원하지 않으므로 미디어 속성(a=)을 정의하지 않음
+- 영상 스트림 채널 2
+  MPEG 코덱 (페이로드 타입 32), 53000 UDP 포트, 별도로 언급이 없으므로 양방향 채널
