@@ -43,3 +43,11 @@ Bob이 통화중이라 486 Busy Here응답
 
 Bob의 IP 전화기가 488응답을 할 경우. SIP Proxy 서버는 밥의 프로파일에 설정된 Call Forward Busy (통화중 착신전환 번호)로 re-INVITE를 발행하고, 앨리스에게 착신 전환된 번호로 연결을 시도하고 있음을 181 Call Forwarded로 통지한다
 
+6. Gateway Congestion : 503 Service Unavailbale
+
+![게이트웨이 혼잡 503 Service Unavailable](./image/14_6.png)
+
+이용 가능한 리소스가 없을 경우 503 Service Unavailable을 발행한다.
+
+물론 SIP Proxy서버는 두 대의 게이트웨이를 이중화 및 로드밸런싱 설정이 서전에 구성되어 있어야 한다.
+
