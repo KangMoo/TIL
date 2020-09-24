@@ -43,3 +43,77 @@ a=rtpmap:0 PCMU/8000
   - 필수
   - Timing으로 start-time과, stop-time을 표시한다. `0 0`은 고정 세션을 의미한다.
 
+## SDP 메시지 분석
+
+SDP의 Capability Exchange를 위한 핵심은 `m=`과 `a=`이다. RTP가 시용할 코덱, IP주소, 포트번호를 명시한다. 보통 SDP메시지를 생성하는 UA는 가능한 모든 코덱을 명시하여 제안한다.
+
+```sdp
+m=audio 16444 RTP/AVP 0 8 18 101
+a=rtpmap:0 PCMU/8000
+a=ptime:20
+a=rtpmap:8 PCMA/8000
+a=ptime:20
+a=rtpmap:18 G729/8000
+a=ptime:20
+a=sendrecv
+a=rtpmap:101 telephone-event/8000
+a=fmtp:101 0-15 
+```
+
+- m=audio 16444 RTP/AVP 0 8 18 101
+
+  - Media Description으로 Media, Port, Protocol, Format을 정의한다
+  - Media (m=audio 16444 RTP/AVP 0 8 18 101)
+    - RTP프로토콜의 페이로드 선언
+    - audio, video, text, application, message중에서 표시
+  - Port
+    - 미디어가 전송될 포트 표시
+    - UDP 16384에서 32767 사이의 번호를 무작위로 선택
+  - Protocol
+    - UDP, RTP/AVP, RTP/SAVP중에서 표시
+    - AVP 는 Audio Video Profile의 약자
+  - Format
+    - 미디어의 포맷을 서브필드 `a=`로 표시함을 의미
+    - Payload Type 0 8 18의 순서는 코덱 협상의 우선순위를 표시
+    - Payload Type 101은 DTMF 이벤트를 정의
+
+- a=rtpmap:0 PCMU/8000
+
+  - 미디어 속성(attribute) 정의
+  - a=rtpmap : payload type, encoding name/clock rate를 표시
+  - a=ptime : packet time으로 미디어 패킷 한 개가 포함한 시간 정보로 ms로 표시. 보통 20ms로 표시
+  - a=fmtp : 미디어 포맷에 대한 파라미터를 정의
+
+- a=(미디어의 방향)
+
+  - RTP 프로토콜이 전달하는 미디어 속성 뿐만 아니라 미디어 방향도 표시한다
+
+  - `a=sendrecv`
+
+    단말은 송신 및 수신 가능. 예) 전화기로 통화가 가능한 채널
+
+    별도의 언급이 없으면 `a=sendrecv`로 가정
+
+  - `a=recvonly`
+
+    단말은 미디어 수신만 가능. 예) 단말은 링백톤 수신만 가능한 채널
+
+  - `a=sendonly`
+
+    단말은 미디어 송신만 가능. 예) 마이크 기능만 있는 단말로 송신만 가능한 채널
+
+  - ` a=inactive`
+
+    단말은 송신 및 수신이 불가능. 예) 전화기에서 Hold버튼을 누른 상태
+
+- a=(DTMF 협상)
+
+  - DTMF는 통화중에 Digit(숫자)를 전달할 수 있도록 하고, 어떤 방식으로 할지를 결정한다.
+  - a=rtpmap:101 telephone-event.8000
+    RFC 2833에 의한 In-band DTMF
+  - a=fmtp 101 0-15
+    DTMF Tone은 0,1,2,3,4,5,6,7,8,9,0,*,#, A, B, C, D 총 15가지를 송수신
+
+- a=rtpmap:101 telephone-event/8000
+
+- a=fmtp:101 0-15 
