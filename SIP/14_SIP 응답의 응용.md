@@ -25,3 +25,14 @@ SIP Proxy서버는 전화기의 상태를 감시하고 전화기로부터 설정
 Alice -> Bob : G.711 코덱으로 INVITE 요청
 
 Bob -> Alice : 488 Not Acceptable Here
+
+4. Called Party : 486 Busy Here
+
+![통화중 : 486 Busy Here](./image/14_4.png)
+
+Bob이 통화중이라 486 Busy Here응답
+
+비슷한 응답으로 600 Busy Everywhere / 488 Not Acceptable Here가 있다.
+
+- 600 Busy Everywhere : 밥이 가진 여러 단말 중에서 응답할 수 있는 단말이 없을 경우.
+- 488 Not Acceptable Here : 밥이 통화중이어서 호를 거절할 경우. 488 응답은 정확한 거절 이유를 명시해야한다.
