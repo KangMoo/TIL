@@ -122,6 +122,8 @@ a=fmtp:101 0-15
 
 ## SDP협상의 이해
 
+![SDP 협상](./image/15_2.png)
+
 1. 앨리스의 Offer
 
 ```sdp
@@ -170,3 +172,58 @@ a=rtpmap:32 MPV/90000
   H.261 코덱을 사용하는 영상 스트림 채널의 개방을 원하지 않으므로 미디어 속성(a=)을 정의하지 않음
 - 영상 스트림 채널 2
   MPEG 코덱 (페이로드 타입 32), 53000 UDP 포트, 별도로 언급이 없으므로 양방향 채널
+
+여기서 미디어 속성 `a=`을 포함하지 않으면 미디어 스트림이 개방되지 않는다
+
+3. 밥의 협상 변경 요청 Offer
+
+```sdp
+v=0
+o=bob 2890844730 2890844731 IN IP4 host.example.com
+s=
+c=IN IP4 host.example.com
+t=0 0
+m=audio 65422 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+m=video 0 RTP/AVP 31
+m=video 53000 RTP/AVP 32
+a=rtpmap:32 MPV/90000
+m=audio 51434 RTP/AVP 110
+a=rtpmap:110 telephone-events/8000
+a=recvonly
+```
+
+밥의 재협상 제안 : 음성 스트림 채널 1의 UDP포트번호 변경과 DTMF이벤트 처리를 위한 음성 채널 개방 요구
+
+- 음성 스트림 채널 1
+  G.711 ulaw (PCMU) 코덱, 별도로 언급이 없으므로 양방향 채널
+  49920 UDP 포트를 65422로 변경할 것을 요청
+- 영상 스트림 채널 1
+  H.261 코덱을 사용하는 영상 스트림 채널의 개방을 원하지 않으므로 미디어 속성(a=)을 정의하지 않음 
+- 영상 스트림 채널 2
+  MPEG 코덱 (페이로드 타입 32), 53000 UDP 포트, 별도로 언급이 없으므로 양방향 채널
+- 음성 스트림 채널 2
+  DTMF 이벤트 처리를 위한 수신전용 (receive-only) 채널 
+  일반적으로 DTMF 이벤트 처리는 RTP Payload Type 110을 사용
+
+4. 앨리스의 Answer
+
+```sdp
+v=0
+o=alice 2890844526 2890844527 IN IP4 host.anywhere.com
+s=
+c=IN IP4 host.anywhere.com
+t=0 0
+m=audio 49170 RTP/AVP 0
+a=rtpmap:0 PCMU/8000
+m=video 0 RTP/AVP 31
+a=rtpmap:31 H261/90000
+m=video 53000 RTP/AVP 32
+a=rtpmap:32 MPV/90000
+m=audio 53122 RTP/AVP 110
+a=rtpmap:110 telephone-events/8000
+a=sendonly
+```
+
+앨리스는 자신이 사용하려고 한 음성 스트림 채널 1개와 영상 스트림 채널 2개에 밥이 추가적으로 제한한 DTMT 이벤트용 음성 채널을 송신 전용으로 오픈한다.
+
