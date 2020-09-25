@@ -227,3 +227,113 @@ a=sendonly
 
 앨리스는 자신이 사용하려고 한 음성 스트림 채널 1개와 영상 스트림 채널 2개에 밥이 추가적으로 제한한 DTMT 이벤트용 음성 채널을 송신 전용으로 오픈한다.
 
+
+
+
+
+**즉 SDP Offer와 Answer는 사용할 수 있는 모든 미디어 속성을 정의하는 과정이다.**
+
+![SDP 협상 예제](./image/15_2.png)
+
+
+
+## 여러 코덱 중에 하나의 코덱 선택하기
+
+IP 전화기와 음성게이트웨이는 음성과 영상을 압축하기 위해 DSP칩을 사용한다.
+
+DSP칩은 다수의 음성 또는 영상 압축코덱을 지원하지만 전화 통화는 하나의 음성 코덱만을 사용한다. 영상 통화는 하나의 음성 코덱과 하나의 영상 코덱을 선택한다. 즉, SDP Offer에 다수의 코덱을 정의하더라도 하나의 미디어 채털은 SDP Answer를 통해 하나의 코덱을 선택한다.
+
+**다수의 코덱 Offer, 하나의 코덱 Answer 예시**
+
+1. 앨리스의 Offer
+
+```sdp
+v=0
+o=alice 2890844526 2890844526 IN IP4 host.anywhere.com
+s=
+c=IN IP4 host.anywhere.com
+t=0 0
+m=audio 62986 RTP/AVP 0 4 18
+a=rtpmap:0 PCMU/8000
+a=rtpmap:4 G723/8000
+a=rtpmap:18 G729/8000
+a=inactive
+```
+
+- 음성 스트림 채널 1
+
+  G.711 ulaw (PCMU), G.723과 G.729음성 코덱 지원 가능
+
+  `m=`에 정의된 순서대로 앨리스느 G.711 ulaw를 선호
+
+  코덱 혐상 완료 전까지는 통화가 불가능하므로 미디어의 방향을 `a=inactive`로 선택
+
+2. 밥의 Answer
+
+```sdp
+v=0
+o=bob 2890844730 2890844731 IN IP4 host.example.com
+s=
+c=IN IP4 host.example.com
+t=0 0
+m=audio 54344 RTP/AVP 0 4
+a=rtpmap:0 PCMU/8000 
+a=rtpmap:4 G723/8000
+a=inactive
+```
+
+- 음성 스트림 채널 1
+
+  G.711 ulaw (PCMU), G.723 음성 코덱 지원 가능
+
+  `m=`에 정의된 순서대로 앨리스는 G.711 ulaw를 선호
+
+  코덱 협상 완료 전까지는 통화가 불가능하므로 미디어의 방향을 `a=inactive`로 선택
+
+3. 앨리스의 Offer
+
+ ```sdp
+v=0
+o=alice 2890844526 2890844527 IN IP4 host.anywhere.com
+s=
+c=IN IP4 host.anywhere.com
+t=0 0
+m=audio 62986 RTP/AVP 4
+a=rtpmap:4 G723/8000
+a=sendrecv
+ ```
+
+- 음성 스트림 채널 1
+
+  G.723 음성 코덱 지원 가능
+
+  코덱 협상이 완료되면 사용하기 위해 양방향으로 미디어 채널 오픈
+
+4. 밥의 수락 Answer
+
+```sdp
+v=0
+o=bob 2890844730 2890844732 IN IP4 host.example.com
+s=
+c=IN IP4 host.example.com
+t=0 0
+m=audio 54344 RTP/AVP 4
+a=rtpmap:4 G723/8000
+a=sendrecv
+```
+
+- 앨리스가 제안한 G.723코덱을 선택하고 `a=sendrecv`로 양방향 통화 채널을 활성화한다
+- 음성 스트림 채널 1
+  G.723 음성 코덱 
+  코덱 협상이 완료되면 사용하기 위해 양방향으로 미디어 채널 오픈
+
+
+
+일반적으로는 처음부터 `a=sendrecv`로 교환하고 우선순위가 높은 코덱을 선택한다. 한 번의 SDP Offer / Answer 과정으로 코덱을 선택하지만, 이 예제는 처음 inactive상태를 sendrecv로 전환하기 위해 4번에 걸친 Offer Answer를 교환하는 과정을 보여준다.
+
+![여러 코덱 중 하나 선택](./image/15_3.png)
+
+
+
+
+
