@@ -34,3 +34,11 @@ SDP Delayed offer는 INVITE메시지에 SDP Offer를 전달하지 않고 180 Rin
 
 
 
+## 미디어 클리핑과 링백톤 문제
+
+![Early Offer 과정](./image/16_3.png)
+
+앨리스는 수화기를 들고 다이얼링을 완료하자마자 전화기는 INVITE메시지와 함께 SDP Offer를 송신한다.
+
+
+
