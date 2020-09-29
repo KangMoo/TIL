@@ -51,5 +51,5 @@
   - 부가 서비스 적용 시 문제를 일으키지 않는다
   - 방화벽 투과 및 관리가 쉽다
 - 결국 어플리케이션 서버 모델을 이용하여 하나의 다이얼로그로 Early Media Sesison과 Regular Media Session을 함께 처리하는 것이 가장 현실적인 방안이다. 어플리케이션 서버 모델을 구현하기 위해 새로운 SIP헤더를 사용하더라도 SDP Answer가 빨라도 200OK이다
-- Early Media 를 전송하기 위해 180 Ringing과 동시에 개방되어야 하지만 현재의 CAll Flow로는 부라긍하고 새로운 SIP 메서드가 필요하다
+- Early Media 를 전송하기 위해 180 Ringing과 동시에 개방되어야 하지만 현재의 CAll Flow로는 불가능하고 새로운 SIP 메서드가 필요하다
 
