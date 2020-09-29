@@ -18,4 +18,26 @@
   - 180 Ringing을 수신하고 Media 패킷이 있다면, 미디어를 재생하고 로컬 링백을 재생하지 않는다
 - 180 Ringing은 수신 측의 전화기가 울리고 있음을 의미하며 UAS는 Early Media Session의 상태화 상관없이 응답을 보내야 한다.
 
-## 
+## 게이트웨어 모델과 어플리케이션 서버 모델
+
+- SIP는 다른 시그널링 프로토콜과 달리 UAC가 로컬 링백을 재생하지 않도록 할 수 있는 Early Media indicator가 없다.
+- UAS가 원격 링백톤이나 announcement를 제공하려는 의도를 UAC에게 전달할 수 없다.
+- SIP와 Media의 경로가 서로 달라서 SIP시그널링보다 Media가 먼저 도착할 가능성이 있다.
+- 위의 문제를 해결하기 위해서 RFC 3960 Early Media and Ringing Tone Generation in the SIP에서는 링백톤 재생을 위한 게이트웨이 모델과 어플리케이션 모델을 제시한다
+
+### 게이트웨이 모델
+
+- 게이트웨이 모델은 단말(UA)이 Early Media와 Regular Media를 구문할 수 없을 때만 사용된다.
+- PSTN Gateway 또는 Voice Gateway에 주로 사용한다.
+- 게이트웨이는 PSTN과 IP네트워크를 서로 연결해주지만 미디어의 내용을 알 수 없으므로 Early Media와 Regular Media간의 전환을 정확히 인지하지 못한다.
+- 게이트웨이 모델은 Call Forking 시 Media Clipping이 발생하는 점과 미디어 검출을 통해 로컬 링백을 적당하게 재생해야 하는 문제가 있다 RFC 3959에서 게이트웨이 모델의 Early Media 문제를 언급한다.
+  - Call Forking의 경우 UAC는 Early Media를 보내는 UAS의 미디어를 모두 재생하지 않고 랜덤하게 한 개의 Early Media만을 재생하고 나머지는 묵음 처리한다.
+  - 만일 200 OK를 내보내는 UAS가 묵음처리되었다면 묵음 해제를 위한 새로운 Offer/Answer가 필요하므로 Media Clipping이 발생한다
+  - 따라서 Call Forking 상황에서 미디어 클리핑 문제를 해결하기 위해서는 어플리케이션 서버 모델이 필요하다
+
+### 어플리케이션 서버 모델
+
+- Call Forking 상황에서 UAS들은 Regular Media를 위한 SDP Offer/Answer 교환과는 독립적인 Early Media를 위한 Offer/Answer 교환이 필요하다. 어플리케이션 서버 모델은 Early Media SEssion을 설립하기 위해 UAS가 어플리케이션 서버의 역할을 한다. UAS와 UAC는 Regular Media Session과 Early Media Session을 위한 SDP Offer/Answer협상을 각각 진행한다. UAC는 정확한 시점에 Early Media와 Regular Media로 전환한다.
+
+
+
