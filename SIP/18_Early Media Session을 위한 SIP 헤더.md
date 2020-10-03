@@ -87,3 +87,6 @@ m=audio 20002 RTP/AVP 0
 
 앨리스는 PRACK 메서드를 이용하여 Early Offer에 대한 Answer를 200OK 이전에 수행하여 Early Media Session협상을 완료한다
 
+## Early Media Session설립을 위한 또 다른 방법
+
+기존 다이얼로그를 유지하며 Early Media Session을 만들기 위해 Content-Disposition헤더를 사용하고, 신뢰할 수 있는 응답을 받기 위해 PRACK을 사용한다. PRACK은 전화기와 전화기간 또는 전화기와 게이트웨이 간에 링백톤을 전달할 때 유용한 방법이다. 컬러링을 이용하더라도 컬러링 서비스가 음성 게이트웨이를 통해 들어오기 때문에 PRACK으로 충분하다. 그러나 인터넷 전화에서 링백을 위해 UAS가 아닌 컬러링 서버에서 직접 음원을 받아야 하는 경우에는 같은 다이얼로그가 아닌 별도의 다이얼로그를 만드는 것이 훨씬 편리하다...
