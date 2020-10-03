@@ -12,3 +12,4 @@ RFC 3959 The Early Session Disposition Type for the SIP권고안은 Early Media 
 
 ![PRACK 메서드를 이용한 Early Media 협상](./image/17_1.png)
 
+PRACK은 Provisional Response ACKnowledgement의 준말로 아직 설립되지 않은 세션에 신뢰할 수 있는 최종 응답을 제공한다.
