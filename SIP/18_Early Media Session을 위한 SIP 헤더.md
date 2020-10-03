@@ -8,3 +8,7 @@ Content-Disposition 헤더는 'early-session'이라는 새로운 disposition typ
 
 RFC 3959 The Early Session Disposition Type for the SIP권고안은 Early Media Session과 Regular Media Session이 같은 코덱을 사용할 것을 권고한다.
 
+### 예제
+
+![PRACK 메서드를 이용한 Early Media 협상](./image/17_1.png)
+
