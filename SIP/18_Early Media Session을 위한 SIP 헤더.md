@@ -70,3 +70,20 @@ m=audio 30002 RTP/AVP 0
 
 Content-Type:multipary/mixed를 통해 여러 SDP 세션에 대한 정보가 포함되어 있음을 표시한다. Content-Disposition 헤더는 Regular Media Session을 위한 'session'과 Early Media SEssion을 위한 'early-session'을 정의하고 각각의 미디어 속성 파라미터를 협상한다
 
+3. 앨리스의 PRACK (Early Answer)
+
+```sip
+...
+Content-Type: application/sdp
+Content-Disposition: early-session
+
+v=0
+o=alice 2890844717 2890844717 IN IP4 host.example.com
+s=
+c=IN IP4 192.0.2.1
+t=0 0
+m=audio 20002 RTP/AVP 0
+```
+
+앨리스는 PRACK 메서드를 이용하여 Early Offer에 대한 Answer를 200OK 이전에 수행하여 Early Media Session협상을 완료한다
+
