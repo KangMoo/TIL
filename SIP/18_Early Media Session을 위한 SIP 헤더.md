@@ -34,3 +34,39 @@ m=audio 20000 RTP/AVP 0
 
 SIP INVITE메세지에 'Content-Disposition:session'헤더를 추가함으로써 현재의 SDP Offer가 Regular Media Session에 대한 협상임을 표시한다.
 
+2. 밥의 183 Session Progress (Early Offer & Answer)
+
+```sip
+...
+Content-Type: multipart/mixed; boundary="boundary1"
+Content-Length: 401
+
+--boundary1
+Content-Type: application/sdp
+Content-Disposition: session
+
+
+v=0
+o=Bob 2890844725 2890844725 IN IP4 host.example.org
+s=
+c=IN IP4 192.0.2.2
+t=0 0 
+m=audio 30000 RTP/AVP 0 
+
+--boundary1
+Content-Type: application/sdp
+Content-Disposition: early-session
+
+v=0
+o=Bob 2890844714 2890844714 IN IP4 host.example.org
+s=
+c=IN IP4 192.0.2.2
+t=0 0
+m=audio 30002 RTP/AVP 0
+--boundary1--
+```
+
+밥은 183 Session Progress메시지와 함께 SDP 협상을 발행한다. SDP 협상은 Early Media Session에 대한 Offer와 REgular Media Session에 대한 Answer이다
+
+Content-Type:multipary/mixed를 통해 여러 SDP 세션에 대한 정보가 포함되어 있음을 표시한다. Content-Disposition 헤더는 Regular Media Session을 위한 'session'과 Early Media SEssion을 위한 'early-session'을 정의하고 각각의 미디어 속성 파라미터를 협상한다
+
