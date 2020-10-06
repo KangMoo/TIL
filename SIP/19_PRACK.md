@@ -97,3 +97,10 @@ Contact: <sip:alice@pc33.atlanta.com>
 Content-Length: 0
 ```
 
+
+
+## PRACK을 통해 신뢰할 수 있는 SDP 협상하기
+
+SDP Early Offer로 Early Media를 협상한다면 INVITE에서 SDP Offer가 발행하고 180 Ringing이나 183 Session Progress에서 SDP Answer를 한다. PRACK은 200 OK 최종 응답(Final Response) 이전에 세션 파라미터에 대한 협상을 위해 사용한다. PRACK은 183 Session Progress와 함께 전달된 SDP Answer가 정상적으로 전달되었음을 확인하여 주었으므로 3- way Handshake를 완료한다.
+
+Delayed Offer로 Early Media를 협상한다면 180 Ringing이나 183 Session Progress에서 SDP Offer를 발행하고 PRACK에서 SDP Answer 한다.  PRACK에 대해서는 200 OK가 전달되면서 3- way Handshake를 완료한다.
