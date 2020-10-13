@@ -15,7 +15,72 @@ UPDATE는 INVITE / 200 OK / ACK 이전에 세션 협상이 완료된 상황에�
 
 
 
+**UPDATE메서드를 이용하여 세션 설립 이전에 G.711코덱에서 G.729코덱으로 변환하는 과정**
 
+1. 앨리스의 INVITE (SDP1 : G.711 OFFER)'
+
+   앨리스는 INVITE와 함께 G.711 코덱을 사용하는 미디어 세션에 대해 SDP Offer를 제안한다.
+
+   ```sip
+   INVITE sip:bob@biloxi.com/TCP SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asdhds
+   Max-Forwards: 70
+   To: Bob <sip:bob@biloxi.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   Allow: UPDATE
+   CSeq: 22756 INVITE
+   Contact: <sip:alice@pc33.atlanta.com>
+   Requires: 100rel
+   Content-Type: application/sdpContent-Length: 142
+   
+   (SDP 정보는 생략, G711 코덱을 Offer) 
+   ```
+
+   Allow 헤더는 사용가능한 메서드를 명기한다. UAC인 앨리스는 'Allow:UPDATE'를 선언하여  UPDATE메서드 사용이 가능하다. 또한 'Requires:100rel'이므로 임의 응답 (Provisional Response)에 대한 신뢰할 수 있는 응답을 제공할 수 있다.
+
+2. 밥의 '180 Ringing (SDP1 : G.711 Answer)'
+
+   밥은 180 Ringing과 함께 G.711코덱을 사용하는 미디어 세션에 대해 SDP Answer를 전달한다.
+
+   ```sip
+   SIP/2.0 180 Ringing 
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asdhds
+   To: Bob <sip:bob@biloxi.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   Allow: UPDATE
+   CSeq: 22756 INVITE
+   RSeq: 813520
+   Contact: <sip:alice@pc33.atlanta.com>
+   Content-Type: application/sdp
+   Content-Length: 142
+   
+   (SDP 정보는 생략, G.711 코덱을 Answer) 
+   ```
+
+   UAS인 밥은 'Allow:UPDATE'를 선언하여 UPDATE 메서드 사용이 가능하다. RSeq가 주어져 신뢰할 수 있는 응답이 필요할 경우 사용할 수 있다.
+
+3. 앨리스의 UPDATE (SDP2 : G.729 Offer)
+
+   앨리스는 200 OK 이전에 UPDATE메서드로 코덱을 G.711에서 G.729로 변경한다
+
+   ```sip
+   UPDATE sip:bob@biloxi.com/TCP SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asdhds
+   Max-Forwards: 70
+   To: Bob <sip:bob@biloxi.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   CSeq: 10197 UPDATE
+   Contact: <sip:alice@pc33.atlanta.com>
+   Content-Type: application/sdp
+   Content-Length: 142
+   
+   (SDP 정보는 생략, G.729 코덱을 Offer) 
+   ```
+
+   
 
 
 
