@@ -9,3 +9,13 @@
 
 UPDATE 메서드는 RFC 3311 The SIP UPDATE Method에서 정의한다. re-INVITE와 달리 UPDATE메서드는 다이얼로그를 유지하면서 세션 파라미터를 재협상한다.
 
+![UPDATE](./image/21_1.png)
+
+UPDATE는 INVITE / 200 OK / ACK 이전에 세션 협상이 완료된 상황에서 세션 파라미터를 변경하기 위해 사용하고, re-INVITE는 INVITE / 200 OK / ACK이후에 세션 파라미터를 변경하기 위해 사용한다. 세션 협상 완료된 후 통화 중에 기존 다이얼로그를 유지하기 위해 UPDATE를 사용할 수 있지만, re-INVITE를 이용하여 새로운 다이얼로그를 생성하는 것이 일반적이다.
+
+
+
+
+
+
+
