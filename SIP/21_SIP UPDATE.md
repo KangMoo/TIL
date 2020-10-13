@@ -86,3 +86,10 @@ UPDATE는 INVITE / 200 OK / ACK 이전에 세션 협상이 완료된 상황에�
 
 ![Prack과 UPDATE](./image/21_2.png)
 
+1. 1차 세션 파라미터 협상 (SDP 1)
+
+   1차 SDP제언과 수락 (Offer & Answer) 협상은 앨리스의 INVITE 요청과 밥의 180 Ringing응답으로 이루어졌다. 앨리스는 180Ringing응답을 정확히 수신했음을 통지하기 위해 PRACK을 발행한다. 여기서 PRACK은 INVITE에 대한 200 OK 이전에 신뢰할만한 응답을 제공한다
+
+2. 2차 세션 파라미터 협상 (SDP 2)
+
+   앨리스가 180 Ringing 이후에 링백톤을 듣다가 호 보류 버튼을 누르고 2차 SDP 제안과 수락 (Offer & Answer) 협상은 
