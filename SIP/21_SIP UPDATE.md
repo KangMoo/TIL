@@ -82,5 +82,7 @@ UPDATE는 INVITE / 200 OK / ACK 이전에 세션 협상이 완료된 상황에�
 
    
 
+## PRACK과 UPDATE
 
+![Prack과 UPDATE](./image/21_2.png)
 
