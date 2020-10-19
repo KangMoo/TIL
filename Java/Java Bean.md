@@ -19,3 +19,23 @@
 - getter의 경우 파라미터가 존재하지 않아야 하고, setter의 경우 한 개 이상의 파라미터가 존재한다.
 - 프로퍼티의 형이 boolean일 경우 get 메서드 대신 is메서드를 사용해도 된다.
 
+## Example
+
+```java
+package 패키지_명;
+
+[import 패키지_명;]
+
+public class Bean_ClassName [ implements java.io.Serializable ] {
+  private String name;    // 값을 저장하는 속성 정의(필드)
+  public Bean_ClassName() { }    // 기본 생성자
+
+  public String getName() {    // 필드 값을 읽어오는 메소드 
+    return name; 
+  }
+  public void setName(String name) {    // 필드 값을 저장하는 메소드
+    this.name = name;
+  }
+}
+```
+
