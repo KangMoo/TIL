@@ -3,7 +3,7 @@
 ### 모든 DB 백업
 
 ```shell
-$ mysqldump --all-databases -u[사용자 계정] -p --default-character-set=euckr < [백업된 DB].sql
+$ mysqldump --all-databases -u[사용자 계정] -p --default-character-set=euckr > [백업된 DB].sql
 ```
 
 ### 모든 DB 복원
