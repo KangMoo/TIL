@@ -25,3 +25,40 @@ SIP INFO는 전송할 정보를 SIP INFO의 헤더가 아닌 SIP 메시지 바�
 ![SIP INFO](./image/22_1.png)
 
 앨리스는 은행 ARS 시스템에 접속하여 요청받은 비밀번호를 전화기 키패드에서 숫자를 눌러 전달한다. 실제는 다수의 SIP INFO와 200 OK로 구성된다.
+
+
+
+1. 앨리스의 INFO
+
+   앨리스는 은행 ARS 자동응답 시스템에 접속한 후에 요청받은 정보를 전달한다.
+
+   ```sip
+   INFO sip:ARS@192.168.10.20 SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asegma
+   Max-Forwards: 70
+   To: Bank <sip:Bank@Bank_URI.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928301774
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   CSeq: 22756 INFO
+   Contact: <sip:alice@pc33.atlanta.com>
+   Content-Type: text/plain
+   Content-Length: 16
+   
+   3 1 8 1 9 6 2
+   ```
+
+   은행은 기존 Call-ID와 동일한 SIP INFO를 수신한다. Content-Type을 text/plain으로 하여 3181962번호를 전달한다.
+
+2. 응답
+
+   SIP INFO 메시지를 수신한 후 200 OK외에 다음과 같은 응답을 사용할 수 있다.
+
+   - 481 Call leg / Transaction Dose not Exist
+     수신된 INFO가 기존의 Call Leg와 매치가 되지 않음 
+
+   - 415 Unsupported Media Type
+     UAS가 이해할 수 없는 메시지 바디를 포함하므로 처리 없음
+
+   - 487 Request Terminated
+     SIP INFO 요청을 처리 중에 CANCEL 메쏘드를 받음
+
