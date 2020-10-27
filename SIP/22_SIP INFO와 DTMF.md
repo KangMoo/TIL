@@ -100,3 +100,35 @@ DTMF(Dual Tone Multi Frequency)는 2개의 주파수 성분을 갖는 신호를 
 
      RFC 2833방식은 음성과 같은 미디어 세션의 RTP 패킷에 DTMF번호와 볼륨, 시간을 명시하여 전송한다. Out of band의 단점인 주파수의 세기와 시간까지 같이 전달되는 장벙이 있다 RFC 2833 Rtp Payload for DTMF Digits, Telephony Tonse and Telephony Signals 권고안으로 정의한다.
 
+## In band 방식의 SDP 협상
+
+Bypass와 RFC 2833방식은 RTP 채널로 DTMF를 전달한다. SDP Offer /Anaswer모델에서 진행되는 DTMF협상을 살펴본다.
+
+1. Bypass방식의 SDP 협상
+
+   별도의 DTMF협상없이 음성 코덱만을 제안한다. 전화기나 게트웨이는 DTMF를 기존 설립된 RTP채널로 음성과 함께 전달한다.
+
+   ```sip
+   v=0
+   o=alice 2890844526 2890844526 IN IP4 atlanta.com
+   c=IN IP4 10.1.3.33 
+   t=0 0
+   m=audio 49172 RTP/AVP 18 
+   a=rtpmap:18 G729/8000
+   ```
+
+2. RFC 2833 방식의 SDP 협상
+
+   RFC 2833 DTMF협상을 위해 페이로드 타입 101을 협상한다.
+
+   ```sip
+   v=0
+   o=alice 2890844526 2890844526 IN IP4 atlanta.com 
+   c=IN IP4 10.1.3.33
+   t=0 0
+   m=audio 49172 RTP/AVP 18 101
+   a=rtpmap:18 G729/8000 
+   a=rtpmap:101 telephone-event/8000
+   ```
+
+   
