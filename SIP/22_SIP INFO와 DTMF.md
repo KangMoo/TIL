@@ -131,4 +131,9 @@ Bypass와 RFC 2833방식은 RTP 채널로 DTMF를 전달한다. SDP Offer /Anasw
    a=rtpmap:101 telephone-event/8000
    ```
 
-   
+## RFC 2833 DTMF의 정보 손실 방지 방안
+
+RFC 2833방식이 사용하는 RTP 채널은 UDP로 전달되므로 수신 측에서부터 수신 확인에 대한 응답을 받지 못한다. RFC 2833은 DTMF패킷 분실에 대한 위험을 분산하기 위해 하나의 숫자를 여러번 전송한다. SIP 단말은 RFC 2833방식의  DTMF 방식 선택 시 몇 개의 패킷을 보낼지 설정한다. 같은 In Band방식의 Bypass방식은 패킷 분실에 대한 대응 방안이 없다.
+
+![RFC 2833 패킷 캡쳐](./image/22_2.png)
+
