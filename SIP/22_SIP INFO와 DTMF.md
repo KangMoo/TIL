@@ -72,3 +72,31 @@ RFC 2976에서 SIP INFO의 메시지 바디에 Digit을 실어 보내도록 되�
 - Contents-type; application/vnd.networks.digits
 - Content-Type: text/plain
 
+
+
+## DTMF의 이해
+
+DTMF(Dual Tone Multi Frequency)는 2개의 주파수 성분을 갖는 신호를 의미한다. DTMF는 전송할 숫자를 2개의 주파수로 변환하므로 1개의 주파수를 사용하는 Pulse보다 안정적이다. 전화기의 키패드 숫자를 누를 때마다 들리는 삐 소리가 주파수의 소리다. ARS 자동응답 시스템은 주파수를 듣고 숫자로 변홚낟. 즉 DTMF는 전화기가 전송하는 숫자를 상대측 장비가 정확히 수신하도록 한다. DTMF전달 방식은 크게 두가지로 구분된다.
+
+1. Out of band 방식
+
+   Out of band 방식은 시그널링 경로로 DTMF신호를 전달한다. 전화기나 게이트웨이가 음성을 전달하는 미디어 (RTP) 채널로 DTMF 신호음을 전달하지 ㅇ낳고 숫자로 변환하여 시그널링 채널로 전달한다. H.323네트워크에서는 H.245채널을 이용하고 SIP 네트워크에서는 SIP INFO를 이용한다.
+
+   Out of band 방식은 DTMF Duration에 대한 정보를 표현할 수 없으므로 숫자를 길게 또는 짧게 누르는 것을 표현할 수 없다. DTMF를 전달하려는 발신자 숫자를 누른 시간만큼 삐 소리를 듣지만, 수신자는 발신자가 DIGIT버튼에서 손가락을 떼는 순간 시그널링 경로로 메시지만 전달되어 삐 소리만 듣는다.
+
+   SIP INFO는 out of band 방식으로 SIP 시그널링으로 전달되므로 안전덕이고 잡음에 영향을 받지 않는다.
+
+2. In band 방식
+
+   In band 방식은 음성이 전달되는 Media 경로로 DTMF신호를 전달한다. 전화기나 게이트웨이가 음성을 전달하는 미디어(RTP) 채널에 DTMF 주파수를 그대로 전달하므로 DTMF Duration까지도 전달한다.
+
+   In band 방식은 시그널링과 상관없이 RTP를 사용하는 모든 프로토콜에서 사용되고, Bypass와 RFC 2833방식으로 나뉜다.
+
+   - Bypass 방식
+
+     Bypass 방식은 숫자를 RTP가 사용하는 압축코덱으로 음성과 같이 보낸다. 별도의 형식이나 협상이 필요 없이 IP 전화기나 게이트웨이가 숫자에 맞는 주파수를 생성하여 음성 채널로 그대로 전달한다. G.711이 아닌 G.729나 G.723과 같이 압축률이 높은 코덱을 사용할 경우 DTMF톤이 변형되거나 정보가 손실될 가능성이 있다.
+
+   - RFC 2833방식
+
+     RFC 2833방식은 음성과 같은 미디어 세션의 RTP 패킷에 DTMF번호와 볼륨, 시간을 명시하여 전송한다. Out of band의 단점인 주파수의 세기와 시간까지 같이 전달되는 장벙이 있다 RFC 2833 Rtp Payload for DTMF Digits, Telephony Tonse and Telephony Signals 권고안으로 정의한다.
+
