@@ -62,3 +62,13 @@ SIP INFO는 전송할 정보를 SIP INFO의 헤더가 아닌 SIP 메시지 바�
    - 487 Request Terminated
      SIP INFO 요청을 처리 중에 CANCEL 메쏘드를 받음
 
+
+
+## SIP INFO에서 Content-Type의 문제
+
+RFC 2976에서 SIP INFO의 메시지 바디에 Digit을 실어 보내도록 되어있지만, Content-Type에 대한 정확한 형식을 규정하지 않아 제조사별로 구현 방식이 다르다. 서로 다을 제조사의 장비 간의 DTMF테스트 중일 때는 Contents-type을 동일하게 명기하는지를 확인할 필요가 있다. DTMF를 위한 SIP INFO의 Content-Type 헤더 값이 다를 수 있다.
+
+- Contents-type; audio/telephone-event
+- Contents-type; application/vnd.networks.digits
+- Content-Type: text/plain
+
