@@ -14,4 +14,16 @@ SIP REFER요청의 Refer-To헤더는 UA가 INVITE요청을 제대로 발행하�
 
 SIP REFER요청을 받은 UA는 반드시 2020 Accepted로 응해야 한다.
 
-## 
+## 이벤트 처리의 결과를 SIP NOTIFY로 통보
+
+SIP REFER 요청을 수신한 UA는 요청의 처리 결과를 통보하기 위해 SIP NOTIFY메서드를 사용한다. SIP NOTIFY요청의 메시지 바디에는 다음과 같은 정보가 표신된다.
+
+- SIP/2.0 100 Trying
+  현재 REFER에 의해 요청된 이벤트 처리 중
+- SIP/2.0 200 OK
+  현재 REFER에 의해 요청된 이벤트 정상 처리 완료
+- SIP/2.0 503 Service Unavailable
+  현재 REFER에 의해 요청된 이벤트 실패 
+- SIP/2.0 603 Declined
+  현재 REFER에 의해 요청된 이벤트 거절 
+
