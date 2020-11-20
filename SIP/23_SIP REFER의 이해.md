@@ -27,3 +27,64 @@ SIP REFER 요청을 수신한 UA는 요청의 처리 결과를 통보하기 위�
 - SIP/2.0 603 Declined
   현재 REFER에 의해 요청된 이벤트 거절 
 
+## SIP REFER 메시지 분석
+
+RFC 3515 The Refer Method에서 설명된 REFER Call Flow
+
+![SIP NOTIFY](./image/23_2.png)
+
+1) 앨리스의 REFER
+
+통화중에 앨리스는 밥에게 회원번호를 요청하고 수집용 서버로 호 전환을 시도한다. 앨리스 전화기는 밥에게 REFER 요청을 발행ㅎ나다
+
+```sip
+REFER sip:b@atlanta.example.com SIP/2.0 
+Via: SIP/2.0/UDP agenta.atlanta.example.com;branch=z9hG4bK2293940223
+To: <sip:b@atlanta.example.com>
+From: <sip:a@atlanta.example.com>;tag=193402342
+Call-ID:898234234@agenta.atlanta.example.com
+CSeq: 93809823 REFER
+Max-Forwards: 70
+Refer-To: (whatever URI, 서버의 주소)
+Contact: sip:a@atlanta.example.com
+Content-Length: 0
+```
+
+Refer-To 헤더는 서버의 URI 주소를 명기한다. 밥은 새로운 INVITE요청을 발행한다.
+
+2) 밥의 202 Accepted
+
+밥은 REFER요청을 수신하고 처리했다는 의미로 2020 Accepted로 응답한다.
+
+```sip
+SIP/2.0 202 Accepted
+Via: SIP/2.0/UDP agenta.atlanta.example.com;branch=z9hG4bK2293940223
+To: <sip:b@atlanta.example.com>;tag=4992881234
+From: <sip:a@atlanta.example.com>;tag=193402342
+Call-ID:898234234@agenta.atlanta.example.com
+CSeq: 93809823 REFER
+Contact: sip:b@atlanta.example.com
+Content-Length: 0
+```
+
+3) 밥의 NOTIFY
+
+밥은 SIP REFER에 의한 이벤트 진행 상황을 SIP NOTIFY로 앨리스에게 통보한다. SIP 메시지 바디의 'SIP/2.0 100 Trying'는 요청된 이벤트를  처리 중임을 의미한다
+
+```sip
+NOTIFY sip:a@atlanta.example.com SIP/2.0
+Via: SIP/2.0/UDP agentb.atlanta.example.com;branch=z9hG4bK9922ef992-25
+To: <sip:a@atlanta.example.com>;tag=193402342
+From: <sip:b@atlanta.example.com>;tag=4992881234
+Call-ID:898234234@agenta.atlanta.example.com
+CSeq: 1993402 NOTIFY
+Max-Forwards: 70
+Event: refer
+Subscription-State: active;expires=(depends on Refer-To URI)
+Contact: sip:b@atlanta.example.com
+Content-Type: message/sipfrag;version=2.0
+Content-Length: 20
+
+SIP/2.0 100 Trying
+```
+
