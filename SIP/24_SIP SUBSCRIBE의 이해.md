@@ -13,3 +13,10 @@
 - 메시지 대기 표시 MWI (Message Waiting Inidcation)
 
   음성사서함은 읽지 않은 메시지의 유무를 전화기나 소프트폰에 통지한다. 전화기는 붉은색의 LED로 표시하고 메신저는 붉은 숫자르ㅗ 표시한다. 메시지 대기 표시를 확인한 사람들은 음성 사서함에 접속하여 저장된 음성 메시지를 재생한다.
+
+## 등록 상태 머신 (Registration State Machine)
+
+RFC 3680 SIP Event Package for Registration은 SIP REGISTRA서버가 단말의 상태 정보를 어떻게 관리하는지를 설명하기 위해 등록 상태 머신을 설명한다.
+
+![등록 상태 머신의 동작](./image/24_1.png)
+
