@@ -85,3 +85,21 @@ SUBSCRIPBE 메서드가 사용하는 헤더
   `Expires:0`은 Unsubscribe를 의미
 
 신청자는 `Event:reg`로 등록 상태 정보를 요청하고, app_IM.atlanta.com (IM 서버)가 21600초 동안 등록 상태 정보 변경 이벤트 발생 시 SIP REGISTRA 서버가 업데이트해 줄 것을 요청한다.
+
+2. 등록 서버의 `200 OK`
+
+SIP REGISTRA 서버는 신청자(Subscriber)의 요청을 승인하고 `200 OK`를 전송한다
+
+```sip
+SIP/2.0 200 OK
+Via: SIP/2.0/TCP app_IM.atlanta.com;branch=z9hG4bKnashds7 ;received=10.1.3.2
+From: sip:app_IM.atlanta.com ;tag=123aa9
+To: sip:server19@atlanta.com;tag=xyzygg
+Call-ID:9987@app_IM.atlanta.com
+CSeq: 9887 SUBSCRIBE
+Contact: sip:server19.atlanta.com
+Expires: 3600
+```
+
+SIP REGISTRA 서버는 유효기간 설정을 SIP SUBSCRIBER가 요청한 21600초가 아닌 3600초를 결정한다
+
