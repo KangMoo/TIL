@@ -41,3 +41,10 @@ SIP 네트워크에서 등록(Registration)은 사용자의 AoR(Address-of-recor
   Termiatated된 후 등록 상태는 Init 상태로 전환
 
 엄밀하게 등록 상태 정보와 사용자 상태 정보는 다르다. 사용자 상태 정보는 사용자가 SIP 네트워크에서 통화가 가능한지를 나타내고 하나 이상의 단말 Contact address의 모음으로 나타낸다. 등록 상태 정보는 단순히 단말의 Contact address가 존재하는지를 나타낸다.
+
+## SIP SUBSCRIBE 메서드의 이해
+
+신청자(Subscriber)가 SIP REGISTRA 서버에 특정 사용자의 상태 정보 업데이트를 요청하기 위해 SIP SUBSCRIBE 메서드를 사용한다. SIP REGISTRA 서버는 사용자의 상태 정보에 대한 이벤트가 발생할 경우 신청자에게 SIP NOTIFY 메서드로 결과를 통지한다. SIP SUBSCRIBE 메서드를 발행하는 UA를 신청자 (Subscriber)라 하고, NOTIFY로 응답하는 SIP REGISTR 서버를 Notifier라고 한다.
+
+![SIP SUBSCRIBE](./image/24_2.png)
+
