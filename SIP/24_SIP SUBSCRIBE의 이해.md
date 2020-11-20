@@ -48,3 +48,40 @@ SIP 네트워크에서 등록(Registration)은 사용자의 AoR(Address-of-recor
 
 ![SIP SUBSCRIBE](./image/24_2.png)
 
+Notifier는 상태 정보를 관리하는 서버로 SIP REGISTRA, SIP PRESENCE 또는 SIP Proxy일 수도 있다.
+
+1. SIP 채팅 서버 'SUBSCRIBE'
+
+SIP 채팅 서버는 친구 목록 (Buddy List)에 있는 주소에 대한 상태 정보를 SIP REGISTRA 서버에 요청한다.
+
+```sip
+SUBSCRIBE sip:server19@atlanta.com SIP/2.0
+Via: SIP/2.0/TCP app_IM.atlanta.com;branch=z9hG4bKnashds7
+From: sip:app_IM.atlanta.com ;tag=123aa9
+To: sip:server19@atlanta.com
+Call-ID:9987@app_IM.atlanta.com
+CSeq: 9887 SUBSCRIBE
+Contact: sip:app_IM.atlanta.com
+Event: reg
+Max-Forwards: 70
+Expires: 21600
+Accept: application/reginfo+xml
+```
+
+SUBSCRIPBE 메서드가 사용하는 헤더
+
+- Event 헤더
+
+  요청하는 이벤트를 명시
+
+  `Event:reg`는 등록 상태 정보를 요청
+
+- Expires 헤더
+
+  REGISTER 메서드와 마찬가지로 SUBSCRIBE 요청의 유효기간을 명시
+
+  유효 기간 만료 전 다이얼로그( 같은 Call-ID)로 주기적으로 SUSBSCRIBE 요청
+
+  `Expires:0`은 Unsubscribe를 의미
+
+신청자는 `Event:reg`로 등록 상태 정보를 요청하고, app_IM.atlanta.com (IM 서버)가 21600초 동안 등록 상태 정보 변경 이벤트 발생 시 SIP REGISTRA 서버가 업데이트해 줄 것을 요청한다.
