@@ -88,3 +88,58 @@ Content-Length: 20
 SIP/2.0 100 Trying
 ```
 
+Event헤더는 `Event:refer`값으로 호 전환 서비스를 타나탠다. Subscription-State헤더는 요청의 상태 정보를 나타내므로  SIP REFER 요청에 대한 상태 정보다.
+
+- Subscription-State:active 
+  Refer-To의 대상이 이벤트를 승인하고 처리 중
+- Subscription-State:pending
+  Refer-To의 대상이 요청을 수령하고 불충분한 정책 정보로 승인 또는 거절을 결정하지 못함
+  호전환 서비스에서 pending 상태 정보는 발생하지 않음
+- Subscription-State:terminatd;reason=noresource
+  Refer-To의 대상이 이벤트 처리 완료
+  반드시 사유를 명기
+
+4) 앨리스의 200 OK (NOTIFY)
+
+SIP NOTIFY 메시지 수신을 통보한다.
+
+```sip
+SIP/2.0 200 OK
+Via: SIP/2.0/UDP agentb.atlanta.example.com;branch=z9hG4bK9922ef992-25
+To: <sip:a@atlanta.example.com>;tag=193402342
+From: <sip:b@atlanta.example.com>;tag=4992881234
+Call-ID:898234234@agenta.atlanta.example.com
+CSeq: 1993402 NOTIFY
+Contact: sip:a@atlanta.example.com
+Content-Length: 0
+```
+
+## 
+
+## SIP REFER 요청의 활용 - 호전환 (Call Transfer)
+
+SIP RFER메서드를 사용하는 부가 서비스는 호전환 (Call Transfer)이며 구현하는 방식에 따라 Blind Transfer와 Consultative Transfer로 나뉜다.
+
+1) Blind Transfer
+
+앨리스와 통화 중에 밥은 호전환(Transfer)버튼을 누른다. 밥의 전화기는 re-INVITE메시지에 호 보류 (Call Hold)를 위한 SDP 메시지를 전달함과 동시에 호 전환 대상의 전화번호를 수집하기 위한 프롬프트를 표시한다. 밥이 캐럴의 전화번호를 다이얼링한다.
+
+밥의 전화기는 앨리스의 전화기로 캐럴의 전화번호를 REFER요청의 Refer-to 헤더로 전달한다. 앨리스의 전화기는 캐럴의 전화기로 자동으로 호를 시도한다. 앨리스는 링백톤을 듣고 캐럴은 전화 벨소리를 듣는다. 캐럴이 수화기를 들면 대화를 시작한다.
+
+앨리스의 전화기는 요청된 이벤트가 정상 처리되었음을 통지하기 위해 SIP NOTIFY 메서드를 밥에게 송신한다. 그리고 앨리스의 전화기와 밥의 전화기간의 통화를 자동으로 종료한다.
+
+![Blind Transfer](./image/23_3.png)
+
+호를 전달받은 제삼자인 캐럴은 앨리스가 직접 전화한 것인지 밥이 호전환시켜준 것인지 알지 못한다. Blind Transfer 서비스는 제삼자와 통화 없이 제삼자에게 호전환 서비스를 호출한다. 단지 캐럴의 IP 전화기 디스플레이에서 밥이 호전환했다는 표시만 한다.
+
+2) Consultative Transfer
+
+앨리스와 통화 중에 밥은 호전환(Transfer)버튼을 누른다. 밥의 전화기는 re-INVITE 메시지에 호보류 (Call Hold)를 위한 SDP메시지를 전달함과 동시에 호 전환 대상의 전화번호를 수집하기 위한 프롬프트를 표시한다. 밥이 캐럴의 전화번호를 다이얼링 한다.
+
+밥은 링백톤을 듣고 캐럴은 전화 벨소리를 든는다. 캐럴이 수화기를 들면 대화를 시작한다. 밥은 앨리스와 통화 중이고 앨리스와 통화를 원하는지 캐럴에게 물어본다. 캐럴이 앨리스와의 통화를 승낙한다.
+
+밥이 호전환 버튼을 다시 누른다. 밥의 전화기는 앨리스의 전화기로 캐럴의 전화번호를 REFER요청의 Refer-to헤더로 전달한다. 앨리스의 전화기는 캐럴의 전화기로 자동으로 호를 시도한다. 앨리스는 링백톤을 듣고 캐럴은 전화 벨소리를 든는다. 캐럴이 수화기를 들고 대화를 시작한다.
+
+![Consultative Transfer](./image/23_4.png)
+
+호를 전달받은 제삼자인 캐럴은 밥이 호전환 시켜주면서 앨리스와 통화하고 있다는 것을 알고 있다. Consultative Transfer서비스는 제삼자와 통화 후 승낙을 받은 후에 제삼자에게 호전환 서비스를 호출한다.
