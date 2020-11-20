@@ -20,3 +20,24 @@ RFC 3680 SIP Event Package for Registration은 SIP REGISTRA서버가 단말의 �
 
 ![등록 상태 머신의 동작](./image/24_1.png)
 
+SIP 네트워크에서 등록(Registration)은 사용자의 AoR(Address-of-record)과 탄말의 Contact Address와를 바인딩하는 과정이다. 하나의 AoR은 여러개의 Contact Address를 가질 수 있다. UA가 SIP REGISTRA서버에 등록하는 과정에서 등록 상태 정보는 3 단계로 표시되며, 이를 등록 상태 머신이라고 한다
+
+- Init
+
+  사용자의 AoR에 단말의 Contact Address가 없는 상태
+
+  SIP REGISTRA에 등록된 사용자이나 통화 가능한 단말이 없음
+
+- Active
+
+  사용자의 AoR에 하나 이상 단말 Contact address가 바인딩된 상태
+
+  SIP REGISTRA에 등록된 사용자이며 통화 가능한 단말이 있음
+
+- Terminated
+
+  사용자의 AoR에 단말의 Contact Address가 바인딩 된 후에 해제된 상태
+
+  Termiatated된 후 등록 상태는 Init 상태로 전환
+
+엄밀하게 등록 상태 정보와 사용자 상태 정보는 다르다. 사용자 상태 정보는 사용자가 SIP 네트워크에서 통화가 가능한지를 나타내고 하나 이상의 단말 Contact address의 모음으로 나타낸다. 등록 상태 정보는 단순히 단말의 Contact address가 존재하는지를 나타낸다.
