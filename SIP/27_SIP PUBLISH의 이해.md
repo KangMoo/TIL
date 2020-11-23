@@ -61,3 +61,8 @@ SIP PUBLISH 메서드는 AoR (Address-of-Record)과 연관된 Event State를 생
   PUBLISH 메커니즘을 통해 EPA가 발행하는 Event State
 
   유효기간 내에서만 의미를 나타냄
+
+RFC 권고안들이 같은 장비를 다르게 부르는 이유는 복잡한 기능을 쉽게 정의하기 위해서다. Event State Compositor는 SIP Proxy 서버일 수도 있고, 사용자 상태 정보를 관리하는 프레즌스 서버일 수도 있다. 사용자 규모와 제조사에 따라 SIP Proxy서버와 프레즌스 서버가 한 방비로 구현하거나 별도로 구현한다. 엔지니어는 장비명이 무엇인지가 아니라 기능이 무엇인지 알아야 한다.
+
+![상태정보의 수집과 전파](./image/27_1.png)
+
