@@ -71,3 +71,49 @@ RFC 권고안들이 같은 장비를 다르게 부르는 이유는 복잡한 기
 앨리스의 전화기는 SIP REGISTER요청과 함께 자신에게 설정된 프로파일에 따라 상태 정보 업데이트를 SIP PUBLISH 요청으로 프레즌스 서버로 보낸다. 앨리스는 프레즌스 서버어ㅔ 단순한 상태 정보, 위치 및 시간 등의 정보가 전달되지만 프레즌스 서버는 상태 정보 정책에 따라 지정돤 정보가 신청자들에게 전달한다. 상태 정보 전파는 SIP NOTIFY 메서드를 활용한다. 또한 상ㅐ 정보 전파는 프레즌스 정책에 따라 전파하거나 하지 않을 수 있다.
 
 w정리하면, 특정 사용자에 대한 상태 정보를 프레즌스 서버에 신청하기 위해서는 SIP SUBSCRIBE 메서드를 사용한다. 프레즌스 서버가 특정 사용자의 상태 정보 변화를 신청자에게 업데이트하기 위해서는 SIP NOTIFY메서드를 사용한다. 사용자가 자신의 상태 정보를 프레즌스 서버에 업데이트하기 위해서는 SIP PUBLISH메서드를 사용한다.
+
+
+
+## SIP PUBLISH 메시지 분석
+
+SIP PUBLISH 메서드를 분석한다
+
+1. 앨리스의 PUBLISH
+
+   앨리스는 자신의 상태 정보를 프레즌스 서버에 업데이트하기 위해 PUBLISH 메서드를 발행한다.
+
+   ```sip
+   PUBLISH sip:esc1@atlanta.com SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asegma
+   Max-Forwards: 70
+   To: Alice <sip:alice@atlanta.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928301774
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   CSeq: 22756 PUBLISH
+   Event: presence
+   Expires: 21600
+   Content-Type: application/pidf+xml
+   Content-Length: 126
+   
+   
+   (XML message body: 자신의 상태 정보 표시)  
+   ```
+
+   SIP 메시지 바디는 NOTIFY의 메시지 바디와 동일하므로 생략한다. Event헤더는 등록 상태 정보 요청은 'Event:reg'이고, 사용자 상태 정보 요청은 'Event:presence'이다. Expires헤더는 유효기간을 표시한다
+
+2. 프레즌스 서버의 200 OK
+
+   프레즌스 서버는 SIP PUBLISH 요청을 수신하고 200 OK로 응답한다.
+
+   ```sip
+   SIP/2.0 200 OK 
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK776asegma ;received=10.1.3.33
+   To: Alice <sip:alice@atlanta.com>
+   From: Alice <sip:alice@atlanta.com>;tag=1928301774
+   Call-ID:a84b4c76e66710@pc33.atlanta.com
+   CSeq: 22756 PUBLISH
+   SIP-ETag: hp169abc 
+   Expires: 1800
+   ```
+
+   SIP-ETag헤더는 프레즌스 서버가 SIP PUBLISH 요청을 성공적으로 처리하고 entity-tag를 할당한 값을 표시한다. SIP-ETag는 동일한 PUBLISH 업데이트나 변경 요청 시 같은 값을 사용한다.
