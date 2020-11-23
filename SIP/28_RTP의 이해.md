@@ -13,3 +13,35 @@ RTP는 전송 프로토콜로 UDP (User Datagram Protocol)과 네트워크 프�
 ![패킷당 페이로드의 크기](./image/28_2.png)
 
 샤논과 나이키스트 정리에 의해 G.711코덱은 1초당 8000개의 샘플링하고 샘플당 8비트로 양자화한다. DSP칩으로 G.711코덱을 적용하면 10ms단위 당 음성 샘플은 160바이트이고, G.729는 20바이트이다. 만일 패킷당 10ms 단위로 페이로드를 만들면 초당 100개가 전송되고, 패킷당 20ms 단위로 페이로드를 만들면 50개가 전송된다. 일반적으로 20ms단위로 하나의 패킷을 만들어 초당 50개의 패킷을 생성한다.
+
+## RTP 헤더 분석
+
+RFC 3550에 정의된 RTP 헤더 포맷을 정리한다.
+
+![RTP 헤더](./image/28_3.png)
+
+- V (version) : 2 bit
+  RTP의 Version 표시 (현재 버전은 2)
+- P (padding) : 1 bit
+  패킷의 마지막 부분에 하나 이상의 패딩 바이트 무 표시
+  패딩 비트는 의미가 없는 비트로 헤더나 패킷의 크기를 일정하게 유지하기 위해 사용하는 비트 
+- X (Extension) : 1 bit
+  고정 헤더 이후의 하나 이상의 확장 헤더 유무 표시
+- CC (CSRC Count) : 4 bit
+  RTP 12 바이트 고정 헤더 뒤에 CSRC identifier의 수 표시
+- M (Marker) : 1 bit
+  패킷 내에서 프레임 경계와 같은 중요한 이벤트들을 표시
+  Payload Type 필드의 확장을 위해 무시되기도 함 
+- PT (Payload Type) : 7bit
+  페이로드의 타입은 RTP가 전송하고 있는 실시간 데이터의 압축 코덱을 명시 
+  페이로드 타입은 Capability Exchange 협상에서 상호 인지 필수
+- Sequence number : 16 bit
+  보안을 이유로 랜덤 번호에서 시작하고 패킷이 늘어날 때마다 1씩 증가
+  수신 측이 패킷 손실 여부 확인 가능
+- Timestamp : 32 bit
+  RTP 패킷의 첫 번째 바이트의 샘플링 순간을 표시
+  초기값은 랜덤 넘버로 결정되지만 샘플링 레이트에 따라 증가량은 상이
+- SSRC (Synchronization Source) Identifier : 32 bit
+  동기화 소스로 랜덤 넘버로 결정
+- CSRC (Contributing Source) Identifiers : 32 bit
+  다수의 음원이 Audio Mixer를 통해 하나로 통합될 경우 원래 음원의 목록을 표시 
