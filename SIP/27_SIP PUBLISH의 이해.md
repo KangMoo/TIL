@@ -33,7 +33,31 @@ PC에서 사용하는 앱은 전원을 끄면 사용할 수 없지만, 스마트
 SIP PUBLISH 메서드는 AoR (Address-of-Record)과 연관된 Event State를 생성, 변경 및 제거한다. RFC 2779 A Model for Presence and Instant Messaging과 RFC 3903 SIP Extension for Event State Publication의 용어 정의를 통해 상태 정보를 생성하고 교환하는 과정에 대한 구성 요소를 살펴본다.
 
 - Event State
-- EPA (Event Publication Agent)
+
+  자원의 상태 정보
+
+- EPA (Event Publication Agent
+
+  PUBLISH 요청을 발행하는 UAC
+
+  RFC 2856의 PUA (Presence User Agent)
+
 - ESC (Event State Compositor)
+
+  PUBLISH 요청을 받아 처리하는 UAS
+
+  RFC 3856의 PA (Presence Agent)
+
+  Proxy 및 Register와 공존
+
 - Event Hard State
+
+  자원의 default Event State로 AoR에 대한 고정된 상태 정보
+
+  ESC는 Soft State Publicsation이 없을 때 사용
+
 - Event Soft State
+
+  PUBLISH 메커니즘을 통해 EPA가 발행하는 Event State
+
+  유효기간 내에서만 의미를 나타냄
