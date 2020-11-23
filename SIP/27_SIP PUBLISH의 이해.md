@@ -23,3 +23,17 @@ PC에서 사용하는 앱은 전원을 끄면 사용할 수 없지만, 스마트
   회사 주소록에서 특정 직원을 검색할 때 직원 전화번호의 상태 정보가 표시된다. 일반적으로 웹페이지의 전화번호는 클릭 투 콜 서비스와 연결되어 있어 클릭만으로 전화를 걸 수 있다.
 
 사용자의 상태 정보는 SIP 전화기, SIP 소프트폰과 메신저 등에서 사용한다.
+
+
+
+## SIP PUBLISH의 이해
+
+등록상태정보를 교환하기 위해서 REGISTER, SUBSCRIBE 및 NOTIFY메서드가 유기적으로 동작한다. 등록 상태 정보는 사용자의 AoR과 Contact address의 바인딩에 의해 생성된다. 사용자 상태 정보는 다수의 Contact address의 조합으로 만들어진다. 사용자 상태 정보는 자동 생성되기도 하지만, Do not Disturb처럼 사용자에 의해 강제 설정될 수도 있다. 그러므로 사용자의 AoR과 연관된 여러 이벤트를 처리할 수 있는 별도의 메서드가 필요하다.
+
+SIP PUBLISH 메서드는 AoR (Address-of-Record)과 연관된 Event State를 생성, 변경 및 제거한다. RFC 2779 A Model for Presence and Instant Messaging과 RFC 3903 SIP Extension for Event State Publication의 용어 정의를 통해 상태 정보를 생성하고 교환하는 과정에 대한 구성 요소를 살펴본다.
+
+- Event State
+- EPA (Event Publication Agent)
+- ESC (Event State Compositor)
+- Event Hard State
+- Event Soft State
