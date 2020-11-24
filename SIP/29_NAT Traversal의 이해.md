@@ -23,3 +23,6 @@ NAT가 활성화된 라우터나 방화벽이 NAT 매핑 테이블을 생성하�
 인터넷 전화가 NAT 환경에서도 잘 되도록 하는 기술을 NAT Traversal (NAT 투과기술)이라 하고 방화벽장비들이 NAT를 많이 사용하므로 Firewall Traversal(방화벽 투과 기술)이라고도 한다. NAT투과기술이 복잡한 이유는 수동으로 NAT매핑 테이블을 생성하여 외부에서 내부로 들어오도록 하더라도 문제가 발생한다.
 
 NAT Traversal은 OSI 7Layer의 Layer 3네트워크 계층에서 IP 주소 변환이 이루어진다. 하지만, VoIP 프로토콜은 Layer 7인 응용 계층에서 동작한다. NAT 기능이 활성화된 장비들은 응용계층의 어플리케이션을 인식하지 못한다. VoIP프로토콜은 응용계층의 SDP Offer와 SDP Answer로 RTP 미디어 스트림이 사용할 주소를 알려준다. RTP가 사용하는 주소도 공인 IP 주소 변경해 주지 않으므로 NAT Traversal 기술이 필요하다
+
+![VoIP에서 NAT가 문제가 되는 이유](./image/29_2.png)
+
