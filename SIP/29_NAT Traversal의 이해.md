@@ -76,4 +76,11 @@ NAT Traversal은 OSI 7Layer의 Layer 3네트워크 계층에서 IP 주소 변환
 NAT Traversal 또는 방화벽과 투과 기술을 위해 사용하는 제품들은 두 가지가 있다
 
 - ALG (Application Layer Gateway)
+
+  응용계층 (Application Layer)의 프로토콜인 H.323 및 SIP 시그널링을 인지하고 사용하는 IP주소를 변경한다. 방화벽 제품들 중에 ALG 기능을 활성화할 수 있지만, 모든 패킷을 Layer 3에서 Layer 7 까지 분석해야하므로 많은 리소스가 필요하다. 실제 잘 사용하지도 않고 사용하더라도 여러 문제를 일으킨다.
+
 - SBC (Session Border Controller)
+
+  망의 경계에 위치하여 Topology Hiding과 NAT Traversal 기능을 수행한다. VoIP 시그널링 및 RTP 트래픽까지 종단한다. SBC는 통신 사업자들이 많이 사용하고 B2B연결에서도 일반화된 제품이다.
+
+ALG와 SBC를 이용하는 방법은 장비나 서버 기반으로 해결하는 방법으로 모든 상황에 사용하기 어렵고 네트워크 복잡도를 증가시킨다. 그래서 모든 네트워크 상황에서 적용할 수 있는 NAT Traversal기술인 CE (Interactive Connectivity Establishment) 기술이 주목받고 있따. ICE가 만능은 아니지만 지금까지의 NAT Traversal기술 중에서 단말에서 해결하려는 시도이다.
