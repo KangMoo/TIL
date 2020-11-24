@@ -26,3 +26,46 @@ NAT Traversal은 OSI 7Layer의 Layer 3네트워크 계층에서 IP 주소 변환
 
 ![VoIP에서 NAT가 문제가 되는 이유](./image/29_2.png)
 
+1. 앨리스의 INVITE와 SDP Offer
+
+   앨리스는 밥과 통화하기 위해 SIP INVITE요청과 SDP Offer를 전달한다.
+
+   ```sip
+   INVITE sip:bob@biloxi.com SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK74bf9
+   Max-Forwards: 70
+   From: Alice <sip:alice@atlanta.com>;tag=9fxced76sl 
+   To: Bob <sip:bob@biloxi.com>
+   Call-ID: 3848276298220188511@pc33.atlanta.com
+   CSeq: 31862 INVITE 
+   Contact: <sip:alice@atlanta.com> 
+   Content-Type: application/sdp
+   Content-Length: 142
+   
+   
+   v=0
+   o=alice 2890844526 2890844526 IN IP4 atlanta.com
+   c=IN IP4 10.1.3.33
+   t=0 0
+   m=audio 49172 RTP/AVP 0 
+   a=rtpmap:0 PCMU/8000
+   ```
+
+   SIP 메시지와 SDP메시지는 발신자와 수신자를 가리키는 주소 체계를 URI또는 IP주소체계를 사용한다. 사용된 IP 주소가 사설 IP 주소 대역일 경우 인터넷을 통해 라우팅 될 수 없으므로 문제가 된다. SDP 메시지의 내용에 'c='에 사설 IP가 사용되었으므로 밥이 전송하는 RTP 미디어 스트림은 인터넷을 통해 라우팅되지 못한다.
+
+2. NAT Traversal 문제가 발생할 경우
+
+   SIP메시지와 SDP 메시지에서 사설 IP 주소가 사용되면 통화에 문제를 일으킨다.
+
+   - 사설 IP가 적용된 Via헤더
+
+     SIP INVITE요청에 대한 200 OK응답은 Via 헤더의 주소로 전달된다. SIP Proxy서버가 INVITE 요청에 삽입한 Via 헤더의 사설 IP 주소는 인터넷망을 통해 라우팅될 수 없다.
+
+   - 사설 IP가 적용된 Contact 헤더
+
+     SIP INVITE / 200 OK / ACK 이후의 새로운 요청은  Contact헤더를 이용한다. 수신자가 통화를 종료할 경우 BYE요청은 Contact헤더의 사설 IP 주소로 전송되므로 인터넷망을 통해 라우팅될 수 없다. 따라서 발신자는 통화가 중단되었는지를 알지 못한다.
+
+   - SDP 메시지의 'c='
+
+     'c='는 실제 음성을 실어 나르는 RTP프로토콜이 사용하는 주소다. 사설 IP가 사용되면 RTP 패킷은 인터넷을 통해 라우팅 될 수 없다.
+
