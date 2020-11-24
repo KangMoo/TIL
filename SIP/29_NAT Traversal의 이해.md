@@ -69,3 +69,11 @@ NAT Traversal은 OSI 7Layer의 Layer 3네트워크 계층에서 IP 주소 변환
 
      'c='는 실제 음성을 실어 나르는 RTP프로토콜이 사용하는 주소다. 사설 IP가 사용되면 RTP 패킷은 인터넷을 통해 라우팅 될 수 없다.
 
+## NAT Traversal에 대한 해결책
+
+지금은 어플리케이션 서비스들이 직접적으로 IP주소를 사용하지 않도록 하지만, SIP는 이런 합의 이전에 만들어진 프로토콜이므로 IP주소의 사용이 가능하다. NAT Traversal이 중요한 이유는 음성 및 영상 통화가 기업 내부에서 만 이루어지는 것이 아니기 때문이다. 기업과 기업 간의 연결뿐만 아니라 전 세계 어딜가도 전화를 걸 수 있어야 하기 때 문이다. 인터넷 전화 및 영상 통화는 NAT Traversal기술의 발전의 역사이다.
+
+NAT Traversal 또는 방화벽과 투과 기술을 위해 사용하는 제품들은 두 가지가 있다
+
+- ALG (Application Layer Gateway)
+- SBC (Session Border Controller)
