@@ -41,4 +41,5 @@ Candidate는 IP주소와 포트 넘버의 조합으로 표시된 주소를 의�
 - Local Address : 자신의 사설 IP 주소와 포트 넘버
 - Server Reflexive Address : 자신의 공인 IP 주소와 포트 넘버
 - Relay Address : TURN 서버의 IP 주소와 포트 넘버
-- 
+
+만일 단말이 인터넷망에 있다면 Server Reflexive Address와 Local Address는 동일하다. 각 주소의 상관관계를 정리해 보자. 두 단말이 각각 3개의 주소를 갖고 있고, 서로가 상대방의 주소를 수집(Candidate Gathering)으로 알 수 있다. 그러면 Local Address와 Local Address, Server Reflexive Address와 Server Reflexive Address 그리고 Relayed Address와 Relayed Address간의 연결이 가능하다. 또한 한 단말의 Local Address와 다른 단말의 Server Reflexive Address와도 연결이 가능하다.
