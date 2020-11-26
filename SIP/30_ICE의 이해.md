@@ -46,5 +46,23 @@ Candidate는 IP주소와 포트 넘버의 조합으로 표시된 주소를 의�
 
 ICE Candidate Gathering은 SDP Offer에 3개의 Candidate와 SDP Answer에 3개의 Candidate를 우선순위를 정하여 교환하는 것이다.
 
+SIP 메시지에 전달되는 SDP 메시지를 살펴보자
 
+```sip
+v=0
+o=jdoe 2890844526 2890842807 IN IP4 10.0.1.1
+s=
+c=IN IP4 192.0.2.3 t=0 0
+a=ice-options:ice2
+a=ice-pwd:asd88fgpdd777uzjYhagZg
+a=ice-ufrag:8hhY
+m=audio 45664 RTP/AVP 0
+b=RS:0
+b=RR:0
+a=rtpmap:0 PCMU/8000
+ a=candidate:1 1 UDP 2130706431 10.0.1.1 8998 typ host
+a=candidate:2 1 UDP 1694498815 192.0.2.3 45664 typ srflx raddr  10.0.1.1 rport 8998
+```
+
+RTP 패킷이 사용하는 목적지 주소인 `c=` 속성은 기존의 SDP와 동일하다 `a=candidate` 속성에 우선순위를 정하여 IP 주소와 UDP 포트 넘버를 명시한다. Candidate 1은 Local Address인 단말의 사설 IP 주소이고, ㅣCandidate 2는 Server-reflexive Address인 단말의 공인 IP 주소를 전달했다. 만일 단말이 두 개 이상의 Local IP 주소를 사용한다면 모두 명기한다.
 
