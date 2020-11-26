@@ -22,3 +22,6 @@ TRUN 프로토콜은 NAT환경에 단말이 릴레이 서버를 이용하여 통
 
 ![RFC 5766 TURN](./image/30_2.png)
 
+TUNR 서버의 주소는 관리자가 직접 설정하거나 설정 파일을 다운로드한다고 가정한다. TURN 클라이언트는 사설 주소 (Host Transport address)가 포함된 TURN 메시지를 TURN서버로 전송한다. TURN 서버는 TURN메시지에 포마된 사설 주소 (Host Transport address)와 TURN 메시지 패킷의 공인 주소인 Layer3 IP 주소와 Layer4 UDP 포트 넘버 (Server-reflexive transport address)로 응답한다. NAT 장비는 NAT 매핑 테이블에 있는 정보에 따라 TURN응답 메시지를 클라이언트의 사설 주소 (Host Transport address)로 전송한다
+
+TURN 서버는 릴레이 역할을 하는 공인 주소 (Relay Transport address)를 할당하는 역할을 한다 대규모 전개가 아니라면 TURN서버와 릴레이 서버는 동일한 서버다.
