@@ -66,3 +66,9 @@ a=candidate:2 1 UDP 1694498815 192.0.2.3 45664 typ srflx raddr  10.0.1.1 rport 8
 
 RTP 패킷이 사용하는 목적지 주소인 `c=` 속성은 기존의 SDP와 동일하다 `a=candidate` 속성에 우선순위를 정하여 IP 주소와 UDP 포트 넘버를 명시한다. Candidate 1은 Local Address인 단말의 사설 IP 주소이고, ㅣCandidate 2는 Server-reflexive Address인 단말의 공인 IP 주소를 전달했다. 만일 단말이 두 개 이상의 Local IP 주소를 사용한다면 모두 명기한다.
 
+## ICE 연결성 체크 (Connectivity Checks)
+
+두 단말은 TURN서버와 메시지 교환을 통해 자신의 3개 Candidate 주소를 확인하고 SDP Offer와 SDP Answer를 통해 상대방에게 3개 Candidate 주소를 확인한다.
+
+![ICE Candidate Gathering](./image/30_4.png)
+
