@@ -36,3 +36,9 @@ ICE를 실행하는 단말들은 통신이 가능한 모든 주소를 식별한�
 
 ![ICE Candidate Relationship](./image/30_3.png)
 
+Candidate는 IP주소와 포트 넘버의 조합으로 표시된 주소를 의미한다. TURN 서버는 Related Candidate와 Server Reflexive Candidate (단말의 공인 IP 주소)를 응답하고, STUN 서버는 Server Reflexive Candidate (단말의 공인 IP 주소)를 응답한다. 결국 사설망에 있는 단말은 3개의 통신 가능한 주소를 획득한다.
+
+- Local Address : 자신의 사설 IP 주소와 포트 넘버
+- Server Reflexive Address : 자신의 공인 IP 주소와 포트 넘버
+- Relay Address : TURN 서버의 IP 주소와 포트 넘버
+- 
