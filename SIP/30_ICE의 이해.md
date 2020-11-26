@@ -72,3 +72,7 @@ RTP 패킷이 사용하는 목적지 주소인 `c=` 속성은 기존의 SDP와 �
 
 ![ICE Candidate Gathering](./image/30_4.png)
 
+상대방의 Candidate와 자신의 Candidate로 실제 사용할 RTP와 RTCP가 통신이 가능한지를 확인한다. 주어진 모든 Candidate에 대한 확인을 마치고 나면 사용 가능한 주소 리스트가 만들어진다.
+
+![ICE Connectivey Checks](./image/30_5.png)
+
