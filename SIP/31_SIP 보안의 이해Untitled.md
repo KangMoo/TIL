@@ -36,4 +36,9 @@ SIP 프로토콜은 기본적인 보안 방법들이 있다.
 
 SIP 프로토콜은 한 가지 방법을 사용하는 것이 아니라 서로 상호 보완적으로 사용한다.
 
-## 
+## HTTP Digest Authentication (단순 인증)
+
+SIP 단순인증은 RFC 2617 HTTP Digest Authentication에 기반을 둔 사용자 인증 방법이다.
+
+![패스워드 암호화](./image/31_2.png)
+
