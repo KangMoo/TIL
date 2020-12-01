@@ -56,3 +56,5 @@ SIP 단순인증은 RFC 2617 HTTP Digest Authentication에 기반을 둔 사용�
 
 SIP Digest Authentication은 HTTP Digest Authentication과 동작 방식은 동일하지만, HTTP 프로토콜이 아니라 SIP 프로토콜 위에서 동작하는 것이 다르다.
 
+![SIP Digest Authentication](./image/31_4.png)
+
