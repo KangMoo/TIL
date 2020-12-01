@@ -58,3 +58,81 @@ SIP Digest Authentication은 HTTP Digest Authentication과 동작 방식은 동�
 
 ![SIP Digest Authentication](./image/31_4.png)
 
+1. 앨리스의 INVITE
+
+   앨리스는 SIP INVITE 요청을 SIP Proxy 서버로 전송한다.
+
+   ```sip
+   INVITE sip:audrey@atlanta.com SIP/2.0
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK74b43
+   Max-Forwards: 70
+   From: Alice <sip:alice@atlanta.com>;tag=9fxced76sl
+   To: Audrey <sip:audrey@atlanta.com>
+   Call-ID: 3848276298220188511@pc33.atlanta.com
+   CSeq: 31862 INVITE
+   Contact: <sip:alice@atlanta.com>
+   Content-Type: application/sdp
+   Content-Length: 151 
+   ```
+
+2. SIP Proxy 서버의 407 Proxy Authorization Required
+
+   SIP Proxy 서버는 INVITE 메시지에 사용자 인증에 대한 정보가 없으므로 407 Proxy Authoriation Required 응답을 앨리스에게 전달한다.
+
+   ```sip
+   SIP/2.0 407 Proxy Authorization Required
+   Via: SIP/2.0/TLS pc33.atlanta.com;branch=z9hG4bK74b43 ;received=10.1.3.33
+   From: Alice <sips:alice@atlanta.com>;tag=9fxced76sl
+   To: Audrey <sips:audrey@atlanta.com>;tag=3flal12sf
+   Call-ID: 3848276298220188511@pc33.atlanta.com
+   CSeq: 31862 INVITE
+   Proxy-Authenticate: Digest realm="atlanta.com", qop="auth",         nonce="f84f1cec41e6cbe5aea9c8e88d359", opaque="", stale=FALSE, algorithm=MD5
+   Content-Length: 0
+   ```
+
+   SIP Proxy 서버는 SIP INVITE 요청에 대해 사용자 인증을 요청하려고 응답한다. Proxy-Authenticate 헤더는 여러 가지 정보를 포함하고 있다.
+
+   - realm="atlanta.com"
+     도메인 네임
+   - qop="auth"
+     사용자 인증 정보 요청
+   - nonce="f84f1cec41e6cbe5aea9c8e88d359"
+     HTTP Digest Authentication의 Challenge 값과 동일한 시간을 기반으로 한 난수열
+
+   INVITE를 받은 SIP Proxy 서버는 407 Proxy Authorization Required로, SIP REDIRECT 서버나 REGISTRA 서버는 401 Unauthrized로 응답한다
+
+3. 앨리스의 INVITE (Token)
+
+   앨리스는 INVITE메시지에 Authorization헤더를 이용하여 사용자 인증 정보를 전달한다
+
+   ```sip
+   INVITE sips:audrey@atlanta.com SIP/2.0
+   Via: SIP/2.0/TLS pc33.atlanta.com;branch=z9hG4bK776asdhds ;received=10.1.3.33
+   Max-Forwards: 70
+   Route: <sips:bigbox10.atlanta.com;lr>
+   To: Audrey <sips:audrey@atlanta.com>
+   From: Alice <sips:alice@atlanta.com>;tag=1928301774
+   Call-ID: a84b4c76e66710@pc33.atlanta.com 
+   CSeq: 31863 INVITE
+   Contact: <sips:alice@pc33.atlanta.com>
+   Content-Type: application/sdp
+   Content-Length: 151
+   Authorization: Digest username=“audrey", realm="atlanta.com"  nonce="ea9c8e88df84f1cec4341ae6cbe5a359", opaque="",  uri="sips:audrey@atlanta.com",  response="dfe56131d1958046689d83306477ecc"
+   ```
+
+   407 Proxy Auth Required 응답의 Proxy-Authenticate 헤더의 nounce값을 이용하여 생성한 해쉬값과 사용자 인증 정보를 Authorization 헤더로 전달한다.
+
+   - username=“audrey"
+     사용자명
+   - realm="atlanta.com" 
+     도메인 네임
+   - nonce="ea9c8e88df84f1cec4341ae6cbe5a359"
+     HTTP Digest Authentication의 Challenge 값과 동일한 시간을 기반으로 한 난수열
+   - uri="sips:audrey@atlanta.com"
+     착신 측의 URI 주소
+   -  response="dfe56131d1958046689d83306477ecc"
+     패스워드 해쉬 정보
+
+4. SIP Proxy 서버의 INVITE (Token)
+
+   SIP Proxy 서버는 오드리에게 앨리스가 보낸 메시지를 그대로 전달한다. SIP Proxy 서버는 응답을 받기 위해 Via 헤더만을 추가한다
