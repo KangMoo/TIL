@@ -136,3 +136,4 @@ SIP Digest Authentication은 HTTP Digest Authentication과 동작 방식은 동�
 4. SIP Proxy 서버의 INVITE (Token)
 
    SIP Proxy 서버는 오드리에게 앨리스가 보낸 메시지를 그대로 전달한다. SIP Proxy 서버는 응답을 받기 위해 Via 헤더만을 추가한다
+
