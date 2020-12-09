@@ -164,3 +164,4 @@ TLS세션을 생성하기 위한 파라미터 교환은 TLS Handshake 프로토�
 ![TLS Full Handshake](./image/31_8.png)
 
 처음에는 Full Handshake 절차로 진행되고, 세션이 다시 시작할 때는 간소한 Abbreviated Handshake를 진행한다. 앨리스 전화기와 SIP Proxy 서버간의 TLS Full Handshake절차이다.
+
