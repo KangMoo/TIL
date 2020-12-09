@@ -216,5 +216,17 @@ Content-Type 헤더의 application / pkcs7-mime 값이 SIP메시지 바디가 S/
 도메인 내에서 사용자 인증은 Digest Authentication을 이용하고 사용자 식별은 Network Asserted Identity를 이용한다. 사용자를 식별하기 위해 세가지 SIP 헤더가 필요하다.
 
 - P-Asserted-Identity (PAI) : SIP Proxy 서버가 생성
-- P-Preferred-Identity (PPI) : UACrk todtjd
+
+  PAI 헤더는 신뢰할 수 있는 SIP 컴포넌트 간에 사용되며 SIP 메시지를 보내는 사용자를 식별한다. From 헤더는 SIP Proxy서버와 같은 SIP 컴포넌트들에 의해 추가 변경 삭제가 가능하므로 정확한 사용자 식별이 불가능하다. PAI 헤더는 생성 이후에는 변경이 불가능하며 From헤더보다 우선순위가 높다. PAI헤더는 SIP Proxy 서버가 사용자를 인증하고 생성하는 헤더이므로 신뢰성이 높다. 주로 과금 정보 생성에 활용된다.
+
+- P-Preferred-Identity (PPI) : UAC가 생성
+
+  PPI 헤더는 신뢰할 수 있는 도메인 내에서 UAC가 선호하는 URI를 지정한다. UAC가 신뢰할 수 있는 SIP Proxy서버에게 SIP Message를 보내는 자신의 정확한 ID를 명기한다
+
 - Privacy
+
+  Privacy 헤더는 P-Asserted-Identity헤더를 추가할지 삭제할지를 결정한다. 만일 Privacy헤더가 없으면 임의대로 결정한다.
+
+  - id : 신뢰할 수 없는 도메인으로 SIP메시지를 전달할 때 P-Asseryted-Identity헤더를 삭제
+  - none : 신뢰할 수 없는 도메인으로 SIP메시지를 전달할 때 그대로 전달
+
