@@ -230,3 +230,4 @@ Content-Type 헤더의 application / pkcs7-mime 값이 SIP메시지 바디가 S/
   - id : 신뢰할 수 없는 도메인으로 SIP메시지를 전달할 때 P-Asseryted-Identity헤더를 삭제
   - none : 신뢰할 수 없는 도메인으로 SIP메시지를 전달할 때 그대로 전달
 
+NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식별하고 상호 간에 프라이버시를 형성한다. SIP Proxy서버는 PAI헤더를 가진 SIP메시지는 신뢰할 수 있으므로 인증 대신 사용할 수 있다. PAI를 가진 SIP메시지는 SIP Diegest Authentication이 SIP Proxy 서버에 의해 수행된 것이므로 SIP Proxy서버를 신뢰할 수 있으면 가능하다. 따라서, Privacy설정으로 단순히 PAI를 전송할지 말지를 결정하는 것이 아니라 상호 간의 신뢰가 담보되는지 않는지를 사전에 관리자가 확인하는 것이 중요하다. 자세한 내용은 RFC 3325 Private Extensions to the SIP for Assertyed Identity within Trusted Networks에 정의되어 있다.
