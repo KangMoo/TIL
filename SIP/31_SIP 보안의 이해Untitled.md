@@ -210,3 +210,11 @@ JB23LB645V73V73MNB73KV7K4VLHV4T234T2T2JH5NG5CMGX5MYM5SMN5GYCWG5CYMWYMWHNHG5MC5YG
 ```
 
 Content-Type 헤더의 application / pkcs7-mime 값이 SIP메시지 바디가 S/MIME임을 가리킨다. S/MIME는 SHA1 인증과 3 DES암호화 알고리즘을 사용한다. S/MIME를 사용하는 이유는 단대단 (End-to-End) 보안을 제공하기 위한 제한적인 상황에서 이용한다. SIP 시그널링 전달 과정에 SIP Proxy 서버는 내용을 알 수 없으므로 SIP Proxy 서버가 있어야 수행할 수 있는 부가 서비는 사용할 수 없다. 현장에서 거의 쓰이지 않는다.
+
+## Network Asserted Identity/Privacy (Trusted)
+
+도메인 내에서 사용자 인증은 Digest Authentication을 이용하고 사용자 식별은 Network Asserted Identity를 이용한다. 사용자를 식별하기 위해 세가지 SIP 헤더가 필요하다.
+
+- P-Asserted-Identity (PAI) : SIP Proxy 서버가 생성
+- P-Preferred-Identity (PPI) : UACrk todtjd
+- Privacy
