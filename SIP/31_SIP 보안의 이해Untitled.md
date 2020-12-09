@@ -137,7 +137,7 @@ SIP Digest Authentication은 HTTP Digest Authentication과 동작 방식은 동�
 
    SIP Proxy 서버는 오드리에게 앨리스가 보낸 메시지를 그대로 전달한다. SIP Proxy 서버는 응답을 받기 위해 Via 헤더만을 추가한다
 
-### TLS와 SRTP의 개요
+## TLS와 SRTP의 개요
 
 공공기관과 보안을 중요시하는 기업들은 보안이 강화된 Secure IP Telephony를 구현한다. Secure IP Telephony는 매우 복잡한 체계로 구현되지만 주요 프로토콜은 TLS (Transport Layer Security)와 SRTP(Secure RTP)다. TLSsms 냐ㅖ시그널링 메시지를 암화화하고, SRTP는 음성과 영상 트래픽을 암호화한다. Secure IP  Telephony가 구현된 네트워크에서 중간에 패킷을 캡쳐하더라도 내용을 유추할 수 없다.
 
@@ -145,3 +145,4 @@ SIP Digest Authentication은 HTTP Digest Authentication과 동작 방식은 동�
 
 TLS는 넷스케이프 사에 전자 상거래 등의 보안을 위해 개발된 SSL (Secure Socket Layer Protocol) 프로토콜이  RTF 2246으로 1999년에 표준화 된 후 현재는 RFC 5346 TLS 1.2가 표준화되었다. RFC 8446 TLS 1.3도 표준화되었지만, 가장 널리 쓰이는 것능 TLS 1.2이다. TLS는 OSI 7계층 중 전송계층에서 수행되는 프로토콜이므로 응용계층의 프로토콜인 HTTP, XMPP, FTP등 사용할 수 있다. TLS는 기밀성, 무결성 및 사용자 인증까지 제공할 수 있는 프로토콜로써 확장성 및 효율성이 뛰어나 광범위하게 사용된다.
 
+### 
