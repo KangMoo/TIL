@@ -186,3 +186,27 @@ TLS세션을 생성하기 위한 파라미터 교환은 TLS Handshake 프로토�
 5. FInished
 
    세션 암호화 키를 교환 후에 암호화 방식을 변경하거나 세션을 종료한다.
+
+
+
+## S/MIME (Secure / Multipart Internet Mail Extension)
+
+S/MIME은 SDP를 암호화하거나 SIP 메시지에 대한 서명과 무결성을 제공한다. SIP헤더는 평문이지만 SIP 메시지 바디는 암호화한다.
+
+```sip
+ INVITE sip:bob@biloxi.com SIP/2.0
+Via: SIP/2.0/UDP pc33.atlanta.com;branch=z9hG4bKnashds8
+To: Bob <sip:bob@biloxi.com>
+From: Alice <sip:alice@atlanta.com>;tag=1928301774
+Call-ID: a84b4c76e66710@pc33.atlanta.com
+CSeq: 314159 INVITE
+Max-Forwards: 70
+Contact: <sip:alice@pc33.atlanta.com>
+Content-Type: application/pkcs7-mime;smime-type=enveloped-data; name=smime.p7m
+Content-Disposition: attachment;filename=smime.p7m  handling=required 
+
+
+JB23LB645V73V73MNB73KV7K4VLHV4T234T2T2JH5NG5CMGX5MYM5SMN5GYCWG5CYMWYMWHNHG5MC5YGWC5CW5WIU87W34TO8W7FLW5LWC5WC5C4L5CLWCTYWJHC54JHCW45HCWLJ5HCWL5CLWJH5CLJH4C5JHEWCLTJ
+```
+
+Content-Type 헤더의 application / pkcs7-mime 값이 SIP메시지 바디가 S/MIME임을 가리킨다. S/MIME는 SHA1 인증과 3 DES암호화 알고리즘을 사용한다. S/MIME를 사용하는 이유는 단대단 (End-to-End) 보안을 제공하기 위한 제한적인 상황에서 이용한다. SIP 시그널링 전달 과정에 SIP Proxy 서버는 내용을 알 수 없으므로 SIP Proxy 서버가 있어야 수행할 수 있는 부가 서비는 사용할 수 없다. 현장에서 거의 쓰이지 않는다.
