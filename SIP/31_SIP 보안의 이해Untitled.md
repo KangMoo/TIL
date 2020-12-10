@@ -234,3 +234,22 @@ NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식
 
 ![NAI](./image/31_9.png)
 
+1. 앨리스의 INVITE
+
+   앨리스는 오드리와 통화하기 위해 SIP Proxy 서버로 INVITE를 전송한다.
+
+   ```sip
+   INVITE sip:audrey@atlanta.com SIP/2.0 
+   Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK74b43
+   Max-Forwards: 70
+   From: <sip:anonymous@anonymous.invalid>;tag=9fxt6c
+   To: Audrey <sip:audrey@atlanta.com>
+   Call-ID: 3848276298220188511@pc33.atlanta.com
+   CSeq: 31862 INVITE
+   P-Preferred-Identity: Alice <sip:alice@atlanta.com>
+   Privacy: none
+   Content-Type: application/sdp
+   Content-Length: 151 
+   ```
+
+   From 헤더는 annoymouse(익명)으로 표시하고 P-Preferred-Identity 헤더에 앨리스의 사용자 정보를 포함한다. P-Preferred-Identity 헤더가 From을 우선하기 때문에 From헤더의 값은 무시된다. Pricvacy 헤더는 P-Asserted-Identity헤더를 사용할지 말지를 표시한다.
