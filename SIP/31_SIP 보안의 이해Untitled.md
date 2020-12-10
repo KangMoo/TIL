@@ -336,4 +336,10 @@ Content-Length: 151
 SIP Protoco은 새로운 두 개의 SIP 헤더를 이용하여 해결한다
 
 -  Identity 헤더
+
+  해쉬값으로 SIP 헤더와 SDP 정보가 중간에 변경되었다면 Identity 헤더의 해쉬 값과 일치하지 않으므로 문제가 발생한다.
+
 - Identity-info
+
+  바로 전 SIP 컴포넌트의 인증서를 얻을 수 있는 URL
+
