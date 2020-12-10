@@ -344,3 +344,23 @@ SIP Protoco은 새로운 두 개의 SIP 헤더를 이용하여 해결한다
   바로 전 SIP 컴포넌트의 인증서를 얻을 수 있는 URL
 
 SIP Identity는 From, Contact, Via, Call-ID, Record-Route 등에 사용한 메시지 발송자의 이름이 변경되지 않았음을 증명한다. 변경되지 않았음을 증명하는 identity의 해쉬 값과 비교하기 위해서는 Idnetity-info가 가리키는 URL에서 인증서를 다운로드해야하며, 사용된 해쉬 알고리즘이 무엇인지 확인한다.
+
+## SIP Privacy
+
+신뢰할 수 없는 도메인으로 SIP  요청을 전달할 경우에 UAC를 식별할 수 있는 모든 메시지를 제거한다.
+
+```sip
+INVITE sips:bob@biloxi.com SIP/2.0
+Via: SIP/2.0/TLS agent86.privacy-service.com;branch=z9hG4bKnashd93
+Max-Forwards: 69
+To: Bob <sips:bob@biloxi.com>
+From: <sips:anonymous@anonymous.invalid>;tag=19jtf1
+Call-ID: a84b4c76e66711
+CSeq: 31863 INVITE
+Contact: <sips:anonymous@anonymous.invalid>
+Content-Type: application/sdp
+Content-Length: 151
+Authorization:... (메시지 생략) 
+```
+
+INVITE  메시지에서 앨리스가 전송한 것을 인지할 수 있는 모든 메시지 부분을 'annonymouse@annotymouse.invalid'로 변경했다. 응답 메시지는 Via 헤더를 따라 전달되고 From헤더의 고유한 tag파라미터를 통해 식별한다.
