@@ -292,3 +292,25 @@ NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식
    ```
 
    SIP URI 가 SIPS URI로 변경되었으므로 TLS 세션으로 전달된다. Privacy 헤더의 값이 'none'에서 'id'로 변경되었으므로 SIP Proxy 서버에게 신뢰할 수 없는 도메인으로는 P-Assorted-Identity를 전송하지 말 것을 요청한다.
+
+4. SIP Proxy 서버의 INVITE (Token과 PAI)
+
+   SIP Proxy 서버는 앨리스의 사용자 인증을 수행하고 IVNITE 요청을 오드리에게 전달한다.
+
+   ```sip
+   INVITE sips:audrey@atlanta.com SIP/2.0 
+   Via: SIP/2.0/TLS Bigbox10.atlanta.com;branch=z9hG4bKnashd92
+   Via: SIP/2.0/TLS pc33.atlanta.com;branch=z9hG4bK776asdhds
+   Max-Forwards: 69 
+   To: Audrey <sips:audrey@atlanta.com>
+   From: <sips:anonymous@anonymous.invalid>;tag=19jtf0
+   Call-ID: a84b4c76e66710
+   CSeq: 31863 INVITE
+   P-Asserted-Identity: Alice <sips:alice@atlanta.com>
+   Privacy: id
+   Content-Type: application/sdp
+   Content-Length: 151
+   Authorization:... (메시지 생략) 
+   ```
+
+   
