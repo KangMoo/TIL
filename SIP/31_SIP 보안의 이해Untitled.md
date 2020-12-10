@@ -271,4 +271,24 @@ NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식
 
    앨리스는 SIP Digest Authentication을 위해 정보를 요청한다
 
-   
+3. 앨리스의 INVITE (Token과 PPI)
+
+   앨리스는 Authoriztion 헤더에 Digest Authentication 관련 사용자 정보를 포함하고, P-Preferred-Identity 헤더에 사용자 정보를 포함하여 전달한다.
+
+   ```sip
+   INVITE sips:audrey@atlanta.com SIP/2.0 
+   Via: SIP/2.0/TLS pc33.atlanta.com;branch=z9hG4bK776asdhds
+   Max-Forwards: 70
+   Route: <sips:bigbox10.atlanta.com;lr>
+   To: Audrey <sips:audrey@atlanta.com>
+   From: <sips:anonymous@anonymous.invalid>;tag=19jtf0
+   Call-ID: a84b4c76e66710@pc33.atlanta.com
+   CSeq: 31863 INVITE
+   P-Preferred-Identity: Alice <sips:alice@atlanta.com>
+   Privacy: id
+   Content-Type: application/sdp
+   Content-Length: 151
+   Authorization:... (메시지 생략)  
+   ```
+
+   SIP URI 가 SIPS URI로 변경되었으므로 TLS 세션으로 전달된다. Privacy 헤더의 값이 'none'에서 'id'로 변경되었으므로 SIP Proxy 서버에게 신뢰할 수 없는 도메인으로는 P-Assorted-Identity를 전송하지 말 것을 요청한다.
