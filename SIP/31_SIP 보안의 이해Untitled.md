@@ -253,3 +253,22 @@ NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식
    ```
 
    From 헤더는 annoymouse(익명)으로 표시하고 P-Preferred-Identity 헤더에 앨리스의 사용자 정보를 포함한다. P-Preferred-Identity 헤더가 From을 우선하기 때문에 From헤더의 값은 무시된다. Pricvacy 헤더는 P-Asserted-Identity헤더를 사용할지 말지를 표시한다.
+
+2. SIP Proxy 서버의 407 Proxy Authorization Required
+
+   SIP Proxy 서버는 사용자 인증 정보 요청을 위해 407 응답을 한다
+
+   ```sip
+   SIP/2.0 407 Proxy Authorization Required
+   Via: SIP/2.0/TLS pc33.atlanta.com;branch=z9hG4bK74b43
+   From: <sips:anonymous@anonymous.invalid>;tag=9fxt6c
+   To: Audrey <sips:audrey@atlanta.com>;tag=3flal
+   Call-ID: 3848276298220188511@pc33.atlanta.com
+   CSeq: 31862 INVITE
+   Proxy-Authenticate:...(메시지 생략)
+   Content-Length: 0
+   ```
+
+   앨리스는 SIP Digest Authentication을 위해 정보를 요청한다
+
+   
