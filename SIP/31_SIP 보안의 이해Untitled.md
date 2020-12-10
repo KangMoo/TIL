@@ -313,4 +313,27 @@ NAI는 신뢰할 수 있는 SIP서버 네트워크가 인증된 사용자를 식
    Authorization:... (메시지 생략) 
    ```
 
-   
+## SIP Identity
+
+같은 도메인 내의 사용자 인증으 Digest Authentication과 사용자 식별은 Network Assorted Identity를 이용한다. 서로 다른 도메인 간에 사용자 식별을 위한 방안이 필요하다. 도메인과 도메인 간을 건너갈 때 상대방이 보내 준 발신자의 사용자 식별자를 어떻게 신뢰할 수 있는지가 문제다. 예를들어 발신자가 보낸 SIP INVITE 요청이라고 보내진 메시지를 다른 도메인에 있는 밥이 신뢰할 수 있는 방법이 필요하다.
+
+```sip
+INVITE sips:bob@biloxi.com SIP/2.0 
+Via: SIP/2.0/TCP pc33.atlanta.com;branch=z9hG4bK74b43
+Max-Forwards: 70
+From: <sips:alice@atlanta.com>;tag=9fxt6c
+To: Bob <sips:bob@biloxi.com>
+Call-ID: 3848276298220188511@pc33.atlanta.com
+CSeq: 31862 INVITE
+Date: Sun, 22 Jun 2008 20:02:03 GMT
+Contact: <sip:alice@atlanta.com>
+Identity: "CyI4+nAkHrH3ntmaxgr01TMxTmtjP7MASwliNRdupRI1vpkXRvZXx1ja 9k0nB2sW+v1PDsy32MaqZi0M5WfEkXxbgTnPYW0jIoK8HMyY1VT7egt0kk4 XrKFCHYWGClsM9CG4hq+YJZTMaSROoMUBhikVIjnQ8ykeD6UXNOyfI="
+Identity-Info: <https://atlanta.com/cert02.cer>;alg=rsa-sha1
+Content-Type: application/sdp
+Content-Length: 151 
+```
+
+SIP Protoco은 새로운 두 개의 SIP 헤더를 이용하여 해결한다
+
+-  Identity 헤더
+- Identity-info
