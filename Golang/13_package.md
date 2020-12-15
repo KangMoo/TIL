@@ -117,3 +117,26 @@ func getKeys() {  // 내부에서만 호출 가능
 
 사이즈가 큰 복잡한 라이브러리 같은 경우 `go install`명령을 사용하여 라이브러리를 컴파일하여 Cache할 수 잇는데, 이렇게 하면 다음 빌드 시 빌드타임을 크게 줄일 수 있다. Go 패키지를 빌드하고 /pkg 폴더에 인스톨하기 위해서 `go install` 명령어를 아래 그림과 같이 testlib 폴더안에서 실행할 수 있다. 이 명령어가 실행되면, testlib.a 라는 파일이 `/pkg/windows_amd64/24lab.net` 안에 생성된다. 만약 main 패키지에 `go install`  명령을 수행하면 `/bin` 폴더에 실행파일을 생성한다.
 
+![example](./image/13_1.png)
+
+사용자 정의 패키지를 실행하기 위해 /src 안에 다음과 같은 코드를 작성한다.
+
+```go
+package main
+ 
+import "24lab.net/testlib"
+ 
+func main() {
+    song := testlib.GetMusic("Alicia Keys")
+    println(song)
+}
+```
+
+여기 코드에선 `24lab.net/testlib` 패키지를 import 하고 해당 패키지의 Export 함수인 `GetMusic()` 을 호출하고 있다. `24lab.net/testlib` 패키지가 있는 위치를 찾기 위해 GOROOT와 GOPATH의 경로를 사용하는데, GOROOT와 GOPATH에 있는 각 루트폴더의 src 밑에 `24lab.net/testlib` 폴더를 순서대로 찾게된다. 즉, GOPATH가 `C:\GoApp;C:\GoSrc`인 경우 지정된 라이브러리를 찾기 위해 다음과 같은 폴더를 순차적으로 검색하게 된다.
+
+```
+C:\Go\src\24lab.net\testlib (from $GOROOT)
+C:\GoApp\src\24lab.net\testlib (from $GOPATH)
+C:\GoSrc\src\24lab.net\testlib
+```
+
