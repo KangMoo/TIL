@@ -41,3 +41,41 @@ GOROOT환경변수는 Go 설치시 자동으로 시스템에 설정되지만, GO
 ## 패키지 Scope
 
 패키지 내에서는 함수, 구조체, 인터페이스 메서드 등이 존재하는데, 이들의 이름 (Identifier)이 첫문자를 대문자로 시작하면 public으로 사용할 수 있다. 즉, 패키지 외부에서 이들을 호출하거나 사용할 수 있게 된다. 반면 이름이 소문자로 시작하면 이는 non-public으로 패키지 내부에서만 사용될 수 있다.
+
+
+
+## 패키지 init 함수와 alias
+
+개발자가 패키지를 작성할 때, 패키지 실행 시 처음으로 호출되는 init() 함수를 작성할 수 있다. 즉, init함수는 패키지가 로드되면서 실행되는 함수로 별도의 호출 없이 자동으로 호출된다.
+
+```go
+package testlib
+ 
+var pop map[string]string
+ 
+func init() {   // 패키지 로드시 map 초기화
+    pop = make(map[string]string)
+}
+```
+
+경우에 따라 패키지를 import하면서 단지 그패키지 안의 init() 함수만을 호출하고자 하는 케이스가 있다. 이런 경우는 패키지 import시 `_` 라는 alias를 지정한다.
+
+```go
+package main
+import _ "other/xlib"
+```
+
+만약 패키지 이름이 동일하지만, 서로 다른 버전 혹은 서로 다른 위치에서 로딩하고자 할 때는, 패키지 alias를 구분할 수 있다.
+
+```go
+import (
+    mongo "other/mongo/db"
+    mysql "other/mysql/db"
+)
+func main() {
+    mondb := mongo.Get()
+    mydb := mysql.Get()
+    //...
+}
+```
+
