@@ -15,3 +15,23 @@ Go에 사용하는 표준 패키지는 https://golang.org/pkg에 자세히 설�
 ## Main 패키지
 
 일반적으로 패키지는 라이브러리로서 사용되지만 "main"이라고 명명된 패키지는 Go Compiler에 의해 특별하게 인식된다. 패키지명이 main인 경우 컴파일러는 해당 패키지를 공유 라이브리가 아닌 실행 (executable) 프로그램으로 만든다. 그리고 이 main 패키지 안의 main() 함수가 시작점 즉 Entry Point가 된다. 패키지를 공유 라이브러리로 만들 때는 main패키지나 main함수를 사용해서는 안된다.
+
+
+
+## 패키지 Import
+
+다른 패키지를 프로그램에서 사용하기 위해서는 import를 사용하여 패키지를 포함시킨다. 예를 들어 Go의 표준 라이브러리인 fmt 패키지를 사용하기 위해, `import "fmt"` 와 같이 해당 패키지를 포함시킬 것을 선언해준다. Import 후에는 아래 예제처럼 fmt 패키지의 Println()함수를 호출하여 사용할 수 있다.
+
+```go
+package main
+ 
+import "fmt"
+ 
+func main(){
+ fmt.Println("Hello")
+}
+```
+
+패키지를 import할 때, Go 컴파일러는 GORROT 혹은 GOPATH환경변수를 검색하는데, 표준 패키지는 GOROOT/pkg에서 그리고 사용자 패키지나 3rd Party 패키지의 경우 GOPATH/pkg에서 패키지를 찾게 된다.
+
+GOROOT환경변수는 Go 설치시 자동으로 시스템에 설정되지만, GOPATH는 사용자가 지정해 주어야 한다. GOPATH 환경변수는 3rd Party 패키지를 갖는 라이브러리 디렉토리나 사용자 패키지가 있는 작업 디렉토리를 지정하게 되는데, 복수 개일 경우 세미콜론(윈도우즈의 경우)를 사용하여 연결한다.
