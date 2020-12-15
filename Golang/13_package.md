@@ -113,3 +113,7 @@ func getKeys() {  // 내부에서만 호출 가능
 
 
 
+### Optional
+
+사이즈가 큰 복잡한 라이브러리 같은 경우 `go install`명령을 사용하여 라이브러리를 컴파일하여 Cache할 수 잇는데, 이렇게 하면 다음 빌드 시 빌드타임을 크게 줄일 수 있다. Go 패키지를 빌드하고 /pkg 폴더에 인스톨하기 위해서 `go install` 명령어를 아래 그림과 같이 testlib 폴더안에서 실행할 수 있다. 이 명령어가 실행되면, testlib.a 라는 파일이 `/pkg/windows_amd64/24lab.net` 안에 생성된다. 만약 main 패키지에 `go install`  명령을 수행하면 `/bin` 폴더에 실행파일을 생성한다.
+
