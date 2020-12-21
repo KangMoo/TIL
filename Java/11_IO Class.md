@@ -84,4 +84,16 @@ Java의 초기에는 입출력 클래스도 단순했 단순히 바이트 단위
   | PipedReader       | PipedWriter에서 읽어들임                        | 1차 스트림 |
   | StringReader      | 문자열에서 읽어들임                             | 1차 스트림 |
 
-  
+- Writer
+
+  | 클래스             | 설명                                   | Stream     |
+  | ------------------ | -------------------------------------- | ---------- |
+  | Writer             | 문자 출력 스트림을 위한 추상 클래스    | 2차 스트림 |
+  | BufferdWriter      | 문자 스트림에 버퍼 출력, 줄바꿈 사용   | 1차 스트림 |
+  | CharArrayWriter    | 문자 스트림에 문자배열 출력            | 1차 스트림 |
+  | OutputStreamWriter | 문자 스트림을 바이트 스트림으로 변환   | 2차 스트림 |
+  | FileWriter         | 문자 스트림을 바이트 파일로 변환       | 1차 스트림 |
+  | FilterWriter       | 필터 적용 문자 출력을 위한 추상 클래스 | 2차 스트림 |
+  | PipedWriter        | PipedReader에 출력                     | 1차 스트림 |
+  | StringWriter       | 문자열 출력                            | 1차 스트림 |
+  | PrintWriter        | Writer값과 객체를 프린트               | 2차 스트림 |
