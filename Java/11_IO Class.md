@@ -67,3 +67,21 @@ Java의 초기에는 입출력 클래스도 단순했 단순히 바이트 단위
 
 ![Reader/Writer](./image/reader_writer_class.jpeg)
 
+> 문자 입출력에는 문자 Encoding이 관여된다
+
+- Reader
+
+  | 클래스            | 설명                                            | Stream     |
+  | ----------------- | ----------------------------------------------- | ---------- |
+  | Reader            | 바이트 입력 스트림을 위한 추상 클래스           | 2차 스트림 |
+  | BufferedReader    | 문바 버퍼 입력, 라인 해석                       | 2차 스트림 |
+  | LineNumberReader  | 문자 입력 시 라인 번호를 유지                   | 2차 스트림 |
+  | CharArrayReader   | 문자 배열에서 읽어들임                          | 1차 스트림 |
+  | InputStreamReader | 바이트 스트림을 문자 스트림으로 변환            | 2차 스트림 |
+  | FileReader        | 파일에서 바이트를 읽어들여 문자 스트림으로 변환 | 1차 스트림 |
+  | FilterReader      | 필터 적용 문자 이력을 위한 추상 클래스          | 2차 스트림 |
+  | PushbackReader    | 읽어들인 문자를 되돌림                          | 2차 스트림 |
+  | PipedReader       | PipedWriter에서 읽어들임                        | 1차 스트림 |
+  | StringReader      | 문자열에서 읽어들임                             | 1차 스트림 |
+
+  
