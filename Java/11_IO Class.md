@@ -46,3 +46,19 @@ Java의 초기에는 입출력 클래스도 단순했 단순히 바이트 단위
   | SequenceInputStream     | 서로 다른 InputStream을 입력받은 순서대로 이어줌  | 2차 스트림 |
   | StringBufferInputStream | 문자열에서 읽어들임 (비추천)                      | 1차 스트림 |
   | ObjectInputStream       | 객체로 직렬화된 데이터를 역직렬화하여 읽음        | 2차 스트림 |
+
+- OutputStream
+
+  | 클래스                | 설명                                     | Stream     |
+  | --------------------- | ---------------------------------------- | ---------- |
+  | OutputStream          | 바이트 출력 스트림을 위한 추상 클래스    | 2차 스트림 |
+  | FileOutputStream      | 바이트 스트림을 바이트 파일로 변환       | 1차 스트림 |
+  | pipedOutputStream     | PipedOutputStream에 출력                 | 1차 스트림 |
+  | FilterOutputStream    | 필터 적용 바이트 출력을 위한 추상 클래스 | 2차 스트림 |
+  | DataOutputStream      | 바이트를 기본 자료형으로 출력            | 2차 스트림 |
+  | BufferedOutputStream  | 바이트 스트림에 버퍼 출력                | 2차 스트림 |
+  | PrintStream           | Stream 값과 객체를 브린트                | 2차 스트림 |
+  | ByteArrayOutputStream | 바이트 스트림에 바이트 배열 출력         | 1차 스트림 |
+  | ObjectputStream       | 데이터를 객체로 직렬화하여 출력          | 2차 스트림 |
+
+  
