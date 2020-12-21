@@ -61,4 +61,5 @@ Java의 초기에는 입출력 클래스도 단순했 단순히 바이트 단위
   | ByteArrayOutputStream | 바이트 스트림에 바이트 배열 출력         | 1차 스트림 |
   | ObjectputStream       | 데이터를 객체로 직렬화하여 출력          | 2차 스트림 |
 
-  
+
+
