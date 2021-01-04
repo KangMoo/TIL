@@ -38,13 +38,13 @@ Java의 초기에는 입출력 클래스도 단순했 단순히 바이트 단위
   | FileInputStream         | 파일에서 바이트를 읽어들여 바이트 스트림으로 변환 | 1차 스트림 |
   | PipedInputStream        | PipedOutputStream에서 읽어들임                    | 1차 스트림 |
   | FilterInputStream       | 필터 적용 바이트 입력을 위한 추상 클래스          | 2차 스트림 |
-  | LineNumberInputStream   | 바이트 입력시 라인 번호를 유지 (비추천)           | 2차 스트림 |
+  | LineNumberInputStream   | 바이트 입력시 라인 번호를 유지 **(비추천)**       | 2차 스트림 |
   | DataInputStream         | 기본 자료형 데이터를 바이트로 출력                | 2차 스트림 |
   | BufferedInputStream     | 바이트 버퍼 입력                                  | 2차 스트림 |
   | PushbackInputStream     | 읽어들인 바이트를 되돌림 (pushback)               | 2차 스트림 |
   | ByteArrayInputStream    | 바이트 배열에서 읽어들임                          | 1차 스트림 |
   | SequenceInputStream     | 서로 다른 InputStream을 입력받은 순서대로 이어줌  | 2차 스트림 |
-  | StringBufferInputStream | 문자열에서 읽어들임 (비추천)                      | 1차 스트림 |
+  | StringBufferInputStream | 문자열에서 읽어들임 **(비추천)**                  | 1차 스트림 |
   | ObjectInputStream       | 객체로 직렬화된 데이터를 역직렬화하여 읽음        | 2차 스트림 |
 
 - OutputStream
