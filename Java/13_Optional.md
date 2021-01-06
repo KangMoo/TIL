@@ -190,3 +190,15 @@ Optional.ofNullable(null).ifPresent((value) -> {
 });
 ```
 
+### isPresent
+
+최종적으로 연산을 끝낸 후 객체가 존재하는지 여부를 판별한다
+
+```java
+// 메서드 시그니처
+public boolean isPresent();
+// 예제
+Optional.ofNullable("test").isPresent(); // true
+Optional.ofNullable("test").filter((val) -> "result".eqauls(val)).isPresent(); // false
+```
+
