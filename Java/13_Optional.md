@@ -268,5 +268,14 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
 >});
 >```
 
-
+> **Optional<List<T>> vs List<T>**
+>
+> List는 항상 변수를 할당할때마다 초기화해주는 습관이 필요합니다. List를 Optional로 감싸게 되면 Optional로 체크하고 내부의 List 도 체크해야하는 상태가 생겨 코드 가독성이 좋지 않아요. 따라서 항상 아래의 코드처럼 List를 사용할때에 List를 채워주면 좋겠습니다.
+>
+> ```java
+> List data = Optional.ofNullable(somethingList).orElse(Collections.emptyList());
+> if (!data.isEmpty()) {
+> 	// do something...
+> }
+> ```
 
