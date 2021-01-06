@@ -151,3 +151,42 @@ public<U> Optional<U> map(Function<? super T, ? extends U> mapper);
 Integer test = Optional.of("1").map(Integer::valueOf).orElseThrow(NoSuchElementException::new); // string to integer
 ```
 
+### filterMap
+
+mapper함수를 통해 입력값을 다른 값으로 변환하는 메서드이다. `map()` 메서드와 다른점은 메서드 시그니처의 매개변수이다. `map()`에서는 제너릭으로 `U`를 정의했지만 `filterMap()`에서는 제너릭으로 `Optional(U)`를 정의했다.
+
+이것을 뜻하는 바는 `flatpMap()`메서드가 반환해야 하는 값은 `Optional`이라는 의미다.
+
+```java
+// 메서드 시그니처
+public<U> Optional<U> flatMap(Function<? super T, Optional<U>> mapper);
+// 예제
+String result = Optional.of("result")
+        .flatMap((val) -> Optional.of("good"))
+        .get();
+System.out.println(result); // print 'good'
+```
+
+
+
+## Optional 종단처리
+
+종단 처리라는 것은 객체의 체이닝을 끝낸다는 것이다.
+
+### isPresent
+
+최종적으로 연산을 끝낸 후 값이 비어있지 않다면 입력값으로 주어진다. 이 값을 가지고 원한는 작업을 수행하면 된다. 하지만 중간 옵션을 하자 비어있는 객체를 받게 되면 `.isPresent()`메서드의 내용을 수행하지 않는다.
+
+```java
+// 메서드 시그니처
+public void ifPresent(Consumer<? super T> consumer);
+// 예제1
+Optional.of("test").ifPresent((value) -> {
+	// something to do
+});
+// 예제2 (ifPresent 미수행)
+Optional.ofNullable(null).ifPresent((value) -> {
+	// nothing to do
+});
+```
+
