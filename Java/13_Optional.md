@@ -214,5 +214,17 @@ Optional.of("test").get(); // 'test'
 Optional.ofNullable(null).get(); // NoSuchElementException!
 ```
 
+### orElse
+
+최종적으로 연산을 끝낸 후에도 옵셔널 객체가 비어있다면 기본값으로 제공할 객체를 지정한다.
+
+```java
+// 메서드 시그니처
+public T orElse(T other);
+// 예제
+String result = Optional.ofNullable(null).orElse("default");
+System.out.println(result); // print 'default
+```
+
 
 
