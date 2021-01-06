@@ -90,3 +90,14 @@ public static <T> Optional<T> ofNullable(T value);
 Optional<String> opt = Optional.ofNullable(null);
 ```
 
+### Optional.empty
+
+비어있는 옵셔널 객체를 생서한다. 조건에 따라 분기를 태워야 하고 반환할 값이 없는 경우에도 사용된다.
+
+```java
+// 메서드 시그니처
+public static<T> Optional<T> empty();
+// 예제
+Optional<String> emptyOpt = Optional.empty();
+```
+
