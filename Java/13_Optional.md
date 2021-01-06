@@ -140,3 +140,14 @@ Optional.of("True").filter((val) -> "True".eqauls(val)).orElse("NO DATA"); // "T
 Optional.of("False").filter((val) -> "True".eqauls(val)).orElse("NO DATA"); // "NO DATA"
 ```
 
+### map
+
+mapper함수를 통해 입력값을 다른 값으로 변환하는 메서드이다
+
+```java
+// 메서드 시그니처
+public<U> Optional<U> map(Function<? super T, ? extends U> mapper);
+// 예제
+Integer test = Optional.of("1").map(Integer::valueOf).orElseThrow(NoSuchElementException::new); // string to integer
+```
+
