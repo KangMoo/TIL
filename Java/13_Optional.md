@@ -127,3 +127,16 @@ Optional<String> emptyOpt = Optional.empty();
 ## Optional 중간 처리
 
 옵셔널 객체를 생성한 후 사용 가능한 메서드다. 해당 메서드들은 다시 옵셔널을 반환하므로 메서드 체이닝을 통해 원하는 로직을 반복 사용할 수 있다.
+
+### filter
+
+predicate 갓이 참이면 필터를 통과시키고 거짓이면 통과되지 않습니다.
+
+```java
+// 메서드 시그니처
+public Optional<T> filter(Predicate<? super T> predicate);
+// 예제
+Optional.of("True").filter((val) -> "True".eqauls(val)).orElse("NO DATA"); // "True"
+Optional.of("False").filter((val) -> "True".eqauls(val)).orElse("NO DATA"); // "NO DATA"
+```
+
