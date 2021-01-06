@@ -64,3 +64,18 @@ void main() {
 }
 ```
 
+
+
+## Optional
+
+### Optional.of
+
+value가 null인 경우 NPE예외를 던진다. 반드시 값이 있어야 하는 경우 해당 메서드를 사용하면 된다.
+
+```java
+// 메서드 시그니처
+public static <T> Optional<T> of(T value);
+// 예제
+Optional<String> opt = Optional.of("result");
+```
+
