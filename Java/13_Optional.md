@@ -238,5 +238,16 @@ String result = Optional.ofNullable("input").filter("test"::equals).orElseGet(()
 System.out.println(result); // print 'default'
 ```
 
+### orElseThrow
+
+최종적으로 연산을 끝낸 후에도 옵셔널 객체가 비어있다면 예외 공급자 함수를 통해 예외를 발생시킨다.
+
+```java
+// 메서드 시그니처
+public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSupplier) throws X;
+// 예제
+Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementException::new);
+```
+
 
 
