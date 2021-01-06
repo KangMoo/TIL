@@ -202,3 +202,17 @@ Optional.ofNullable("test").isPresent(); // true
 Optional.ofNullable("test").filter((val) -> "result".eqauls(val)).isPresent(); // false
 ```
 
+### get
+
+최종적으로 연산을 끝낸 후 객체를 껀낸다. 이 때 비어있는 옵셔널 객체였다면 예외가 발생한다.
+
+```java
+// 메서드 시그니처
+public T get();
+// 예제
+Optional.of("test").get(); // 'test'
+Optional.ofNullable(null).get(); // NoSuchElementException!
+```
+
+
+
