@@ -2,7 +2,7 @@
 
 - Java 8의 API로 null처리를 도와주는 API
 
-
+메서드가 반환할 결과값이 ‘없음’을 명백하게 표현할 필요가 있고, `null`을 반환하면 에러를 유발할 가능성이 높은 상황에서 메서드의 반환 타입으로 `Optional`을 사용하자는 것이 `Optional`을 만든 주된 목적이다. `Optional` 타입의 변수의 값은 절대 `null`이어서는 안 되며, 항상 `Optional` 인스턴스를 가리켜야 한다.
 
 ### 예시
 
@@ -278,4 +278,10 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
 > 	// do something...
 > }
 > ```
+
+
+
+## Optional의 바른 사용
+
+## `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
 
