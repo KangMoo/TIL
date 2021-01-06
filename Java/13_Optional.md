@@ -70,12 +70,23 @@ void main() {
 
 ### Optional.of
 
-value가 null인 경우 NPE예외를 던진다. 반드시 값이 있어야 하는 경우 해당 메서드를 사용하면 된다.
+value가 `null`인 경우 `NPE`예외를 던진다. 반드시 값이 있어야 하는 경우 해당 메서드를 사용하면 된다.
 
 ```java
 // 메서드 시그니처
 public static <T> Optional<T> of(T value);
 // 예제
 Optional<String> opt = Optional.of("result");
+```
+
+### Optional.ofNullable
+
+value가 `null`인 경우 비어있는 `Optional`을 반환한다. 값이 `null`일수도 있는 것은 해당 메서드를 사용하면 된다.
+
+```java
+// 메서드 시그니처
+public static <T> Optional<T> ofNullable(T value);
+// 예제
+Optional<String> opt = Optional.ofNullable(null);
 ```
 
