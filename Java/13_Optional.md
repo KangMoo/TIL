@@ -249,5 +249,24 @@ public <X extends Throwable> T orElseThrow(Supplier<? extends X> exceptionSuppli
 Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementException::new);
 ```
 
+> **orElse, orElseGet 중 무엇을 사용할까?**
+>
+>orElse 메서드는 옵셔널 객체가 비어있든 비어있지 않든 **반드시 실행**한다. orElseGet 메서드는 옵셔널 객체가 비어있으면 실행한다. 따라서 기본값을 주고자 할때에 기본값을 구하는 과정이 오래 걸린다면 orElseGet을 사용하면 된다.
+>
+>또 한가지의 측면은 orElse 메서드가 받는 매개변수는 객체다.
+>
+>```java
+>Optional.ofNullable(something).orElse(new Something());
+>```
+>
+>orElseGet 메서드가 받는 매개변수는 공급자 함수Supplier입다. 이는 기본값으로 제공할 때 사용할 비즈니스 로직을 메서드 안으로 포함 할 수 있다는 것이다.
+>
+>```java
+>Optional.ofNullable(something).orElseGet(() -> {
+>	// business logic ...
+>	return value;
+>});
+>```
+
 
 
