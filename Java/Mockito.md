@@ -70,7 +70,7 @@ public void example1(){
 
 
 
-## when()
+### when()
 
 - 목 객체를 만들었다면 이 객체로부터  특정 조건을 지정할 수 있다. 이 때 사용하는 것이 `when()`메서드이다.
 
@@ -103,3 +103,24 @@ public List<String> getList(String name, int age){ // do something code }
 when(mockIns.getList(eq("JDM"), anyInt()))
 ```
 
+
+
+### doThrow()
+
+- 예외를 던지고 싶을 때 사용한다
+
+```java
+@Test(expected = IllegalArgumentException.class)
+public void example(){
+    Person p = mock(Person.class);
+    doThrow(new IllegalArgumentException()).when(p).setName(eq("JDM"));
+    String name = "JDM";
+    p.setName(name);
+}
+```
+
+
+
+
+
+### 
