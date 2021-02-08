@@ -25,3 +25,31 @@ mockito의 사용법을 위해 Junit도 pom.xml에 추가 해줍니다.
 </dependency>
 ```
 
+
+
+## 사용법
+
+### mock()
+
+- `mock()`메서드는 목 객체를 만들어서 반환한다.
+
+```java
+public class Person {
+  private String name;
+  private int age;
+
+  public String getName() { return name; }
+  public void setName(String name) { this.name = name; }
+  public int getAge() { return age; }
+  public void setAge(int age) { this.age = age; }
+}
+```
+
+```java
+@Test
+public void example(){
+  Person p = mock(Person.class);
+  assertTrue( p != null );
+}
+```
+
