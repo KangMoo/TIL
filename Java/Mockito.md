@@ -135,3 +135,34 @@ public void example(){
 }
 ```
 
+
+
+### verify()
+
+- `verify()` 는 해당 구문이 호출되었는지를 체크한다. 단순한 호출뿐만 아니라 횟수나 타임아웃 시간까지 지정해서 체크해 볼 수 있다.
+
+```java
+@Test
+public void example(){
+  Person p = mock(Person.class);
+  String name = "JDM";
+  p.setName(name);
+  // n번 호출했는지 체크
+  verify(p, times(1)).setName(any(String.class)); // success
+  // 호출 안했는지 체크
+  verify(p, never()).getName(); // success
+  verify(p, never()).setName(eq("ETC")); // success
+  verify(p, never()).setName(eq("JDM")); // fail
+  // 최소한 1번 이상 호출했는지 체크
+  verify(p, atLeastOnce()).setName(any(String.class)); // success
+  // 2번 이하 호출 했는지 체크
+  verify(p, atMost(2)).setName(any(String.class)); // success
+  // 2번 이상 호출 했는지 체크
+  verify(p, atLeast(2)).setName(any(String.class)); // fail
+  // 지정된 시간(millis)안으로 메소드를 호출 했는지 체크
+  verify(p, timeout(100)).setName(any(String.class)); // success
+  // 지정된 시간(millis)안으로 1번 이상 메소드를 호출 했는지 체크
+  verify(p, timeout(100).atLeast(1)).setName(any(String.class)); // success
+}
+```
+
