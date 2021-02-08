@@ -53,3 +53,18 @@ public void example(){
 }
 ```
 
+
+
+`@Mock` 어노테이션을 선언하여 목 객체를 만들 수도 있다. `MockitoAnnotations.initMocks(this)`를 이용하면 Mockito 어노테이션이 선언된 변수들은 객체를 만들어낸다.
+
+```java
+@Mock
+Person p;
+
+@Test
+public void example1(){
+  MockitoAnnotations.initMocks(this);
+  assertTrue(p != null);
+}
+```
+
