@@ -121,6 +121,17 @@ public void example(){
 
 
 
+### doNothing()
 
+- void로 선언된 메서드에 `when()` 을 걸고 싶을 때 사용한다.
 
-### 
+```java
+@Test
+public void example(){
+  Person p = mock(Person.class);
+  doNothing().when(p).setAge(anyInt());
+  p.setAge(20);
+  verify(p).setAge(anyInt());
+}
+```
+
