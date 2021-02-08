@@ -10,13 +10,13 @@
 - 어떤 종단이 NAT/Firewall 뒤에 있는지 판단하게 해준다.
 - 어떤 종단에 대한 Public IP Address를 결정하고 NAT/Firewall의 유형에 대해 알려준다.
 
-![STUN](C:/Users/허강무/TIL/WebRTC/images/01_1.png)
+![STUN](C:/Users/허강무/TIL/WebRTC/images/02_1.png)
 
 
 
 #### STUN 동작
 
-![STUN 동작](C:/Users/허강무/TIL/WebRTC/images/01_2.png)
+![STUN 동작](C:/Users/허강무/TIL/WebRTC/images/02_2.png)
 
 #### STUN의 한계
 
@@ -32,9 +32,9 @@
 >
 > - Cone NAT에서는 특정 PC의 내부의 IP:Port가 외부 IP:Port로 변환될 때 Destination에 상관 없이 외부 Port가 항상 일정하다.
 >
-> ![Cone NAT](C:/Users/허강무/TIL/WebRTC/images/01_6.png)
+> ![Cone NAT](C:/Users/허강무/TIL/WebRTC/images/02_3.png)
 >
 > - Symmetric NAT은 특정 PC의 내부의 IP:Port가 외부 IP:Port로 변환될 때 Destination에 따라 다른 외부 Port가 사용된다. 즉 peer들이 오직 이전에 연결한 적 있는 연결들만 허용한다
 >
-> ![Symmetric NAT](C:/Users/허강무/TIL/WebRTC/images/01_7.png)
+> ![Symmetric NAT](C:/Users/허강무/TIL/WebRTC/images/02_4.png)
 
