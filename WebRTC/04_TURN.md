@@ -7,10 +7,10 @@
 - TURN은 Peer 들과의 미디어 스트리밍을 릴레이하기 위해 사용
 - TURN은 공용 주소들을 가지고 있으며 미디어를 릴레이하기 때문에 네트워크와 컴퓨팅 자원이 소모될 수 있다.
 
-![TURN](C:/Users/허강무/TIL/WebRTC/images/01_3.png)
+![TURN](C:/Users/허강무/TIL/WebRTC/images/03_1.png)
 
 
 
 #### TURN 동작
 
-![TURN 동작](C:/Users/허강무/TIL/WebRTC/images/01_4.png)
+![TURN 동작](C:/Users/허강무/TIL/WebRTC/images/03_2.png)
