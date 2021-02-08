@@ -166,3 +166,46 @@ public void example(){
 }
 ```
 
+
+
+### @InjectMocks
+
+- 클래스 내부에 다른 클래스를 포함한느 경우 `@InjectMocks` 를 사용한다. 이 어노테이션은 `@Mock` 이나 `@Spy` 어노테이션이 붙은 목 객체를 자신의 멤버 클래스와 일치하면 주입시킨다.
+
+
+
+- `AuthService` 의 `isLogin()` 메서드를 사용할 경우 `AuthDao.isLogin()` 반환값을 사용한다. 이 경우 다음과 같은 mockito로 처리할 수 있다.
+
+```java
+public class AuthService{
+  private AuthDao dao;
+  // some code...
+  public boolean isLogin(String id){
+    boolean isLogin = dao.isLogin(id);
+    if( isLogin ){
+      // some code...
+    }
+    return isLogin;
+  }
+}
+public class AuthDao {
+  public boolean isLogin(String id){ //some code ... }
+  }
+```
+
+```java
+@Mock
+AuthDao dao;
+
+@InjectMocks
+AuthService service;
+
+@Test
+public void example(){
+  MockitoAnnotations.initMocks(this);
+  when(dao.isLogin(eq("JDM"))).thenReturn(true);
+  assertTrue(service.isLogin("JDM") == true);
+  assertTrue(service.isLogin("ETC") == false);
+}
+```
+
