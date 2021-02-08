@@ -209,3 +209,17 @@ public void example(){
 }
 ```
 
+
+
+### @Spy
+
+`@Spy` 로 선언된 목 객체는 목 메서드를 별도로 만들지 않는다면 실제 메서드가 호출된다. 또한 `spy()`로도 같은 효과를 낸다.
+
+```java
+Person p = spy(Person.class);
+or
+  Person p = spy(new Person());
+or
+  @Spy Person p;
+```
+
