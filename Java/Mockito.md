@@ -68,3 +68,38 @@ public void example1(){
 }
 ```
 
+
+
+## when()
+
+- 목 객체를 만들었다면 이 객체로부터  특정 조건을 지정할 수 있다. 이 때 사용하는 것이 `when()`메서드이다.
+
+```java
+@Test
+public void example(){
+  Person p = mock(Person.class);
+  when(p.getName()).thenReturn("JDM");
+  when(p.getAge()).thenReturn(20);
+  assertTrue("JDM".equals(p.getName()));
+  assertTrue(20 == p.getAge());
+}
+```
+
+```java
+public List<String> getList(String name, int age){ // do something code }
+
+  // ...
+  when(mockIns.getList(anyString(), anyInt()))
+    .thenReturn(
+    new ArrayList<String>(){
+      { this.add("JDM"); this.add("BLOG"); }
+    }
+  );
+```
+
+매개변수가 어떤 값이라도 관계가 없다면 `any...`로 시작하는 메서드를 사용한다. 만약 특정 값을 넣어야 한다면 `eq()` 메서드를 사용하면 된다.
+
+```java
+when(mockIns.getList(eq("JDM"), anyInt()))
+```
+
