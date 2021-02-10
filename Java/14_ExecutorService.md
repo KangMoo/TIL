@@ -25,6 +25,14 @@
 
 
 
+#### 메서드
+
+- `submit()` : 작업을 추가할 땐 `submit` 메서드를 사용하면 된다
+
+- `shutdown()` : 더 이상 쓰레드풀에 작업을 추가하지 못하도록 한다. 그리고 처리 중인 Task가 모두 완료되면 쓰레드풀을 종료시킨다.
+
+- `awaitTermination()` : 이미 수행 중인 Task가 지정된 시간동안 끝나기를 기다리고 지정된 시간 내에 끝나지 않으면 false를 리턴하며, 이 때 `shutdownNow()`를 호출하면 실행 중인 Task를 모두 강제로 종료시킬 수 있다.
+
 #### ExecutorService 예시
 
 **객체 생성**
@@ -35,7 +43,7 @@ ExecutorService executor = Executors.newFixedThreadPool(4);
 
 **작업 추가**
 
-- 작업을 추가할 땐 `submit` 메서드를 사용하면 된다
+- 
 
 ```java
 ExecutorService executor = Executors.newSingleThreadExecutor();
