@@ -25,7 +25,9 @@
 
 
 
-#### ExecutorService 생성 예시
+#### ExecutorService 예시
+
+**객체 생성**
 
 ```java
 ExecutorService executor = Executors.newFixedThreadPool(4);
@@ -33,7 +35,7 @@ ExecutorService executor = Executors.newFixedThreadPool(4);
 
 
 
-#### ExecutorService 사용 예시
+**Sample 1**
 
 - `submit( () -> {} )`은 멀티스레드로 처리할 작업을 예약한다. 인자로 람다식을 전달할 수 있다. (Runnable, Callable)
 
@@ -88,4 +90,6 @@ Job4 pool-1-thread-1
 Job2 pool-1-thread-2
 end
 ```
+
+
 
