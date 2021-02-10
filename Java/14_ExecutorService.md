@@ -21,7 +21,7 @@
 
 - Customer은 Application에서 ExecutorService를 사용하는 클래스
 - 해당 클래스에서 ExcutorService에 작업을 submit하게 되면 ExecutorService 내부에서 해당 작업을 내부적으로 스케쥴링 하면서 일을 처리한다
-- 이 때 Task를 가진 Queue에서 ThreadPool에 있는 스레드를이 각기 본인의 Task를 가지고 작업을 처리하기 때문에 개발자 입장에서는 해당 스레드들의 생명주기를 따로 관리할 필요가 없다
+  - 이 때 Task를 가진 Queue에서 ThreadPool에 있는 스레드를이 각기 본인의 Task를 가지고 작업을 처리하기 때문에 개발자 입장에서는 해당 스레드들의 생명주기를 따로 관리할 필요가 없다
 
 
 
