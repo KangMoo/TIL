@@ -43,8 +43,6 @@ ExecutorService executor = Executors.newFixedThreadPool(4);
 
 **작업 추가**
 
-- 
-
 ```java
 ExecutorService executor = Executors.newSingleThreadExecutor();
 
