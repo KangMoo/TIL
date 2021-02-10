@@ -2,6 +2,9 @@
 
 - 병렬 작업 시 여러개의 작업을 효율적으로 처리하기 위해 제공되는 JAVA 라이브러리
 - 흔히 말하는 ThreadPool구현을 매우 용이하게 할 수 있으므로, Java에서 스레드 풀을 사용하고자 할 때 사용한다
+- Runnable, Callable 중 하나를 상속하여 구현한 클래스를 인자로 받아서 처리할 수 있다.
+  - Runnable : return 값이 없는 스레드
+  - Callable : return 값이 있는 스레드
 
 
 
