@@ -31,3 +31,61 @@
 ExecutorService executor = Executors.newFixedThreadPool(4);
 ```
 
+
+
+#### ExecutorService 사용 예시
+
+- `submit( () -> {} )`은 멀티스레드로 처리할 작업을 예약한다. 인자로 람다식을 전달할 수 있다. (Runnable, Callable)
+
+```java
+public class ExecutorServiceTest {
+
+  public static void main(String args[]) throws InterruptedException {
+    ExecutorService executor = Executors.newFixedThreadPool(4);
+
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job1 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job2 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job3 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job4 " + threadName);
+    });
+
+    // 더이상 ExecutorService에 Task를 추가할 수 없습니다.
+    // 작업이 모두 완료되면 쓰레드풀을 종료시킵니다.
+    executor.shutdown();
+
+    // shutdown() 호출 전에 등록된 Task 중에 아직 완료되지 않은 Task가 있을 수 있습니다.
+    // Timeout을 20초 설정하고 완료되기를 기다립니다.
+    // 20초 전에 완료되면 true를 리턴하며, 20초가 지나도 완료되지 않으면 false를 리턴합니다.
+    if (executor.awaitTermination(20, TimeUnit.SECONDS)) {
+      System.out.println(LocalTime.now() + " All jobs are terminated");
+    } else {
+      System.out.println(LocalTime.now() + " some jobs are not terminated");
+
+      // 모든 Task를 강제 종료합니다.
+      executor.shutdownNow();
+    }
+
+    System.out.println("end");
+  }
+}
+```
+
+```log
+Job1 pool-1-thread-1
+Job3 pool-1-thread-1
+Job4 pool-1-thread-1
+Job2 pool-1-thread-2
+end
+```
+
