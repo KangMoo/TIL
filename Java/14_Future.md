@@ -10,3 +10,23 @@
 
 - `Future`은 내부적으로 `Thread-Safe` 하도록 구현되어있기 때문에 `synchronized block`을 사용하지 않아도 된다.
 
+
+
+### 예제
+
+```java
+ExecutorService executor
+  = Executors.newSingleThreadExecutor();
+
+Future<Integer> future = executor.submit(() -> {
+  System.out.println(LocalTime.now() + " Starting runnable");
+  Integer sum = 1 + 1;
+  Thread.sleep(3000);
+  return sum;
+});
+
+System.out.println(LocalTime.now() + " Waiting the task done");
+Integer result = future.get();
+System.out.println(LocalTime.now() + " Result : " + result);
+```
+
