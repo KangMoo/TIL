@@ -112,3 +112,36 @@ end
 
 
 
+**Sample 2**
+
+- `newSingleThreadExecutor` 를 사용하면 순차적으로 처리된다.
+
+```java
+public class ExecutorServiceTest2 {
+
+  public static void main(String args[]) throws InterruptedException {
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job1 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job2 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job3 " + threadName);
+    });
+    executor.submit(() -> {
+      String threadName = Thread.currentThread().getName();
+      System.out.println("Job4 " + threadName);
+    });
+
+    executor.shutdown();
+    executor.awaitTermination(20, TimeUnit.SECONDS)
+      System.out.println("end");
+  }
+}
+```
+
