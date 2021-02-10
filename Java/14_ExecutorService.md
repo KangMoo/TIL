@@ -33,6 +33,19 @@
 ExecutorService executor = Executors.newFixedThreadPool(4);
 ```
 
+**작업 추가**
+
+- 작업을 추가할 땐 `submit` 메서드를 사용하면 된다
+
+```java
+ExecutorService executor = Executors.newSingleThreadExecutor();
+
+executor.submit(() -> {
+  System.out.println("Do Something");
+  return null;
+});
+```
+
 
 
 **Sample 1**
