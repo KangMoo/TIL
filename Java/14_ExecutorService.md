@@ -11,3 +11,7 @@
 - `FixedThreadPool` : 고정된 개수를 가진 스레드풀
 - `SingleThreadExecutor` : 한 개의 스레드로 작업을 처리하는 스레드풀. 스레드 풀이라기보단 TaskPool의 개념이 더 적합하다
 
+![ExecutorService](./image/14_1.jpg)
+
+
+
