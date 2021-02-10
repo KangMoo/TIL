@@ -139,8 +139,8 @@ public class ExecutorServiceTest2 {
     });
 
     executor.shutdown();
-    executor.awaitTermination(20, TimeUnit.SECONDS)
-      System.out.println("end");
+    executor.awaitTermination(20, TimeUnit.SECONDS);
+    System.out.println("end");
   }
 }
 ```
