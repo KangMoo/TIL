@@ -5,3 +5,9 @@
 
 
 
+### ExecutorService의 종류
+
+- `CachedThreadPool` : 스레드를 캐싱하는 스레드 풀 (여기서 쓰이는 캐싱의 의미는 일정시간동안 스레드를 검사한다는 뜻이다. 60초동안 작업이 없으면 Pool에서 제거한다)
+- `FixedThreadPool` : 고정된 개수를 가진 스레드풀
+- `SingleThreadExecutor` : 한 개의 스레드로 작업을 처리하는 스레드풀. 스레드 풀이라기보단 TaskPool의 개념이 더 적합하다
+
