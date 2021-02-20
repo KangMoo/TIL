@@ -14,6 +14,14 @@
 
 ![WebRTC SDP Example](./images/05_1.png)
 
+
+
+![WebRTC 구조](./images/05_2.png)
+
+### SDP 상세설명
+
+
+
 ```sdp
 v=0
 o=- 6137031273746274589 2 IN IP4 127.0.0.1
@@ -104,8 +112,6 @@ a=mid:data
 b=AS:1638400
 a=sctpmap:5000 webrtc-datachannel 1024
 ```
-
-### SDP 상세설명
 
 #### Global Lines
 
