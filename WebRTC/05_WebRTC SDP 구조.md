@@ -6,3 +6,6 @@
 
 
 
+### WebRTC SDP의 구조
+
+![WebRTC SDP Example](./images/05_1.png)
