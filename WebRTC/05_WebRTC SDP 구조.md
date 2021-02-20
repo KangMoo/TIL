@@ -105,3 +105,18 @@ b=AS:1638400
 a=sctpmap:5000 webrtc-datachannel 1024
 ```
 
+### Global Lines
+
+```sdp
+v=0
+```
+
+- SDP의 현재 버전을 일컫는다. 곧 SDP 프로토콜 버전이다
+
+```sdp
+o=- 6137031273746274589 2 IN IP4 127.0.0.1
+```
+
+- SDP를 생성한 Peer의 식별자. 순서는 아래와 같다.
+- user name(생략됨), session id, session version, network type, address type, unicast address 순이다.
+- user name 이 - 으로 생략되었지만 문자열 파싱을 통해 어플리케이션에서 user name 을 추가할 수 있다. 이를 추가하면 아래와 같다
