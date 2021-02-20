@@ -164,3 +164,18 @@ c=IN IP4 0.0.0.0
 ```
 
 - c 는 실시간 트래픽을 보내고 받을 IP를 제공합니다. 그러나 ICE 에서 이미 IP 가 제공 되고 있으므로 c 라인의 IP 는 사용되지 않는다.
+
+```
+a=rtcp:9 IN IP4 0.0.0.0
+```
+
+- 이 행은 RTCP에 사용될 IP 및 포트를 지정합니다. RTCP multiplex가 지원되므로 SRTP와 동일한 포트입니다.
+
+```
+a=ice-ufrag:eWXl
+a=ice-pwd:57FcQfoChjtjaMlHOlp6TPGE
+```
+
+- ICE Parameter 이다.
+- ICE candidate 가 교환되면, 서로를 확인하는 프로세스가 시작된다.
+- ice-ufgra 과 ice-pwd는 해당 프로세스에 사용되어 세션과 관련되지 않는 잠재적인 공격을 받지 않도록 한다.
