@@ -179,3 +179,17 @@ a=ice-pwd:57FcQfoChjtjaMlHOlp6TPGE
 - ICE Parameter 이다.
 - ICE candidate 가 교환되면, 서로를 확인하는 프로세스가 시작된다.
 - ice-ufgra 과 ice-pwd는 해당 프로세스에 사용되어 세션과 관련되지 않는 잠재적인 공격을 받지 않도록 한다.
+
+```
+a=fingerprint:sha-256 EB:E1:55:0E:41:99:0C:C0:CC:C8:43:9B:99:11:F9:A1:4D:77:5C:A1:BF:70:78:B0:19:30:04:D8:D3:11:DC:0D
+```
+
+- DTLS Parameters 이다.
+- DTLS-SRTP 협상에 사용되는 인증서의 해시 함수 (이 경우 sha-256 사용)의 결과이다.
+
+```
+a=setup:actpass
+```
+
+- DTLS Parameters 이다.
+- 이 매개 변수는 Peer가 DTLS 협상을 시작하는 서버 또는 클라이언트가 될 수 있음을 의미합니다. RFC4145에 의해 정의 되었으며 RFC4572에 의해 업데이트되었습니다.
