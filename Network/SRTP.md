@@ -29,7 +29,7 @@
 
 ## 구조
 
-![srtp](./images/srtp.jpg)
+![srtp](./images/srtp.gif)
 
 Payload 항목까지는 RTP와 동일하며, SRTP MKI, Authentication Tag 항목이 추가되었다.
 
