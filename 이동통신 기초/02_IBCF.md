@@ -5,3 +5,16 @@
 
 ![IBCF 중심의 IMS 망 구성도](./images/02_1.gif)
 
+
+
+IBCF의 기능
+
+- 보안 기능
+- NAT 자원 및 미디어 제어 가능
+- 자원 할당 기능
+- 세션 Filtering 기능
+- Topology and Infrastructure Hiding 기능
+- 과금 기능
+- Media Relay 기능
+- 타망의 IBCF 연동 기능
+- Transcoding 기능
