@@ -8,13 +8,9 @@ IMS 망 개념도
 
 
 
-
-
 ![IMS 망내의 시스템 계층구조](./images/01_2.gif)
 
 IMS망내의 시스템 계층구조
-
-
 
 IMS망에서는 호처리를 하는 CSCF (Call Session Contron Function)가 존재한다. 이는 SIP기반의 멀티미디어 세션 제어를 위한 기본 기능을 수행하는 인프라 시스템으로써 역할에 따라 Proxy-CSCF, Interogating-CSCF, Serving-CSCF로 나뉜다
 
