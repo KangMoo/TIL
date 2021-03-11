@@ -4,3 +4,4 @@ IMS(IP Multimedia Subsystem)은 유선망과 무선망간의 새로운 통신 �
 
 ![IMS망 개념도](./images/01_1.gif)
 
+![IMSa망내의 시스템 계층구조](./images/01_2.gif)
