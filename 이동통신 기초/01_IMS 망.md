@@ -25,3 +25,5 @@ IMS망에서는 호처리를 하는 CSCF (Call Session Contron Function)가 존�
 IMS망과 레거시망 연동을 위한 시그널링 변환을 해주는 MGCF (Media Gateway Control Function) 와 미디어 변환을 위한 IMS-MGW(Media Gateway)가 있으며, PSTN 착신호에 대한 라우팅 최적화를 고려하여 적당한 MGCF를 선택하는 BGCF도 존재한다
 
 UE 즉 단말이 IMS 망에 접속하기 위해서는 IP-CAN (IP-Connectivity Access Network)를 거쳐야 한다. IP-CAN은 단말에서 패킷 데이터전송를 위한 엑세스망을 말한다. 예를 들어 GPRS나 WCDMA가 될 수 있다. 이 구조에서의 SGSN과 GGSN은 GPRS를 사용한 예이다
+
+![IMS 시스템 연동 구조](./images/01_3.gif)
