@@ -2,13 +2,13 @@
 
 - IMS(IP Multimedia Subsystem)은 유선망과 무선망간의 새로운 통신 비즈니스 모델을 제시함으로써 ALL IP 기반의 풍부한 컨텐츠와 새로운 서비스 능력을 수용할 수 있도록 지원한다. 서비스 측면에서 IMS의 개념은 과거의 폐쇠적인 통신 서비스의 개발 및 제공방법과는 차별화하여 서비스 제공자 도메인과 망사업자 도메인간의 분리를 시도했다.
 
-![IMS망 개념도](./images/01_1.gif)
+![IMS망 개념도](./images/IMS_1.gif)
 
 IMS 망 개념도
 
 
 
-![IMS 망내의 시스템 계층구조](./images/01_2.gif)
+![IMS 망내의 시스템 계층구조](./images/IMS_2.gif)
 
 IMS망내의 시스템 계층구조
 
@@ -22,9 +22,9 @@ IMS망내의 시스템 계층구조
 
 - UE 즉 단말이 IMS 망에 접속하기 위해서는 IP-CAN (IP-Connectivity Access Network)를 거쳐야 한다. IP-CAN은 단말에서 패킷 데이터전송를 위한 엑세스망을 말한다. 예를 들어 GPRS나 WCDMA가 될 수 있다. 이 구조에서의 SGSN과 GGSN은 GPRS를 사용한 예이다
 
-![IMS 시스템 연동 구조](./images/01_3.gif)
+![IMS 시스템 연동 구조](./images/IMS_3.gif)
 
-![](./images/01_4.gif)
+![](./images/IMS_4.gif)
 
 
 
