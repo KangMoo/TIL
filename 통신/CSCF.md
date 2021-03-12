@@ -11,4 +11,7 @@
 - Proxy Call State Control Function
 - P-CSCF는 UE가 GPRS 엑세스를 통해 IMS에 접속할 때 처음 만나는 지점이다. 다시 말해 사용자가 IMS망에 접속하는 첫 포인트 지점이고  GGSN과 같은 도메인에 존재한다. 3GPP에서는 UE가 P-CSCF를 찾는데 DHCP를 이용하거나 PDP Context를 통해서 주소를 얻는 방법을 제시하고 있다.
 
-![P-CSCF](./images/CSCF_1.jpg)
+> **PDP Context Activation을 통해서 P-CSCF IP 주소를 얻어내는 절차**
+>
+> ![P-CSCF](./images/CSCF_1.jpg)
+
