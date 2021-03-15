@@ -284,12 +284,13 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
 ## Optional의 바른 사용
 
 1. `Optional` 변수에 절대로 `null` 을 할당하지 말 것 (`Optional.empty` 사용 권장)
-2. `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
-3. `orElse(new ...)` 대신 `orElseGet(() -> new ...)`
-4. 단지 값을 얻을 목적이라면 `Optional` 대신 `null` 비교
-5. `Optional` 대신 비어있는 컬렉션 반환
-6. `Optional`을 필드로 사용 금지
-7. `Optional`을 생성자나 메서드 인자로 사용 금지
-8. `Optional`을 컬렉션의 원소로 사용 금지
-9. `of()`, `ofNullable()` 혼동 주의
-10. `Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
+2. `Optional.get()` 호출 전에 `Optional` 객체가 값을 가지고 있음을 확실히 할 것
+3. `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
+4. `orElse(new ...)` 대신 `orElseGet(() -> new ...)`
+5. 단지 값을 얻을 목적이라면 `Optional` 대신 `null` 비교
+6. `Optional` 대신 비어있는 컬렉션 반환
+7. `Optional`을 필드로 사용 금지
+8. `Optional`을 생성자나 메서드 인자로 사용 금지
+9. `Optional`을 컬렉션의 원소로 사용 금지
+10. `of()`, `ofNullable()` 혼동 주의
+11. `Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
