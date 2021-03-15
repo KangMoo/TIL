@@ -301,4 +301,4 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
 10. `Optional`을 생성자나 메서드 인자로 사용 금지
 11. `Optional`을 컬렉션의 원소로 사용 금지
 12. `of()`, `ofNullable()` 혼동 주의
-13. `Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
+13. 원시 타입의 `Optional`의 경우`Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
