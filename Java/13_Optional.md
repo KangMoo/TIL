@@ -285,7 +285,13 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
 
 1. `Optional` 변수에 절대로 `null` 을 할당하지 말 것 (`Optional.empty` 사용 권장)
 2. `Optional.get()` 호출 전에 `Optional` 객체가 값을 가지고 있음을 확실히 할 것
-3. 값이 없는 경우, `Optional.orElse()` 를 통해 이미 생성된 기본 값(객체)를 제공할 것
+3. 값이 없는 경우
+   * `Optional.orElse()` 를 통해 이미 생성된 기본 값(객체)를 제공할 것
+     * 기본값 반환
+     * 동일한 객체 참조를 반환해도 괜찮은 경우에 적합
+   * `Optional.orElseGet()` 을 통해 이를 나타내는 객체를 제공할 것
+     * 매번 새로운 객체를 반환해야 하는 경우에 적합
+   * `Optional.orElseThrow()` 를 통해 명시적으로 예외를 던질 것
 4. `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
 5. `orElse(new ...)` 대신 `orElseGet(() -> new ...)`
 6. 단지 값을 얻을 목적이라면 `Optional` 대신 `null` 비교
