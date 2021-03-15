@@ -292,12 +292,13 @@ Optional.ofNullable("input").filter("test"::equals).orElseThrow(NoSuchElementExc
    * `Optional.orElseGet()` 을 통해 이를 나타내는 객체를 제공할 것
      * 매번 새로운 객체를 반환해야 하는 경우에 적합
    * `Optional.orElseThrow()` 를 통해 명시적으로 예외를 던질 것
-4. `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
-5. `orElse(new ...)` 대신 `orElseGet(() -> new ...)`
-6. 단지 값을 얻을 목적이라면 `Optional` 대신 `null` 비교
-7. `Optional` 대신 비어있는 컬렉션 반환
-8. `Optional`을 필드로 사용 금지
-9. `Optional`을 생성자나 메서드 인자로 사용 금지
-10. `Optional`을 컬렉션의 원소로 사용 금지
-11. `of()`, `ofNullable()` 혼동 주의
-12. `Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
+4. 값이 있는 경우에 이를 사용하고 없는 경우에 아무 동작도 하지 않는다면, `Optional.ifPresent()` 를 활용할 것
+5. `isPresent()-get()` 대신 `orElse()/orElseGet()/orElseThrow()`
+6. `orElse(new ...)` 대신 `orElseGet(() -> new ...)`
+7. 단지 값을 얻을 목적이라면 `Optional` 대신 `null` 비교
+8. `Optional` 대신 비어있는 컬렉션 반환
+9. `Optional`을 필드로 사용 금지
+10. `Optional`을 생성자나 메서드 인자로 사용 금지
+11. `Optional`을 컬렉션의 원소로 사용 금지
+12. `of()`, `ofNullable()` 혼동 주의
+13. `Optional<T>` 대신 `OptionalInt`, `OptionalLong`, `OptionalDouble`
