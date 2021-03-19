@@ -13,4 +13,10 @@
 
 - Java Native Access
 - JNI 개발에서 번거로운 부분을 쉽게 해결해주는 API
+  - Native언어로 만들어진 함수를 사용하기 위해서 Header파일 생성, Header파일을 구현한 C소스, compile과정이 없다
+- JNA는 libffi (Foreign function interface library)라 불리는 native library를 사용하여 dynamic하게 쓸 수 있게 한다.
+
+
+
+
 
