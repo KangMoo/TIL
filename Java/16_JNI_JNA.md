@@ -11,6 +11,12 @@
 - Java에서 Native영역으로 들어가 호출 또는 native에서 Java로 호출하는 interface
 - C, C++ 언어로 만든 라이브러리, 솔루션을 java에서 사용가능 하다.
 
+- JNI 개발 과정
+
+  ![JNI 개발과정](./image/16_1.png)
+
+
+
 #### JNA
 
 - Java Native Access
