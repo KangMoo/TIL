@@ -9,3 +9,8 @@
 - Java에서 Native영역으로 들어가 호출 또는 native에서 Java로 호출하는 interface
 - C, C++ 언어로 만든 라이브러리, 솔루션을 java에서 사용가능 하다.
 
+## JNA
+
+- Java Native Access
+- JNI 개발에서 번거로운 부분을 쉽게 해결해주는 API
+
