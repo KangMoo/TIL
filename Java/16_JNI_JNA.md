@@ -36,11 +36,31 @@
 
 - JNA는 libffi (Foreign function interface library)라 불리는 native library를 사용하여 dynamic하게 쓸 수 있게 한다.
 
+- 얻을 수 있는 효과
+
+  - 단순히 Java단에서 C코드로 일을 시킬 때 아주 편리하다.
+  - 권한만 있다면 리눅스 또는 윈도우 커널 라이브러리에 접근해서 interface에 바인딩하여 명령어를 실행할 수 있다.
+  - JNI처럼 C언어에서 함수에 Pointer를 연결하여  Java에서 쓸 수 있도록 할 수 있으며 Callback이 일어나면 Java로 올려치기도 가능하다
+  - JNI 개발과정보다 단순하고 JNI 개발의 번거로운 부분을 해소해준다
+  - 기존에 이미 만들어진 shared object를 바로 클래스만 작성해서 호출하는 방식이기 때문에 복잡한 interface가 필요없다.
+  - Java의 src 디렉토리에 지저분한 C header 파일과 C 소스 파일이 필요없다
+
+- 단점
+
+  - C++ 코드는 사용할 수 없다
+    - (jnaerator라는 서드파티 오픈소스를 사용하면 되긴 한다)
+  - api특성상 JNI의 성격을 다 포함하지는 못한다.
+    - 예를 들어 native에서 jvm을 start하는 것은 JNA가 지원하지 않는다
+
 - JNA 개발과정
 
   ![JNA 개발과정](./image/16_2.png)
 
+**JNI 의 불편함대신 간편하게 사용될 수 있는 JNA는 점차 보편화 되고 있어서, 오픈소스 코드를 분석하거나 또는 Native 모듈을 개발하는데 큰 도움이 된다.**
 
+
+
+출처: https://knight76.tistory.com/entry/jni-vs-jna
 
 
 
