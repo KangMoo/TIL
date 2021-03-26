@@ -5,6 +5,10 @@
 - Data Plane Library / NIC 드라이버의 집합으로 구성되어 있다
 - DPDK는 어플리케이션이 User Space의 Intel DPDK 라이브러리 API와 EAL (Environment Abstraction Layer)를 사용하여 리눅스 커널을 통과하여 직접 NIC에 엑세스 할 수 있는 통로를 제공한다.
 - 리눅스 User Space의 Data Plane API 뿐만 아니라, 패킷처리에 최적화된 NIC 드라이버를 제공한다
+- 고성능 네트워크 패킷 처리를 위한 I/O 드라이버 및 라이브러리 모음집
+-  DPDK는 운영체제의 도움을 받지 않고 오버헤드 없이 사용자 애플리케이션이 직접 하드웨어를 독점 제어할 수 있는 자체 인터페이스를 제공
+  - 일반적인 네트워크 드라이버는 운영체제에서 요구하는 이더넷 인터페이스에 맞추어 만들어진다
+- 
 
 
 
