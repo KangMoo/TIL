@@ -6,3 +6,17 @@
 - DPDK는 어플리케이션이 User Space의 Intel DPDK 라이브러리 API와 EAL (Environment Abstraction Layer)를 사용하여 리눅스 커널을 통과하여 직접 NIC에 엑세스 할 수 있는 통로를 제공한다.
 - 리눅스 User Space의 Data Plane API 뿐만 아니라, 패킷처리에 최적화된 NIC 드라이버를 제공한다
 
+
+
+### 커널 기반 패킷 처리 과정과 DPDK의 차이점
+
+- CPU 처리 속도와 메모리/PCI 인터페이스 사이에서 발생하는 처리속도의 차이로 인한 문제를 DPDK에서는 다수 패킷을 동시에 처리하는 I/O 최적환 기술인 배치 패킷처리 기술을 사용하여 해결
+- 네트워크 패킷마다 동적으로 패킷을 위해 버퍼 메모리를 할당/해제하던 문제를 DPDK에서는 네트워크 패킨ㅅ에 대해 고정 길이의 메모리를 사전 할당함으로써 해결
+- 공유 데이터 구조에 대한 접근으로 인한 병목현상이 일어날 때 패킷처리 성능이 저하되는 문제 점을 DPDK에서는 불필요한 대기시간이 발생하지 않도록 안전한 Lockless Queue를 구현하여 해결
+- 리눅스의 Page table size(4Kbyte)로 인해 TLB miss가 발생하는 문제점을 DPDK에서는 2MB 또는 1GB의 huge page를 사용하여 해결
+- 인터럽트 기반의 최적화되지 않은 물리 NIC와 가상 NIC 드라이버로 인한 성능저하 문제를 DPDK에서는 최적화된 poll mode driver를 이용하여 해결
+- CPU가 데이터를 기다리는 상황으로 인한 패킷처리 성능 저하 문제를 DPDK는 메모리 엑세스에 대한 Pre-fetching 기술 및 cash line 사이즈 (64kbyte)로 정렬하여 해결
+- 멀티 프로세서를 사용하더라도 성능이 스케일 되지 않는 문제를 run-to-complete 모델을 통해 horizontal scalability를 제공
+- 리눅스 스케줄러의 스레드 스위칭 오버헤드 문제를 DPDK에서는 소프트웨어 스레드를 하드웨어 스레드로 매핑하는 CPU Core Isolation기술을 사용하여 해결
+- 호스트 커널 네트워킹 스택의 성능이 제야고디는 문제점을 DPDK에서는 KNI (Kernal Network Interface)를 통해 커널 네트워킹 스택 성능을 개선
+
