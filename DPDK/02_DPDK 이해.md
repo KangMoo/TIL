@@ -4,7 +4,7 @@
 
 - system call / Context Switching
 - Interrupt Handling
-- Data copy (Kernel space -> User space)
+- Buffer copy (Kernel space -> User space)
 
 DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 
@@ -17,4 +17,10 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 - Context Switching은 하던 작업을 멈추고 다른 작업을 하는 일.
 - Context Switching은 작업전환을 의미하고 작업전환 과정에서는 오버헤드가 발생한다
 - 거의 모든 System call은 Context Switching을 발생시키기 때문에 system call은 Overhead가 발생한다.
+
+### Interrupt Handling
+
+- 
+
+
 
