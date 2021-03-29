@@ -31,7 +31,7 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 
 
 
-## DPDK의 내부동작 구조
+## DPDK의 핵심 라이브러리 및 기술
 
 - Huge page
 - Processor affinity
@@ -50,5 +50,7 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 - 최신 커널의 경우 huge page를 사용하더라도 상당수는 4k를 사용하지만 DPDK에서는 기본적으로 영구 huge 페이지가 사용되며 모든 개체, 파일시스템, 기본 요소들에 대해서 Huge Page 사용 -> Huge Page의 모든 이점을 활용
   - Huge page는 프로세스 종료시 해제된다.
 
-### Scheduling
+### Lockless Ring
+
+
 
