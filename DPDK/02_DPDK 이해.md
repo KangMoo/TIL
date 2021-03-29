@@ -31,7 +31,16 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 
 
 
-## DPDK의 핵심 라이브러리 및 기술
+## DPDK의 핵심 라이브러리 및 드라이버
+
+- Memory Manager : Object pool, huge page 메모리, Ring, 관리
+- Buffer Manager : 고정 크기 버퍼를 미리 할당
+- Queue Manager : Lockless Queue 제공. waiting time 회피 (spinlock 사용 X)
+  - spinlock : 조금 기다리면 바로 사용할 수 있으니, 잠시 루프를 돌면서 크리티컬 섹션으로 진입 시도 (context switching으로 인한 부하 회피)
+- Poll Mode Drivers : 수신 프로세스 및 사용자의 어플리케이션에서 패킷을 임의의 인터럽트 없이 신속하게 전달하는 직접적인 디스크립터
+- Flow Classification : 
+
+
 
 - Huge page
 - Processor affinity
