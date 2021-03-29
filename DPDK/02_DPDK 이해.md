@@ -31,5 +31,21 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 
 
 
-## 
+## DPDK의 내부
 
+- Huge page
+- Processor affinity
+- UIO
+- Polling
+- Lockless synchronization
+- Batch packet handling
+- SSE, NUMA awareness
+
+
+
+#### Huge Page
+
+- 기존의 가상 메모리 관리 방법
+  - 기존에는 일반적으로 4kb의 페이지를 사용
+  - 
+  - 최신 커널의 경우 huge page를 사용하더라도 상당수는 4k를 사용하지만 DPDK의 경우 상당수가 모든 개체, 파일시스템, 기본 요소들에 대해서만 Huge Page 사용 -> Huge Page의 모든 이점을 활용
