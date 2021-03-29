@@ -31,6 +31,20 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 
 
 
+#### 기존 Kernel 문제와 DPDK의 해결방안
+
+| 기존 Kernel                                                 | DPDK                                                         |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| CPU 처리 속도와 Memoy/PCI 인터페이스에서 발생하는 속도 문제 | 다수의 패킷을 동시에 처리하는 I/O 배치 처리 기술을 적용하여 해결 |
+| 동적으로 네트워크 패킷마다 메모리를 할당/해제하던 문제      | 네트워크 패킷에 대해 고정 길이의 메모리를 하전에 할당하여 해결 |
+| 공유 자원의 접근으로 인한 병목 현상 문제                    | Lockless Queue 기술 적용으로 해결                            |
+| Page table size(4k bytes)로 인해 TLB miss 발생              | Huge page로 해결                                             |
+| 성능이 sclae 되지 않는 문제 (멀티 프로세스 사용)            | Run-To-Complete 모델로 Horizontal Scalability를 제공         |
+| Scheduler의 Thread switching overhead 문제                  | CPU core isolation 기술로 해결                               |
+| Host kernel networking stack의 performance 제약 문제        | KNI (Kernel Network Interface)를 이용하여 Kernel network stack 성능 개선 |
+
+
+
 ## DPDK의 핵심 라이브러리 및 드라이버
 
 - Memory Manager : Object pool, huge page 메모리, Ring, 관리
@@ -38,6 +52,7 @@ DPDK는 위의 오버헤드로 발생하는 병목현상을 최소화한다.
 - Queue Manager : Lockless Queue 제공. waiting time 회피 (spinlock 사용 X)
   - spinlock : 조금 기다리면 바로 사용할 수 있으니, 잠시 루프를 돌면서 크리티컬 섹션으로 진입 시도 (context switching으로 인한 부하 회피)
 - Poll Mode Drivers : 수신 프로세스 및 사용자의 어플리케이션에서 패킷을 임의의 인터럽트 없이 신속하게 전달하는 직접적인 디스크립터
+  - 인터럽트없이 직접 RX 및 TX descriptors에 액세스하여 (링크 상태 변경 인터럽트 제외) 사용자 애플리케이션에서 패킷을 빠르게 수신, 처리 및 전달
 - Flow Classification : 
 
 
