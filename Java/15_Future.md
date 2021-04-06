@@ -7,12 +7,11 @@
 - 비동기 작업을 취소하려면 `cancel` 메서드를 사용하면 된다. 비동기 작업이 정상적으로 완료되었는지 혹은 지연되었는지 확인하기 위한 메서드도 제공된다.
 - 또한 비동기 작업이 완료된 경우에는 작업을 취소하는 것은 불가능하다.
 - 만약 Future를 비동기 작업의 취소의 용도로 사용하고자 한다면(비동기 적업의 결과는 필요없음), `Future<?>` 형식으로 타입을 선언하면 된다. 그리고 비동기 작업의 결과로는 null을 리턴하도록 하면 된다.
-
 - `Future`은 내부적으로 `Thread-Safe` 하도록 구현되어있기 때문에 `synchronized block`을 사용하지 않아도 된다.
 
 
 
-### 예제
+### 예제1
 
 ```java
 ExecutorService executor
@@ -27,6 +26,33 @@ Future<Integer> future = executor.submit(() -> {
 
 System.out.println(LocalTime.now() + " Waiting the task done");
 Integer result = future.get();
+System.out.println(LocalTime.now() + " Result : " + result);
+```
+
+
+
+### 예제2 (Timeout)
+
+```java
+ExecutorService executor
+        = Executors.newSingleThreadExecutor();
+
+Future<Integer> future = executor.submit(() -> {
+    System.out.println(LocalTime.now() + " Starting runnable");
+    Integer sum = 1 + 1;
+    Thread.sleep(4000);
+    System.out.println(LocalTime.now() + " Exiting runnable");
+    return sum;
+});
+
+System.out.println(LocalTime.now() + " Waiting the task done");
+Integer result = null;
+try {
+    result = future.get(2000, TimeUnit.MILLISECONDS);
+} catch (TimeoutException e) {
+    System.out.println(LocalTime.now() + " Timed out");
+    result = 0;
+}
 System.out.println(LocalTime.now() + " Result : " + result);
 ```
 
