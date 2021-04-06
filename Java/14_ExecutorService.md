@@ -11,9 +11,13 @@
 ### ExecutorService의 종류
 
 - `CachedThreadPool` : 스레드를 캐싱하는 스레드 풀. 필요할 때 필요한 만큼 스레드 풀을 생성한다. 이미 생성된 스레드를 재활용할 수 있기 때문에 성능상의 이점이 있을 수 있다. 다만 스레드 수가 폭발적으로 증가할 수 있다. (여기서 쓰이는 캐싱의 의미는 일정시간동안 스레드를 검사한다는 뜻이다. 60초동안 작업이 없으면 Pool에서 제거한다)
+  - `Executors.newCachedThreadPool()`
 - `ScheduledThreadPool` : 일정 시간 뒤에 실행되는 작업이나 주기적으로 수행되는 작업에 사용된다.
+  - `Executors.newScheduledThreadPool()`
 - `FixedThreadPool` : 고정된 개수를 가진 스레드풀
+  - `Executors.newFixedThreadPool()`
 - `SingleThreadExecutor` : 한 개의 스레드로 작업을 처리하는 스레드풀. 스레드 풀이라기보단 TaskPool의 개념이 더 적합하다
+  - `Executors.newSingleThreadExecutor()`
 
 
 
