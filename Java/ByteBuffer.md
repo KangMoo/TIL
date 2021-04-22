@@ -5,7 +5,7 @@
 - 자바가 C에 비해 느린 이유 중 하나는 IO가 JVM 내부에 IO 버퍼를 두었기 때문인데, ByteBuffer를 사용함으로 속도 향상이 가능하다.
 - 특히 네트워크 통신 등 byte배열 사용이 잦은 경우 GC가 성능에 영향을 끼질 수 있지만 ByteBuffer는 이러한 상황을 예방해줄 수 있다.
 
-
+![buffer](./image/buffer.png)
 
 #### ByteBuffer의 네 가지 포인터
 
