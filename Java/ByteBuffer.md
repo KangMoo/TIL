@@ -45,3 +45,10 @@
   - 포지션은 맨 처엄으로 초기화 됨
   - 포지션이 0이 아닐 때 0으로 취리시킴
 
+#### java.nio.ByteBuffer의 주요 메서드
+
+- `compact()` -> abstact ByteBuffer
+  - 포지션과 리미트를 앞당기고 다음 포지션과 리미트를 설정
+- wrap(byte[] array) -> static ByteBuffer
+  - byte[]를 byteBuffer로 만듦
+  - 만들어진 ByteBuffer는 byte[]에 의존하게 되며, capcaity, limit은 byte[]의 사이즈와 같음
