@@ -9,6 +9,10 @@
 
 
 
+### java.nio의 Buffer 계층도
+
+![buffer계층도](./image/buffer2.gif)
+
 #### ByteBuffer의 생성 방법 3가지
 
 - allocate : **JVM의 힙 영역**에 바이트 버퍼를 생성한다. 인수는 생성할 바이트 버퍼 크기다.
