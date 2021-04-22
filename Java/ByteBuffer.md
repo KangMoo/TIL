@@ -58,3 +58,13 @@
 - wrap(byte[] array) -> static ByteBuffer
   - byte[]를 byteBuffer로 만듦
   - 만들어진 ByteBuffer는 byte[]에 의존하게 되며, capcaity, limit은 byte[]의 사이즈와 같음
+
+
+
+## ByteBuffer의 get()/put()
+
+- `get()`, `put()` 은 각각 버퍼에 데이터를 읽고 쓰는 메서드이다
+- `get()`, `put()` 은 다시 상대적/절대적으로 구분된다
+  - 상대적 `get()`, `put()` : position값 증가
+  - 절대적 `get()`, `put()` : position값 변화없음
+
