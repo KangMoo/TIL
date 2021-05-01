@@ -65,5 +65,7 @@
 - Open for extension. Closed for modification
   - 확장은 가능하게, 그러나 수정은 불가능하게
 - 클래스 내부 수정 없이 동작을 확장할 수 있어야 한다는 의미
-  - 상속이 좋은 예시
+  - 상속, 다형성이 좋은 예시
+
+
 
