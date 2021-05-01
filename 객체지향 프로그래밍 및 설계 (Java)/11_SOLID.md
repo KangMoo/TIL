@@ -1,11 +1,11 @@
 ## SOLID원칙
 
 - 다섯가지 원칙의 약자
-  - Single-responsibility principle
-  - Open-closed principle
-  - Liskov substitution principle
-  - Interface segregation principle
-  - Dependency inversion principle
+  - Single-responsibility principle : 단일 책임 원칙 (SRP)
+  - Open-closed principle : 개방-폐쇠 원칙 (OCP)
+  - Liskov substitution principle : 리스코프 치환 원칙 (LSP)
+  - Interface segregation principle : 인터페이스 분리 원칙 (ISP)
+  - Dependency inversion principle : 의존 역전 원칙 (DIP)
 
 - 이해하기 쉽고, 유연하고, 유지보가 쉽게 만들기 위해 나온 원칙
 
@@ -22,12 +22,6 @@
   - 따라서 모든 프로젝트에 적용할 수 있다고 생각하지 않아야 한다
 - 직접적/구체적인게 더 이해하기 쉽다는 사실을 잊지 말아야 한다
   - 시작은 직접적/구체적으로 설계하고 규모가 커지면서 유연셩이 필요해지면 그때부터 바꿔갈 대 도움이 될 정신이다.
-
-
-
-
-
-
 
 
 
