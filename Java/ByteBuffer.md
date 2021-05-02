@@ -49,7 +49,7 @@
   - 버퍼내 내용이 있으면 treu
 - `rewind()` -> return Buffer
   - 포지션은 맨 처음으로 초기화 됨
-  - 포지션이 0이 아닐 때 0으로 취리시킴
+  - 포지션이 0이 아닐 때 0으로 위치시킴
 - `mark()` -> return Position
   - 현재 위치(P)를 임시 저장한다.
 - `reset()` -> return Position
