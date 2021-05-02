@@ -48,8 +48,14 @@
   - 포지션과 리미트가 같지 않은지 확인
   - 버퍼내 내용이 있으면 treu
 - `rewind()` -> return Buffer
-  - 포지션은 맨 처엄으로 초기화 됨
+  - 포지션은 맨 처음으로 초기화 됨
   - 포지션이 0이 아닐 때 0으로 취리시킴
+- `mark()` -> return Position
+  - 현재 위치(P)를 임시 저장한다.
+- `reset()` -> return Position
+  - 임시저장된 위치로 다시 P를 옮겨놓는다.
+  - mark-reset은 주로 데이터를 미리 살짝 읽어볼 때 (Peek) 주로 쓴다
+  - reset과 clear는 헷갈리기 쉬우니 주의
 
 #### java.nio.ByteBuffer의 주요 메서드
 
