@@ -122,3 +122,18 @@ buf.flip();
 ```
 
 
+
+**get**
+
+- Position을 이동시키며 데이터를 읽는다
+
+```java
+char a, b, c;
+a = buf.get(); b = buf.get(); c = buf.get();
+// P---->P         L 
+// |0|1|2|3|4|5|6|7|
+// |a|b|c|d| | | | |
+```
+
+
+
