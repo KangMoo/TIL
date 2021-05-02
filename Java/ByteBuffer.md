@@ -86,3 +86,21 @@ CharBuffer buf = CharBuffer.allocate(8); // capacity : 8
 ```
 
 
+
+**put**
+
+- put을 사용할 경우 Position이 이동하면서 버퍼에 데이터가 들어간다.
+
+```java
+buf.put('a'); buf.put('b'); buf.put('c'); buf.put('e');
+// P------>P       L 
+// |0|1|2|3|4|5|6|7|
+// |a|b|c|e| | | | |
+
+buf.put(3,'d');
+// P------>P       L 
+// |0|1|2|3|4|5|6|7|
+// |a|b|c|d| | | | |
+```
+
+
