@@ -46,7 +46,7 @@
   - limit을 현재 내용의 마지막 위치로 압축
 - `hasRemaining()` -> return Buffer
   - 포지션과 리미트가 같지 않은지 확인
-  - 버퍼내 내용이 있으면 treu
+  - 버퍼내 내용이 있으면 true
 - `rewind()` -> return Buffer
   - 포지션은 맨 처음으로 초기화 됨
   - 포지션이 0이 아닐 때 0으로 위치시킴
