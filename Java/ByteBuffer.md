@@ -124,7 +124,12 @@ buf.put(3,'d');
   - Limit이 Position이 되고, Position이 0이 된다.
 
 ```java
+//         P       L 
+// |0|1|2|3|4|5|6|7|
+// |a|b|c|d| | | | |
+
 buf.flip();
+
 //          L<------L 
 //  P<------P 
 //  |0|1|2|3|4|5|6|7|
@@ -140,8 +145,13 @@ buf.flip();
 - Position을 이동시키며 데이터를 읽는다
 
 ```java
+//  P               L
+//  |0|1|2|3|4|5|6|7|
+//  |a|b|c|d| | | | | 
+
 char a, b, c;
 a = buf.get(); b = buf.get(); c = buf.get();
+
 // P---->P         L 
 // |0|1|2|3|4|5|6|7|
 // |a|b|c|d| | | | |
