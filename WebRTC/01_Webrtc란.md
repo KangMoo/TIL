@@ -8,3 +8,13 @@
 - WebRTC API는 개발자가 WebRTC프로토콜을 사용할 수 있도록 해준다
 - WebRTC API는 Javascript로만 사용할 수 있다.
 
+
+
+## WebRTC의 장점
+
+- 개방형 표준
+- 다중 구현
+- 브라우저에서 사용 가능
+- 필수 암호화
+- NAT 
+
