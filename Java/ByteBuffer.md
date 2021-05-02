@@ -68,3 +68,21 @@
   - 상대적 `get()`, `put()` : position값 증가
   - 절대적 `get()`, `put()` : position값 변화없음
 
+
+
+### 예시
+
+- P : Position, L : Limit C : Capacity
+
+**allocate**
+
+- 8개의 글자가 들어갈 수 있는 버퍼를 만든다. allocate하면 버퍼는 현재 쓰기모드이다
+
+```java
+CharBuffer buf = CharBuffer.allocate(8); // capacity : 8
+//	P               L
+//  |0|1|2|3|4|5|6|7|
+//  | | | | | | | | |
+```
+
+
