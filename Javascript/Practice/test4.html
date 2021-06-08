@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function power (){
+            if(arguments.length==1)
+            {
+                return arguments[0] **2;
+            }
+            else
+            {
+                return arguments[0] ** arguments[1];
+            }
+        }
+        function multiply() {
+            let result = arguments[0];
+            for(var i = 1; i<arguments.length;i++){
+                result *= arguments[i];
+            }
+            return result;
+        }
+        console.log(power(3));
+        console.log(power(3,4));
+        console.log(multiply(1,2,3,4,5));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

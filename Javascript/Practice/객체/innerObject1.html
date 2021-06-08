@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let primitiveNumber = 273;
+        let objectNumber = new Number(273); // 속성, 메서드 추가 가능
+
+        Number.prototype.method = function(){
+            return "Method on Prototype"
+        };
+
+        console.log(primitiveNumber);
+        console.log(objectNumber);
+        console.log(objectNumber.toString()); // 내장 함수
+        console.log(objectNumber.method());
+        
+    </script>
+</head>
+<body>
+</body>
+</html>

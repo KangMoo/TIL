@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let nums = [52,273,103,32,57,103,31,2];
+
+        let min = nums[0], max = nums[0];
+
+        nums.forEach((e)=>{
+            if(e>max) max = e;
+            if(e<min) min = e;
+        })
+        console.log(`Min:${min}, Max:${max}`);
+        console.log(Math.min.apply(null,nums), Math.max.apply(null,nums));
+        
+        //for(var i =1; i<nums.length;i++)
+        //{
+        //    if(nums[i]>max) max = nums[i];
+        //    if(nums[i]<min) min = nums[i];
+        //}
+        //console.log(`Min:${min}, Max:${max}`);
+    </script>
+</head>
+<body>
+
+</body>
+</html>

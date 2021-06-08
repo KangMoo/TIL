@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        let scores = [1,2,3,4,5];
+        
+        let output = '';
+        let temp = scores.reduce((previousValue, currentValue, index, array)=>{
+            output += previousValue + ' : ' + currentValue + ' : ' + index + '\n';
+        })
+        console.log(output);
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        function student(name, kor, mat, eng){
+            this.이름 = name;
+            this.국어 = kor;
+            this.수학 = mat;
+            this.영어 = eng;
+
+            this.sum = function(){
+                return this.국어+this.영어+this.수학;
+            }
+            this.avg = function(){
+                return this.sum()/3;
+            }
+        }
+        var students = [];
+        students.push(new student('AAA',78,15,90));
+        students.push(new student('BBB',79,98,84));
+        students.push(new student('CCC',85,77,87));
+        students.push(new student('DDD',66,68,88));
+        students.push(new student('EEE',59,95,75));
+        
+        let totalSum=0;
+        let totalAvg=0;
+        for(let i in students)
+        {
+            with(students[i]){
+                console.log(이름+'의 총점:'+sum());
+                console.log(이름+'의 평균:'+avg());
+                totalSum += sum();
+            }
+        }
+        totalAvg = (totalSum / students.length) /3;
+        console.log('전체 총점:'+totalSum);
+        console.log('전체 평균:'+totalAvg);
+    </script>
+</head>
+<body>
+</body>
+</html>

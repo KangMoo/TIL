@@ -1,0 +1,28 @@
+<media_create_req123123>
+    <type>media</type>
+    <cmd>create</cmd>
+    <appId>appid</appId>
+    <id>10</id>
+    <dstIds>
+        <dstIds>1</dstIds>
+        <dstIds>2</dstIds>
+        <dstIds>3</dstIds>    
+    </dstIds>
+    <from>fromNumber</from>
+    <to>toNumber</to>
+    <remote_ip>192.168.7.34</remote_ip>
+    <remote_port>8888</remote_port>
+    <local_port>8080</local_port>
+    <decoder>
+        <codec>codecStr</codec>
+        <duration>500</duration>
+        <packing>packingStr</packing>
+        <rate>rateStr</rate>
+    </decoder>
+    <encoder>
+        <codec>codecStr2</codec>
+        <duration>5002</duration>
+        <packing>packingStr2</packing>
+        <rate>rateStr2</rate>
+    </encoder>
+</media_create_req123123>
