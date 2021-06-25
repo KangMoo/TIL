@@ -4,13 +4,10 @@
 
 ## 1. 확인
 
-> `# echo $JAVA_HOME`
->
-> - 
-
-> `# javac -version`
->
-> - `javac 1.8.0_222`
+> ```shell
+>JAVA_HOME="$(/usr/libexec/java_home -v 11)"
+> $ java --version
+> ```
 
 
 
