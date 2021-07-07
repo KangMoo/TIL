@@ -262,3 +262,20 @@ log(future.get());
 ```log
 16:07:33.196 (main) Hello World
 ```
+
+
+
+연속적으로 `thenCompose()`를 적용할 수도 있다.
+
+```java
+CompletableFuture<String> future = CompletableFuture
+        .supplyAsync(() -> "Hello")
+        .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " World"))
+        .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " Java"));
+
+log(future.get());
+```
+
+```log
+16:08:18.859 (main) Hello World Java
+```
