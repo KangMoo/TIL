@@ -406,3 +406,42 @@ CompletableFuture.anyOf(future1, future2, future3)
 16:19:56.826 (ForkJoinPool.commonPool-worker-2) Result: Future2
 ```
 
+
+
+### allOf
+
+`allOf()`는 모든 future의 결과를 받아서 처리할 수 있다.
+`anyOf()`와는 다르게 Stream api를 사용하여 ㄱ ㅕㄹ과를 처리할 수 있다. `get()`은 null 을 리턴한다.
+
+```java
+CompletableFuture<String> future1 = CompletableFuture
+        .supplyAsync(() -> "Future1");
+
+CompletableFuture<String> future2 = CompletableFuture
+        .supplyAsync(() -> "Future2");
+
+CompletableFuture<String> future3 = CompletableFuture
+        .supplyAsync(() -> "Future3");
+
+CompletableFuture<Void> combinedFuture
+        = CompletableFuture.allOf(future1, future2, future3);
+
+log("get() : " + combinedFuture.get());
+log("future1.isDone() : " + future1.isDone());
+log("future2.isDone() : " + future2.isDone());
+log("future3.isDone() : " + future3.isDone());
+
+String combined = Stream.of(future1, future2, future3)
+        .map(CompletableFuture::join)
+        .collect(Collectors.joining(" + "));
+log("Combined: " + combined);
+```
+
+```log
+16:22:26.615 (main) get() : null
+16:22:26.615 (main) future1.isDone() : true
+16:22:26.615 (main) future2.isDone() : true
+16:22:26.616 (main) future3.isDone() : true
+16:22:26.620 (main) Combined: Future1 + Future2 + Future3
+```
+
