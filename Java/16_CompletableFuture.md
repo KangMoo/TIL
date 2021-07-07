@@ -368,3 +368,41 @@ Thread.sleep(5000);
 16:15:41.537 (ForkJoinPool.commonPool-worker-1) Future1! + Future2!
 ```
 
+
+
+### anyOf()
+
+`anyOf()`는 여러개의 CompletableFuture 중에서 빨리 처리되는 1개의 결과만을 가져오는 메서드다.
+
+다음과 같이 `anyOf()`를 사용할 수 있으며, 3개의 future 중에 가장 먼저 처리되는 1개의 결과만 `thenAccept()`으로 전달된다. 물론 3개의 future는 모두 실행이 되지만, `thenAccept()`에 전달되는 것이 1개일 뿐이다.
+
+```java
+CompletableFuture<String> future1 = CompletableFuture
+        .supplyAsync(() -> {
+            log("starting future1");
+            return "Future1";
+        });
+
+CompletableFuture<String> future2 = CompletableFuture
+        .supplyAsync(() -> {
+            log("starting future2");
+            return "Future2";
+        });
+
+CompletableFuture<String> future3 = CompletableFuture
+        .supplyAsync(() -> {
+            log("starting future3");
+            return "Future3";
+        });
+
+CompletableFuture.anyOf(future1, future2, future3)
+        .thenAccept(s -> log("Result: " + s));
+```
+
+```log
+16:19:56.826 (ForkJoinPool.commonPool-worker-2) starting future2
+16:19:56.826 (ForkJoinPool.commonPool-worker-1) starting future1
+16:19:56.826 (ForkJoinPool.commonPool-worker-3) starting future3
+16:19:56.826 (ForkJoinPool.commonPool-worker-2) Result: Future2
+```
+
