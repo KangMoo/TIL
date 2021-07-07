@@ -19,3 +19,50 @@ Executors.newCachedThreadPool().submit(() -> {
 log(future.get());
 ```
 
+이미 값을 알고 있다면 스레드를 만들지 않고 `completedFuture()`로 값을 할당할 수 있다.
+
+```java
+Future<String> completableFuture =
+        CompletableFuture.completedFuture("Skip!");
+
+String result = completableFuture.get();
+log(result);
+```
+
+
+
+### Cancel에 대한 예외처리
+
+스레드에서 `cancel()`이 호출될 수 있다. 이 때, `get()`에서 `CancellationException`이 발생하기 때문에 예외처리를 해주어야 한다.
+
+```java
+CompletableFuture<String> future
+        = new CompletableFuture<>();
+Executors.newCachedThreadPool().submit(() -> {
+    Thread.sleep(2000);
+    future.cancel(false);
+    return null;
+});
+
+String result = null;
+try {
+    result = future.get();
+} catch (CancellationException e) {
+    e.printStackTrace();
+    result = "Canceled!";
+}
+
+log(result);
+```
+
+```
+java.util.concurrent.CancellationException
+	at java.util.concurrent.CompletableFuture.cancel(CompletableFuture.java:2276)
+	at CompletableFutureExample.lambda$ex3$1(CompletableFutureExample.java:47)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+23:02:53.074 (main) Canceled!
+```
+
