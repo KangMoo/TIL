@@ -203,3 +203,19 @@ log("future.get(): " + future.get());
 15:57:49.343 (main) future.get(): Future1 + Future2
 ```
 
+
+
+`thenApply()` 또한 리턴값이 있기 때문에, 연달아 `thenApply()`를 적용할 수 있다.
+
+```java
+CompletableFuture<String> future = CompletableFuture
+        .supplyAsync(() -> "Hello")
+        .thenApply(s -> s + " World")
+        .thenApply(s -> s + " Future");
+
+log("future.get(): " + future.get());
+```
+
+```log
+16:00:00.513 (main) future.get(): Hello World Future
+```
