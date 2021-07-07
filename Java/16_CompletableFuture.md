@@ -445,3 +445,10 @@ log("Combined: " + combined);
 16:22:26.620 (main) Combined: Future1 + Future2 + Future3
 ```
 
+
+
+### async method
+
+`thenApply()`와 `thenApplyAsync()`처럼 뒤에 asyncc가 붙은 메서드들이 항상 존재한다. 위의 예제에서 동일한 스레드를 사용하지 않고 다른 스레드를 사용하여 처리하고 싶을 때 async가 붙은 메서드를 사용하면 된다
+
+예를 들어 `thenAccept()`는 `thenAsyncAccpet()`라는 메서드를 가지고 있으며, 대부분 asyn가 붙은 메서드들이 pair로 존재한다
