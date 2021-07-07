@@ -323,3 +323,48 @@ future1.thenCombine(future2, (s1, s2) -> s1 + " + " + s2)
 16:12:07.573 (main) Future1! + Future2!
 ```
 
+
+
+### thenApply() vs thenApplyAsync()
+
+`thenApply()` 대신에 `thenApplyAsync()`를 사용하면 다른 쓰레드에서 동작하도록 만들 수 있다.
+
+```java
+CompletableFuture<String> future1 = CompletableFuture
+        .supplyAsync(() -> "Future1")
+        .thenApplyAsync((s) -> {
+            log("Starting future1");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "!";
+        });
+
+CompletableFuture<String> future2 = CompletableFuture
+        .supplyAsync(() -> "Future2")
+        .thenApplyAsync((s) -> {
+            log("Starting future2");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "!";
+        });
+
+future1.thenCombine(future2, (s1, s2) -> s1 + " + " + s2)
+        .thenAccept((s) -> log(s));
+
+Thread.sleep(5000);
+```
+
+두개의 작업이 다른 쓰레드에서 처리되어 2초만에 처리되는 것을 볼 수 있다.
+
+```log
+16:15:39.532 (ForkJoinPool.commonPool-worker-2) Starting future2
+16:15:39.537 (ForkJoinPool.commonPool-worker-1) Starting future1
+16:15:41.537 (ForkJoinPool.commonPool-worker-1) Future1! + Future2!
+```
+
