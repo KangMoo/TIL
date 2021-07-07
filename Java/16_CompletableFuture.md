@@ -187,3 +187,19 @@ log("future2.get(): " + future2.get());
 15:56:26.203 (main) future2.get(): Future1 + Future2
 ```
 
+
+
+위의 future2는 다음과 같이 한번에 정의할 수도 있다.
+
+```java
+CompletableFuture<String> future = CompletableFuture
+        .supplyAsync(() -> "Future1")
+        .thenApply(s -> s + " + Future2");
+
+log("future.get(): " + future.get());
+```
+
+```log
+15:57:49.343 (main) future.get(): Future1 + Future2
+```
+
