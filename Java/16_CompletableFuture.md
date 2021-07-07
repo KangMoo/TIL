@@ -243,3 +243,22 @@ log("future2.get(): " + future2.get());
 16:02:05.453 (main) future1.get(): Hello
 16:02:05.453 (main) future2.get(): null
 ```
+
+
+
+### thenCompose() : 여러 작업을 순차적으로 수행
+
+`thenCompose()`는 chain처럼 두개의 CompletableFuture를 하나의 CompletableFuture으로 만들어주는 역할을 한다. 첫번째 CompletableFuture의 결과가 리턴되면 그 결과를 두번째 CompletableFuture으로 전달하며, 순차적으로 작업이 처리된다.
+
+다음은 `thenCompose()`는 Lambda로 구성된 CompletableFuture를 인자로 받는다. 여기서 `s`는 `supplyAsync()`에서 리턴되는 String입니다.
+
+```java
+CompletableFuture<String> future = CompletableFuture
+        .supplyAsync(() -> "Hello")
+        .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " World"));
+log(future.get());
+```
+
+```log
+16:07:33.196 (main) Hello World
+```
