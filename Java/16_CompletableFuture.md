@@ -279,3 +279,47 @@ log(future.get());
 ```log
 16:08:18.859 (main) Hello World Java
 ```
+
+
+
+### thenCombind() : 여러 작업을 동시에 수행
+
+`thenCompose()`가 여러개의 CompletableFuture를 순차적으로 처리되도록 만들었다면, `thenCombine()`는 여러 CompletableFuture를 병렬로 처리되도록 만든다. 모든 처리가 완료되고 그 결과를 하나로 합칠 수 있습니다.
+
+다음은 `thenCombine()`으로 이 두개의 future가 병렬로 진행되도록 하고 그 결과를 하나로 합치도록 한다.
+
+```java
+CompletableFuture<String> future1 = CompletableFuture
+        .supplyAsync(() -> "Future1")
+        .thenApply((s) -> {
+            log("Starting future1");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "!";
+        });
+
+CompletableFuture<String> future2 = CompletableFuture
+        .supplyAsync(() -> "Future2")
+        .thenApply((s) -> {
+            log("Starting future2");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return s + "!";
+        });
+
+future1.thenCombine(future2, (s1, s2) -> s1 + " + " + s2)
+        .thenAccept((s) -> log(s));
+```
+
+```log
+16:12:03.569 (main) Starting future1
+16:12:05.571 (main) Starting future2
+16:12:07.573 (main) Future1! + Future2!
+```
+
