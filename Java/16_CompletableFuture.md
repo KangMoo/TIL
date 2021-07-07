@@ -133,3 +133,11 @@ log("get(): " + future.get());
 15:47:01.328 (main) get(): null
 ```
 
+
+
+처리가 완료될 때까지 기다리지 않아도 된다면 다음과 같이 짧게 구현할 수도 있다
+
+```java
+CompletableFuture.runAsync(() -> log("future example"));
+```
+
