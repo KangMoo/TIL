@@ -95,7 +95,7 @@ log("get(): " + future.get());
 
 
 
-작업이 종료되지 않으면 main에서 호출되는 `future.get()`은 기다렸다 실행된다.
+결과가 완료될때까지 `future.get()`은 blocking한다
 
 ```java
 CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
@@ -114,5 +114,22 @@ log("get(): " + future.get());
 ```
 15:46:09.715 (ForkJoinPool.commonPool-worker-1) Starting....
 15:46:11.716 (main) get(): Finished works
+```
+
+
+
+`runAsync()`도 사용법은 동일하지만, 리턴 값이 없다는 차이가 있다.
+따라서 `CompletableFuture<Void>`로 선언해야 하며. 결과가 완료될때까지 `future.get()`은 blocking되고, null을 리턴한다.
+
+```java
+CompletableFuture<Void> future
+        = CompletableFuture.runAsync(() -> log("future example"));
+
+log("get(): " + future.get());
+```
+
+```
+15:47:01.328 (ForkJoinPool.commonPool-worker-1) future example
+15:47:01.328 (main) get(): null
 ```
 
