@@ -93,3 +93,26 @@ log("get(): " + future.get());
 15:43:02.923 (main) get(): future example
 ```
 
+
+
+작업이 종료되지 않으면 main에서 호출되는 `future.get()`은 기다렸다 실행된다.
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            log("Starting....");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Finished works";
+        });
+
+log("get(): " + future.get());
+```
+
+```
+15:46:09.715 (ForkJoinPool.commonPool-worker-1) Starting....
+15:46:11.716 (main) get(): Finished works
+```
+
