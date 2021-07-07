@@ -219,3 +219,27 @@ log("future.get(): " + future.get());
 ```log
 16:00:00.513 (main) future.get(): Hello World Future
 ```
+
+
+
+### thenAccpet() 리턴 값이 없는 작업 수행
+
+`thenAccept()`도 `thenApply()`와 비슷하다. 하지만, 인자는 있지만 리턴값이 없는 Lambda를 처리할 수 있습니다.
+
+다음은 `thenAccept()`를 사용하는 예제입니다. 리턴 값이 없기 때문에 `thenAccept()`는 `CompletableFuture<Void>`를 리턴하게 된다.
+
+```java
+CompletableFuture<String> future1 = CompletableFuture
+        .supplyAsync(() -> "Hello");
+
+CompletableFuture<Void> future2 = future1.thenAccept(
+        s -> log(s + " World"));
+log("future1.get(): " + future1.get());
+log("future2.get(): " + future2.get());
+```
+
+```log
+16:02:05.452 (main) Hello World
+16:02:05.453 (main) future1.get(): Hello
+16:02:05.453 (main) future2.get(): null
+```
