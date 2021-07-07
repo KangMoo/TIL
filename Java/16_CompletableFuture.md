@@ -141,3 +141,49 @@ log("get(): " + future.get());
 CompletableFuture.runAsync(() -> log("future example"));
 ```
 
+
+
+### Exception handling
+
+`CompletableFuture`에서 작업을 처리하는 중에 Exception이 발생할 수 있다. 이런 경우 `handle()`로 예외를 처리할 수 있다.
+
+```java
+CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+    String name = null;
+    if (name == null) {
+        throw new RuntimeException("Computation error!");
+    }
+    return "Hello, " + name;
+}).handle((s, t) -> s != null ? s : "Hello, Stranger!");
+
+log(future.get());
+```
+
+```
+15:51:35.385 (main) Hello, Stranger!
+```
+
+
+
+### thenApply() : 리턴 값이 있는 작업 수행
+
+`supplyAsync()`로 어쩐 작업이 처리되념 그 결과를 가지고 다른 작업도 수행하도록 구현할 수 있다.
+
+`thenApply()`메서드는 인자와 값이 있는 Lambda를 수행하며, 여기서 인자는 `supplyAsync()`에서 리턴되는 값이 된다.
+
+```java
+CompletableFuture<String> future1
+        = CompletableFuture.supplyAsync(() -> "Future1");
+
+CompletableFuture<String> future2 = future1.thenApply(
+        s -> s + " + Future2");
+
+log("future1.get(): " + future1.get());
+log("future2.get(): " + future2.get());
+```
+
+```
+15:56:26.203 (main) future1.get(): Future1
+15:56:26.203 (main) future2.get(): Future1 + Future2
+```
+
