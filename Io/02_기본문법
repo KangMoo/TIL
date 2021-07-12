@@ -32,9 +32,26 @@ Io> a + b
 
 
 
-리스트
+조건
+
+```io
+Io> a := 2
+
+Io> (a == 1) ifTrue("a is one" println) ifFalse("a is not one" println)
+==> a is not one
+
+Io> if(a == 1, writeln("a is one"), writeln("a is not one"))
+==> a is not one
 
 ```
+
+
+
+
+
+리스트
+
+```io
 Io> d := List clone append(30, 10, 5, 20)
 ==> list(30, 10, 5, 20)
 
