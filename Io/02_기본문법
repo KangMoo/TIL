@@ -113,6 +113,31 @@ ghi
 
 
 
+딕셔너리
+
+```io
+Io> dict := Map clone    
+Io> dict atPut("hello", "a greeting")   
+Io> dict atPut("goodbye", "a parting")   
+Io> dict hasKey("hello")   
+==> true
+
+Io> dict hasValue("a greeting")   
+==> true
+
+Io> dict at("hello")   
+==> a greeting
+
+Io> dict keys  
+==> list("hello", "goodbye")
+
+Io> dict foreach(k, v, (k .. ":" .. v) println)
+hello: a greeting
+==> goodbye: a parting
+```
+
+
+
 
 
 객체
