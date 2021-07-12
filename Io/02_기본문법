@@ -2,17 +2,37 @@
 
 
 
-Basic Math
+기본 수학
 
 ```
 Io> 1 + 1
-==> 2
+2
 
 Io> 2 sqrt
 ==> 1.4142135623730951
 ```
 
-Lists
+
+
+변수
+
+```io
+Io> a := 1
+==> 1
+
+Io> a
+==> 1
+
+Io> b := 2 * 3
+==> 6
+
+Io> a + b
+==> 7
+```
+
+
+
+리스트
 
 ```
 Io> d := List clone append(30, 10, 5, 20)
@@ -25,7 +45,7 @@ Io> d select (>10)
 ==> list(20, 30)
 ```
 
-Objects
+객체
 
 ```
 Io> Contact := Object clone
