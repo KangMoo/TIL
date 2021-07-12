@@ -372,3 +372,35 @@ Io> Lobby protos Core Date slotNames
 ==> list(zone, -=, month, fromNumber, asSerialization, secondsToRun, +, print, isValidTime, setGmtOffset, fromSerialization, fromString, setDay, now, asJson, clock, timeStampString, setToUTC, asNumberString, setSecond, second, minute, format, year, convertToLocal, today, -, setYear, setMinute, hour, +=, asString, asAtomDate, secondsSinceNow, isDaylightSavingsTime, justSerialized, secondsSince, isDST, cpuSecondsToRun, gmtOffsetSeconds, asNumber, copy, isPast, gmtOffset, setHour, isToday, convertToUTC, convertToZone, setMonth, day)
 ```
 
+
+
+code as data
+
+```io
+Io> m := method(a(b) + c)
+==> method(
+   a(b) + c
+)
+
+Io> getSlot("m") message
+==> a(b) +(c)
+
+Io> getSlot("m") message next
+==> +(c)
+
+Io> getSlot("m") message name
+==> a
+
+Io> getSlot("m") message setName("foo")
+==> foo(b) +(c)
+
+Io> getSlot("m") message name
+==> foo
+
+Io> getSlot("m") message arguments
+==> list(b)
+
+Io> Message slotNames
+==> list(name, lastBeforeEndOfLine, removeCachedResult, union, fromString, asMessageWithEvaluatedArgs, appendArg, argAt, argCount, clone, setCharacterNumber, isEndOfLine, label, code, setLineNumber, lineNumber, codeOfLength, doInContext, cachedResult, previous, asStackEntry, setLabel, setArguments, appendCachedArg, setCachedResult, asString, arguments, hasCachedResult, description, nextIgnoreEndOfLines, last, setName, setNext, opShuffle, asSimpleString, OperatorTable, argsEvaluatedIn, next, opShuffleC, characterNumber)
+```
+
