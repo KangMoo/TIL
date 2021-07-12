@@ -132,11 +132,48 @@ Io> dict keys
 ==> list("hello", "goodbye")
 
 Io> dict foreach(k, v, (k .. ":" .. v) println)
-hello: a greeting
-==> goodbye: a parting
+==> hello: a greeting
+goodbye: a parting
 ```
 
 
+
+문자열
+
+```io
+Io> a := "foo"
+==> "foo"
+
+Io> b := "bar"
+==> "bar"
+
+Io> c := a .. b
+==> "foobar"
+
+Io> c at(0)
+==> 102
+
+Io> c at(0) asCharacter
+==> "f"
+
+Io> s := "this is a test"
+==> "this is a test"
+
+Io> words := s split(" ", "\t") print
+==> "this", "is", "a", "test"
+
+Io> s findSeq("is")
+==> 2
+
+Io> s findSeq("test")
+==> 10
+
+Io> s slice(10)
+==> "test"
+
+Io> s slice(2, 10)
+==> "is is a "
+```
 
 
 
