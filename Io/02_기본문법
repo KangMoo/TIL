@@ -52,14 +52,44 @@ Io> if(a == 1, writeln("a is one"), writeln("a is not one"))
 리스트
 
 ```io
-Io> d := List clone append(30, 10, 5, 20)
+Io> d := List clone append(30, 10, 5, 20)    
+==> list(30, 10, 5, 20)
+
+Io> d size
+==> 4
+
+Io> d print
 ==> list(30, 10, 5, 20)
 
 Io> d := d sort
 ==> list(5, 10, 20, 30)
 
-Io> d select (>10)
-==> list(20, 30)
+Io> d first
+==> 5
+
+Io> d last
+==> 30
+
+Io> d at(2)
+==> 20
+
+Io> d remove(30)
+==> list(5, 10, 20)
+
+Io> d atPut(1, 123)
+==> list(5, 123, 20)
+
+Io> list(30, 10, 5, 20) select(>10)
+==> list(30, 20)
+
+Io> list(30, 10, 5, 20) detect(>10)
+==> 30
+
+Io> list(30, 10, 5, 20) map(*2)
+==> list(60, 20, 10, 40)
+
+Io> list(30, 10, 5, 20) map(v, v*2)
+==> list(60, 20, 10, 40)
 ```
 
 객체
