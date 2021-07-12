@@ -179,10 +179,16 @@ Io> s slice(2, 10)
 
 객체
 
-```
+```io
 Io> Contact := Object clone
-==>  Contact_0x7fbc3bc8a6d0:
-  type = "Contact"
+==> Contact_0x7fad4365a640:
+    type = "Contact"
+
+Io> Contact type
+==> Contact
+
+Io> Contact proto type
+==> Object
 
 Io> Contact name ::= nil
 ==> nil
@@ -194,18 +200,70 @@ Io> Contact city ::= nil
 ==> nil
 
 Io> holmes := Contact clone setName("Holmes") setAddress("221B Baker St") setCity("London")
-==>  Contact_0x7fbc3be2b470:
-  address          = "221B Baker St"
-  city             = "London"
-  name             = "Holmes"
+==> Contact_0x7fad4365a640
+    type = "Contact"
+    name = "Holmes"
+    address = "221B Baker St"
+    city = "London"
+
+Io> holmes slotNames
+==> list("type", "name", "address", "city")
 
 Io> Contact fullAddress := method(list(name, address, city) join("\n"))
 ==> method(
-    list(name, address, city) join("\n")
+  list(name, address, city) join("\n")
 )
 
 Io> holmes fullAddress
-==> Holmes
+==> "Holmes
 221B Baker St
-London
+London"
+
+Io> holmes getSlot("fullAddress")
+==> method(
+  list(name, address, city) join("\n")
+)
 ```
+
+
+
+do() 메서드로 객체 정의
+
+```io
+Io> Contact := Object clone do(
+	name ::= nil
+	address ::= nil
+	city ::= nil
+	fullAddress := method(list(name, address, city) join("\n"))
+)
+```
+
+
+
+상속
+
+```io
+
+Io> BusinessContact := Contact clone do(
+	companyName ::= ""
+	fullAddress := method(
+		list(companyName, "Care of: " .. name, address, city) join("\n")
+	)
+)
+
+Io> steve := BusinessContact clone do(
+	setName("Steve") 
+	setCompanyName("Apple Inc.") 
+	setAddress("1 Infinite Loop")
+	setCity("Cupertino")
+)
+
+Io> steve fullAddress
+==>
+   Apple Inc.
+   Care of: Steve Jobs
+   1 Infinite Loop
+   Cupertino
+
+```
+
