@@ -354,3 +354,21 @@ Io> e catch(Exception,
 	  Address assertValid                  test.io 28
 ```
 
+
+
+namespace
+
+```io
+Io> Lobby slotNames
+==> list(set_, Protos, Lobby, _, exit, forward)
+  
+Io> Lobby Protos slotNames
+==> list(Core, Addons)
+
+Io> Lobby protos Core slotNames
+==> list(Duration, Number, Eol, Coroutine, Sequence, DynLib, Normal, Notifier, ImmutableSequence, Collector, Debugger, Directory, CFunction, Block, vector, WeakLink, nil, false, CLI, Compiler, RunnerMixIn, Continue, File, TestSuite, Future, DirectoryCollector, Scheduler, UnitTest, FileCollector, FutureProxy, Date, true, Map, Break, List, AddonLoader, Call, String, Sandbox, Importer, Exception, DummyLine, Locals, Error, TestRunner, Profiler, Object, System, Path, Addon, SerializationStream, Return, OperatorTable, Vector, Message)
+
+Io> Lobby protos Core Date slotNames
+==> list(zone, -=, month, fromNumber, asSerialization, secondsToRun, +, print, isValidTime, setGmtOffset, fromSerialization, fromString, setDay, now, asJson, clock, timeStampString, setToUTC, asNumberString, setSecond, second, minute, format, year, convertToLocal, today, -, setYear, setMinute, hour, +=, asString, asAtomDate, secondsSinceNow, isDaylightSavingsTime, justSerialized, secondsSince, isDST, cpuSecondsToRun, gmtOffsetSeconds, asNumber, copy, isPast, gmtOffset, setHour, isToday, convertToUTC, convertToZone, setMonth, day)
+```
+
