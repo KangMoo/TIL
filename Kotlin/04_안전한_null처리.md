@@ -79,11 +79,11 @@
 - 물음표를 통해 null을 정의하고, null을 사용할 때는 ?.length와 같이 사용 가능.
 
   > ```kotlin
-  > 
-  > ```
+  > // null을 포함 할 수 있는 temp var 변수이며, null로 초기화 합니다.
+  > var temp: String? = null
   >
-  > ```kotlin
-  > 
+  > // 다음과 같이 사이즈를 체크하게 됩니다.
+  > val size = temp?.length
   > ```
   >
   > - temp가 null이므로 temp.length는 성립되지 않습니다.
