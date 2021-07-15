@@ -21,17 +21,31 @@
 - Java의 경우…
 
   > ```kotlin
+  > String temp = null;
+  > int size = -1;
+  > if (temp != null) {
+  >   size = temp.length();
+  > }
   > 
+  > // 또는 TextUtils.isEmpty()를 활용
+  > if (!TextUtils.isEmpty(temp)) {
+  >   size = temp.length();
+  > }
   > ```
 
 * Kotlin의 경우
 
   > ```kotlin
-  > 
+  > var temp: String? = null
+  > var size = -1
+  > if (temp != null) {
+  >   size = temp.length
+  > }
   > ```
   >
   > ```kotlin
-  > 
+  > var temp: String? = null
+  > val size = if (temp != null) temp.length else -1
   > ```
   >
   > java에서 보다 코드가 간결해졌을 뿐 내용은 같다.
