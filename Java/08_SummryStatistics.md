@@ -76,3 +76,30 @@ Min: 4
 Average: 6.0
 Count: 10
 ```
+
+
+
+## Collectors.summarizingInt
+
+collect와 `Collectors.summarizingInt`를 이용하면 `summaryStatistics()`를 사용하지 않고 SummaryStatistics 객체를 만들 수 있다.
+
+```java
+List<String> langs =
+  Arrays.asList("java", "kotlin", "haskell", "ruby", "javascript");
+IntSummaryStatistics stats =
+  langs.stream()
+  .collect(Collectors.summarizingInt(String::length));
+
+System.out.println("Max: " + stats.getMax());
+System.out.println("Min: " + stats.getMin());
+System.out.println("Average: " + stats.getAverage());
+System.out.println("Count: " + stats.getCount());
+```
+
+```java
+Max: 10
+Min: 4
+Average: 6.2
+Count: 5
+```
+
