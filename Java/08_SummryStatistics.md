@@ -22,14 +22,15 @@
 
 ### IntSummaryStatistics 예제
 
+**기본 사용 예제**
 스트림과 함께 사용하는 IntSummaryStatisticd 예제
 
 ```java
 List<String> langs =
-        Arrays.asList("java", "kotlin", "haskell", "ruby", "javascript");
+  Arrays.asList("java", "kotlin", "haskell", "ruby", "javascript");
 IntSummaryStatistics stats = langs.stream()
-                                  .mapToInt((lang) -> (lang.length()))
-                                  .summaryStatistics();
+  .mapToInt((lang) -> (lang.length()))
+  .summaryStatistics();
 
 System.out.println("Max: " + stats.getMax());
 System.out.println("Min: " + stats.getMin());
@@ -46,3 +47,32 @@ Count: 5
 
 
 
+**combine() 예제**
+
+```java
+List<String> langs =
+  Arrays.asList("java", "kotlin", "haskell", "ruby", "javascript");
+IntSummaryStatistics stats = langs.stream()
+  .mapToInt((lang) -> (lang.length()))
+  .summaryStatistics();
+
+List<String> companies =
+  Arrays.asList("google", "apple", "google", "apple", "samsung");
+IntSummaryStatistics stats2 = companies.stream()
+  .mapToInt((lang) -> (lang.length()))
+  .summaryStatistics();
+
+stats.combine(stats2);
+
+System.out.println("Max: " + stats.getMax());
+System.out.println("Min: " + stats.getMin());
+System.out.println("Average: " + stats.getAverage());
+System.out.println("Count: " + stats.getCount());
+```
+
+```java
+Max: 10
+Min: 4
+Average: 6.0
+Count: 10
+```
