@@ -7,6 +7,17 @@
   - LongSummaryStatistics
   - DoubleSummaryStatistics
 
+> 자료형만 다를 뿐 사용법은 동일하니 IntSummary Statistics를 기준으로 설명
+
+### IntSummaryStatistics
+
+- `IntSummaryStatistics.accept()` : 새로운 아이템을 추가한다
+- `IntSummaryStatistics.getMax()` : 최대값을 리턴
+- `IntSummaryStatistics.getMin()` : 최소값을 리턴
+- `IntSummaryStatistics.getAverage()` : 평균값을 리턴
+- `IntSummaryStatistics.getCount()` : 스트림의 아이템 전체 개수를 리턴
+- `IntSummaryStatistics.combine()` :  두 개의 statistics 객체를 합친다
+
 
 
 ### IntSummaryStatistics 예제
