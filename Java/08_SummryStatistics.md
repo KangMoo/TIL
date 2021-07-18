@@ -11,7 +11,7 @@
 
 ### IntSummaryStatistics
 
-- `IntSummaryStatistics.accept()` : 새로운 아이템을 추가한다
+- `IntSummaryStatistics.accept()` : 새로운 값 추가
 - `IntSummaryStatistics.getMax()` : 최대값을 리턴
 - `IntSummaryStatistics.getMin()` : 최소값을 리턴
 - `IntSummaryStatistics.getAverage()` : 평균값을 리턴
