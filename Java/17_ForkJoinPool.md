@@ -87,6 +87,8 @@ public class MyRecursiveAction extends RecursiveAction {
 }
 ```
 
+- `compute()`에서는 workload가 16보다 클 때 Task를 나누고 16이하면 더 이상 나누지 않고 그 쓰레드에서 처리하도록 정의
+
 ```java
 ForkJoinPool forkJoinPool = new ForkJoinPool(4);
 
@@ -95,5 +97,25 @@ forkJoinPool.invoke(myRecursiveAction);
 
 // Just wait until all tasks done
 forkJoinPool.awaitTermination(5, TimeUnit.SECONDS);
+```
+
+- `forkJoinPool.invoke()`으로 RecursiveAction을 인자로 전달하고 처리되도록 할 수 있다
+
+```java
+[19:45:23.430][ForkJoinPool-1-worker-1] Splitting workLoad : 128
+[19:45:24.432][ForkJoinPool-1-worker-1] Splitting workLoad : 64
+[19:45:24.432][ForkJoinPool-1-worker-2] Splitting workLoad : 64
+[19:45:25.433][ForkJoinPool-1-worker-1] Splitting workLoad : 32
+[19:45:25.433][ForkJoinPool-1-worker-3] Splitting workLoad : 32
+[19:45:25.433][ForkJoinPool-1-worker-0] Splitting workLoad : 32
+[19:45:25.433][ForkJoinPool-1-worker-2] Splitting workLoad : 32
+[19:45:26.434][ForkJoinPool-1-worker-1] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-0] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-2] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-3] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-2] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-0] Doing workLoad myself: 16
+[19:45:26.434][ForkJoinPool-1-worker-1] Doing workLoad myself: 16
+[19:45:26.435][ForkJoinPool-1-worker-3] Doing workLoad myself: 16
 ```
 
