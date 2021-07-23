@@ -238,3 +238,31 @@ forkJoinPool.awaitTermination(5, TimeUnit.SECONDS);
 mergedResult = 384
 ```
 
+
+
+### 비동기적으로 Task 처리
+
+- 비동기적 처리를 위해 `submit()` 메서드로 인자를 전달할 수 있으며, Future를 받는다. Future를 통해 필요할 때 Result를 기다리거나 읽을 수 있다.
+
+```java
+ForkJoinPool forkJoinPool = new ForkJoinPool(4);
+MyRecursiveTask myRecursiveTask = new MyRecursiveTask(128);
+Future<Long> future = forkJoinPool.submit(myRecursiveTask);
+
+System.out.println("Do something....");
+
+System.out.println("mergedResult = " + future.get());
+
+forkJoinPool.awaitTermination(5, TimeUnit.SECONDS);
+```
+
+```java
+Do something....
+[21:03:41.125][ForkJoinPool-1-worker-1] Splitting workLoad : 128
+[21:03:42.126][ForkJoinPool-1-worker-2] Splitting workLoad : 64
+....
+[21:03:48.134][ForkJoinPool-1-worker-3]Received result from subtask
+[21:03:48.134][ForkJoinPool-1-worker-1]Received result from subtask
+mergedResult = 384
+```
+
