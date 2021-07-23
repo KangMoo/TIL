@@ -167,7 +167,7 @@ log(future.get());
 
 ### thenApply() : 리턴 값이 있는 작업 수행
 
-`supplyAsync()`로 어쩐 작업이 처리되념 그 결과를 가지고 다른 작업도 수행하도록 구현할 수 있다.
+`supplyAsync()`로 어쩐 작업이 처리되면 그 결과를 가지고 다른 작업도 수행하도록 구현할 수 있다.
 
 `thenApply()`메서드는 인자와 값이 있는 Lambda를 수행하며, 여기서 인자는 `supplyAsync()`에서 리턴되는 값이 된다.
 
@@ -411,7 +411,7 @@ CompletableFuture.anyOf(future1, future2, future3)
 ### allOf
 
 `allOf()`는 모든 future의 결과를 받아서 처리할 수 있다.
-`anyOf()`와는 다르게 Stream api를 사용하여 ㄱ ㅕㄹ과를 처리할 수 있다. `get()`은 null 을 리턴한다.
+`anyOf()`와는 다르게 Stream api를 사용하여 결과를 처리할 수 있다. `get()`은 null 을 리턴한다.
 
 ```java
 CompletableFuture<String> future1 = CompletableFuture
@@ -449,6 +449,6 @@ log("Combined: " + combined);
 
 ### async method
 
-`thenApply()`와 `thenApplyAsync()`처럼 뒤에 asyncc가 붙은 메서드들이 항상 존재한다. 위의 예제에서 동일한 스레드를 사용하지 않고 다른 스레드를 사용하여 처리하고 싶을 때 async가 붙은 메서드를 사용하면 된다
+`thenApply()`와 `thenApplyAsync()`처럼 뒤에 async가 붙은 메서드들이 항상 존재한다. 위의 예제에서 동일한 스레드를 사용하지 않고 다른 스레드를 사용하여 처리하고 싶을 때 async가 붙은 메서드를 사용하면 된다
 
 예를 들어 `thenAccept()`는 `thenAsyncAccpet()`라는 메서드를 가지고 있으며, 대부분 asyn가 붙은 메서드들이 pair로 존재한다
