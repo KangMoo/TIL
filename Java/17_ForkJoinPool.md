@@ -17,3 +17,13 @@
 
 - 다른 스레드에서 처리된 결과를 기다렸다가 합친다는 의미
   - Parent는 Child에서 처리되는 Task가 완료될때까지 기다린 후 결과를 합쳐 더상위의 Parent로 전달한다.
+
+![Join](./image/17_2.png)
+
+
+
+### RecursiveAction과 RecursiveTask
+
+- RecursiveAction : 리턴값이 없는 Task. 리턴값이 필요하지 않는 Task라면 이 클래스로 Task를 정의하면 된다
+- RecursiveTask : 리턴값이 있는 Task. Parent는 Child Task의 리턴값을 기다려 합친 후 상위 Parent로 전달한다
+
