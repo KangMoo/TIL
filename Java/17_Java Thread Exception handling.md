@@ -116,3 +116,28 @@ aThread.start();
 Default: [Thread-0] 스레드에서 발생한 [널포인터 예외 A] 처리
 ```
 
+
+
+```java
+Thread.setDefaultUncaughtExceptionHandler(
+  (thread, throwable) -> System.out.println(
+    String.format(
+      "Default: [%s] 스레드에서 발생한 [%s] 처리",
+      thread.getName(), throwable.getMessage()))
+);
+Thread bThread = new Thread(() -> {
+  throw new NullPointerException("널포인터 예외 B");
+});
+bThread.setUncaughtExceptionHandler(
+  (thread, throwable) -> System.out.println(
+    String.format(
+      "Custom: [%s] 스레드에서 발생한 [%s] 처리",
+      thread.getName(), throwable.getMessage()))
+);
+bThread.start();
+```
+
+```java
+Custom: [Thread-1] 스레드에서 발생한 [널포인터 예외 B] 처리
+```
+
