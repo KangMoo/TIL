@@ -51,5 +51,7 @@ OOO ExceptionProducingRunnable 실행 OOO
         at java.base/java.lang.Thread.run(Thread.java:844)
 ```
 
-`ExecutorService.execute()` 대신 **`ExecutorService.submit()`로 실행해서 별도의 스레드에서 실행한 결과를 `Future`에 담고, `Future.get()`으로 결과를 가져오면 드디어 별도의 스레드에서 발생한 예외가 main 스레드에서 잡힌다.** catch에서 `throw e`로 예외를 던졌으므로 StackTrace가 출력되고 main 스레드는 정상적으로 종료되지 못한다. `throw e`가 없으면 StackTrace도 출력되지 않고 main 스레드도 정상 종료 된다.
+- **`get()`을 호출하지 않으면 `report()` 예외가 main 스레드로 던져지지 않는다**
+
+
 
