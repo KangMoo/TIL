@@ -93,3 +93,5 @@ OOO ExceptionProducingRunnable 실행 OOO
         OOO MAIN THREAD 정상 종료 OOO
 ```
 
+- `CompletableFuture.exceptionally()`도 별도의 스레드에서 발생한 예외를 잡아서 처리할 수 있다.
+
