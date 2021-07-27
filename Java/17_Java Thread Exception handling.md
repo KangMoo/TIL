@@ -55,3 +55,41 @@ OOO ExceptionProducingRunnable 실행 OOO
 
 
 
+### CompletableFuture.exceptionally()
+
+```java
+public class CompletableFutureRunAsync {
+
+  public static void main(String[] args) {
+    CompletableFuture.runAsync(new ExceptionProducingRunnable())
+      .exceptionally(t -> {
+        System.err.println("예외 처리 in thread " + Thread.currentThread().getName());
+        System.out.println(CCC_THREAD_내에서_발생한_예외_CATCH_CCC);
+        t.printStackTrace();
+        throw new RuntimeException("exceptionally에서 throw", t);
+      });
+    System.out.println(OOO_MAIN_THREAD_정상_종료_OOO);
+  }
+}
+```
+
+```java
+// 결과
+OOO ExceptionProducingRunnable 실행 OOO
+  예외 처리 in thread main
+  CCC Thread 내에서 발생한 예외 catch CCC
+    java.util.concurrent.CompletionException: java.lang.NullPointerException: XXXXX ExceptionProducingRunnable 예외 발생 in thread [ForkJoinPool.commonPool-worker-1]
+      at java.base/java.util.concurrent.CompletableFuture.encodeThrowable(CompletableFuture.java:314)
+      at java.base/java.util.concurrent.CompletableFuture.completeThrowable(CompletableFuture.java:319)
+      at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1739)
+      at java.base/java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1728)
+      at java.base/java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:283)
+      at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1603)
+      at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:175)
+      Caused by: java.lang.NullPointerException: XXXXX ExceptionProducingRunnable 예외 발생 in thread [ForkJoinPool.commonPool-worker-1]
+        at io.homo_efficio.scratchpad.thread.exception.runnable.ExceptionProducingRunnable.run(ExceptionProducingRunnable.java:14)
+        at java.base/java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1736)
+        ... 4 more
+        OOO MAIN THREAD 정상 종료 OOO
+```
+
