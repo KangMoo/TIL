@@ -95,3 +95,24 @@ OOO ExceptionProducingRunnable 실행 OOO
 
 - `CompletableFuture.exceptionally()`도 별도의 스레드에서 발생한 예외를 잡아서 처리할 수 있다.
 
+
+
+### 스레드의 예외 핸들러 등록
+
+```java
+Thread.setDefaultUncaughtExceptionHandler(
+  (thread, throwable) -> System.out.println(
+    String.format(
+      "Default: [%s] 스레드에서 발생한 [%s] 처리",
+      thread.getName(), throwable.getMessage()))
+);
+Thread aThread = new Thread(() -> {
+  throw new NullPointerException("널포인터 예외 A");
+});
+aThread.start();
+```
+
+```java
+Default: [Thread-0] 스레드에서 발생한 [널포인터 예외 A] 처리
+```
+
