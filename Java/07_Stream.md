@@ -548,3 +548,32 @@ Stream의 요소를 수집하여 요소를 그룹화 하거나 결과를 담아 
 - `Collectors.groupingBy`
 - `Collectors.partioningBy`
 - `Collectors.summarizingInt()`
+
+
+
+## Concat
+
+- 아이템들을 하나의 객체로 합치는데 사용된다.
+
+```java
+List<String> numbers = Arrays.asList("1", "2", "3", "4", "5");
+List<String> chars = Arrays.asList("a", "b", "c", "d", "e");
+Stream<String> stream1 = numbers.stream();
+Stream<String> stream2 = chars.stream();
+Stream<String> stream3 = Stream.concat(stream1, stream2);
+stream3.forEach(System.out::println);
+```
+
+```java
+1
+2
+3
+4
+5
+a
+b
+c
+d
+e
+```
+
