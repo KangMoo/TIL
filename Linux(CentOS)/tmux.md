@@ -18,3 +18,28 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 
 
+### 세션 관련 명령어
+
+**세션 생성**
+- `tmux`
+
+**이름을 지정하여 새션 셍성**
+- `tmux new -s <session_name>`
+- `tmux new-session -s <session_name>`
+
+**세션 이름 수정**
+- `[Ctrl] + b, $`
+
+**세션 detach**
+- `[Ctrl] + b, d`
+
+**세션 리스트 확인**
+- tmux attach -t <session number 혹은 session name>`
+
+**세션 종료, 세션의 마지막 윈도우, 마지막 팬에서 실행**
+- `exit`
+
+**세션 종료, 세션 밖에서 실행**
+
+- `tmux kill-session -t session_name`
+
