@@ -43,3 +43,42 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 - `tmux kill-session -t session_name`
 
+
+
+**윈도우 관련 tmux 명령어**
+
+**세션 생성과 함께 윈도우 생성**
+
+- $ tmux new -s <session-name> -n <window-name>
+
+**윈도우 이름 변경**
+
+- [Ctrl] + b, ,
+
+**윈도우 종료**
+
+- [Ctrl] + b, &
+- [Ctrl] + d
+
+**다음 윈도우(Next Window)로 이동**
+
+- [Ctrl] + b, n
+
+**이전 윈도우(Previous Window)로 이동**
+
+- [Ctrl] + b, p
+
+**마지막 윈도우(Last Window)로 이동**
+
+- [Ctrl] + b, l
+
+**특정 윈도우로 이동 (몇 번째 윈도우인지)**
+
+- [Ctrl] + b, 0-9
+
+**특정 윈도우로 이동 (이름으로 이동)**
+
+- [Ctrl] + b, f
+
+**윈도우 리스트 보기**
+- [Ctrl] + b, w
