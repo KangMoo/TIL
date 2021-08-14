@@ -158,3 +158,12 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 - [Ctrl] + b, :
 - setw synchronize-panes on
+
+**Copy 모드로 들어가기**
+
+- [Ctrl] + b, [
+
+**빠져나오기**
+
+- [ESC]
+  q
