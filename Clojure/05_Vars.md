@@ -25,7 +25,7 @@ user=> b
 CompilerException java.lang.RuntimeException: Unable to resolve symbol: b in this context, compiling:(NO_SOURCE_PATH:0:0)
 ```
 
-같은 심볼에 새로운 값으로 Var을 만들면 값이 바뀌지 않고 심볼과 새루은 값에 연결된 Var를 만든다.
+같은 심볼에 새로운 값으로 Var을 만들면 값이 바뀌지 않고 심볼과 새로운 값에 연결된 Var를 만든다.
 
 ```clojure
 user=> (def a 1)
@@ -37,3 +37,4 @@ user=> (def a 2)
 user=> a
 2
 ```
+
