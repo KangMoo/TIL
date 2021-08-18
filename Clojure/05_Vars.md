@@ -165,3 +165,11 @@ user=> (alter-var-root (var a) (fn [origin-value] 2))
 user=> a
 2
 ```
+
+`alter-var-root`는 첫번째 인자로 Var를 두번째 인다로 새로 연결될 새로운 값을 리턴하는 함수를 넘겨준다
+
+위의 예제에서 `var`는 심볼에 연결된 Var를 가져오는 구문이다
+
+짧게 쓸 수 있는 구문도 제공하는데, `#'a` 라고 써도 된다. `def` 로 Var를 만들었을때 REPL에 출력되던 형식 `#'user/a`가 Var를 참조하는 구문이다
+
+앞에 `user`가 붙어 있는데 네임스페이스로 따로 다룬다.
