@@ -136,3 +136,16 @@ user=> a
 1
 ```
 
+동적으로 바인딩되는 Var는 Var를 만들 때 심볼 앞에 `^:dynamic` 이라는 메타데이터를 준다. (메타데이터는 추후에 다룸)
+
+클로저 세계에서는 dynamic var를 사용할때 심볼 앞뒤로 귀마게 표시 `**`로 주의 사항을 표시한다
+
+```clojure
+user=> (def ^:dynamic *a* 1)
+#'user/*a*
+user=> (binding [*a* 2] (+ *a* 1))
+3
+user=> *a*
+1
+```
+
