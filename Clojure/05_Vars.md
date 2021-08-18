@@ -177,3 +177,11 @@ user=> a
 클로저는 함수형 프로그래밍 스타일에 따라 대부분 값을 변경되지 않는 스타일을 사용하기 때문에 `alter-var-root`를 변수처럼 사용하는 일은 없어야 한다.
 
 참고로 `alter-var-root`는 내부적으로 `synchronized`되어있다.
+
+> `alter-var-root`예제에서 두번째 함수에 파라미터로는 원래 연결된 값이 넘어온다.
+>
+> 이때 `_`를 사용해 연결되는 값을 무시하게 할 수 있다
+>
+> ```clojure
+> user=> (alter-var-root (var a) (fn [_] 2))
+> ```
