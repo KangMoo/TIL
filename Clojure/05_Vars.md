@@ -73,3 +73,34 @@ clojure.core/+
 nil
 ```
 
+
+
+### let
+
+Var의 범위는 전역 스코프를 가진다. 이것을 Root Var라고 한다
+
+```clojure
+user=> (def x 1)
+#'user/x
+user=> (def y 2)
+#'user/y
+user=> (+ x y)
+3
+```
+
+만약 지역적으로 사용될 이름이 필요하다면 `let`구문을 쓰면 된다
+
+```clojure
+user=> (def a 1)
+user=> (let [b 2 c 3] (+ b c))
+5
+user=> b
+
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: b in this context, compiling:(NO_SOURCE_PATH:0:
+user=> c
+
+CompilerException java.lang.RuntimeException: Unable to resolve symbol: c in this context, compiling:(NO_SOURCE_PATH:0:0)
+```
+
+`let`구문은 `(let 바인딩벡터 본문)` 형식으로 작성한다
+
