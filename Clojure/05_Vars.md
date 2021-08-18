@@ -120,3 +120,19 @@ user=> x
 user=> y
 2
 ```
+
+
+
+### Dynamic Vars
+
+`binding` 구문으로 Var 값을 지역적으로 다른 값으로 연결해서 사용할 수 있다.
+
+```clojure
+user=> (def ^:dynamic a 1)
+#'user/a
+user=> (binding [a 2] (+ a 1))
+3
+user=> a
+1
+```
+
