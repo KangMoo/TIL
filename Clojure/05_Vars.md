@@ -38,3 +38,26 @@ user=> a
 2
 ```
 
+
+
+### Docstrings
+
+Var는 연결된 값에 대한 설명을 넣을 수 있는 기능이 있다
+
+```clojure
+user=> (def a "A value." 1)
+#'user/a
+```
+
+심볼 뒤에 문자열로 설명을 넣으면 된다
+
+Var 설명을 보려면 `doc` 함수로 볼 수 있다
+
+```clojure
+user=> (doc a)
+-------------------------
+user/a
+A value.
+nil
+```
+
