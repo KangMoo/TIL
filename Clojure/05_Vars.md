@@ -138,7 +138,7 @@ user=> a
 
 동적으로 바인딩되는 Var는 Var를 만들 때 심볼 앞에 `^:dynamic` 이라는 메타데이터를 준다. (메타데이터는 추후에 다룸)
 
-클로저 세계에서는 dynamic var를 사용할때 심볼 앞뒤로 귀마게 표시 `**`로 주의 사항을 표시한다
+클로저 세계에서는 dynamic var를 사용할때 조심하라는 의미로 심볼 앞뒤로 귀마게 표시 `**`를 붙이는 네이밍 규칙을 쓴다
 
 ```clojure
 user=> (def ^:dynamic *a* 1)
@@ -149,3 +149,19 @@ user=> *a*
 1
 ```
 
+
+
+### Root Var를 동적으로 다시 바인딩하기
+
+`binding`구문은 지역적으로 Var를 다시 연결하는 기능을 하지만 Root Var을 동적으로 다시 바인딩 하려면 `alter-var-root` 함수를 사용한다.
+
+```clojure
+user=> (def a 1)
+#'user/a
+user=> a
+1
+user=> (alter-var-root (var a) (fn [origin-value] 2))
+2
+user=> a
+2
+```
