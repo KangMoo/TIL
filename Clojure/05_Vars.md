@@ -61,3 +61,15 @@ A value.
 nil
 ```
 
+클로저 제공하는 함수는 docstring을 가지고 있기 때ㅔ문에 사용법을 보려면 `doc`함수에 실볼을 넣으면 된다.
+
+```clojure
+user=> (doc +)
+-------------------------
+clojure.core/+
+([] [x] [x y] [x y & more])
+  Returns the sum of nums. (+) returns 0. Does not auto-promote
+  longs, will throw on overflow. See also: +'
+nil
+```
+
