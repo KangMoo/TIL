@@ -104,3 +104,19 @@ CompilerException java.lang.RuntimeException: Unable to resolve symbol: c in thi
 
 `let`구문은 `(let 바인딩벡터 본문)` 형식으로 작성한다
 
+바인딩 벡터 형식은 `[심볼 값 심볼 값 ...]` 으로 심볼 뒤에 나오는 값과 심볼이 연결된다. 따라서 벡터가 홀수개의 항목을 가질 수 없다.
+
+Var 심볼과 같은 이름의 심볼을 `let`안에서 사용하면 Var 심볼은 가려져서 `let`안에서 사용할 수 없다. 하지만 `let` 바깥에서는 여전히 Var 심볼을 사용할 수 있다.
+
+```clojure
+user=> (def x 1)
+#'user/x
+user=> (def y 2)
+#'user/y
+user=> (let [x 3 y 4] (+ x y))
+7
+user=> x
+1
+user=> y
+2
+```
