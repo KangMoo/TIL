@@ -31,3 +31,17 @@ dart에서는 비동기 작업을 구현하기 위해 두 가지 방법을 사�
   - 값을 반환하는 경우, `Future<T>`타입의 `future`는 `T`의 값을 반환하며 완료된다. 예를들어 `Future<String>`는 문자열을 생성한다. 사용할수 있는 값을 반환하지 않으면 `future`의 타입은 `Future<void>`가 된다.
   - 에러를 발생시키는 경우는 비동기 작업중 예외적인 상황이 발생한 경우이다.
 
+**Future 예시**
+
+```dart
+Future<void> getUserOrder() {
+  // Imagine that this function is fetching user info from another service or database
+  return Future.delayed(Duration(seconds: 3), () => print('Large Latte'));
+}
+
+main() {
+  getUserOrder();
+  print('Fetching user order...');
+}
+```
+
