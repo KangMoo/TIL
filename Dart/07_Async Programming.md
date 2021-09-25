@@ -76,6 +76,8 @@ Uncaught Error: Exception: Logout failed: user ID is invalid
 - `async`는 함수 몸체 바로 앞에 추가할 수 있다.
 - `await`는 항상 `async`함수 안에서만 사용될 수 있다.
 
+`async`함수는 첫번째 `await`를 만날때까지 동기적으로 실행된다. 이것은 `async`함수 몸채 네부에서, 첫번째 `await`가 나타날 때까지 만나게 되는 모든 동기 코드는 즉시 실행된다는 의미이다.
+
 
 
 **동기 함수**
@@ -134,5 +136,36 @@ main() async {
 Fetching user order...
 Your order is: Large Latte
 */
+```
+
+
+
+**async 함수를 사용한 코드 예시**
+
+```dart
+import 'dart:async';
+
+void createOrderMessage () async {
+  print('Awaiting user order...');
+  var order = await getUserOrder();
+  print('Your order is: $order');
+}
+
+Future<String> getUserOrder() {
+  // Imagine that this function is more complex and slow.
+  return Future.delayed(Duration(seconds: 3), () => 'Large Latte');
+}
+
+main() async {
+  countSeconds(4);
+  await createOrderMessage();
+}
+
+// You can ignore this function - it's here to visualize delay time in this example.
+void countSeconds(s) {
+  for( var i = 1 ; i <= s; i++ ) {
+      Future.delayed(Duration(seconds: i), () => print(i));
+   }
+}
 ```
 
