@@ -167,5 +167,14 @@ void countSeconds(s) {
       Future.delayed(Duration(seconds: i), () => print(i));
    }
 }
+
+/* Result
+Awaiting user order...
+1
+2
+3
+Your order is: Large Latte
+4
+*/
 ```
 
