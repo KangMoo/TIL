@@ -67,3 +67,11 @@ Uncaught Error: Exception: Logout failed: user ID is invalid
 */
 ```
 
+
+
+## async/await
+
+`async`와 `await` 키워드는 비동기 함수를 정의하고 결과를 사용하기 위해 '선언을 통한 방식(declarative way)'를 사용한다.
+
+- `async`는 함수 몸체 바로 앞에 추가할 수 있다.
+- `await`는 항상 `async`함수 안에서만 사용될 수 있다.
