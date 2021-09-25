@@ -75,3 +75,34 @@ Uncaught Error: Exception: Logout failed: user ID is invalid
 
 - `async`는 함수 몸체 바로 앞에 추가할 수 있다.
 - `await`는 항상 `async`함수 안에서만 사용될 수 있다.
+
+
+
+**동기 함수**
+
+```dart
+String createOrderMessage() {
+  var order = getUserOrder();
+  return 'Your order is: $order';
+}
+
+Future<String> getUserOrder() {
+  // Imagine that this function is
+  // more complex and slow.
+  return
+    Future.delayed(
+      Duration(seconds: 4), () => 'Large Latte');
+}
+
+// Synchronous
+main() {
+  print('Fetching user order...');
+  print(createOrderMessage());
+}
+
+/* Result
+Fetching user order...
+Your order is: Instance of _Future<String>
+*/
+```
+
