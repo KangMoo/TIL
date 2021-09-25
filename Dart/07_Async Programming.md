@@ -43,5 +43,10 @@ main() {
   getUserOrder();
   print('Fetching user order...');
 }
+
+/* Result
+Fetching user order...
+Large Latte
+*/
 ```
 
