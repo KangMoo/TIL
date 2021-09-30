@@ -87,3 +87,50 @@ Dart에서는 타입을 명시해도 되고, 안 해도 된다.
 
   
 
+## Class / 생성자
+
+- Java
+
+  ```java
+  class Point {
+    int x;
+    int y;
+  
+    Point(int x, int y) {
+      this.x = x;
+      this.y = y;
+    }
+  }
+  ```
+
+- Dart
+
+  ```dart
+  class Point {
+    num x;
+    num y;
+  
+    Point(num x, num y) {
+      this.x = x;
+      this.y = y;
+    }
+  
+    Point.origin() {
+      x = 0;
+      y = 0;
+    }
+  }
+  ```
+
+  Dart는 `origin` 키워드를 통해 이름없는 생성자를 초기화하는 역할을 한다.
+
+  ```dart
+  Point p = Point(10, 30);
+  print(p.x); // 10
+  
+  var origin = Point.origin();
+  print(origin.x); // 0
+  ```
+
+  
+
