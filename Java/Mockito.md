@@ -86,7 +86,8 @@ public void example(){
 ```
 
 ```java
-public List<String> getList(String name, int age){ // do something code }
+public List<String> getList(String name, int age){ // do something code
+}
 
   // ...
   when(mockIns.getList(anyString(), anyInt()))
