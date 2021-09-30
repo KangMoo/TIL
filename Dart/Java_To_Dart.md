@@ -134,3 +134,30 @@ Dart에서는 타입을 명시해도 되고, 안 해도 된다.
 
   
 
+## Map
+
+- Java - Map의 수정이 자유로움
+
+  ```java
+  Map<String, Integer> map = new HashMap<>();
+  map.put("height", 175);
+  map.put("height", 180);
+  System.out.println(map.get("height")); // 180 출력
+  ```
+
+  
+
+- Dart - Map의 수정이 가능하게 또는 불가능하게 만들 수 있음
+
+  ```dart
+  Map<String, int> map = Map<String, int>();
+  map.putIfAbsent("height", () => 175); // 키가 없을 때만 값을 추가
+  map.putIfAbsent("height", () => 180);
+  
+  print(map["height"]); // 175 출력
+  
+  map["height"] = 190; // 이미 키가 있어도 값을 추가
+  print(map["height"]); // 190 출력
+  ```
+
+  
