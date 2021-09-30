@@ -19,4 +19,31 @@
   var age = 78;
   ```
 
+  `var`를 사용한 타입 추론의 경우 타입을 중간의 바꾸는건 허용하지 않는다. 
+
+
+
+## 배열/리스트
+
+자바에선 배열과 리스트를 구분하지만 다트는 리스트만 사용하기에 좀 더 편하게 데이터를 다룰 수 있다.
+
+-  Java
+
+  ```java
+  int[] numbers = [10, 20, 30];
+  String[] countries = {"USA", "JAPAN", "KOREA"};
+  ArrayList<Integer> lists = new ArrayList<>();
+  lists.add(100);
+  lists.add(200);
+  lists.add(300);
+  ```
+
+- Dart
+
+  ```dart
+  var numbers = [10, 20, 30];
+  var countries = ["USA", "JAPAN", "KOREA", 10];
+  print(countries[0]);
+  ```
+
   
