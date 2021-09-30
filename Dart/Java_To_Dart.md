@@ -46,4 +46,41 @@
   print(countries[0]);
   ```
 
+
+
+## 함수
+
+- Java
+
+  ```java
+  int add(int a, int b) {
+    return a + b;
+  }
+  ```
+
+- Dart - 타입 추론
+
+  ```dart
+  combine(a,b) {
+    return a + b;
+  }
+  
+  var result = combine(10, 20);
+  print(result);
+  
+  var word = combine("hello", "world");
+  print(word);
+  ```
+
+- Dart - 타입 지정 (권장)
+
+  ```dart
+  int add(int a, int b) {
+    return a + b;
+  }
+  
+  int sum = add(15, 25);
+  print(sum);
+  ```
+
   
