@@ -46,3 +46,6 @@
 
 
 
+## JDK / VM 확인
+
+- `/usr/libexec/java_home -V`
