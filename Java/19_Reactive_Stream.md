@@ -72,3 +72,4 @@ Subscription은 Publisher와 Subscriber 사이에서 중계하는 역할을 한�
 2. Publisher는 `subscribe()`메서드를 통해 Subscriber를 등록한다
 3. Subscriber는 `onSubscribe()`메서드를 통해 Subscription을 등록하고 Publisher를 구독하기 시작한다. 이는 Publisher에 구현된 Subscription을 통해 이뤄진다. 이렇게 하면 Publisher와 Subscribr는 Subscription을 통해 연결된 상태가 된다. `onSubscribe()` 내부에 Subsciription의 `request()`를 요청하면 그때부터 data구독이 시작된다.
 4. Subscription의 `request()`에는 조건에 따라 Subscriber의 `onNext()`, `onComplete()` 또는 `onError()`를 호출한다. 그러면 Subscriber의 해당 메서드의 로직에 따라 `request()` 또는 `cancel()`로 제어하게 된다.
+
