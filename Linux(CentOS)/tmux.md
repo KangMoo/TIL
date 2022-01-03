@@ -34,7 +34,7 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 - `[Ctrl] + b, d`
 
 **세션 리스트 확인**
-- tmux attach -t <session number 혹은 session name>`
+- `tmux attach -t <session number 혹은 session name>`
 
 **세션 종료, 세션의 마지막 윈도우, 마지막 팬에서 실행**
 - `exit`
@@ -49,7 +49,7 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 **세션 생성과 함께 윈도우 생성**
 
-- $ tmux new -s <session-name> -n <window-name>
+- `tmux new -s <session-name> -n <window-name>`
 
 **윈도우 이름 변경**
 
@@ -123,7 +123,7 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 **팬 사이즈 조절 [Ctrl] + b 를 누른 후 :**
 
-- `[Ctrl] + b, :
+- [Ctrl] + b, :
 - resize-pane -L <Size> or -R <Size> or -U <Size> -D <Size>
 
 **팬 레이아웃 변경 (다양한 레이아웃으로 자동 전환)**
@@ -136,7 +136,7 @@ tmux는 리눅스에서 하나의 창이 아닌 여러 창을 함께 사용할 �
 
 **단축키 목록**
 
-- $ [Ctrl] + b, ?
+- [Ctrl] + b, ?
 
 **키 바인딩 및 언바인딩**
 
