@@ -239,11 +239,55 @@
   - ex. 사용자가 인스턴스로부터 파일 다운로드 중 오토스케일링에 의해 인스턴스가 바로 삭제되면 파일 전송이 중단되므로, 일정 시간 후에 삭제되도록 설정
 - CLB 에서는 Connection Draining이라는 이름으로, ALB & NLB에서는 Deregistration Delay 라는 이름으로 불린다
 
-## Auto Scaling Group
+## ASG
 
+- Auto Scaling Group
 - 부하에 맞춰 서버를 유동적으로 생성하고 삭제하는 기능
   - 최소/최대 수 설정 가능하며, 새 인스턴스를 로드 밸런서에 자동으로 등록한다
   - 부하 증가 -> Scale out (EC2 인스턴스 추가)
   - 부하 감소 -> Scale in (EC2 인스턴스 제거)
 
 ![ASG](./images/05_09.png)
+
+### ASG 속성
+
+- 시작 설정값
+  - AMI + 인스턴스 타입
+  - EC2 유저 데이터
+  - EBS 볼륨
+  - 보안 그룹
+  - SSH 키페어
+- 최소 크기, 최대 크기, 초기 용량
+- 네트워크, 서브넷 정보
+- 로드 밸런서 정보
+- 스케일링 정책
+
+### Auto Scaling Alarm
+
+- CloudWatch 경보를 기반으로 ASG 확장이 가능하다
+- 알람은 지표(ex. 평균 CPU)를 모니터링하며, 지표는 전체 ASG 인스턴스에 대해 계산된다
+- 알람을 기반으로 확장 정책을 생성할 수 있다
+
+### ASG - 동적 확장 정책
+
+- 대상 추정 조정
+  - 가장 간단하고 설정하기 쉽다
+  - ex. 평균 ASG CPU를 약 40%로 유지하고 싶다
+- 단순/단계 조정
+  - CloudWatch 경보가 트리거될때 유닛 추가/제거
+  - ex. CloudWatch에 CPU > 70% 경보가 트리거되면 2개 추가, CPU < 30% 경보가 트리거되면 1개 제거
+- 예약 작업
+  - 잘 알려진 사용 패턴을 기반으로 조정을 예상한다
+  - ex. 금요일 오후 5시에 최소 용량을 10으로 증가
+
+### ASG - Predictive Scaling
+
+- Predictive Scaling : 지속적으로 부하를 예측하고 미리 확장일정을 잡는다
+
+### ASG - Scaling Cooldowns (조정 휴지)
+
+- Scaling Cooldown : 스케일링 작업이 발생한 후에 일정시간 동안 휴지(cooldown) (default : 300초)
+- 휴지기간 동안 ASG는 추가 인스턴스를 시작하거나 종료하지 않음 (안정화를 위해)
+- 준비된 요청을 더 빨리 처리하고 휴지기간을 줄이기 위해 AMI 사용 권장
+
+![ASG_scaling_cooldown](./images/05_10.png)
