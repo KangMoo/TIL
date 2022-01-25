@@ -9,6 +9,8 @@
 
 ![Users and Groups](./images/02_01.png)
 
+---
+
 ### IAM : 권한
 
 - 유저 및 그룹은 젗갱이라고 불리는 Json 문서를 할당받을 수 있다
@@ -63,6 +65,8 @@
   - 비밀번호 만료기간을 설정하여 유저에게 비밀번호 변경 요구
   - 동일한 비밀번호로 변경 금지
 
+---
+
 ## MFA
 
 - Multi Factor Authentication
@@ -87,6 +91,7 @@
   - Access Key ID ~= ID
   - Secret Access Key != Password
 
+---
 
 ## AWS CLI
 
@@ -94,6 +99,8 @@
 - AWS 서비스의 공개 API에 직접 접근이 가능하다
 - AWS CLI를 이용하여 자원을 관리하기 위한 스크립트를 만들 수도 있다.
 - AWS 웹 관리 서비스 (AWS Management Console)을 대체 가능하다
+
+---
 
 ## AWS SDK
 
@@ -106,6 +113,8 @@
   - 모바일 SDKs (Android, iOS, ...)
   - IoT 장비 SDKs (Embeddes C, Arduino, ...)
 
+---
+
 ## IAM Roles for Services
 
  - 일부 AWS 서비스는 사용자를 대싱하여 작업을 수행해야 한다
@@ -117,6 +126,8 @@
 
 ![IAM Role](./images/02_03.png)
 
+---
+
 ## IAM 보안 도구
 
 - IAM 자격증명 보고서 (account-level)
@@ -125,6 +136,8 @@
 - IAM Access Advisor (user-level)
   - Access Advisor는 유저에 부여된 관한과 그들이 마지막으로 언제 이 서비스에 접근했는지를 보여준다
   - 이 정보는 정책을 수정할때 유용하게 사용된다.
+
+---
 
 ## IAM 가이드라인 & Best Practice
 
@@ -138,6 +151,7 @@
 - IAM 자격증명 보고서로 계정 권한을 감시하라
 - **IAM 유저 그리고 Access키를 절대로 공유하지 마라**
 
+---
 
 ## 요약
 
