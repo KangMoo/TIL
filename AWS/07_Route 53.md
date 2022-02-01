@@ -25,6 +25,8 @@
 > ![](./images/07_01.png)
 > ![](./images/07_02.png)
 
+---
+
 ### Route 53 - Record Types
 
 - A : 호스트네임을 IPv4에 매핑
@@ -45,6 +47,8 @@
 >
 > Zone Apex는 루트 도메인, 네이키드 도메인(Naked Domain)이라고도 하며. 이름 그대로 서브 도메인이 붙지 않은 상태를 뜻한다. DNS RFC(RFC 1033)에 루트 도메인은 A 레코드만 지정할 수 있다고 정의되어 있다.
 
+---
+
 ### Route 53 - Hosted Zones
 
 - 트래픽을 도메인 및 해당 하위 도메인으로 라우팅하는 방법을 정의하는 레코드용 컨테이너
@@ -54,6 +58,8 @@
 
 ![Hosted_zones](./images/07_03.png)
 
+---
+
 ### Route 53 - Records TTL (Time To Live)
 
 - **Alias 레코드를 제외하고 각 DNS 레코드에 대해 TTL은 필수적이다**
@@ -62,6 +68,8 @@
 - Low TTL - ex. 60 sec
   - Route 53에 부하가 많지만, 사용자가 비교적 최신의 record를 사용할 수 있다
   - record를 자주 변경할 수 있다
+
+---
 
 ### CNAME vs Alias
 
@@ -84,6 +92,8 @@
 - 무료
 - 네이티브 health check
 
+---
+
 ### Route 53 - Alias Records
 
 - 호스트네임을 AWS 리소스에 매핑
@@ -96,6 +106,8 @@
 
 ![alias](./images/07_04.png)
 
+---
+
 ### Route 53 - Alias Record 대상
 
 - Elastic Load Balanacer
@@ -107,6 +119,8 @@
 - Global Accelerator
 - Route 53 record (같은 호스트 존에 있는 경우)
 - **EC2 DNS 이름에는 Alias record 설정이 불가능하다**
+
+---
 
 ### Route 53 - Routing 정책
 
@@ -131,6 +145,8 @@
   - Multi-Value Answer - 다중 응답 라우팅 정책
     - Route 53이 DNS 쿼리에 무작위로 선택된 최대 8개의 정상 레코드로 응답하게 하려는 경우에 사용
 
+---
+
 ### Routing 정책 - Simple
 
 - 일반적으로 트래픽을 단일 리소스로 라우팅
@@ -140,6 +156,8 @@
 - 상태 확인과 연결 불가능하다
 
 ![route53_simple](./images/07_05.png)
+
+---
 
 ### Routing 정책 - Weighted
 
@@ -155,6 +173,8 @@
 
 ![route53_weighted](./images/07_06.png)
 
+---
+
 ### Routing 정책 - Latency based
 
 - 최소한의 지연을 위해 가장 가까운 곳으로 리다이렉션
@@ -163,6 +183,8 @@
 - 상태 확인과 연결 가능 (장애조치 있음)
 
 ![route53_latency_based](./images/07_07.png)
+
+---
 
 ### Route 53 - 상태 확인
 
@@ -174,6 +196,8 @@
 - 상태 확인은 CW 지표와 통합된다 (CloudWatch로도 확인 가능)
 
 ![health_check](./images/07_08.png)
+
+---
 
 ### 상태 검사 - 엔드포인트 모니터링
 
@@ -189,6 +213,8 @@
 
 ![health_check](./images/07_09.png)
 
+---
+
 ### Route 53 - Calculated Health Checks
 
 - OR, AND, NOT을 사용하여 여러 상태 검사의 결과를 하나의 상태 검사 결과로 조합해준다
@@ -198,6 +224,8 @@
 
 ![calculated_health_check](./images/07_10.png)
 
+---
+
 ### Health Checks - Private Hosted Zones
 
 - Route 53 상태 검사기는 VPC 외부에 있기 때문에 **private 엔드포인트로 접근이 불가능**하다
@@ -205,12 +233,16 @@
 
 ![health_check_private_hosted_zones](./images/07_11.png)
 
+---
+
 ### Routing 정책 - FailOver
 
 - Primary, Secondary 두 개의 레코드를 지정하며, Primary 레코드가 정상상태이면 Route 53은 Primary Record를 반환하고, 비정상상태라면 장애조치를 위해 Secondrary Record를 반환한다
   - 원한다면 Secondary도 상태 검사를 수행할 수 있다
 
 ![health_check_failover](./images/07_12.png)
+
+---
 
 ### Routing 정책 - Geolocation
 
@@ -220,6 +252,8 @@
 - Latency-based와는 다르다!
 - ex. 웹사이트 현지화, 콘텐츠 배포 제한, 로드 밸런싱, ...
 - 상태 검사를 수행할 수 있다
+
+---
 
 ### Routing 정책 - Geoproximity
 
@@ -245,6 +279,8 @@
 > 
 > ![traffic_flow](./images/07_15.jpg)
 
+---
+
 ### Routing 정책 - Multi-Value
 
 - 여러 리소스로 트래픽을 라우팅할 때 사용
@@ -255,6 +291,8 @@
 
 ![multi_value](./images/07_16.jpg)
 
+---
+
 ### Domain Registar vs Domain Service
 
 - 연간 요금을 지불하여 도메인 등록 기관에 도메인 이름을 구입하거나 등록할 수 있다.
@@ -264,6 +302,8 @@
 - ex. GoDaddy에서 도메인을 구입하고 Route 53을 사용하여 DNS 레코드를 관리
 
 ![](./images/07_17.png)
+
+---
 
 ### Amazon Route 53 & 서드파티 등록 대행자
 

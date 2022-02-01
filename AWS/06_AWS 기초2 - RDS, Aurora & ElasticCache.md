@@ -25,6 +25,8 @@
 >
 > 하지만, SSH로 인스턴스에 접속할 수 없다는 단점도 있다
 
+---
+
 ### RDS 백업
 
 - RDS 백업은 자동으로 활성화된다
@@ -36,6 +38,8 @@
 - DB 스냅샷
   - 사용자가 만들 수 있다
   - 원하는 기간만큼 백업 보존이 가능하다
+
+---
 
 ### RDS - Storage Auto Scaling
 
@@ -49,6 +53,8 @@
   - 마지막 수정 이후 6시간 경과
 - 예측하기 어려운 워크로드를 가진 어플리케이션에 유용하다
 - 모든 RDS 데이터베이스 엔진을 지원한다 (MariaDB, MySQL, PostgreSQL, SQL Server, Oracle)
+
+---
 
 ### RDS - 읽기 확장성을 위한 읽기 전용 복제본
 
@@ -66,6 +72,8 @@
 >
 > ![RDS_repl_network_cost](./images/06_02.png)
 
+---
+
 ### RDS Multi AZ (재해 복구)
 
 - **동기적**으로 복제
@@ -79,6 +87,8 @@
 
 ![RDS_Multi_AZ](./images/06_03.png)
 
+---
+
 ### RDS - 단일 AZ -> Multi-AZ
 
 - DB를 멈출 필요가 없음
@@ -88,6 +98,8 @@
   3. 두 DB 사이에 동기화 설정
 
 ![](./images/06_04.png)
+
+---
 
 ### RDS 보안 - 암호화
 
@@ -102,6 +114,8 @@
   - 전송 중인 RDS로 데이터를 암호화하는 SSL 인증서 사용
   - 데이터베이스에 연결할 때 신뢰 인증서와 함께 SSL 옵션 제공
 
+---
+
 ### RDS 암호화 작업
 
 - RDS 백업 암호화
@@ -113,6 +127,8 @@
   2. 스냅샷 복사 및 스냅샷 암호화 활성화
   3. 암호화된 스냅샷에서 데이터베이스 복원
   4. 애플리케이션을 새 데이터베이스로 마이그레이션하고 이전 데이터베이스 삭제
+
+---
 
 ### RDS 보안 - 네트워크 & IAM
 
@@ -126,6 +142,8 @@
   - 기존 사용자 이름 및 암호를 사용하여 데이터베이스에 로그인이 가능하다
   - IAM 기반 인증을 사용하여 RDS MySQL 및 PostgreSQL에 로그인이 가능하다
 
+---
+
 ### RDS - IAM 인증
 
 - IAM 데이터베이스 인증은 MySQL 및 PostgreSQL에서 동작한다
@@ -135,6 +153,8 @@
   - 네트워크 입/출력은 SSL을 사용하여 암호화되어야 한다
   - DB 대신 사용자를 중앙에서 관리하는 IAM
   - 손쉬운 통합을 위해 IAM 역할 및 EC2 인스턴스 프로필 활용 가능
+
+---
 
 ### RDS 보안 요약
 
@@ -165,6 +185,8 @@
 - 장애조치가 즉각적이고 HA가 기본이다
 - RDS보다 비싸지만 더 효율적이다
 
+---
+
 ### Aurora 고가용성 및 읽기 확장
 
 - 하나의 Aurora 인스턴스에서 Write(마스터)
@@ -173,6 +195,8 @@
 - Across AZ 복제 지원
 
 ![Aurora](./images/06_05.png)
+
+---
 
 ### Aurora 특징
 
@@ -185,6 +209,8 @@
 - 고급 모니터링
 - 일상적인 유지보수
 - 역추적: 백업을 사용하지 않고 언제든지 데이터 복원
+
+---
 
 ### Aurora 보안
 
@@ -209,6 +235,8 @@
 - AWS에서 OS 유지 관리/패치, 최적화 설정, 구성, 모니터링, 실패 복구 및 백업을 처리한다
 - **ElastiCache를 사용하기 위해서 많은양의 어플리케이션 코드의 변경이 필요하다**
 
+---
+
 ### ElastiCahce Solution Architecture - DB Cache
 
 - 어플리케이션은 ElastiCache를 쿼리하며 사용할 수 없는 경우 RDS에서 가져와 ElastiCache에 저장한다
@@ -216,6 +244,8 @@
 - 캐시에는 최신 데이터만 사용 되도록 하는 무효화 전략이 있어야 한다
 
 ![ElastiCahce](./images/06_06.png)
+
+---
 
 ### ElastiCahce Solution Architecture - User Session Store
 
@@ -225,6 +255,8 @@
 - 인스턴스가 데이터를 검색하고 사용자가 이미 로그인 되어있음
 
 ![ElastiCahce](./images/06_07.png)
+
+---
 
 ### ElastiCache – Redis vs Memcached
 
@@ -247,6 +279,8 @@
 
 ![MEMCACHED](./images/06_09.png)
 
+---
+
 ### ElastiCache - Cache Security
 
 - ElastiCache의 모든 캐시
@@ -261,6 +295,8 @@
 
 ![](./images/06_10.png)
 
+---
+
 ### ElastiCache Replication: 클러스터 모드 비활성화된 경우
 
 - 기본 노드 1개, 복제본 최대 5개
@@ -273,6 +309,8 @@
 - 읽기 성능 확장에 유용
 
 ![](./images/06_11.png)
+
+---
 
 ### ElastiCache Replication: 클러스터 모드 활성화된 경우
 
@@ -287,6 +325,8 @@
 
 ![](./images/06_12.png)
 
+
+---
 
 ### 캐싱 디자인 패턴
 

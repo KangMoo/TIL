@@ -8,11 +8,15 @@
   - 수평적 확장성 (elastic)
 - 확장성은 고가용성과 밀접한 연관성을 가지고 있지만 둘은 목적이 다르다
 
+---
+
 ### 수직적 확장성
 
 - 수직적 확장성은 인스턴스의 크기/성능을 키우는것을 의미한다
 - RDS, ElasticCache는 수직적 확장이 가능한 서비스
 - 수직적확장은 하드웨어의 제한이 동반되기 때문에 명확한 한계가 있다
+
+---
 
 ### 수평적 확장성
 
@@ -30,6 +34,8 @@
 - 고가용성은 수동적일수도 있고 능동적일수도 있다
   - 수동적 고가용성의 예 : RDS 다중 AZ의 경우
   - 능동적 고가용성의 예 : 수평 확장의 경우
+
+---
 
 ### EC2의 고가용성 & 확장성
 
@@ -54,6 +60,8 @@
   - 영역 간 고가용성
   - 개인 트래픽과 공용 트래픽 분리
 
+---
+
 ### Elastic load balancer
 
 - Elastic Load Balancer : 관리형 로드 밸런서
@@ -76,6 +84,8 @@
 
 ![health_check](./images/05_02.png)
 
+---
+
 ### AWS 로드 밸런서의 종류
 
 1. Classic Load Balancer (CLB - v1 - 2009)
@@ -90,12 +100,16 @@
 - 전반적으로 더 많은 기능을 제공하는 최신 세대 로드밸런서 사용 추천 (CLB보다 ALB사용 추천)
 - 일부 로드 밸런서는 내부(프라이빗) 또는 외부 (퍼블릭) ELB로 설정 가능하다
 
+---
+
 ### Classic Load Balancer (v1)
 
 - TCP, HTTP, HTTPS 지원
 - TCP나 HTTP를 기반으로 상태 확인
 - 고정 호스트 이름
   - XXX.region.elb.amazonaws.com
+
+---
 
 ### Application Load Balancer (v2)
 
@@ -119,6 +133,8 @@
 
 ![ALB](./images/05_03.png)
 
+---
+
 ### Network Load Balancer (v2)
 
 - 4계층 지원
@@ -138,6 +154,8 @@
   - ALB
 
 ![NLB_target_group](./images/05_05.png)
+
+---
 
 ### Gateway Load Balancer
 
@@ -210,6 +228,8 @@
 - Comodo, symantec, GoDaddy, GlobalSign, Digicert, GlobalSign, Digicert, Letsencrypt 등...
 - SSL 인증서에는 만료날짜가 있으며, 갱신이 필요하다
 
+---
+
 ### 로드 밸런서 - SSL 인증
 
 - 로드밸런서는 X.509 인증을 사용한다 (SSL/TLS 서버 인증)
@@ -221,6 +241,8 @@
   - 클라이언트는 SNI(서버 이름 표시)를 사용하여 도달하는 호스트이름을 지정할 수 있다
   - 레거시 클라이언트를 위해 SSL/TLS의 이전 버전을 지원하는 보안 정책을 지정하는 기능이 있다
 
+---
+
 ### SSL - Server Name Indication (SNI)
 
 - SNI는 여러 SSL 인증서를 하나의 웹 서버에 로드하는 문제를 해결해준다
@@ -228,6 +250,8 @@
 - 이 방식은 최신 프로토콜이며 클라이언트가 초기 SSL 핸드셰이크에서 대상 서버의 호스트 이름을 나타내도록 요구한다
   - 그러면 서버가 올바른 인증서 또는 기본 인증서를 반환한다
 - ALB 및 NLB, CloudFront에서만 사용 가능하며, CLB에서는 사용 불가능하다
+
+---
 
 ### Elastic Load Balancer - SSL 인증서
 
@@ -240,6 +264,8 @@
 - Network Load Balancer (v2)
   - 여러 SSL 인증서가 있는 여러 수신기 지원
   - SNI(서버 이름 표시)를 사용하여 작동
+
+---
 
 ### Connection Draining
 
@@ -260,6 +286,8 @@
 
 ![ASG](./images/05_09.png)
 
+---
+
 ### ASG 속성
 
 - 시작 설정값
@@ -273,11 +301,15 @@
 - 로드 밸런서 정보
 - 스케일링 정책
 
+---
+
 ### Auto Scaling Alarm
 
 - CloudWatch 경보를 기반으로 ASG 확장이 가능하다
 - 알람은 지표(ex. 평균 CPU)를 모니터링하며, 지표는 전체 ASG 인스턴스에 대해 계산된다
 - 알람을 기반으로 확장 정책을 생성할 수 있다
+
+---
 
 ### ASG - 동적 확장 정책
 
@@ -291,9 +323,13 @@
   - 잘 알려진 사용 패턴을 기반으로 조정을 예상한다
   - ex. 금요일 오후 5시에 최소 용량을 10으로 증가
 
+---
+
 ### ASG - Predictive Scaling
 
 - Predictive Scaling : 지속적으로 부하를 예측하고 미리 확장일정을 잡는다
+
+---
 
 ### ASG - Scaling Cooldowns (조정 휴지)
 
