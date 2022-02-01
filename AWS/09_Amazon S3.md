@@ -102,3 +102,104 @@
 - Consumer가 키와 암호화 주기를 완전히 관리해야 한다
 
 ![Client_Side_Encryption](./images/08_13.png)
+
+---
+
+### 전송 중 암호화 (SSL/TLS)
+
+- Amazon S3의 노출 부분은 다음과 같다
+  - HTTP Endpoint (암호화 되지 않음)
+  - HTTPS Endpoint (전송 중 암호화)
+
+- Endpoint의 선택은 자유지만 HTTPS 사용을 권장한다
+- 대부부의 클라이언트는 기본적으로 HTTPS Endpoint를 사용한다
+
+- HTTPS 는 SSE-C 사용이 필수적이다
+- 전송 중 암호화는 SSL/TLS 라고 부른다
+
+---
+
+### S3 보안
+
+- 사용자 기반
+  - IAM 정책 - IAM 콘솔에서 특정 사용자에 대해 허용되어야 하는 API 호출
+- 리소스 기반
+  - 버킷 정책 - S3 콘솔의 버킷 전체 규칙 (교차 계정 허용)
+  - Object Access Control List (ACL) - 더 세밀한 조작
+  - Bucket Access Control List (ACL) - 덜 자주 사용
+
+- IAM보안 주체는 다음의 경우 Objectdp 접근 가능하다
+  - 사용자 IAM 권한이 이를 허용하거나 리소스 정책이 허용하는 경우
+  - 명시적인 DENY가 없다
+
+---
+
+### S3 Bucket 정책
+
+- Json 기반 정책
+  - Resources : Bucket & Objects
+  - Action : Allow/Deny API Set
+  - Effect : Allow/Deny
+  - Principal : 정책을 적용할 계정 또는 유저
+
+> ```json
+> {
+>   "Version":"2012-10-17",
+>   "Statement":[
+>     {
+>       "Sid":"PublicRead",
+>       "Effect":"Allow",
+>       "Principal":"*",
+>       "Action":[
+>         "s3:GetObject"
+>       ],
+>       "Resource":[
+>         "arn:aws:s3:::examplebucket/*"
+>       ]
+>     }
+>   ]
+> }
+> ```
+
+- S3 Bucket 정책은 다음과 같은 상황에서 사용한다
+  - Bucket에 대한 공개 액세스 권한 부여
+  - 업로드시 Object에 대한 암호화 강제
+  - 다른 계정에 대한 액세스 권한 부여 (Cross Account)
+
+---
+
+### 공개 액세스 차단을 위한 버킷 설정
+
+- 다음의 경우 Buckets/Objects의 공개 액세스를 차단한다
+  - 새로운 access control lists (ACLs)
+  - 모든 access control lists (ACLs)
+  - 새로운 공개 bucket이나 액세스 포인트 정책
+- 공개 버킷 또는 액세스 포인트 정책을 통해 버킷 및 객체에 대한 공개 및 교차 계정 액세스를 차단한다
+
+- **이 설정들은 회사 데이터 유출 방지를 위해 만들어졌다**
+  - 만약 Bucket이 절대 공개되선 안되는 경우 위 설정을 활성화한다
+- 계정 레벨에서 설정 가능하다
+
+---
+
+### S3 Security - 그 외
+
+- 네트워킹
+  - VPC Endpoint 지원 (외부 인터넷(www)이 없는 VPC 인스턴스에 사용)
+- Logging / Audit
+  - S3 액세스 로그는 다른 S3 버킷에 저장할 수 있다
+  - API 호출은 AWS CloudTrail에 기록할 수 있다
+- 유저 보안
+  - MFA 삭제 : Objects를 삭제하려면 버전이 지정된 버킷에서 MFA가 필요할 수 있다
+  - Pre-Signed URLs : 제한된 시간동안만 유효한 URL (ex. 로그인한 사용자를 위한 프리미엄 비디오 서비스)
+
+---
+
+### S3 웹사이트
+
+- S3는 정적 웹사이트를 호스팅하고 www에서 액세스 할 수 있다
+- 웹사이트 URL은 다음과 같은 형식을 가진다
+  - <bucket-name>.s3-website-<AWS-region>.amazonaws.com
+  - <bucket-name>.s3-website.<AWS-region>.amazonaws.com
+- 403(Forbidden) 에러를 수신한다면, Bucket 정책 중 public reads가 허용되었는지 확인해볼 것
+
