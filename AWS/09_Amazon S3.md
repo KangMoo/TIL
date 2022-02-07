@@ -203,3 +203,30 @@
   - <bucket-name>.s3-website.<AWS-region>.amazonaws.com
 - 403(Forbidden) 에러를 수신한다면, Bucket 정책 중 public reads가 허용되었는지 확인해볼 것
 
+---
+
+## CORS
+
+- 교차 출처 리소스 공유(Cross-Origin Resource Sharing, CORS)
+- **origin** : 스키마(프로토콜), 호스트(도메인), 포트
+  - ex. https://www.example.com
+    - `https://` : 스키마(프로토콜)
+    - `www.example.com` : 호스트(도메인)
+    - `:443` : 포트. HTTPS 프로토콜의 경우 암시적으로 443 포트 사용. HTTP의 경우 80 포트 사용
+    - 
+- 하나의 main origin에서 로드된 콘텐츠가 다른 origin의 서버에서 사용 가능한 선택된 리소스에 액세스할 수 있도록 하는 **웹 브라우저 기반 메커니즘**
+- 동일한 origin: **http://example.com**/app1 & **http://example.com**/app2
+- 다른 origins: **http://www.example.com** & **http://other.example.com**
+- CORS 헤더(ex. Access-Control-Allow-Origin)를 사용하여 다른 orign에서 요청을 허용하지 않는 한 요청이 이행되지 않는다
+
+![CORS_diagram](./images/08_15.png)
+
+---
+
+### S3 CORS
+
+- 클라이언트가 S3 버킷에 대해 교차 출처 요청을 수행하는 경우 올바른 CORS 헤더를 활성화해야 한다
+- 특정 origin 또는 *(모든 origin)에 대해 허용할 수 있다
+
+![S3_CORS](./images/08_16.png)
+
