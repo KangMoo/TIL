@@ -54,7 +54,7 @@
 ### S3 Objects 암호화
 
 - S3의 Object를 암호화하는 4가지 방법
-  - SSE-S3 : AWS에서 처리및 관리하는 키를 사용하여 S3 객체 암호화
+  - SSE-S3 : AWS에서 처리 및 관리하는 키를 사용하여 S3 객체 암호화
   - SSE-KMS : AWS Key Management Service를 활용하여 암호화 키 관리
   - SSE-C : 자신의 암호화 키를 관리하려는 경우 사용
   - 클라이언트 측 암호화
@@ -66,7 +66,7 @@
 - SSE-S3 : Amazon S3에서 처리 및 관리하는 키를 사용한 암호화
 - Object가 서버 측에서 암호화됨
 - AES-256암호화 유형
-- 다음과 같은 헤더를 설정해야 한다. ex. “x-amz-server-side-encryption": "AES256"
+- 다음과 같은 헤더를 설정해야 한다. `"x-amz-server-side-encryption": "AES256"`
 
 ![SSE-S3](./images/08_10.png)
 
@@ -74,10 +74,11 @@
 
 ### SSE-KMS
 
+- KMS : Key Managemnet Service
 - SSE-KMS : KMS에 의해 관리되는 키를 사용한 암호화
 - KMS의 장점 : 사용자 제어 + 감사 추적 가능
 - Object가 서버 측에서 암호화됨
-- 다음과 같은 헤더를 설정해야 한다. "x-amz-server-side-encryption": "aws:kms"
+- 다음과 같은 헤더를 설정해야 한다. `"x-amz-server-side-encryption": "aws:kms"`
 
 ![SSE-KMS](./images/08_11.png)
 
@@ -85,9 +86,9 @@
 
 ### SSE-C
 
-- SSE-C : AWS외부에서 고객이 완전히 관리하는 데이터 키를 사용한 서버측 암호화
-- Amazon S3는 사용자가 제공한 암호화 키를 저장하지 않는다
-- **HTTPS를 사용해야 한다**
+- SSE-C : AWS외부에서 **고객이 완전히 관리**하는 데이터 키를 사용한 서버측 암호화
+- Amazon S3는 사용자가 제공한 **암호화 키를 저장하지 않는다**
+- 암호화 전송을 위해 **HTTPS를 사용해야 한다**
 - 모든 HTTP 요청에 대해 HTTP 헤더에 암호화 키를 제공해야 한다
 
 ![SSE-C](./images/08_12.png)
@@ -109,7 +110,7 @@
 
 - Amazon S3의 노출 부분은 다음과 같다
   - HTTP Endpoint (암호화 되지 않음)
-  - HTTPS Endpoint (전송 중 암호화)
+  - HTTPS Endpoint (SSL/TLS를 통한 전송 중 암호화)
 
 - Endpoint의 선택은 자유지만 HTTPS 사용을 권장한다
 - 대부부의 클라이언트는 기본적으로 HTTPS Endpoint를 사용한다
@@ -128,9 +129,9 @@
   - Object Access Control List (ACL) - 더 세밀한 조작
   - Bucket Access Control List (ACL) - 덜 자주 사용
 
-- IAM보안 주체는 다음의 경우 Objectdp 접근 가능하다
-  - 사용자 IAM 권한이 이를 허용하거나 리소스 정책이 허용하는 경우
-  - 명시적인 DENY가 없다
+- IAM보안 주체는 다음의 경우 Object에 접근 가능하다
+  - 사용자 IAM 권한이 허용하거나 리소스 정책이 이를 허용하는 경우
+  - 명시적 DENY가 없는 경우
 
 ---
 
@@ -199,8 +200,8 @@
 
 - S3는 정적 웹사이트를 호스팅하고 www에서 액세스 할 수 있다
 - 웹사이트 URL은 다음과 같은 형식을 가진다
-  - <bucket-name>.s3-website-<AWS-region>.amazonaws.com
-  - <bucket-name>.s3-website.<AWS-region>.amazonaws.com
+  - `<bucket-name>.s3-website-<AWS-region>.amazonaws.com`
+  - `<bucket-name>.s3-website.<AWS-region>.amazonaws.com`
 - 403(Forbidden) 에러를 수신한다면, Bucket 정책 중 public reads가 허용되었는지 확인해볼 것
 
 ---
@@ -213,7 +214,7 @@
     - `https://` : 스키마(프로토콜)
     - `www.example.com` : 호스트(도메인)
     - `:443` : 포트. HTTPS 프로토콜의 경우 암시적으로 443 포트 사용. HTTP의 경우 80 포트 사용
-    - 
+
 - 하나의 main origin에서 로드된 콘텐츠가 다른 origin의 서버에서 사용 가능한 선택된 리소스에 액세스할 수 있도록 하는 **웹 브라우저 기반 메커니즘**
 - 동일한 origin: **http://example.com**/app1 & **http://example.com**/app2
 - 다른 origins: **http://www.example.com** & **http://other.example.com**
@@ -230,3 +231,13 @@
 
 ![S3_CORS](./images/08_16.png)
 
+---
+
+### Amazon S3 - 일관성 모델
+
+- 2020년 12월 기준으로 강력한 일관성 제공
+
+- 새로운 객체를 write하거나, overwrite하거나, 기존 object를 삭제한 뒤에
+  - 모든 후속 읽기 요청은 최신 버전의 객체를 즉시 반영하며(쓰기 일관성 후 읽기)  모든 후속 목록 요청은 변경 사항을 즉시 반영한다. (목록 일관성)
+
+- 성능에 미치는 영향 / 추가 비용 없이 사용가능하다
