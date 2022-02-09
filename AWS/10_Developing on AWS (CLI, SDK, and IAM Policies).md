@@ -137,7 +137,3 @@
 ![](./images/10_02.png)
 
 ---
-
-### S3 MFA-Delete
-
-- 
