@@ -1,4 +1,4 @@
-bㅠ# Advanced S3 & Athena
+# Advanced S3 & Athena
 
 ### S3 MFA-Delete
 
@@ -210,3 +210,93 @@ bㅠ# Advanced S3 & Athena
 - 특정 접두사(ex. s3://mybucket/mp3/*)에 대한 규칙을 생성할 수 있다
 - 특정 개체 태그(ex. 부서: 재무)에 대한 규칙을 생성할 수 있다
 
+---
+
+### S3 - Baseline Performance
+
+- Amazon S3 요청량에 따라 자동으로 확장하며, 지연시간은 100-200ms 이다
+- 어플리케이션은 초당 최소 3500개의 PUT/COPY/POST/DELETE요청을, 5500개의 GET/HEAD 요청을 수행할 수 있다 (bucket의 prefix당)
+- 버킷의 접두사 수에는 제한이 없다
+
+---
+
+### S3 - KMS 제한
+
+- SSE-KMS 사용 시 KMS 제한의 영향을 받을 수 있다
+- 업로드시 **GenerateDataKey** KMS 업로드를 호출한다
+- 다운로드시, **Decrypt** KMS API를 호출한다
+- 초당 KMS 할당량은 초당 5500, 10000, 30000 req다. (리전에 따라 다르다) 
+- Service Quotas Console을 사용하여 할당량 증가를 요청할 수 있다
+
+![KMS_Limitation](./images/11_06.png)
+
+---
+
+### S3 성능
+
+- 멀티 파트 업로드
+  - 100MB 이상의 파일의 경우 권장되며, 5GB이상의 파일에는 필수사항이다
+  - 병렬 업로드를 지원하기 때문에 전송 속도의 향상이 있다
+
+![Multi-Part_upload](./images/11_07.png)
+
+- S3 전송 가속
+  - 목표 리전에 있는 S3 버킷으로 데이터를 전달할 AWS 에지 로케이션으로 파일을 전송하여 전송속도를 향상시킨다
+  - 멀티 파트 업로드와 호환 가능하다
+
+![Transfer_Accelertion](./images/11_08.png)
+
+#### S3 Byte Range Fetches
+
+- 특정 바이트의 범위를 GET요청하여 병렬화하는 작업
+- 실패시 복원력을 향상시킬 수 있다
+
+> 다운로드 속도 향상을 위해 사용할 수 있다
+> 
+> ![byte-range-fetches](./images/11_09.png)
+
+> 데이터의 일부분만 검색할 경우 사용할 수 있다 (ex. 헤더파일 검색)
+> 
+> ![byte-range-fetches](./images/11_10.png)
+
+---
+
+### S3 Select & Glacier Select
+
+- 서버 측 필터링을 수행하여 SQL검색 시 더 적은 데이터 검색
+- 행/열로 필터링 할 수 있다 (단순 SQL 문)
+- 효과 : 더 적은 네트워크 전송량, 클라이언트의 더 적은 CPU비용
+
+![byte-range-fetches](./images/11_11.png)
+
+![byte-range-fetches](./images/11_12.png)
+
+---
+
+### S3 이벤트 알림
+
+- S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication ...
+- object의 이름 필터링 가능하다 (ex. *.jpg)
+- 사용 사례 : S3에 업로드된 이미지의 썸네일 생성
+- **원하는 만큼 "S3 이벤트" 생성 가능**
+
+- S3 이벤트 알림은 일반적으로 몇초 안에 전달되지만 몇 분 이상 걸릴 수도 있다
+- 두개의 쓰기 작업이 단일 non-versioned object에서 동시에 발생할 경우, 하나의 이벤트 알림만 발생할 수 있다
+  - 모든 이벤트 알림이 오길 원한다면, versioning을 활성화하면 된다
+
+![event_notifiaction](./images/11_13.png)
+
+---
+
+### Amazon Athena
+
+- **S3 object에 대해 분석을 수행하는 서버리스 쿼리 서비스**
+- 표준 SQL 언어를 사용하여 쿼리한다
+- CSV, JSON, ORC, Avro, Parquet(Presto)을 지원한다
+
+- 비용 : 검색된 데이터 TB당 $5.00
+- 압축된 데이터 또는 열 기반 데이터를 사용하면, 더 적은 비용 (적은 검색)이 든다
+
+- 사용 사례 : Business intelligence / analytics / reporting, analyze & query VPC Flow Logs, ELB Logs, CloudTrail trails, ...
+
+![](./images/11_14.png)
