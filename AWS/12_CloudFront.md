@@ -92,4 +92,64 @@
 
 ### CloudFront Geo Restriction
 
-- 
+- 접근자를 제한 기능
+  - Whitelist : 승인된 국가 목록 중에 속해있는 유저만 허용
+  - BlackList : 금지된 국가 목록 중에 속해있는 유저는 차단
+
+- 국가는 서드파티ㅡ Geo-IP 데이터베이스를 사용하여 결정
+- 사용사례 : 콘텐츠에 대한 액세스를 제어하는 저작권법
+
+---
+
+### CloudFront and HTTPS
+
+- Viewer Protocol Policy
+  - HTTP -> HTTPS로 리다이렉션
+  - HTTPS만 허용
+- Origin Protocol Poliicy (HTTP or S3)
+  - HTTPS만 허용
+  - Match Viewer
+    - 클라이언트가 HTTP 요청하면 HTTP로, HTTPS로 요청하면 HTTPS를 사용
+
+> S3 bucket "웹사이트"는 HTTPS를 지원하지 않는다
+
+![CloudFront and HTTPS](./images/12_06.png)
+
+---
+
+### CloudFront Signed URL / Signed Cookies
+
+- 유료 공유 컨텐츠를 전 세계의 프리미엄 사용자에게 배포할 경우, **뷰어의 액세스를 제한**하기 위해 CloudFront Signed URL / Cookies를 생성할 수 있다
+- URL의 유효기간
+  - 공유콘텐츠 (영화, 음악) : 짧게 설정 권장 (몇 분)
+  - 개인 콘텐츠 : 몇년동안 유지되게끔 설정 권장
+
+- Signed URL : 개별 파일 접근
+- Signed Cookies : 여러 파일 접근
+
+---
+
+### CloudFront Signed URL Diagram
+
+![CloudFront Signed URL Diagram](./images/12_07.png)
+
+---
+
+### CloudFront Signed URL vs S3 Pre-Signed URL
+
+- CloudFront Signed URL
+  - origin에 관계 없이 경로에 대한 액세스 허용
+  - 계정 전체의 key-pair를 이용하거나 루트 관리자만 관리할 수 있음
+  - IP, 경로, 날짜, 만료기간에 따라 필터링 가능
+  - 캐싱 기능 활용 가능
+
+![CloudFront Signed URL](./images/12_08.png)
+
+- S3 Pre-Signed URL
+   - pre-signed된 유저로 요청 발행
+   - IAM 보안 서명의 IAM 키 사용
+   - 제한된 수명
+
+![S3 Pre-Signed URL](./images/12_09.png)
+
+---
