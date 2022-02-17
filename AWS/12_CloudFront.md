@@ -15,8 +15,8 @@
 ### CloudFront - Origins
 
 - S3 Bucket
-  - 파일을 분산하고, 엣지로 캐시화하기 위해
-  - CloudFront의 Origin Access Identity(OAI)로 강화된 보안
+  - 파일을 분산하고, 엣지로 캐시화하기 위해 CloudFront 사용하는 것이 일반적
+  - CloudFront의 Origin Access Identity(OAI)로 강화된 보안 사용 가능
   - CloudFront는 입구로서 사용될 수 있다
 
 - Custom Origin (HTTP)
@@ -139,7 +139,7 @@
 
 - CloudFront Signed URL
   - origin에 관계 없이 경로에 대한 액세스 허용
-  - 계정 전체의 key-pair를 이용하거나 루트 관리자만 관리할 수 있음
+  - 계정 전체의 key-pair를 사용하므로, root만 관리가 가능
   - IP, 경로, 날짜, 만료기간에 따라 필터링 가능
   - 캐싱 기능 활용 가능
 
@@ -148,8 +148,83 @@
 - S3 Pre-Signed URL
    - pre-signed된 유저로 요청 발행
    - IAM 보안 서명의 IAM 키 사용
-   - 제한된 수명
+     - 내가 IAM 보안 주체로 URL에 서명하고, 다른사람이 IAM 키를 사용하여 서명하면, 해당 URL을 가진 사람이 나와 동일한 권한을 갖게 된다
+   - 제한된 수명을 가지고 있음
+
+> 사람들이 CloudFront 배포에 액세스할 수 있도록 하고 S3 앞에 있는 경우 S3 버킷을 OAI로 제한하는 버킷 정책에 의해 S3 버킷에 액세스할 수 없기 때문에 Signed URL을 사용해야 한다
+>
+> S3에 대해 직접 사용하고 CloudFront를 사용하지 않고 직접 파일을 배포하려는 경우 Pre-Signed URL을 사용하면 좋다
+
 
 ![S3 Pre-Signed URL](./images/12_09.png)
 
 ---
+
+### CloudFront Signed URL Process
+
+- 두 가지 유형의 서명자
+  - 신뢰할 수 있는 키 그룹 (권장)
+    - API를 활용하여 키 (그리고 API보안을 위한 IAM) 생성 및 교체 가능
+  - CloudFront 키페어가 포함된 AWS 계정
+    - 루트 계정과 AWS 콘솔을 사용하여 키를 관리
+    - 이 작업에 루트 계정을 사용하면 안 되므로 권장하지 않음
+
+- CloudFront 배포에서 하나 이상의 **신뢰할 수 있는 키 그룹 생성**
+- 자신의 public/private key 생성
+  - private key는 어플리케이션에서 URL에 서명하는데 사용
+  - public key는 CloudFront에서 URL을 확인하는데 사용
+
+---
+
+### CloudFront - 가격
+
+- CloudFront 엣지 로케이션은 전 세계에 분포되어 있고, 엣지 로케이션당 비용은 다양하다
+
+![CloudFront - Pricing](./images/12_10.png)
+
+- 비용 절감을 위해 엣지 로케이션 수를 줄일 수 있고, 이를 위한 세가지 가격 등급이 있다.
+  1. Price Class All : 모든 리전에서 사용 (최고 성능)
+  2. Price Class 200 : 대부분 리전에서 사용 (가장 비싼 리전 제외)
+  3. Price Class 100 : 가장 저렴한 리전만 사용
+
+![CloudFront - Price Class](./images/12_11.png)
+
+---
+
+### CloudFront - Multiple Origin
+
+**Multiple Origin**
+- 콘텐츠 유형에 따라 다른 종류의 origin으로 라우팅할 때 사용
+- 경로 패턴을 기반으로 사용
+  - /images/*
+  - /api/*
+  - /*
+  - ...
+
+![CloudFront - Multiple Origin](./images/12_12.png)
+
+---
+
+### CloudFront - Origin Groups
+
+**Origin Groups**
+- Origin Group : 하나의 기본 오리진과 보조 오리진을 가지고 있는 그룹
+  - 기본 오리진이 실패하면 보조 오리진이 사용된다
+- 고가용성, 장애복구를 위해 사용
+
+![CloudFront - Origin Groups](./images/12_13.png)
+
+---
+
+### CloudFront - Field Level Encryption
+
+**Field Level Encryption**
+- 어플리케이션 스택을 통한 사용자 민감 정보 보호
+- HTTPS와 함께 추가적인 보안 계층 추가
+- 민감한 정보는 사용자와 가까운 엣지에서 암호화
+- 비대칭 암호화 사용
+- 사용법
+  - 암호화하려는 POST 요청의 필드 세트 지정 (최대 10개 필드)
+  - 암호화할 공개 키 지정
+
+![CloudFront - Field Level Encryption](./images/12_14.png)
