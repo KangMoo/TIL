@@ -1,6 +1,8 @@
 # Route 53
 
-## Route 53 - Records
+## Route 53
+
+### Records
 
 - 도메인에 대한 트래픽 라우팅 방법
 - 각 레코드에 포함되는 정보
@@ -25,9 +27,7 @@
 > ![](./images/07_01.png)
 > ![](./images/07_02.png)
 
----
-
-### Route 53 - Record Types
+### Record Types
 
 - A : 호스트네임을 IPv4에 매핑
   - IP주소와 도메인 주소를 매핑할 때 사용하는 레코드로써 하나의 도메인에 여러 개의 IP 주소를 등록할 수 있습니다.
@@ -47,9 +47,7 @@
 >
 > Zone Apex는 루트 도메인, 네이키드 도메인(Naked Domain)이라고도 하며. 이름 그대로 서브 도메인이 붙지 않은 상태를 뜻한다. DNS RFC(RFC 1033)에 루트 도메인은 A 레코드만 지정할 수 있다고 정의되어 있다.
 
----
-
-### Route 53 - Hosted Zones
+### Hosted Zones
 
 - 트래픽을 도메인 및 해당 하위 도메인으로 라우팅하는 방법을 정의하는 레코드용 컨테이너
 - **Public Hosted Zones** : 인터넷 (공개 도메인 이름)에서 트래픽을 라우팅 하는 방법을 지정하는 레코드를 포함
@@ -58,9 +56,7 @@
 
 ![Hosted_zones](./images/07_03.png)
 
----
-
-### Route 53 - Records TTL (Time To Live)
+### Records TTL (Time To Live)
 
 - **Alias 레코드를 제외하고 각 DNS 레코드에 대해 TTL은 필수적이다**
 - High TTL - ex. 24 hr
@@ -68,8 +64,6 @@
 - Low TTL - ex. 60 sec
   - Route 53에 부하가 많지만, 사용자가 비교적 최신의 record를 사용할 수 있다
   - record를 자주 변경할 수 있다
-
----
 
 ### CNAME vs Alias
 
@@ -92,9 +86,7 @@
 - 무료
 - 네이티브 health check
 
----
-
-### Route 53 - Alias Records
+### Alias Records
 
 - 호스트네임을 AWS 리소스에 매핑
 - DNS 기능 확장
@@ -106,9 +98,7 @@
 
 ![alias](./images/07_04.png)
 
----
-
-### Route 53 - Alias Record 대상
+### Alias Record 대상
 
 - Elastic Load Balanacer
 - CloudFront Distributions
@@ -120,9 +110,41 @@
 - Route 53 record (같은 호스트 존에 있는 경우)
 - **EC2 DNS 이름에는 Alias record 설정이 불가능하다**
 
----
+### 상태 검사
 
-### Route 53 - Routing 정책
+- HTTP 상태 확인은 public 리소스 전용이다
+- 상태확인 -> 자동 장애 조정
+  1. 엔드포인트를 모니터링하는 상태 확인 (어플리케이션, 서버, 다른 AWS 리소스)
+  2. 다른 상태 확인을 모니터링하는 상태 확인 (Calculated Health check : And, Or, Not을 사용해 상태 확인의 결과를 단일 값으로 결합할 수 있다)
+  3. CloudWatch 경보를 모니터링하는 상태 확인 (DynamoDB의 스로틀, RDS에 대한 경보, 사용자 지정 지표 등 private 자원 사용시 유용)
+- 상태 확인은 CW 지표와 통합된다 (CloudWatch로도 확인 가능)
+
+![health_check](./images/07_08.png)
+
+#### 엔드포인트 모니터링
+
+- 약 15개의 글로벌 상태 검사가 엔드포인트 상태를 확인한다
+  - 정상/비정상 임계치 - 기본값 : 3
+  - 상태 확인 간격 - 30초 (10초로 설정도 가능하지만 비용이 더 든다)
+  - 지원되는 프로토콜 : HTTP, HTTPS, TCP
+  - 18% 이상의 상태 검사기가 엔드포인트 상태가 정상이라 판단하면, Route 53이 해당 엔드포인트를 정상이라고 간주한다.
+  - 사용할 Route 53의 위치 선택 가능
+- 상태 검사는 엔드포인트가 2xx, 3xx 상태코드로 응답할경우에만 통과한다
+- 상태 검사는 응답의 처음 **5120 바이트**에 있는 텍스트를 기반으로 통과/실패하도록 설정 가능하다
+- Route 53 상태 검사기에서 들어오는 요청을 허용하도록 라우터/방화벽을 구성해야 한다
+
+![health_check](./images/07_09.png)
+
+> Calculated Health Checks
+> 
+> - OR, AND, NOT을 사용하여 여러 상태 검사의 결과를 하나의 상태 검사 결과로 조합해준다
+> - 256개의 자식 상태 검사를 모니터링할 수 있다
+> - 상위 상태 검사르 통과하기 위해 통과해야하는 상태 검사의 수를 지정해야 한다
+> - ex. 모든 상태 확인이 실패하지 않도록 웹사이트 유지 관리 수행
+> 
+> ![calculated_health_check](./images/07_10.png)
+
+### Routing 정책
 
 - Route 53이 DNS 쿼리에 응답하는 방식 정의
 - "Routing"이라는 단어때문에 헷갈리지 말것
@@ -145,9 +167,7 @@
   - Multi-Value Answer - 다중 응답 라우팅 정책
     - Route 53이 DNS 쿼리에 무작위로 선택된 최대 8개의 정상 레코드로 응답하게 하려는 경우에 사용
 
----
-
-### Routing 정책 - Simple
+#### Simple 라우팅 정책
 
 - 일반적으로 트래픽을 단일 리소스로 라우팅
 - 동일한 레코드에 여러 값 지정 가능
@@ -157,9 +177,7 @@
 
 ![route53_simple](./images/07_05.png)
 
----
-
-### Routing 정책 - Weighted
+#### Weighted 라우팅 정책
 
 - 특정 리소스로 이동하는 요청의 비율을 제어
 - 각 레코드에 상대적인 가중치를 기록한다
@@ -173,9 +191,7 @@
 
 ![route53_weighted](./images/07_06.png)
 
----
-
-### Routing 정책 - Latency based
+#### Latency based 라우팅 정책
 
 - 최소한의 지연을 위해 가장 가까운 곳으로 리다이렉션
 - 낮은 지연시간이 필요할 때 유용하다
@@ -184,67 +200,21 @@
 
 ![route53_latency_based](./images/07_07.png)
 
----
-
-### Route 53 - 상태 확인
-
-- HTTP 상태 확인은 public 리소스 전용이다
-- 상태확인 -> 자동 장애 조정
-  1. 엔드포인트를 모니터링하는 상태 확인 (어플리케이션, 서버, 다른 AWS 리소스)
-  2. 다른 상태 확인을 모니터링하는 상태 확인 (Calculated Health check : And, Or, Not을 사용해 상태 확인의 결과를 단일 값으로 결합할 수 있다)
-  3. CloudWatch 경보를 모니터링하는 상태 확인 (DynamoDB의 스로틀, RDS에 대한 경보, 사용자 지정 지표 등 private 자원 사용시 유용)
-- 상태 확인은 CW 지표와 통합된다 (CloudWatch로도 확인 가능)
-
-![health_check](./images/07_08.png)
-
----
-
-### 상태 검사 - 엔드포인트 모니터링
-
-- 약 15개의 글로벌 상태 검사가 엔드포인트 상태를 확인한다
-  - 정상/비정상 임계치 - 기본값 : 3
-  - 상태 확인 간격 - 30초 (10초로 설정도 가능하지만 비용이 더 든다)
-  - 지원되는 프로토콜 : HTTP, HTTPS, TCP
-  - 18% 이상의 상태 검사기가 엔드포인트 상태가 정상이라 판단하면, Route 53이 해당 엔드포인트를 정상이라고 간주한다.
-  - 사용할 Route 53의 위치 선택 가능
-- 상태 검사는 엔드포인트가 2xx, 3xx 상태코드로 응답할경우에만 통과한다
-- 상태 검사는 응답의 처음 **5120 바이트**에 있는 텍스트를 기반으로 통과/실패하도록 설정 가능하다
-- Route 53 상태 검사기에서 들어오는 요청을 허용하도록 라우터/방화벽을 구성해야 한다
-
-![health_check](./images/07_09.png)
-
----
-
-### Route 53 - Calculated Health Checks
-
-- OR, AND, NOT을 사용하여 여러 상태 검사의 결과를 하나의 상태 검사 결과로 조합해준다
-- 256개의 자식 상태 검사를 모니터링할 수 있다
-- 상위 상태 검사르 통과하기 위해 통과해야하는 상태 검사의 수를 지정해야 한다
-- ex. 모든 상태 확인이 실패하지 않도록 웹사이트 유지 관리 수행
-
-![calculated_health_check](./images/07_10.png)
-
----
-
-### Health Checks - Private Hosted Zones
+#### Private Hosted Zones
 
 - Route 53 상태 검사기는 VPC 외부에 있기 때문에 **private 엔드포인트로 접근이 불가능**하다
 - CloudWatch 지표를 생성하고, CloudWatch 알람을 연결한 다음 경보 자체를 확인하여 상태 검사가 가능하다
 
 ![health_check_private_hosted_zones](./images/07_11.png)
 
----
-
-### Routing 정책 - FailOver
+#### FailOver 라우팅 정책
 
 - Primary, Secondary 두 개의 레코드를 지정하며, Primary 레코드가 정상상태이면 Route 53은 Primary Record를 반환하고, 비정상상태라면 장애조치를 위해 Secondrary Record를 반환한다
   - 원한다면 Secondary도 상태 검사를 수행할 수 있다
 
 ![health_check_failover](./images/07_12.png)
 
----
-
-### Routing 정책 - Geolocation
+#### Geolocation 라우팅 정책
 
 - **사용자 위치를 기반으로 하는 라우팅**
 - 대륙, 국가, 미국 주 별로 위치를 지정하여 사용 (중복되는 경우 가장 정확한 위치가 선택됨)
@@ -252,10 +222,7 @@
 - Latency-based와는 다르다!
 - ex. 웹사이트 현지화, 콘텐츠 배포 제한, 로드 밸런싱, ...
 - 상태 검사를 수행할 수 있다
-
----
-
-### Routing 정책 - Geoproximity
+#### Geoproximity 라우팅 정책
 
 - 트래픽 흐름 전용
 - 사용자 및 리소스의 지리적 위치를 기반한 리소스로 트래픽을 라우팅한다
@@ -279,9 +246,7 @@
 > 
 > ![traffic_flow](./images/07_15.jpg)
 
----
-
-### Routing 정책 - Multi-Value
+#### Multi-Value 라우팅 정책
 
 - 여러 리소스로 트래픽을 라우팅할 때 사용
 - Route 53은 여러개 값/리소스를 반환한다
@@ -290,8 +255,6 @@
 - **Multi-Value는 ELB를 대체할 수 없다**
 
 ![multi_value](./images/07_16.jpg)
-
----
 
 ### Domain Registar vs Domain Service
 
@@ -302,8 +265,6 @@
 - ex. GoDaddy에서 도메인을 구입하고 Route 53을 사용하여 DNS 레코드를 관리
 
 ![](./images/07_17.png)
-
----
 
 ### Amazon Route 53 & 서드파티 등록 대행자
 

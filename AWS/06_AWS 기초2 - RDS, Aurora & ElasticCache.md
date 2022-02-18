@@ -1,6 +1,8 @@
 # AWS 기초 - RDS, Aurora & ElasticCache
 
-## AWS RDS 개요
+## AWS RDS
+
+### 개요
 
 - Relational Database Service
 - SQL 쿼리 언어를 사용하는 DB 서비스
@@ -25,9 +27,7 @@
 >
 > 하지만, SSH로 인스턴스에 접속할 수 없다는 단점도 있다
 
----
-
-### RDS 백업
+### 백업
 
 - RDS 백업은 자동으로 활성화된다
 - 자동 백업
@@ -39,9 +39,7 @@
   - 사용자가 만들 수 있다
   - 원하는 기간만큼 백업 보존이 가능하다
 
----
-
-### RDS - Storage Auto Scaling
+### Storage Auto Scaling
 
 - RDS DB 인스턴스의 용량을 동적으로 늘릴 수 있게 해준다
 - RDS의 저장공간이 없어지면 자동으로 용량이 확장된다
@@ -54,9 +52,7 @@
 - 예측하기 어려운 워크로드를 가진 어플리케이션에 유용하다
 - 모든 RDS 데이터베이스 엔진을 지원한다 (MariaDB, MySQL, PostgreSQL, SQL Server, Oracle)
 
----
-
-### RDS - 읽기 확장성을 위한 읽기 전용 복제본
+### 읽기 확장성을 위한 읽기 전용 복제본
 
 - 최대 5개의 읽기 전용 복제본
 - 동일 AZ, 서로 다른 AZ 어디서든 복제본 생성 가능
@@ -72,9 +68,7 @@
 >
 > ![RDS_repl_network_cost](./images/06_02.png)
 
----
-
-### RDS Multi AZ (재해 복구)
+### Multi AZ (재해 복구)
 
 - **동기적**으로 복제
 - 하나의 DNS 이름 사용 – 대기 모드로의 자동 앱 장애 조치
@@ -87,9 +81,7 @@
 
 ![RDS_Multi_AZ](./images/06_03.png)
 
----
-
-### RDS - 단일 AZ -> Multi-AZ
+### 단일 AZ -> Multi-AZ
 
 - DB를 멈출 필요가 없음
 - DB 복제 과정
@@ -99,9 +91,7 @@
 
 ![](./images/06_04.png)
 
----
-
-### RDS 보안 - 암호화
+### 암호화
 
 - At rest Encryption
   - 저장시 암호화
@@ -114,9 +104,7 @@
   - 전송 중인 RDS로 데이터를 암호화하는 SSL 인증서 사용
   - 데이터베이스에 연결할 때 신뢰 인증서와 함께 SSL 옵션 제공
 
----
-
-### RDS 암호화 작업
+### 암호화 작업
 
 - RDS 백업 암호화
   - 암호화되지 않은 RDS 데이터베이스의 스냅샷은 암호화되지 않는다
@@ -128,9 +116,7 @@
   3. 암호화된 스냅샷에서 데이터베이스 복원
   4. 애플리케이션을 새 데이터베이스로 마이그레이션하고 이전 데이터베이스 삭제
 
----
-
-### RDS 보안 - 네트워크 & IAM
+### 보안 - 네트워크 & IAM
 
 - 네트워크 보안
   - RDS 데이터베이스는 일반적으로 퍼블릭 서브넷이 아닌 프라이빗 서브넷 내에 배포된다
@@ -142,9 +128,7 @@
   - 기존 사용자 이름 및 암호를 사용하여 데이터베이스에 로그인이 가능하다
   - IAM 기반 인증을 사용하여 RDS MySQL 및 PostgreSQL에 로그인이 가능하다
 
----
-
-### RDS - IAM 인증
+### IAM 인증
 
 - IAM 데이터베이스 인증은 MySQL 및 PostgreSQL에서 동작한다
 - 암호가 필요 없고 IAM 및 RDS API 호출을 통해 얻은 인증 토큰만 있으면 된다
@@ -153,8 +137,6 @@
   - 네트워크 입/출력은 SSL을 사용하여 암호화되어야 한다
   - DB 대신 사용자를 중앙에서 관리하는 IAM
   - 손쉬운 통합을 위해 IAM 역할 및 EC2 인스턴스 프로필 활용 가능
-
----
 
 ### RDS 보안 요약
 
@@ -185,9 +167,7 @@
 - 장애조치가 즉각적이고 HA가 기본이다
 - RDS보다 비싸지만 더 효율적이다
 
----
-
-### Aurora 고가용성 및 읽기 확장
+### 고가용성 및 읽기 확장
 
 - 하나의 Aurora 인스턴스에서 Write(마스터)
 - 30초 이내에 마스터에 대한 자동 장애 조치
@@ -196,9 +176,7 @@
 
 ![Aurora](./images/06_05.png)
 
----
-
-### Aurora 특징
+### 특징
 
 - 자동 장애 조치
 - 백업 및 복구
@@ -210,9 +188,7 @@
 - 일상적인 유지보수
 - 역추적: 백업을 사용하지 않고 언제든지 데이터 복원
 
----
-
-### Aurora 보안
+### 보안
 
 - RDS와 동일한 엔진을 사용하기 때문에 RDS와 유사
 - KMS를 사용한 저장 데이터 암호화
@@ -235,9 +211,9 @@
 - AWS에서 OS 유지 관리/패치, 최적화 설정, 구성, 모니터링, 실패 복구 및 백업을 처리한다
 - **ElastiCache를 사용하기 위해서 많은양의 어플리케이션 코드의 변경이 필요하다**
 
----
+### ElastiCahce Solution Architecture
 
-### ElastiCahce Solution Architecture - DB Cache
+#### DB Cache
 
 - 어플리케이션은 ElastiCache를 쿼리하며 사용할 수 없는 경우 RDS에서 가져와 ElastiCache에 저장한다
 - RDS의 부하를 완화하는데 도움이 된다
@@ -245,9 +221,7 @@
 
 ![ElastiCahce](./images/06_06.png)
 
----
-
-### ElastiCahce Solution Architecture - User Session Store
+#### User Session Store
 
 - 유저가 임이의 어플리케이션에 로그인한다
 - 어플리케이션이 세션 데이터를 ElastiCache에 기록
@@ -255,8 +229,6 @@
 - 인스턴스가 데이터를 검색하고 사용자가 이미 로그인 되어있음
 
 ![ElastiCahce](./images/06_07.png)
-
----
 
 ### ElastiCache – Redis vs Memcached
 
@@ -279,8 +251,6 @@
 
 ![MEMCACHED](./images/06_09.png)
 
----
-
 ### ElastiCache - Cache Security
 
 - ElastiCache의 모든 캐시
@@ -295,9 +265,9 @@
 
 ![](./images/06_10.png)
 
----
+### ElastiCache Replication
 
-### ElastiCache Replication: 클러스터 모드 비활성화된 경우
+#### 클러스터 모드 비활성화된 경우
 
 - 기본 노드 1개, 복제본 최대 5개
 - 비동기식 복제
@@ -310,9 +280,7 @@
 
 ![](./images/06_11.png)
 
----
-
-### ElastiCache Replication: 클러스터 모드 활성화된 경우
+#### 클러스터 모드 활성화된 경우
 
 - 데이터가 샤드에 분할됨 (쓰기 확장에 유용)
 - 각 샤드에는 기본 노드와 최대 5개의 복제본 데이터가 존재
@@ -325,8 +293,6 @@
 
 ![](./images/06_12.png)
 
-
----
 
 ### 캐싱 디자인 패턴
 
@@ -357,7 +323,6 @@
       - Lazy Loading과 Write-through 캐싱을 결합하는것이 권장됨
 
 ![](./images/06_14.png)
-
 
 #### 캐시 제거 및 TTL (Time-to-Live)
 

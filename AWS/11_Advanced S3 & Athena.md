@@ -1,6 +1,8 @@
 # Advanced S3 & Athena
 
-### S3 MFA-Delete
+## S3
+
+### MFA-Delete
 
 - MFA는 사용자가 S3에서 중요한 작업을 수행하기 전에 디바이스에서 코드를 생성하도록 한다
 - MFA-Delete를 사용하려면 S3 버킷에서 버전 관리를 활성화해야 한다
@@ -13,9 +15,7 @@
 - **버킷 소유자 (루트 계정)만 MFA-Delete를 활성화/비활성화 할 수 있다**
 - MFA-Delete는 현재 CLI를 통해서만 활성화할 수 있다
 
----
-
-### S3 Default Encryption vs Bucket Policies
+### Default Encryption vs Bucket Policies
 
 - "암호화를 강제"하는 한 가지 방법은 버킷 정책을 사용하고 암호화 헤더 없이 S3 객체를 PUT하는 API 호출을 거부하는 것이다
 - 또 다른 방법은 S3의 "기본 암호화" 옵션을 사용하는 것이다
@@ -25,9 +25,7 @@
 
 ![](./images/11_01.png)
 
----
-
-### S3 Access Logs
+### Access Logs
 
 - 감시 목적으로 S3 버킷에 대한 모든 액세스를 기록할 수 있다
 - 승인 또는 거부된 모든 계정에서 S3에 대한 모든 요청은 다른 S3 버킷에 기록된다
@@ -42,9 +40,7 @@
 > 
 > ![S3_Access_Logs_Warning](./images/11_03.png)
 
----
-
-### S3 Replication (CRR & SRR)
+### Replication (CRR & SRR)
 
 - 소스 및 대상에서 버전 관리를 활성화해야 한다
 - 버킷은 다른 계정에 있을 수 있다
@@ -67,9 +63,7 @@
 > - "연쇄"복제 기능은 없다
 >   - A-Bucket 에 대한 복제본 B-Bucket이 있고, B-Bucket 에 대한 복제본 C-Bucket이 있을 때, A-Bucket에서 생성된 Object는 C-Bucket으로 복제되지 않는다
 
----
-
-### S3 Pre-Signed URLS
+### Pre-Signed URLS
 
 - SDK 또는 CLI를 사용하여 pre-signed URL 생성 가능
   - 다운로드용 : 쉬움. CLI사용 가능
@@ -82,9 +76,7 @@
   - URL을 동적으로 생성하여 끊임없이 변화하는 사용자 목록이 파일을 다운로드하도록 허용
   - 일시적으로 사용자가 버킷의 정확한 위치에 파일을 업로드할 수 있도록 허용
 
----
-
-## S3 스토리지 클래스
+### 스토리지 클래스
 
 - Amazon S3 Standard - General Purpose
 - Amazon S3 Standard - Infrequent Access (IA)
@@ -94,9 +86,7 @@
 - Amazon Glacier Deep Archive
 - Amzaon S3 Reduced Redundancy Storage (deprecated-omitted)
 
----
-
-### S3 Standard - General Purpose
+**S3 Standard - General Purpose**
 
 - 멀티 AZ에서 Object의 높은 내구성 (99.999999999%)
 - Amazon S3에 10,000,000 개의 object를 저장하는 경우 평균적으로 10,000년마다 한 번 단일 object 손실이 발생할 것으로 예상할 수 있다
@@ -104,9 +94,7 @@
 - 2개의 동시 시설 장애 유지
 - 사용 사례 : 빅데이터 분석, 모바일 및 게임 어플리케이션, 콘텐츠 배포
 
----
-
-### S3 Standard - Infrequent Access (IA)
+**S3 Standard - Infrequent Access (IA)**
 
 - 액세스 빈도가 낮지만 필요할 때 신속하게 액세스해야 하는 데이터에 적합
 - 멀티 AZ에서 object의 높은 내구성 (99.999999999%)
@@ -115,9 +103,7 @@
 - 2개의 동시 시설 장애 유지
 - 사용 사례 : 재해 복구, 백업을 위한 데이터 저장소 ...
 
----
-
-### S3 One Zone - Infrequent Access (IA)
+**S3 One Zone - Infrequent Access (IA)**
 
 - IA와 동일하지만 데이터가 단일 AZ에 저장된다
 - 단일 AZ에서 object의 높은 내구성 (99.999999999%)
@@ -127,9 +113,7 @@
 - IA에 비해 저렴한 비용 (20%)
 - 사용 사례 : 온프레미스의 보조 백업 복사본 저장, 재생성 가능한 데이터의 저장
 
----
-
-### S3 Intelligent Tiering
+**S3 Intelligent Tiering**
 
 - S3 Standard와 동일한 짧은 대기 시간 및 높은 처리량 성능
 - 적은 월간 모니터링 및 자동 계층화 요금
@@ -137,8 +121,6 @@
 - 멀티 AZ에서 object의 높은 내구성 (99.999999999%)을 위해 설계됨
 - 전체 가용 영역에 영향을 미치는 이벤트에 대해 탄력적이다
 - 주어진 연도 동안 99.9%의 가용성을 위해 설계됨
-
----
 
 ### Amazon Glacier
 
@@ -150,9 +132,7 @@
 - Glacier의 각 항목은 "**Archive**"(최대 40TB)라고 한다
 - 아카이브는 "**Vaults**"에 저장된다
 
----
-
-### Amazon Glacier & Glacier Deep Archive
+#### Glacier Deep Archive
 
 - Amazon Glacier
   - 최소 보관 기간 90일
@@ -166,8 +146,6 @@
   - 최소 보관 기간 180일
   - Standard (12시간)
   - Bulk (48시간)
-
----
 
 ### S3 Storage Class 비교
 
@@ -185,8 +163,6 @@
 |검색 시간|즉시|즉시|즉시|즉시|Expedited(1-5분)</br>Standard(3-5시간)</br>Bulk(5-12시간)|Standard(12시간)</br>Bulk(48시간)|
 |모니터링 비용(object 1000개당)||$0.0025|||||
 
----
-
 ### S3 - Storage Class간 이동
 
 - 스토리지 클래스 간에 object를 전환할 수 있다
@@ -195,8 +171,6 @@
 - **수명 주기 구성**을 사용하여 object 이동을 자동화할 수 있다
 
 ![](./images/11_05.png)
-
----
 
 ### S3 LifeCycle 규칙
 
@@ -210,15 +184,11 @@
 - 특정 접두사(ex. s3://mybucket/mp3/*)에 대한 규칙을 생성할 수 있다
 - 특정 개체 태그(ex. 부서: 재무)에 대한 규칙을 생성할 수 있다
 
----
-
 ### S3 - Baseline Performance
 
 - Amazon S3 요청량에 따라 자동으로 확장하며, 지연시간은 100-200ms 이다
 - 어플리케이션은 초당 최소 3500개의 PUT/COPY/POST/DELETE요청을, 5500개의 GET/HEAD 요청을 수행할 수 있다 (bucket의 prefix당)
 - 버킷의 접두사 수에는 제한이 없다
-
----
 
 ### S3 - KMS 제한
 
@@ -229,8 +199,6 @@
 - Service Quotas Console을 사용하여 할당량 증가를 요청할 수 있다
 
 ![KMS_Limitation](./images/11_06.png)
-
----
 
 ### S3 성능
 
@@ -259,8 +227,6 @@
 > 
 > ![byte-range-fetches](./images/11_10.png)
 
----
-
 ### S3 Select & Glacier Select
 
 - 서버 측 필터링을 수행하여 SQL검색 시 더 적은 데이터 검색
@@ -270,8 +236,6 @@
 ![byte-range-fetches](./images/11_11.png)
 
 ![byte-range-fetches](./images/11_12.png)
-
----
 
 ### S3 이벤트 알림
 
@@ -288,7 +252,7 @@
 
 ---
 
-### Amazon Athena
+## Amazon Athena
 
 - **S3 object에 대해 분석을 수행하는 서버리스 쿼리 서비스**
 - 표준 SQL 언어를 사용하여 쿼리한다

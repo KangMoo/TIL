@@ -1,7 +1,5 @@
 # CloudFront
 
----
-
 ### AWS CloudFront
 
 - Content Delevery Network (CDN)
@@ -10,9 +8,7 @@
 - DDos 보호, shield 및 웹 애플리케이션 방화벽과의 통합을 제공
 - 외부 HTTPS를 노출하고 내부 HTTPS 백엔드와 통신할 수 있다
 
----
-
-### CloudFront - Origins
+#### Origins
 
 - S3 Bucket
   - 파일을 분산하고, 엣지로 캐시화하기 위해 CloudFront 사용하는 것이 일반적
@@ -25,25 +21,21 @@
   - S3 Website (먼저 버킷을 정적 S3 웹사이트로 활성화시켜야 한다)
   - 원하는 모든 HTTP 포트
 
----
-
 > **CloudFront at high level**
 > 
 > ![CloudFront at high level](./images/12_01.png)
-
----
-
+> 
+> ---
+> 
 > **CloudFront - S3 as an Origin**
 > 
 > ![CloudFront - S3 as an Origin](./images/12_02.png)
-
----
-
+> 
+> ---
+> 
 > **CloudFront - ALB or EC2 as an origin**
 >
 > ![CloudFront - ALB or EC2 as an origin](./images/12_03.png)
-
----
 
 ### CloudFront 지역 제한
 
@@ -53,8 +45,6 @@
 
 - "국가"는 서드파티의 Geo-IP 데이터베이스를 사용하여 결정한다
 - 사용 사례 : 콘텐츠에 대한 접근 통제를 위한 저작권법
-
----
 
 ### CloudFront vs S3 Cross Region Replication
 
@@ -69,9 +59,7 @@
   - 읽기 전용이다
   - **일부 지역에서 빠르게 제공되어야 하는 콘텐츠에 적합**
 
----
-
-### CloudFront Caching
+### Caching
 
 - Cache 체크 기준
   - 헤더
@@ -88,9 +76,8 @@
 > 
 > ![](./images/12_05.png)
 
----
 
-### CloudFront Geo Restriction
+### Geo Restriction
 
 - 접근자를 제한 기능
   - Whitelist : 승인된 국가 목록 중에 속해있는 유저만 허용
@@ -98,8 +85,6 @@
 
 - 국가는 서드파티ㅡ Geo-IP 데이터베이스를 사용하여 결정
 - 사용사례 : 콘텐츠에 대한 액세스를 제어하는 저작권법
-
----
 
 ### CloudFront and HTTPS
 
@@ -115,8 +100,6 @@
 
 ![CloudFront and HTTPS](./images/12_06.png)
 
----
-
 ### CloudFront Signed URL / Signed Cookies
 
 - 유료 공유 컨텐츠를 전 세계의 프리미엄 사용자에게 배포할 경우, **뷰어의 액세스를 제한**하기 위해 CloudFront Signed URL / Cookies를 생성할 수 있다
@@ -127,13 +110,9 @@
 - Signed URL : 개별 파일 접근
 - Signed Cookies : 여러 파일 접근
 
----
-
 ### CloudFront Signed URL Diagram
 
 ![CloudFront Signed URL Diagram](./images/12_07.png)
-
----
 
 ### CloudFront Signed URL vs S3 Pre-Signed URL
 
@@ -158,8 +137,6 @@
 
 ![S3 Pre-Signed URL](./images/12_09.png)
 
----
-
 ### CloudFront Signed URL Process
 
 - 두 가지 유형의 서명자
@@ -174,9 +151,7 @@
   - private key는 어플리케이션에서 URL에 서명하는데 사용
   - public key는 CloudFront에서 URL을 확인하는데 사용
 
----
-
-### CloudFront - 가격
+### 가격
 
 - CloudFront 엣지 로케이션은 전 세계에 분포되어 있고, 엣지 로케이션당 비용은 다양하다
 
@@ -189,9 +164,7 @@
 
 ![CloudFront - Price Class](./images/12_11.png)
 
----
-
-### CloudFront - Multiple Origin
+### Multiple Origin
 
 **Multiple Origin**
 - 콘텐츠 유형에 따라 다른 종류의 origin으로 라우팅할 때 사용
@@ -203,9 +176,7 @@
 
 ![CloudFront - Multiple Origin](./images/12_12.png)
 
----
-
-### CloudFront - Origin Groups
+### Origin Groups
 
 **Origin Groups**
 - Origin Group : 하나의 기본 오리진과 보조 오리진을 가지고 있는 그룹
@@ -214,9 +185,7 @@
 
 ![CloudFront - Origin Groups](./images/12_13.png)
 
----
-
-### CloudFront - Field Level Encryption
+### Field Level Encryption
 
 **Field Level Encryption**
 - 어플리케이션 스택을 통한 사용자 민감 정보 보호
