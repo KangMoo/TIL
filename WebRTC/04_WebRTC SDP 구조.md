@@ -12,11 +12,11 @@
 
 ### WebRTC SDP의 구조
 
-![WebRTC SDP Example](./images/05_1.png)
+![WebRTC SDP Example](./images/04_1.png)
 
 
 
-![WebRTC 구조](./images/05_2.png)
+![WebRTC 구조](./images/04_2.png)
 
 ### SDP 상세설명
 
