@@ -108,3 +108,73 @@
 - 확장하려면 작업 번호를 늘리면 되며 이 과정은 단순하고 쉽다. 더 이상 EC2가 필요없다
 
 ## ECS
+
+### IAM Roles Deep Dive
+
+- EC2 Instance 프로필
+  - ECS 에이전트에서 사용
+  - ECS 서비스에 대한 API 호출
+  - CloutWatch Logs에 컨테이너 로그 보내기
+  - ECR에서 Docker 이미지 가져오기
+
+- ECS 작업 역할
+  - 각 작업이 다른 특정 역할을 갖도록 허용
+  - 실행하려는 다양한 ECS 서비스에 대해 다른 역할을 사용
+  - 작업 역할은 **작업 정의**에 정의되어 있다
+
+![](./images/13_07.png)
+
+### ECS 작업 영역
+
+- **개요**
+  - EC2 유형의 작업이 시작되면 ECS는 CPU, 메모리 및 사용가능한 포트의 제약으로 작업을 배치할 위치를 결정해야 한다
+  - 마찬가지로 서비스가 축소되면 ECS는 종료할 작업을 결정해야한다
+  - 이를 지원하기 위해 **작업 배치 전략** 및 **작업 배치 제약**을 정의할 수 있다
+    - 이는 Fargate가 아닌 EC2가 있는 ECS만 해당한다
+
+- **처리 과정**
+  1. 작업 정의에서 CPU, 메모리 및 포트 요구 사항을 충족하는 인스턴스 식별
+  2. 작업 배치 제약 조건을 충족하는 인스턴스 식별
+  3. 작업 배치 전략을 충족하는 인스턴스 식별
+  4. 작업 배치를 위한 인스턴스 선택
+
+![](./images/13_08.png)
+
+#### 작업 배치 전략
+
+- **Binpack**
+  - 사용 가능한 최소 CPU 또는 메모리 양을 기준으로 작업 배치
+  - 사용중인 인스턴스 수 최소화 (비용 절감)
+  - ```json 
+    "placementStrategy": [
+      {
+        "field": "memory",
+        "type": "binpack"
+      }
+    ]
+    ```
+  - ![](./images/13_09.png)
+
+- **Random**
+  - 랜덤하게 작업 배치
+  - ```json 
+    "placementStrategy": [
+      {
+        "type": "random"
+      }
+    ]
+    ```
+  - ![](./images/13_09.png)
+
+- **Spread**
+  - 지정된 값에 다라 균등하게 작업 배치
+  - 예 : `instancId`, `attribute:ecs.availability-zone`
+  - ```json 
+    "placementStrategy": [
+      {
+        "field": "attribute:ecs.availability-zone",
+        "type": "spread"
+      }
+    ]
+    ```
+  - ![](./images/13_10.png)
