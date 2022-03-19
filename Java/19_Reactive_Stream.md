@@ -4,6 +4,18 @@
 
 Reactive Stream 이란 non-blocking backPressure를 이용하여 비동기 서비스를 할 때 기본이 되는 스펙이다. Java의 RxJava, Spring5 Webflux의 Core에 있는 ProjectReactor 프로젝트 모두 해당 스펙을 따르고 있다. 또한 Java9에서 추가된 Flow역시 Reactive Stream 스펙을 채태가여 사용하고 있다. 따라서 비동기 플로젝트를 잘 이해하기 위해서는 기본 스펙이 되는 Reactive Stream에 대해서 이해가 필요하다.
 
+### 명령형 프로그래밍 vs 반응형 프로그래밍
+
+- **명령형 프로그래밍**
+  - 작성된 코드가 순서대로 실행되는 방식의 프로그래밍
+  - 코드가 순서대로 실행되는 것은 개발자가 작성한 조건문, 반복문 또는 함수 호출 등에 의해 컴파일러가 다른 코드로 이동하는 것을 의미
+  - 데이터를 사용하는 곳에서 데이터를 직접 가져와 사용하는 pull방식 프로그래밍
+
+- **반응형 프로그래밍**
+  - 데이터의 흐름을 먼저 정의하고 데이터가 변경되었을 때 연관되는 함수가 알아서 처리하는 것
+  - 프로그래머가 어떠한 기능을 직접 정해서 실행하는 것이 아닌, 시스템에 이벤트가 발생했을 때 알아서 처리되는 것
+  - 데이터의 변화가 발생한 곳에서 새로운 데이터를 consumer에게 전달하는 push방식 프로그래밍
+
 ## Goals, Design and Scope
 
 계속적으로 들어오는 스트림 데이터를 효율적으로 처리하기 위해서는 비동기 시스템이 효과적이다. **비동기 처리를 하면서 가장 중요한 문제는 데이터 처리가 목적지의 리소스 소비를 예측가능한 범위에서 신중하게 제어할 수 있어야 하는것** 이다.
@@ -66,10 +78,15 @@ Subscription은 Publisher와 Subscriber 사이에서 중계하는 역할을 한�
 위 interface를 토대로 아래 와같은 flow를 만들 수 있다.
 
 ![](./image/19_1.png)
-
+![](./image/19_2.png)
 
 1. Publish에 본인이 소유할 Subscription을 구현하고 publishing할 data를 만든다
 2. Publisher는 `subscribe()`메서드를 통해 Subscriber를 등록한다
 3. Subscriber는 `onSubscribe()`메서드를 통해 Subscription을 등록하고 Publisher를 구독하기 시작한다. 이는 Publisher에 구현된 Subscription을 통해 이뤄진다. 이렇게 하면 Publisher와 Subscribr는 Subscription을 통해 연결된 상태가 된다. `onSubscribe()` 내부에 Subsciription의 `request()`를 요청하면 그때부터 data구독이 시작된다.
 4. Subscription의 `request()`에는 조건에 따라 Subscriber의 `onNext()`, `onComplete()` 또는 `onError()`를 호출한다. 그러면 Subscriber의 해당 메서드의 로직에 따라 `request()` 또는 `cancel()`로 제어하게 된다.
 
+# RxJava
+
+- RxJava는 자바로 리액티브 어플리케이션을 구현하는데 사용하는 라이브러리
+- RxJava는 넷플릭스의 Reactive Extension 프로젝트의 일부로 시작되었다
+- RxJava2.0 버전 이상부터 Reactive Streams API와 자바9에 적용된 `java.util.concurrent.Flow`를 지원하도록 구현되었다

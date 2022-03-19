@@ -178,3 +178,38 @@
     ]
     ```
   - ![](./images/13_10.png)
+
+#### 작업 배치 제약
+
+- distinctInstance : 각 작업을 다른 컨테이너 인스턴스에 배치
+  - ```json
+    "placementConstraints": [
+      {
+        "type": "distinctInstance"
+      }
+    ]
+    ```
+
+- memberOf : 표현식을 만족하는 인스턴스에 작업 배치
+  - 클러스터 쿼리 언어 사용
+  - ```json
+    "placementConstraints": [
+      {
+        "expression": "attribute:ecs.instance-type =~ t2.*",
+        "type": "memberOf"
+      }
+    ]
+    ```
+
+#### ECS - Service Auto Scaling
+
+- ECS 서비스 레벨에서 CloudhWatch로 CPU와 RAM 상태가 추적된다
+- 대상 추적 : 특정 평균 CloudWatch 지표를 대상으로 한다
+- 단계 조정 : CloudWatch 경보를 기반으로 조정한다
+- 예정된 조정 : 예측 가능한 변경 사항을 기반으로 한다
+
+- ECS Service Scaling != EC2 Auto Scaling
+  - ECS Service Scaling : Task 레벨
+  - EC2 Auto Scaling : Instance 레벨
+- Fargate Auto Scaling은 설정이 훨씬 더 쉽다
+  - 서버가 없기 때문에..
