@@ -212,4 +212,48 @@
   - ECS Service Scaling : Task 레벨
   - EC2 Auto Scaling : Instance 레벨
 - Fargate Auto Scaling은 설정이 훨씬 더 쉽다
-  - 서버가 없기 때문에..
+  - 서버가 없기 때문에
+
+#### ECS - Cluster Capacity Provider
+
+- 용량 공급자는 클러스터와 연결되어 작업이 실행되는 인프라를 결정하는데 사용된다
+  - ECS 및 Fargate 사용자의 경우 FARGATE 및 FARGATE_SPOT 용량 공급자가 자동으로 추가된다
+  - ECS on EC2의 경우 용량 공급자를 Auto-scaling 그룹과 연결해야 한다
+- 작업 또는 서비스를 실행할 때 용량 공급자 저냑을 정의하여 실행할 공급자의 우선 순위를 지정한다
+- 이를 통해 용량 고급자가 자동으로 인프라를 프로비저닝할 수 있다
+
+![](./images/13_11.png)
+
+### ECS Data Volumes
+
+#### EC2 Task Strategies
+
+- EBS 볼륨은 이미 EC2 인스턴스에 탑재되어 있다. 이를 통해 Docker 컨테이너가 EBS 볼륨을 탑재하고 작업의 스토리지 용량을 확장할 수 있다
+- 문제 : 작업이 한 EC2 인스턴스에서 다른 인스턴스로 이동하면 동일한 EBS 볼륨 및 데이터가 아니게 된다
+- 사용사례
+  - 동일한 인스턴스의 서로 다른 컨테이너 간에 데이터 볼륨 탑재
+  - 작업의 임시 스토리지 확장
+
+![](./images/13_12.png)
+
+#### EFS File System
+
+- EC2 작업 및 Fargate작업 모두에서 동작한다
+- EFS 볼륨을 작업에 마운트하는 기능이다
+- 모둔 AZ에서 시작된 작업은 EFS 볼륨에서 동일한 데이터를 공유할 수 있다
+- Fargte + EFS = 서버리스 + 서버 관리 없는 데이터 스토리지
+- 사용 사례
+  - 컨테이너를 위한 영구 다중 AZ 공유 스토리지
+
+![](./images/13_13.png)
+
+#### Bind Mounts Sharing data between containers
+
+- EC2 작업(로컬 EC2 인스턴스 스토리지 사용) 및 Fargate 작업(볼륨 마운트의 경우 4GB 확보) 모두에서 작동한다
+- 동일한 ECS 작업의 일부인 여러 컨테이너 간에 임시 스토리지를 공유하는데 유용하다
+- "사이드카" 컨테이너 패턴에 적합하다
+  - "사이드카"를 사용해서 메트릭/로그를 다른 대상으로 보낼 수 있다 (문제 분리)
+
+![](./images/13_14.png)
+
+
