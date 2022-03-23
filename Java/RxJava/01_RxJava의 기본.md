@@ -75,6 +75,7 @@
   - Subscriber : 데이터를 받아 처리하는 소비자
 - Subscriber가 Publiser를 구독(subscribe)하면 Publisher가 통지한 데이터를 Subscriber가 받을 수 있다
 - Publiser가 데이터를 통지한 후 Subscriber가 이 데이터를 받을 때까지의 데이터 흐름
+  - ![](./images/01_01.jpg)
   1. 먼저 Publisher는 통지 준비가 끝나면 이를 Subscriber에 통지(onSubscription) 한다
   2. 해당 통지를 받은 Subscriber는 받고자 하는 데이터 개수를 요청한다
      - 이 때 Subscriber가 자신이 통지받을 데이터 개수를 요청하지 않으면 Publisher는 통지해야 할 데이터 개수 요청을 기다리게 되므로 통지를 시작할 수 없다 
@@ -87,6 +88,9 @@
   8. 완료 통지를 하고 나면 Publisher는 이 구독 건에 대해 어떤 통지도 하지 않는다. 또한 Publisher는 처리 도중에 에러가 발생하면 Subscriber에 발생한 에러 객체와 함께 애러를 통지(onError)한다
 - Subscriber가 Publisher에 통지받을 데이터 개수를 요청하는 것은 Publisher가 통지하는 데이터 개수를 제어하기 위함이다
   - 이를 배압(Back pressure)이라고 한다
+  - ![](./images/01_02.jpg)
+
+
 
 ### Reactive Streams가 제공하는 프로토콜 및 인터페이스
 
@@ -142,3 +146,144 @@
 **Subscription의 메서드는 동기화된 상태로 호출해야 한다**
 - Subscription의 메서드를 동시에 호출해서는 안된다
 
+# RxJava의 기본구조
+
+### 기본 구조
+
+- RxJava는 데이터를 만들고 통지하는 생산자와 통지된 데이터를 받아 처리하는 소비자로 구성된다
+  - 이 생산자를 구독해 생산자가 통지한 데이터를 소비자가 받게 된다
+- RxJava에서 이 생산자와 소비자의 관계는 Reactive Streams 지원 여부에 따라 크게 둘로 나뉜다
+
+|구분|생산자|소비자|
+|---|---|---|
+|Reactive Streams 지원|Flowable|Subscriber|
+|Reactive Streams 미지원|Observable|Observer|
+
+- Flowable/Subscriber
+  - Flowable은 Reactive Streams의 생산자인 Publisher를 구현한 클래스고, Subscriber는 Reactibe Streams의 클래스다
+    - 그래서 기본 메커니즘은 Reactive Streams와 같다
+    - 생산자인 Flowable로 구독 시작(onSubscribe), 데이터 통지(onNext), 에러 통지(onError), 완료 통지(onComplete)를 하고 각 통지를 받은 시점에 소비자인 Subscriber로 처리하며, Subscription으로 데이터 개수 요청과 구독 해지를 한다
+
+- Observable/Observer
+  - RxJava2.x버전의 Observable과 Observer 구성은 Reactive Streams를 구현하지 않아서 Reactive Streams인터페이스를 사용하지 않는다. 하지만 기본적인 메커니즘은 거의 같다
+    - 생산자인 Observable에서 구독 시작(onSubscribe), 데이터 통지(onNext), 에러 통지(onError), 완료 통지(onComplete)를 하면 Observer에서 이 통지를 받는다
+  - Observable과 Observer구성은 통지하는 데이터 개수를 제어하는 배압 기능이 없기 때문에 데이터 개수를 요청하지 않고 데이터가 생성되자마자 Observer에 통지된다
+    - 그래서 Subscription을 사용하지 않고 Disposable이라는 구독 해지 메서드가 있는 인터페이스를 사용하며, 이 Disposable은 구독을 시작하는 시점에 onSubscribe 메서드의 인자로 Observer에 전달된다
+    - |메서드|설명|
+      |---|---|
+      |dispose|구독을 해지한다|
+      |isDisposed|구독을 해지하면 true, 해지하지 않으면 false를 반환한다|
+
+### 연산자
+
+- RxJava에는 생산자(Flowable/Observable)가 통지한 데이터가 소비자(Subscriber/Observer)에 도착하기 전에 불필요한 데이터를 삭제하거나 소비자가 사용하기 쉽게 데이터를 변환하는 등 통지하는 데이터를 변경해야 할 때가 있는데 이 때 사용하는 메서드는 생산자의 메서드에서 새로운 생산자를 반환하며, 이 메서드를 연결해나감으로써 최종 데이터를 통지하는 생산자를 생성한다
+  - ![](./images/01_03.jpg)
+  - 자바의 Stream과 유사한 개념이다
+  - 이처럼 데이터 생산, 필터링, 변환하는 메서드를 **연산자**라고 한다
+  - 연산자를 연결해나가는 과정을 메서드 체인이라고 한다
+
+> 메서드 체인 예제
+> ```java
+> public static void main(String[] args) {
+>    Flowable<Integer> flowable =
+>             // 인자의 데이터를 순서대로 통지하는 Flowable을 생성한다
+>             Flowable.just(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+>                     // 짝수에 해당하는 데이터만 통지한다 
+>                     .filter(data -> data % 2 == 0)
+>                     // 데이터를 100배로 변환한다
+>                     .map(data -> data * 100);
+> 
+>     // 구독하고 받은 데이터를 출력한다
+>     flowable.subscribe(data -> System.out.println("data=" + data));
+> }
+> ```
+> 실행 결과
+> ```
+> data=200
+> data=400
+> data=600
+> data=800
+> data=1000
+> ```
+
+- 이처럼 데이터를 메서드 체인에 통과하개 하여 원본 생산자가 통지하는 데이터를 최종적으로 어떤 데이터로 통지할지 제어할 수 있다
+- 전달받은 데이터의 상태를 변경하거나, 처리 작업의 외부에 어떤 변화를 주는 작업은 메서드 체인이 도중이 아니라 최종적으로 데이터를 받아 처리하는 소비자 측에서 이루어지는 것이 좋다
+  - Side Effect를 피하기 위해서
+
+### 비동기 처리
+
+- RxJava는 각각의 처리를 서로 다른 스레드에서 실행할 수 있다
+  - 데이터를 통지하는 측의 처리 범위와 받는 측의 처리 범위를 분리할 수 있게 설계되었기 때문
+- RxJava는 개발자가 직접 스레드를 관리하지 않게 각 처리 목적에 맞춰 스레드를 관리하는 스케줄러를 제공한다
+  - 스케줄러는 데이터 생산자와 소비자에 지정할 수 있다
+  - 하지만 RxJava로 비동기 처리할 때 문제가 발생하지 않게 주의해야 한다
+    - 예를 들어 생산자와 소비자 사이에 이뤄지는 처리를 외부 변수를 참조해 바꾸면 비동기 처리에 영향을 준다
+
+> **외부 접근으로부터 안전한 비동기 처리 방식**
+> 
+> ![](./images/01_04.jpg)
+
+
+### Cold/Hot 생산자
+
+- RxJava는 Cold 생산자, Hot 생산자 두 종류의 생산자가 있다
+
+**Cold 생산자**
+- 1개의 소비자와 구독 관계를 맺는다
+- 데이터의 타임라인은 구독할 때마다 생성된다
+- 구독시 생산자 처리가 시작된다
+- ![](./images/01_05.jpg)
+
+**Hot 생산자**
+- 여러 개의 소비자와 구독 관계를 맺을 수 있다
+- 이미 생성상 통지 데이터의 타임라인에 나중에 소비자가 참가하는 것을 허용한다
+- 구독해도 생산자 처리가 시작되지 않을 수 있다
+- 구독 시점부터 데이터를 받게 되고, 같은 데이터를 여러 소비자가 받을 수도 있다
+- ![](./images/01_06.jpg)
+
+### ConnectableFlowable/ConnectableObservable
+
+- ConnectableFlowable/ConnectableObservable는 Hot 생산자이다
+  - 여러 소비자가 구독 가능하다
+  - subcirber 메서드를 호출해도 처리를 시작하지 않고 `connect` 메서드를 호출해야 처리를 시작한다
+    - `connect` 메서드를 호출하기 전까지 처리가 시작되지 않기 때문에 ConnectableFlowable/ConnectableObservable은 처리를 시작하는 `connect` 메서드를 반드시 호출해야 한다
+
+### Hot 생산자에서 Cold 생산자로 변환하는 연산자
+
+**`refCount()`**
+
+- Hot 생산자에서 새로운 Flowable/Observable을 생성한다
+  - 이 Flowable/Observable은 이미 다른 소비자가 구독하고 있다면 도중에 구독하더라도 같은 타임라인에서 생성되는 데이터를 통지한다
+  - 이 Flowable/Observable은 Cold 생산자이므로 `connect`가 필요없다
+  - 이 Flowable/Observable은 처리가 왼료된 뒤 혹은 모든 구독이 해지된 뒤에 `subscribe`메서드를 호출하면 새로운 처리를 다시 시작한다
+
+**`autoConnect()`/`autoConnect(int numberOfSubscribers)`**
+
+- Hot 생산자에서 지정한 개수의 구독이 시작된 시점에 처리를 하는 Flowable/Observable을 생성한다
+  - 이 Flowable/Observable은 처리가 왼료된 뒤 혹은 모든 구독이 해지된 뒤에는 `subscirbe`메서드를 호출해도 처리가 다시 시작되지 않는다
+- `autoConnect`메서드에서 인자 없이 생성한다면 처음 `subscribe` 메서드가 호출된 시점에 처리를 시작하고, `autoConnect` 메서드에서 인자로 구독 개수를 지정한다면 지정한 개수에 도달한 시점에서 처리를 시작한다
+
+### Cold 생산자에서 Hot 생산자로 변환하는 연산자
+
+**`publish()`**
+
+- `publish`메서드 호출 시 ConnectableFlowable/ConnectableObservable을 생성한다
+  - 이 ConnectableFlowable/ConnectableObservable은 처리를 시작한 뒤에 구독하면 구독한 이후에 생성된 데이터부터 새로운 소비자에게 통지한다
+
+**`replay()`/`replay(int bufferSize)`/`replay(long time, Timeunit unit)`**
+
+- `replay`메서드 호출 시 ConnectableFlowable/ConnectableObservable을 생성한다
+  - 이 ConnectableFlowable/ConnectableObservable은 통지한 데이터를 캐시하고, 처리를 시작한 뒤에 구독하면 캐시된 데이터를 먼저 새로 구독한 소비자에게 통지한다
+    - 그 뒤에는 모든 소비자에게 같은 데이터를 통지한다
+      - `replay()` : 모든 데이터를 캐시한다
+      - `replay(int bufferSize)` : 지정한 개수만큼 데이터를 캐시한다
+      - `replay(long time, Timeunit unit)` : 지정한 시간만큼 데이터를 캐시한다
+
+**`share()`**
+
+- 여러 소비자가 구독할 수 있는 Flowable/Observable을 생성한다
+  - ConnectableFlowable/ConnectableObservable을 생성하는 것이 아니므로 주의
+  - `flowable.publish().refCount()`와 같다 
+  - 이 Flowable/Observable은 구독하는 소비자가 있는 동안은 새로 구독해도 같은 타임라인에서 생성되는 데이터를 통지한다
+
+> Hot 
