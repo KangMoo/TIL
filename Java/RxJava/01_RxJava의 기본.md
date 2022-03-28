@@ -295,3 +295,255 @@
 
 ![](./images/01_07.jpg)
 
+---
+
+# RxJava 예제
+
+- RxJava는 2.x 버전부터 Reactive Streams와 의존관계가 있어서 RxJava의 라이브러리 뿐만 아니라 Reactive Streams의 라이브러리도 라이브러리 경로에 설정해야 RxJava를 사용할 수 있다
+
+## Flowable/Subscriber 사용 예제
+
+- `Hello, World!`, `안녕, RxJava!` 두 데이터를 통지하고, Subscriber가 해당 데이터를 받아 출력
+- Flowable이 모든 데이터를 통지한 뒤에 완료를 통지하고 통지를 받은 Subscriber가 `완료`문자열을 출력
+  - Flowable은 Cold 생산자이므로 Subscriber가 Flowable을 구독하면 바로 처리를 시작한다
+
+```java
+  public static void main(String[] args) throws Exception {
+    // 인사말을 통지하는 Flowable을 생성한다
+    Flowable<String> flowable =
+        Flowable.create(new FlowableOnSubscribe<String>() {
+          @Override
+          public void subscribe(FlowableEmitter<String> emitter)
+              throws Exception {
+            
+            String[] datas = {"Hello, World!", "안녕, RxJava!"};
+            
+            for (String data : datas) {
+              // 구독이 해지되면 처리를 중단한다
+              if (emitter.isCancelled()) {
+                return;
+              }
+              // 데이터를 통지한다
+              emitter.onNext(data);
+            }
+            
+            // 완료를 통지한다
+            emitter.onComplete();
+          }
+        }, BackpressureStrategy.BUFFER);// 초과한 데이터는 버퍼링한다
+    
+    flowable
+        // Subscriber 처리를 개별 스레도에서 실행한다
+        .observeOn(Schedulers.computation())
+        // 구독한다
+        .subscribe(new Subscriber<String>() {
+          // 데이터 개수 요청과 구독 해지를 하는 객체
+          private Subscription subscription;
+          
+          // 구독 시작 시 처리
+          @Override
+          public void onSubscribe(Subscription subscription) {
+            // Subscription을 Subscriber에 보관한다
+            this.subscription = subscription;
+            // 받은 데이터 개수를 요청한다
+            this.subscription.request(1L);
+          }
+          
+          // 데이터를 받을 때 처리
+          @Override
+          public void onNext(String data) {
+            // 실행 중인 스레드 이름을 얻는다
+            String threadName = Thread.currentThread().getName();
+            // 받은 데이터 출력한다
+            System.out.println(threadName + ": " + data);
+            // 다음에 받을 데이터 개수를 요청한다
+            this.subscription.request(1L);
+          }
+          
+          // 완료 통지 시 처리
+          @Override
+          public void onComplete() {
+            // 실행 중인 스레드 이름을 얻는다
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + ": 완료");
+          }
+          
+          // 에러 통지 시 처리
+          @Override
+          public void onError(Throwable error) {
+            error.printStackTrace();
+          }
+        });
+    
+    // 잠시 기다린다
+    Thread.sleep(500L);
+  }
+```
+
+```
+RxComputationThreadPool-1: Hello, World!
+RxComputationThreadPool-1: 안녕, RxJava!
+RxComputationThreadPool-1: 완료
+```
+
+**Backpressure Strategy**
+
+- Flowable의 create메서드에서 BackpressureStrategy로 배압 옵션을 지정할 수 있다
+
+> BackpressuerStratege의 종류
+> |옵션|설명|
+> |---|---|
+> |BUFFER|통지할 수 있을 때까지 모든 데이터를 버퍼링한다|
+> |DROP|통지할 수 있을 때까지 새로 생성한 데이터를 삭제한다|
+> |LATEST|생성한 최신 데이터만 버퍼링하고 생성할 때마다 버퍼링하는 데이터를 교환한다|
+> |ERROR|통지 대기 데이터가 버퍼 크기를 초과하면 MissingBackpressureException에러를 통지한다|
+> |NONE|특정 처리를 수행하지 않는다. 주로 onBackPressure로 시작하는 메서드로 배압 모드를 설정할 때 사용한다|
+
+
+**observeOn 메서드**
+
+- RxJava에서는 메서드를 통지하는 측과 전달받는 측의 처리를 별도의 스레드에서 실행할 때 스레드 관리를 하는 Scheduler객체를 observeOn 메서드의 인자로 설정해서 데이터를 받는 측의 처리를 어떤 스레드에서 실행할지 지정할 수 있다
+
+**subscribe 메서드**
+
+- Reactive Streams에 정의된 Publisher(Flowable이 구현한 인터페이스)의 subscribe 메서드는 반환값을 돌려주지 않는다
+  - Publisher와 Subscriber 사이의 상호 작용이 외부로부터 영향을 받지 않게 설계되었기 때문
+- Subscriber는 데이터 개수 요청이나 구독을 해지하는 Subscription을 전달받아 Subscriber 내부에서 처리하므로 외부에서 데이터 개수 요청이나 구독 해지가 일어나지 않게 한다
+
+> 구독을 중도 해제하는 예제
+> 
+> ```java
+>   public static void main(String[] args) throws Exception {
+>     
+>     // 200밀리초마다 값을 통지하는 Flowable
+>     Flowable.interval(200L, TimeUnit.MILLISECONDS)
+>         .subscribe(new Subscriber<Long>() {
+>           
+>           private Subscription subscription;
+>           private long startTime;
+>           
+>           @Override
+>           public void onSubscribe(Subscription subscription) {
+>             this.subscription = subscription;
+>             this.startTime = System.currentTimeMillis();
+>             this.subscription.request(Long.MAX_VALUE);
+>           }
+>           
+>           @Override
+>           public void onNext(Long data) {
+>             // 구독 시작부터 500밀리초가 지나면 구독을 해지하고 처리를 중지한다
+>             if ((System.currentTimeMillis() - startTime) > 500) {
+>               subscription.cancel(); // 구독을 해지한다
+>               System.out.println("구독 해지");
+>               return;
+>             }
+>             
+>             System.out.println("data=" + data);
+>           }
+>           
+>           @Override
+>           public void onComplete() {
+>             System.out.println("완료");
+>           }
+>           
+>           @Override
+>           public void onError(Throwable error) {
+>             error.printStackTrace();
+>           }
+>         });
+>     
+>     // 잠시 기다린다
+>     Thread.sleep(2000L);
+>   }
+> ```
+> 
+> ```
+> data=0
+> data=1
+> 구독 해지
+> ```
+
+## Observable/Observer 사용 예제
+
+- Observable과 Observer의 관계는 Flowable과 Subscriber의 관계와 거의 같지만, Reactive Streams 사양을 구현하지 않았다는 점과 배압 기능이 없는 점이 다르다
+- 클래스 구성이나 제공되는 메서드 등도 배압에 관련된 기능을 제외하고 Flowable과 거의 같아서 Flowable 사용법을 알고 있으면 Observable도 사용할 수 있다
+
+```java
+  public static void main(String[] args) throws Exception {
+    // 인사말을 통지하는 Observable을 생성한다
+    Observable<String> observable =
+        Observable.create(new ObservableOnSubscribe<String>() {
+          @Override
+          public void subscribe(ObservableEmitter<String> emitter)
+              throws Exception {
+            
+            // 통지 데이터
+            String[] datas = { "Hello, World!", "안녕, RxJava!" };
+            for (String data : datas) {
+              // 구독이 해지되면 처리를 중단한다
+              if (emitter.isDisposed()) {
+                return;
+              }
+              // 데이터를 통지한다
+              emitter.onNext(data);
+            }
+            // 완료를 통지한다
+            emitter.onComplete();
+          }
+        });
+    observable
+        // 소비하는 측의 처리를 개별 스레드로 실행한다
+        .observeOn(Schedulers.computation())
+        // 구독한다
+        .subscribe(new Observer<String>() {
+          // subscribe 메서드 호출 시의 처리
+          @Override
+          public void onSubscribe(Disposable disposable) {
+            // 아무것도 하지 않는다
+          }
+          
+          // 데이터를 받은 때의 처리
+          @Override
+          public void onNext(String item) {
+            // 실행 중인 Thread 이름을 얻는다
+            String threadName = Thread.currentThread().getName();
+            // 받은 데이터 출력한다
+            System.out.println(threadName + ": " + item);
+          }
+          
+          // 완료 통지 시의 처리
+          @Override
+          public void onComplete() {
+            // 실행 중인 Thread 이름을 얻는다
+            String threadName = Thread.currentThread().getName();
+            System.out.println(threadName + ": 완료");
+          }
+          
+          // 에러 통지 시의 처리
+          @Override
+          public void onError(Throwable error) {
+            error.printStackTrace();
+          }
+        });
+    // 잠시 기다린다
+    Thread.sleep(500L);
+  }
+```
+
+```
+RxComputationThreadPool-1: Hello, World!
+RxComputationThreadPool-1: 안녕, RxJava!
+RxComputationThreadPool-1: 완료
+```
+
+
+## Flowable vs Observable
+
+- **Flowable의 사용**
+  - 대량의 데이터 (예를 들어 10,000건 이상)를 처리할 때
+  - 네트워크 통신이나 데이터베이스 등의 I/O를 처리할 때
+
+- **Observable 사용**
+  - GUI 이벤트
+  - 소량 데이터 (예를 들어 1,000건 이하)를 처리할 때
+  - 데이터 처리가 기본으로 동기 방식이며, 자바 표준의 Stream 대신 사용할 때
