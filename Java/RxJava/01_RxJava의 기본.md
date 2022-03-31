@@ -547,3 +547,92 @@ RxComputationThreadPool-1: 완료
   - GUI 이벤트
   - 소량 데이터 (예를 들어 1,000건 이하)를 처리할 때
   - 데이터 처리가 기본으로 동기 방식이며, 자바 표준의 Stream 대신 사용할 때
+
+# RxJava의 전체 구성
+
+- RxJava는 소비자 (Subscriber/Observer)가 생산자(Flowable/Observable)를 구독하는 형태다
+  - 이 생산자와 소비자의 관계는 Reactive Streams 사양을 지원하는지 여부로 나뉜다
+    - Reactive Stream 지원 : Flowable/Subscriber
+    - Reactive Stream 미지원 : Observable/Observer
+- FlowableProcessor는 Processor를 구현하고, Flowable과 Subscirber가 모두 될 수 있는 추상 클래스다
+  - Processor를 구현하지만, Flowable을 상속하기 때문에 Publisher가 구현돼 있으며 subscriber는 구현해야 한다
+- Subject는 배압 기능이 없는 FlowableProcessor로 볼 수 있으며, Observable이나 Observer가 될 수 있는 추상 클래스다
+
+- RxJava는 Subscriber를 구현한 DisposableSubscriber와 ResourceSubscriber를 제공하며, Observer를 구현한 DisposableObserver와 ResourceObserver도 제공한다
+
+## Flowable / Observable
+
+- 데이터를 생성하고 통지하는 클래스이다
+  - Flowable은 배압 기능이 있고, Observable에는 배압 기능이 없다
+- Flowable과 Observable은 기본적으로 Reactive Streams의 규칙과 그 규칙에 영향을 준 Observabnle 규약을 따르지 않으면 데이터가 문제없이 통지되는 것을 보장받지 못한다
+  - 통지 시 규칙
+    - `null`을 통지하면 안된다
+    - 데이터 통지는 해도 되고 안해도 된다
+    - Flowable/Observable의 처리를 끝낼 때는 완료나 에러를 통지해야 하며, 둘 다 통지하지는 않는다
+    - 완료나 에러를 통지한 뒤에는 다른 통지를 해선 안된다
+    - 통지할 때는 1건씩 순차적으로 통지하며, 동시에 통지하면 안된다
+
+## Subscriber / Observer
+
+- 통지된 데이터를 전달받아 이 데이터를 처리하는 인터페이스다
+  - Subscriber는 Flowable의 통지를 받고, Observa는 Observable의 통지를 받는다
+  - Subscirber와 Obsrver의 차이는 배압 기능의 유무다
+    - Subscriber는 배압 기능이 있어서 통지하는 데이터 게수를 요청해야 한다
+    - Observer는 배압 기능이 없어서 데이터 개수의 제한 없이 데이터를 통지할 수 있다
+- Subscriber / Observer의 메서드가 호출되는 정상적인 순서
+  1. `onSubscriber` 메서드
+  2. `onNext` 메서드
+  3. `onComplete` 메서드
+
+- Subscriber / Observer가 구독한 Flowable / Observable의 통지가 준비되면 `onSubscribe`메서드가 호출된다
+  - 1건의 구독에서 한번만 호출된다
+- 다음으로 데이터가 통지될 때마다 `onNext`메서드가 호출된다. 여러 데이터가 통지되면 그만큼 `onNext`메서드가 호출되며 1건도 데이터가 통지되지 않으면 `onNext`메서드는 호출되지 않는다. 또한 안전한 통지를 하는 Flowable/Observable에서 데이터를 받는 동안 onNext 메서드가 동시에 실행되는 일은 없다
+  - 예를 들어 데이터를 받을 때 처리에 시간이 걸린다 해도 그 과정이 끝나야 다음 `onNext`가 호출된다
+- 모든 데이터를 통지한 뒤에 `onComplete` 메서드를 호출해 완료를 통지한다.
+  - 데이터 스트림 처리할 때 중요한데, 이벤트 처리의 구독을 시작한 시점에서는 해당 Flowablw / Observable이 끝나지 않고 계속해서 데이터를 통지하는지 판단할 수 없기 때문에 모든 데이터를 통지한 뒤에 더 이상 통지할 데이터가 없음을 알리고자 완료를 통지하며 이때 완료를 통지할 때의 처리를 할 수 있다
+  - `onComplete` 메서드도 1건의 구독에서 한번만 실행되며, `onComplete` 메서드가 실행되면 해당 구독은 그대로 종료된다
+- Flowable/Observable이 처리 중 에러가 발생하면 `onError`메서드가 호출돼 바로 처리가 종료된다
+- 원래 각 메서드는 하나씩 순서대로 실행되지만, Subscriber의 `onSubscribe` 메서드만 예외로 처리 중에 `onNext` 메서드나 `onComplete` 메서드가 실행된다
+  - `onSubscribe` 메서드에서 Subscription의 request 메서드를 호출하면 Flwoable이 데이터 통지를 시작하기 때문이다
+
+## Subscription
+
+- Reactivbe Streams에 정의된 인터페이스로 통지 데이터 개수를 요청하는 request 메서드와 처리 도중에도 구독을 해지하는 cancel 메서드를 포함한다
+- Subscription은 Subscriber의 `onSubscribe`메서드의 인자로 전달되는 객체이며, 설정한 수만큼 데이터를 통지하게 Flowable에 요청하거나 구독을 해지하는 기능이 있다
+
+## Disposable
+
+- 구독을 해지하는 메서드를 포함한 인터페이스다
+- 구독해지 기능은 외부로 드러날 수 있는데, 외부로 드러날 경우 다른 스레드가 구독 해지를 실행할 수 있어서 위험하므로 함수형 인터페이스를 인자로 받는 구독 메서드인 DisposableSubscriber/DisposableObserver와 ResourceSubscriber/ResourceObserver에서 반환하는 Rxjava가 제공하는 Disposable의 인터페이스는 비동기로 구독 해지를 요청해도 문제가 발생하지 않게 작동한다
+- 자원을 해제하는 등의 처리에도 활용할 수 있으며, 처리가 끝난 자원을 해제해야 한다면 해제 처리를 Disposable의 `dispose`메서드에 구현한다
+
+## FlowableProcessor/Subject
+
+- 생상자와 소비자의 기능이 모두 있는 인터페이스
+  - Publisher와 Subscriber를 모두 상속받으며 다른 메서드는 갖고 있지 않다
+- 두 기능이 모두 있어서 소비자와 생산자 어느쪽이든 될 수 있다
+
+> Processor/Subject의 종류
+> |종류|설명|
+> |---|---|
+> |PublishProcessor/PublishSubject|데이터를 받은 시점에만 소비자에 데이터를 통지한다|
+> |BehaviorProcessor/BehaviorSubject|소비자가 구독하기 직전 데이터를 버퍼링해 해당 데이터부터 통지한다|
+> |ReplayProcessor/ReplaySubject|처리하는 도웆 구독한 소비자에게도 받은 모든 데이터를 통지한다|
+> |AsyncProcessor/AsyncSubject|데이터 생성을 완료했을 때 마지막으로 받은 데이터만 소비자에게 통지한다|
+> |UnicastProcessor/UnicastSubject|1개의 소비자만 구독할 수 있다|
+
+
+## DisposableSubscriber/DisposableObserver
+
+- Disposalbe을 구현한 Subscirber/Observer의 구현 클래스로, 외부에서 비동기로 구독 해지 메서드를 호출해도 안전하게 구독을 해지할 수 있게 해준다
+- 이 클래스는 `onSubscriber`메서드가 final 메서드로 구현되어 있으며, `onSubscribe`메서드로 전달되는 Subscription/Disposable은 직접 접근하지 못하게 은닉돼 있다
+- 그 대신 다음 메서드에서 Subscription/Disposable의 메서드를 호출할 수 있다
+  - DisposableSubscriber의 Subscription 메서드를 호출하는 메서드
+    - `request(long)` : Subscription의 `request` 메서드 호출
+    - `dispose()` : Subscription의 `cancel` 메서드 호출
+  - DisposableObserver의 Dispose 메서드를 호출하는 메서드
+    - `dispose()` : Dispose의 `dispose` 메서드 호출
+    - `isDispose()` Dispose의 `isDisposed` 메서드 호출
+
+
+
