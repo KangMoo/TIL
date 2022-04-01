@@ -257,3 +257,56 @@
 ![](./images/13_14.png)
 
 
+## ECS Summary
+
+- ECS는 Docker 컨테이너를 실행하는데 사용되며 3가지 유형이 있다
+  - ECS "Classic" : 컨테이너를 실행할 EC2 인스턴스 프로비저닝
+  - Fargate : ECS 서버리스, 프로비저닝할 EC2가 더 이상 필요없음
+  - EKS : AWS에서 관리하는 Kubernetes
+
+### ECS Classic
+
+- EC2 인스턴스를 생성해야 한다
+- 클러스터 이름으로 `/etc/ecs/ecs.config`파일을 구성해야 한다
+- EC2 인스턴스는 ECS 에이전트를 실행해야 한다
+- EC2 인스턴스는 동일한 유형에서 여러 컨테이너를 실행할 수 있다
+  - 호스트 포트를 지정해서는 안된다 (컨테이너 포트만 지정해야 한다)
+  - 동적 포트 매핑과 함께 Application Load Balancer를 사용해야 한다
+  - EC2 인스턴스 보안 그룹은 모든 토프에서 ALB의 트래픽을 허용해야 한다
+- ECS 작업에는 AWS에 대한 작업을 수행하기 위한 IAM 역할을 가질 수 있다
+- 보안그룹은 작업 레벨이 아닌 인스턴스 레벨에서 수행된다
+
+### ECR
+
+- **도커 이미지 저장하는데 사용된다**
+- ECR은 IAM과 긴밀하게 통합된다
+- AWS CLI v1 로그인 명령
+  - `$(aws ecr get-login --no-include-email --region eu-west-1)`
+  - `aws ecr get-login`은 `docker login` 명령을 생성합니다.
+- AWS CLI v2 로그인 명령
+  - `aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin 1234567890.dkr.ecr.eu-west-1.amazonaws.com`
+- Docker PUsh & Pull
+  - docker push 1234567890.dkr.ecr.eu-west-1.amazonaws.com/demo:latest
+  - docker pull 1234567890.dkr.ecr.eu-west-1.amazonaws.com/demo:latest
+- EC2 인스턴스가 Docker 이미지를 가져올 수 없는 경우 IAM을 확인해야 한다
+
+### Fargate
+
+- Fargate는 Serverless다
+  - 관리할 EC2가 없다
+- AWS는 컨테이너를 프로비저닝하고 ENI를 할당한다
+- Fargate 컨테이너는 컨테이너 사양 (CPU/RAM)에 따라 프로비저닝된다
+- Fargate 작업에는 AWS에 대한 작업을 실행하기 위한 IAM 역할이 있을 수 있다
+
+### ECS 그 외..
+
+- ECS는 CloudWatch Logs와 통합된다
+  - 작업 정의 수준에서 로깅을 설정해야 한다
+  - 각 컨테이너는 서로 다른 로그 스트림이 있다
+  - **EC2 인스턴스 프로파일에 올바른 IAM 권한이 있어야 한다**
+- 작업을 수행하기 위해 IAM Task Rolse를 사용한다
+- 작업 배치 전략 : binpack, random, spread
+- 목표 추적, 단계적인 스케일링, 스케쥴러로 서비스를 오토 스케일링한다
+- 용량 공급자를 통한 클러스터를 오토 스케일링한다
+
+
