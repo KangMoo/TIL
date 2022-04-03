@@ -624,7 +624,8 @@ RxComputationThreadPool-1: 완료
 
 ## DisposableSubscriber/DisposableObserver
 
-- Disposalbe을 구현한 Subscirber/Observer의 구현 클래스로, 외부에서 비동기로 구독 해지 메서드를 호출해도 안전하게 구독을 해지할 수 있게 해준다
+- Disposalbe을 구현한 Subscriber/Observer의 구현 클래스다
+  - 외부에서 비동기로 구독 해지 메서드를 호출해도 안전하게 구독을 해지할 수 있게 해준다
 - 이 클래스는 `onSubscriber`메서드가 final 메서드로 구현되어 있으며, `onSubscribe`메서드로 전달되는 Subscription/Disposable은 직접 접근하지 못하게 은닉돼 있다
 - 그 대신 다음 메서드에서 Subscription/Disposable의 메서드를 호출할 수 있다
   - DisposableSubscriber의 Subscription 메서드를 호출하는 메서드
@@ -634,5 +635,89 @@ RxComputationThreadPool-1: 완료
     - `dispose()` : Dispose의 `dispose` 메서드 호출
     - `isDispose()` Dispose의 `isDisposed` 메서드 호출
 
+## ResourceSubscriber/ResourceObserver
 
+- Disposable을 구현한 Subscriber/Observer의 구현 클래스이다.
+  - 외부에서 비동기로 구독 해지 메서드를 호출하더라도 안전하게 구독 해지를 하게 해준다
+- Disposable을 보관할 수 있게 add 메서드를 제공한다
+  - add 메서드로 보관된 Disposable의 dispose 메서드는 ResourceSubscriber/ResourceObserver의 dispose 메서드가 호출되면 함께 호출된다
+    - 하지만 완료나 에러가 발생할 때는 자동으로 dispose 메서드가 호출되지 않으니 주의해야 한다
+
+
+## subscribe/subscribeWith 메서드
+
+- subscribe는 소비자가 생산자를 구독하는 메서드로, 이 메서드를 호출하면 생산자가 데이터를 통지할 소비자를 등록한다
+- 생산자가 Cold일 때 subscribe 메서드를 호출하면 생산자는 바로 통지 처리를 시작한다
+- 구독 과정에서 통지 처리는 보통 다음 세 단계로 이루어진다
+  1. 구독 시작 시 초기화 처리 (onSubscribe)
+  2. 데이터 통지 처리 (onNext)
+  3. 통지 종료 처리 (onComplete/onError)
+- 이런 순서는 Subscriber/Observer 내에서 동기화돼야 하며, 순서대로 실행된다는 전제가 있다
+  - 따라서 생산자의 처리와 소비자의 처리가 비동기로 이루어졌다 해도 여러 데이터의 통지를 동시에 하는 일은 없다
+
+|반환값 타입|메서드|설명|
+|---|---|---|
+|Disposable|subscribe()|Flowable/Observable의 처리만 실행하고 Subscriber/Observer에는 아무것도 하지 않는다|
+|Disposable|subscribe(Consumer onNext)|데이터 통지(onNext)를 받았을 때의 처리만 인자에 정의된 대로 실행한다|
+|Disposable|subscribe(Consumer onNext, Consumer onError)|데이터 통지(onNext)와 에러 통지(onError)를 받았을 때의 처리만 인자에 정의된 대로 실행한다|
+|Disposable|subscribe(Consumer onNext, Consumer onError, Action onComplete)|데이터 통지(onNext)와 에러 통지(onError), 완료 통지(onCopmplete)를 받았을 때의 처리만 인자에 정의된 대로 실행한다|
+|Disposable|subscribe(Consumer onNext, Consumer onError, Action onComplete, Consumer onSubscribe)|데이터 통지(onNext)와 에러 통지(onError), 완료 통지(onCopmplete)를 받았을 때의 처리와 구독 시작 시의 처리 (onSubscribe)까지 인자에 정의된 대로 실행한다|
+
+## CompositeDisposable
+
+- 여러 Disposable을 모아 CompositeDisposable의 disposable메서드를 호출함으로써 가지고있는 모든 Disposable의 dispose 메서드를 호출할 수 있는 클래스
+- 이 클래스에서 Disposable을 반환하는 구독 메서드를 호출해 얻은 Disposable을 설정하면 복수의 구독을 동시에 해지할 수 있다
+
+## Single/Maybe/Completable
+
+|클래스|설명|소비자|
+|---|---|---|
+|Single|데이터를 1건만 통지하거나 에러를 통지하는 클래스|SingleObserver|
+|Maybe|데이터를 1건만 통지하거나 1건도 통지하지 않고 완료를 통지하거나 에러를 통지하는 클래스|MaybeObserver|
+|Completable|데이터를 1건도 통지하지 않고 완료를 통지하거나 에러를 통지하는 클래스|CompletableObserver|
+
+### Single
+
+- 데이터를 1건만 통지하거나 에러릍 통지하는 클래스
+- 데이터 통지가 처리 완료를 의미하기 때문에 완료 통지는 하지 않는다
+  - 1건의 데이터를 통지하므로 Single의 통지 프로토콜에는 onNext와 onComplete가 없으며 1건의 데이터를 통지하고 완료했음을 의미하는 통지 프로토콜인 onSuccess를 제공하며, 데이터 개수를 요청할 필요가 없다
+
+> **SingleObserver의 메서드**
+> 
+> |메서드|설명|
+> |---|---|
+> |onSubscribe(Disposable disposable)|통지할 준비가 되면 호출하는 메서드로 구독 해지를 하는 Disposable을 인자로 받는다|
+> |onSuccess(T data)|데이터를 받아 처리하는 메서드로, 이 메서드가 호출된 뒤로는 데이터 통지가 없으므로 onSuccess 메서드가 호출되면 Single의 처리가 완료됐음을 의미한다|
+> |onError(Throwable error)|통지 처리를 하는 동안 에러가 발생하면 호출되는 메서드로, 발생한 에러의 객체가 인자로 전달된다|
+
+### Maybe
+
+- 데이터를 1건만 통지하거나 1건도 통지하지 않고 완료를 통지하거나 에러를 통지하는 클래스
+  - Maybe에서는 데이터 통지가 처리 완료를 의미하므로 굳이 다시 완료 통지를 하지 않는다
+- Maybe가 완료 통지를 할 때는 데이터가 1건도 없이 처리가 정상적으로 종료될 때다
+  - Flowable/Observable의 통지와 달리 Maybe는 정상적으로 처리를 종료할 때 반드시 완료 통지(onComplete)를 호출하지는 않는다는 의미다
+
+> **MaybeObserver의 메서드**
+> 
+> |메서드|설명|
+> |---|---|
+> |onSubscribe(Dosposable disposable)|통지가 준비되면 호출되는 메서드로, 구독 해지를 싱행하는 Disposable을 인자로 받는다|
+> |onSuccess(T data)|데이터를 받아 처리하는 메서드로, 이 메서드가 호출된 뒤로는 데이터 통지가 없으므로 onSuccess 메서드가 호출되면 Maybe의 처리가 완료됐음을 의미하며 onComplete는 호출하지 않는다|
+> |onComplete|데이터를 통지하지 않고 Maybe의 처리가 완료되면 실행되는 메서드다|
+> |onError(Throwable error)|통지 처리를 실행하는 동안 에러가 발생하면 호출되는 메서드로, 발생한 에러의 객체가 인자로 전달된다|
+
+### Completable
+
+- 데이터를 통지하지 않고 완료나 에러를 통지하는 클래스
+- 생산자가 되는 다른 클래스와 달리 데이터를 통지하지 않는다
+  - 그래서 Completable은 생산자 클래스와 역할이 다르며 Completable 내에서 특정 부가 작용이 발생하는 처리를 수행하고, 해당 처리가 끝나면 완료를 통지하고, 에러가 발생하면 에러를 통지한다
+
+
+> CompletableObserver의 메서드
+> 
+> |메서드|설명|
+> |---|---|
+> |onSubscribe(Disposable disposable)|통지 준비가 되면 호출되는 메서드로, 구독 해지를 실행하는 Disposable을 인자로 받는다|
+> |onComplete|Completeable의 처리가 완료되면 실행되는 메서드|
+> |onError(Throwable error)|통지 처리를 실행하는 동안 에러가 발생하면 호출되는 메서드로, 발생한 에러 객체가 인자로 전달된다|
 
