@@ -721,3 +721,15 @@ RxComputationThreadPool-1: 완료
 > |onComplete|Completeable의 처리가 완료되면 실행되는 메서드|
 > |onError(Throwable error)|통지 처리를 실행하는 동안 에러가 발생하면 호출되는 메서드로, 발생한 에러 객체가 인자로 전달된다|
 
+# RxJava의 확장모듈
+
+- RxJava는 경량화되어 기본적으로 최소한의 기능만 있으며, 일부 응용프로그램에서만 사용하는 기능은 편리한 기능이라도 별도의 모듈로 제공한다
+
+- RxJavaString : 문자열을 다루는 RxJava 확장 모듈로, InputStream이나 Reader에서 Flowable/Observable을 생성할 수 있다
+- RxJavaFileUtils : 파일 관련 처리를 하는 확장 모듈
+- RxJavaMath : 수학 관련 처리를 하는 확장 모듈
+- RxJavaJoins : 여러 Observable을 사용한 처리를 하는 확장 모듈
+- RxJavaAsyncUtil : 비동기 처리 유틸리티리 확장 모듈
+- RxAndroid : 안드로이드에서 사용하는 스레드를 관리하는 스케쥴러가 있는 RxJava 확장 모듈
+- RxLifecycle: 안드로이드의 Activity난 Fragment를 RxJava의 Rowable나 Observable의 라이프 사이클과 동기화하는 RxJava 확장 모듈
+- RxBinding : 안드로이드 각 부품의 이벤트와 Rxjava를 연계하는 RxJava 확장 모듈
