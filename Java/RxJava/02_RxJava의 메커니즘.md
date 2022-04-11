@@ -125,3 +125,13 @@ public static void main(String[] args) throws Exception {
 > - RxJava에서 배압을 적용할 때 세번째 인자가 중요한데, 이는 버퍼를 담긴 통지 대기 데이터에서 인자 크기만큼 소비자에게 통지할 데이터를 꺼내기 때문이다.
 >   - 실제로는 자동으로 생산자에게 인자에 지정한 수치를 데이터 개수로 요청하며, 이 요청으로 받은 데이터를 버퍼에 쌓아둔다.
 >   - 즉 '2'를 지정하면 내부에서 request(2)가 실행된다
+
+## 연산자 내에서 생성되는 비동기 Flowable/Observable
+
+- RxJava의 메서드 중에는 flatMap 메서드처럼 연산자 내부에서 Flowable/Observable을 생성하고 이를 시작한 뒤 데이터를 통지하는 메서드가 있다
+  - 이때 생성힌 Flowable/Observable을 별도의 스레드에서 실행하면 데이터를 받아 생성한 Flowable/Observable이 시작될 때까지는 flatMap 메서드가 데이터를 받은 순서대로 실행되지만, 일단 Flowable/Observable이 시작되면 그 뒤로는 각자 다른 스레드에서 처리 작업을 수행한다
+  - 즉 사용하는 메서드에 따라 여러 Flowable/Observable을 서로 다른 스레드에서 동시에 실행한다는 뜻이다.
+
+### flatMap 메서드
+
+- 데이터를 받으면 새로운 Flowable/Observable을 생성하고 이를 실행해 여기에서 통지되는 데이터를 결과물로 통지하는 연산자다

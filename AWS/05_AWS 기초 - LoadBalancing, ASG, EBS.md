@@ -79,13 +79,13 @@
 ### AWS 로드 밸런서의 종류
 
 1. Classic Load Balancer (CLB - v1 - 2009)
-  - HTTP, HTTPS, TCP, SSL
+   - HTTP, HTTPS, TCP, SSL
 2. Application Load Balancer (ALB - v2 - 2016)
-  - HTTP, HTTPS, WebSocket
+   - HTTP, HTTPS, WebSocket
 3. Network Load Balancer (NLB - v2 - 2017)
-  - TCP, TLS, UDP
+   - TCP, TLS, UDP
 4. Gateway Load Balancer (GWLB - 2020)
-  - IP Protocol, 네트워크 레이어
+   - IP Protocol, 네트워크 레이어
 
 - 전반적으로 더 많은 기능을 제공하는 최신 세대 로드밸런서 사용 추천 (CLB보다 ALB사용 추천)
 - 일부 로드 밸런서는 내부(프라이빗) 또는 외부 (퍼블릭) ELB로 설정 가능하다
