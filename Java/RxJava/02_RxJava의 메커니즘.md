@@ -128,10 +128,27 @@ public static void main(String[] args) throws Exception {
 
 ## 연산자 내에서 생성되는 비동기 Flowable/Observable
 
-- RxJava의 메서드 중에는 flatMap 메서드처럼 연산자 내부에서 Flowable/Observable을 생성하고 이를 시작한 뒤 데이터를 통지하는 메서드가 있다
-  - 이때 생성힌 Flowable/Observable을 별도의 스레드에서 실행하면 데이터를 받아 생성한 Flowable/Observable이 시작될 때까지는 flatMap 메서드가 데이터를 받은 순서대로 실행되지만, 일단 Flowable/Observable이 시작되면 그 뒤로는 각자 다른 스레드에서 처리 작업을 수행한다
-  - 즉 사용하는 메서드에 따라 여러 Flowable/Observable을 서로 다른 스레드에서 동시에 실행한다는 뜻이다.
+- RxJava의 메서드 중에는 `flatMap` 메서드처럼 연산자 내부에서 `Flowable/Observable`을 생성하고 이를 시작한 뒤 데이터를 통지하는 메서드가 있다
+  - 이때 생성힌 `Flowable/Observable`을 별도의 스레드에서 실행하면 데이터를 받아 생성한 `Flowable/Observable`이 시작될 때까지는 `flatMap` 메서드가 데이터를 받은 순서대로 실행되지만, 일단 `Flowable/Observable`이 시작되면 그 뒤로는 각자 다른 스레드에서 처리 작업을 수행한다
+  - 즉 사용하는 메서드에 따라 여러 `Flowable/Observable`을 서로 다른 스레드에서 동시에 실행한다는 뜻이다.
 
-### flatMap 메서드
+### `flatMap` 메서드
 
-- 데이터를 받으면 새로운 Flowable/Observable을 생성하고 이를 실행해 여기에서 통지되는 데이터를 결과물로 통지하는 연산자다
+- 데이터를 받으면 새로운 `Flowable/Observable`을 생성하고 이를 실행해 여기에서 통지되는 데이터를 결과물로 통지하는 연산자다
+- 데이터가 연속적으로들어오고 이를 통해 생성되는 `Flowable/Observable`이 별도의 스레드에서 처리되고 최종적으로 통지되는 데이터는 데이터를 받은 순서와는 달라질 수 있다
+
+### `concatMap` 메서드
+
+- `concatMap` 메서드는 받은 데이터로 메서드 내부에 `Flowable/Observable`을 생성하고, 이 `Flowable/Observable`을 하나씩 순서대로 싱행해 통지된 데이터를 그 결과물로 통지하는 연산자다
+- 이 과정에서 생성되는 `Flowable/Observable`은  각각 다른 스레드에서 처리해도 이에 영항을 받지 않고 새로 생성한 `Flowable/Observable`의 처리 데이터를 받은 순서대로 통지한다
+
+### `concatMapEager` 메서드
+
+- concatMapEager 메서드는 데이터를 받으면 새로운 Flowable/Observable을 생성하고 이를 즉시 실행해 그 결과로 받은 데이터를 원본 데이터 순서대로 통지하는 연산자다
+  - 이때 생성한 `Flowable/Observable`이 서로 다른 스레드에서 실행된다면 생성한 `Flowable/Observable`은 `flatMap`메서드 때처럼 동시에 실행된다. 하지만 결과로 통지되는 데이터는 `concatMap` 메서드와 같이 원본 데이터 순서대로 통지된다
+
+---
+
+## 다른 스레드 간 공유되는 객체
+
+- RxJava는 Reactive Streams 규칙과 Obsrvable 규약에 따라 구현하는 한 쉽게 비동기처리를 할 수 있다. 하지만 생산자와 소비자가 아닌 외부에서도 공유되는 객체를 다룰 때는 RxJava가 보장하는 순차성을 잃게될 수 있다
