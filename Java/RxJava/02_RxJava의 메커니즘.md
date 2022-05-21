@@ -152,3 +152,53 @@ public static void main(String[] args) throws Exception {
 ## 다른 스레드 간 공유되는 객체
 
 - RxJava는 Reactive Streams 규칙과 Obsrvable 규약에 따라 구현하는 한 쉽게 비동기처리를 할 수 있다. 하지만 생산자와 소비자가 아닌 외부에서도 공유되는 객체를 다룰 때는 RxJava가 보장하는 순차성을 잃게될 수 있다
+
+--- 
+
+# 에러 처리
+
+- 에러 중에서는 더 이상 처리 작업을 하지 않게 멈춰야 하는 에러가 있기도 하며, 회복 가능한 에러도 있고, 에러 통지에 따라 정상적으로 프로그램을 종료해야 할 때도 있다. 에러가 발생했을 때 RxJava가 제공하는 에러 처리는 크게 세가지가 있다
+  - 소비자 (`Subscriber/Observer`)에게 에러 통지하기
+  - 처리 작업 재시도 (retry)
+  - 대체 데이터 통지
+
+## 소비자에게 에러 통지하기
+
+- RxJava는 지금까지 알아본 것처럼 통지 처리 중에 에러가 발생하면 소비자에게 에러를 통지해 이 에러 통지를 받은 소비자가 에러에 대응하는 메커니즘을 제공한다. 또한 명시적으로 에러 통지 기능을 구현하지 않아도 처리 도중에 에러가 발생하면 에러를 던지고 처리를 중단하는 것이 아니라 기본적으로 소비자에게 발생한 에러를 통지하게 이루어져 있다. 이는 특히 비동기 처리 중에 발생한 에러가 주 처리 작업을 수행하는 스레드에 반드시 전달되도록 에러 객체가 담긴 에러 메시지를 소비자에게 통지해 적절한 에러 처리를 하게 한다
+- 참고로 에러 통지 시 어떤 처리를 할지 설정하지 않은 subscribe 메서드(`subscribe(onNex)`로 구독할 때는 에러가 발생해도 이 에러의 스택 트레이스만 출력할 뿐 별도의 에러 처리를 하지 않는다. 그래서 에러가 발생했다는 것을 인식하지 못해 아무런 에러 처리를 없이 그대로 구독 후의 처리 작업을 진행하게 되므로 주의해야 한다
+
+## 처리 재시도
+
+- 에러에 따라서는 순간적인 네트워크 중단과 같이 재실행하면 정상적인 처리를 할 수 있을 때도 있다 이와 같은 에러를 처리하고자 RxJava는 에러가 발생하면 생산자의 처리 작업을 처음부터 다시 시도함으로써 에러 상황에서 회복해 정상적인 결과를 얻는 방법을 제공한다. 이때는 소비자에게 에러를 통지하지 않는다
+- 이러한 대응 작업을 위해 RxJava는 retry 라는 에러 발생 시 재실행하는 메서드를 제공한다. 이 재시도를 통한 에러 처리는 네트워크가 순산적으로 중단돼 처리 작업이 실패해도 다시 실행하면 올바른 결과를 얻을 수 있을 때 유용하다
+
+> **주요 재시도 연산자**
+> 
+> - `retry(long times)`
+> - `retry(Predicate<? super Throwable> predicate)`
+> - `retry(long times, Predicate<? super Throwable> predicate)`
+> - `retryUtil(BooleanSupplier stop)`
+> - `retryWhen(Function<? super Flowable/Observable<Throwable>, ? extends Publisher/ObservableSource<?>> handler)`
+
+- retry : 재시도 횟수, 재시도 할지 여부 판단하는 함수형 인터페이스 등의 인자를 받는다
+- retryUntil : 재시도를 반정하는 함수형 인터페이스를 인자로 받아 이 함수형 인터페이스가 false를 반환할 때만 재시도하는 연산자
+  - true를 반환하면 재시도를 하지 않고, 에러를 통지한다
+- retryWhen : 재시도하기 위한 `Flowable/Observable`을 생성하는 함수형 인터페이스를 인자로 받아 재시도할지를 제어하는 연산자
+
+## 대체 데이터 통지
+
+- 에러가 발생하면 대체 데이터를 통지해 처리 작업을 에러로 끝내지 않고 완료하게 하는 에러 처리 방법도 있다. RxJava는 이를 위한 메서드를 제공하는데 `onError`나 `onException`으로 시작하는 메서드가 이에 해당한다.
+  - 이러한 메서드를 사용하면 에러가 발생했을 때 소비자에게 에러를 통지하지 않고 대체 데이터나 `Flwoable/Observable`에 있는 데이터를 통지해 처리 작업을 실행하고 마지막으로 완료를 통지해 작업을 정상적으로 종료할 수 있다
+
+
+> **에러가 발생했을 때 대체 데이터를 통지하는 주요 연산자**
+>
+> - `onErrorReturnItem(T item)`
+> - `onErrorReturn(Function<? super Throwable, ? extends T> valueSupplier)`
+> - `onErrorResumeNext(Publisher/ObservableSource<? extends T> next)`
+> - `onErrorResumeNext(Function<? super Throwable, ? extends Publisher/ObservableSource<? extends T>> resumeFunction)`
+> - `onExceptionResumeNext(Publisher/ObservableSource<? extends T> next)`
+
+- onErrorReturnItem, onErrorReturn : 에러 발생 시 에러를 통지하지 않고 대체 데이터를 통지해 완료하는 연산자
+- onErrorResumeNext : 에러 발생 시 에러를 통지하지 않는 대신 `Flowable/Observable`을 생성해 데이터를 통지하는 연산자. 이 메서드는 생성한 `Flowable/Observable`이 데이터를 통지한 뒤로 완료 통지 대신 에러를 통지해 에러로 종료하게 한다
+- onExceptionResumeNext : Exception이나 Exception을 상속받은 예외일 때만 대체 `Flowable/Observable` 데이터를 통지하는 연산자. Error등 Exception이 아닌 에러는 그대로 에러로 통지한다
