@@ -1,4 +1,6 @@
-# 옵저버 패턴
+
+# RxJava와 디자인 패턴
+## 옵저버 패턴
 
 - RxJava는 옵저버 패턴을 확장한 구조다
 - 옵저버 패턴은 관찰 대상 객체의 상태에 변화가 발생하면 해당 객체를 관찰하는 객체가 변화에 따른 처리 작업을 하는 디자인 패턴이다
@@ -23,7 +25,7 @@
   - 이렇게 생산자가 일으킨 상태 변화를 데이터로 다루어 소비자에게 통지하면 변화가 발생했을 때 신속한 처리가 가능하다
   - RxJava에서는 상태 변화를 알리는 통지 외에도 처리를 시작할 준비가 됐음을 알리는 통지와 모든 처리가 끝났음을 알리는 완료 통지, 에러가 발생했음을 알리는 에러 통지가 가능하다
 
-# 이터레이터 패턴
+## 이터레이터 패턴
 
 - RxJava의 실제 구현은 이터레이터 패턴과 완전히 다른 구조를 가지고 있으나 개념은 이터레이터 패턴이 많은 영향을 주었다
 - 이터레이터 패턴은 데이터 집합체에서 순서대로 데이터를 꺼내기 위한 패턴이다
@@ -87,6 +89,8 @@
 - `subscribeOn` 메서드는 생산자가 처리 작업을 할 스케줄러를 설정할 때 사용하므로 최초 1회만 설정할 수 있다
   - `subscribeOn` 메서드로 스케줄러를 설정하고 나면 그보다 뒤에 설정한 `subscribeOn`의 스케줄러는 무시된다
 
+![](./images/02_03.png)
+
 ```java
 public static void main(String[] args) throws Exception {
     Flowable.just(1, 2, 3, 4, 5) // Flowable 설정
@@ -114,6 +118,8 @@ public static void main(String[] args) throws Exception {
   - `observeOn(Scheduler scheduler, Boolean delayError)`
   - `observeOn(Scheduler scheduler, Boolean delayError, int bufferSize)`
 
+![](./images/02_04.png)
+
 > `observeOn` 메서드의 인자
 > 
 > |인자 타입|설명|
@@ -137,15 +143,21 @@ public static void main(String[] args) throws Exception {
 - 데이터를 받으면 새로운 `Flowable/Observable`을 생성하고 이를 실행해 여기에서 통지되는 데이터를 결과물로 통지하는 연산자다
 - 데이터가 연속적으로들어오고 이를 통해 생성되는 `Flowable/Observable`이 별도의 스레드에서 처리되고 최종적으로 통지되는 데이터는 데이터를 받은 순서와는 달라질 수 있다
 
+![](./images/02_05.png)
+
 ### `concatMap` 메서드
 
 - `concatMap` 메서드는 받은 데이터로 메서드 내부에 `Flowable/Observable`을 생성하고, 이 `Flowable/Observable`을 하나씩 순서대로 싱행해 통지된 데이터를 그 결과물로 통지하는 연산자다
 - 이 과정에서 생성되는 `Flowable/Observable`은  각각 다른 스레드에서 처리해도 이에 영항을 받지 않고 새로 생성한 `Flowable/Observable`의 처리 데이터를 받은 순서대로 통지한다
 
+![](./images/02_06.png)
+
 ### `concatMapEager` 메서드
 
 - concatMapEager 메서드는 데이터를 받으면 새로운 Flowable/Observable을 생성하고 이를 즉시 실행해 그 결과로 받은 데이터를 원본 데이터 순서대로 통지하는 연산자다
   - 이때 생성한 `Flowable/Observable`이 서로 다른 스레드에서 실행된다면 생성한 `Flowable/Observable`은 `flatMap`메서드 때처럼 동시에 실행된다. 하지만 결과로 통지되는 데이터는 `concatMap` 메서드와 같이 원본 데이터 순서대로 통지된다
+
+![](./images/02_07.png)
 
 ---
 
@@ -202,3 +214,44 @@ public static void main(String[] args) throws Exception {
 - onErrorReturnItem, onErrorReturn : 에러 발생 시 에러를 통지하지 않고 대체 데이터를 통지해 완료하는 연산자
 - onErrorResumeNext : 에러 발생 시 에러를 통지하지 않는 대신 `Flowable/Observable`을 생성해 데이터를 통지하는 연산자. 이 메서드는 생성한 `Flowable/Observable`이 데이터를 통지한 뒤로 완료 통지 대신 에러를 통지해 에러로 종료하게 한다
 - onExceptionResumeNext : Exception이나 Exception을 상속받은 예외일 때만 대체 `Flowable/Observable` 데이터를 통지하는 연산자. Error등 Exception이 아닌 에러는 그대로 에러로 통지한다
+
+# 리소스 관리
+
+- RxJava는 `Flowable/Observable`이 구독될 때 리소스를 얻고 완료나 에러가 발생했을 때 리소스를 해제하는 기능을 제공한다
+
+## using 메서드
+
+- RxJava는 리소스를 관리하는 using 메서드를 제공하여 리소스의 라이프사이클에 맞춘 `Flowable/Observable`을 생성할 수 있다.
+- 이 메서드는 다음 처리 작업을 하는 함수형 인터페이스를 제공한다
+  1. 리소스 얻기
+  2. 리소스에서 얻은 데이터를 사용하는 `Flowable/Observable` 생성
+  3. 리소스 해제
+- `using`메서드로 생성한 `Flowable/Observable`을 사용하면 리소스 관리는 `Flowable/Observable` 내부에서 일어나게 된다
+- 마지막 리소스 해제 작업은 구독을 해지할 때도 실행된다. 그러므로 처리 작업 도중에 구독을 해지해야 하는 상황에도 구독 해지 시점에 자동으로 리소스가 해지된다. 다만 이때는 `sourceSupplier`가 데이터를 통지하려고 리소스에 접근할 때 리소스에 접근할 수 있는지를 확인해야 한다
+
+![](./images/02_08.png)
+
+## FlowableEmitter/ObservableEmitter
+
+- `Flowable/Observable`의 create 메서드 내부에서 사용하는 `FlowableEmitter/ObservableEmitter`도 리소스를 해제하는 수단으로 다음 메서드가 있다
+    > - `setCancellable(Cancellable cancellable)`
+    > - `setDisposabnle(Disposable disposable)`
+
+### setCancellable 메서드
+
+- FlowableEmitter/ObservableEmitter의 setCancellab le 메서드는 Cancellable 인터페이스를 설정하는 메서드다
+- Cancellable인터페이스는 구독이 취소될 때 처리 작업을 하는 메서드 하나만 있는 함수형 인터페이스다
+- setCancellable 메서드로 Cancellable 인터페이스를 설정해 두면 완료 통지나 에러 통지를 한 후 또는 구독을 중도에 해지했을 때 cancel 메서드가 실행된다. 따라서 create메서드로 생성한 Flowable/Observable이 정상적으로 종료되거나 불필요해졌을 때 구독을 해지할 수 있게 제대로 관리한다면 Flowable/Observable 외부에서 별도로 리소스를 관리하지 않아도 된다
+
+### setDisposable 메서드
+
+- FlowableEmiiter/ObservabnleEmitter의 setDisposable 메서드는 Disposable 인터페이스를 설정하는 메서드다.
+- setDisposable 메서드로 Disposable을 설정해 두면 완료 또는 에러를 통지한 후나 구독을 중도 해지했을 때 dispose 메서드가 실행된다.
+  - create메서드로 생성한 Flowable/Observable이 완료되거나 불필요해졌을 때 구독을 해지할 수 있게 제대로 관리한다면 Flwoable/Observable 외부에서 별도로 리소스를 관리하지 않아도 된다
+
+### 주의사항
+
+- 두독을 중도에 해지샣을 때 데이터를 통지하는 처리 작업이 이미 파기한 리소스에 접근한다면 에러가 발생한다. 그러므로 리소스에 접근할 때는 리소스가 파기됐는지 체크하거나 신속하게 처리를 멈추는 등의 대응을 해야 한다
+- 또한 Cancellable과 Disposable을 함께 FlowableEmiiter/ObservableEmitter에 설정할 수 없다. 이는 setCanceallbe 메서드가 실제로는 내부애서 setDisposable 메서드를 호출하여 Canceallbe을 Disposable로 감싸서 설정하기 때문이다.
+- setDisposable 메서드는 Disposable 메서드를 설정할 때 이미 설정된 Disposable의 dispose 메서드를 호출한다. 그러므로 Cancellable과 Disposable 양쪽을 모두 설정하려고 하면 설정 시점에 어느 한쪽의 리소스가 해제돼 버린다.
+
