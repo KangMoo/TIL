@@ -4,7 +4,6 @@ Today I Learned
 
 하루하루 배운 내용 기록!!
 
-
 ---
 
 ### ASP.NET
@@ -32,35 +31,33 @@ Today I Learned
 
 ### Akka
 - [01_Akka](https://github.com/KangMoo/TIL/blob/master/Akka/01_Akka.md)
-- [Akka Actor Model](https://github.com/KangMoo/TIL/blob/master/Akka/Akka%20Actor%20Model.pdf)
-- [Akka Actor Model](https://github.com/KangMoo/TIL/blob/master/Akka/Akka%20Actor%20Model.pptx)
-
----
-
-### C# Network
-- [01_네트워크 기본 구조와 원리](https://github.com/KangMoo/TIL/blob/master/C%23%20Network/01_%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%EA%B8%B0%EB%B3%B8%20%EA%B5%AC%EC%A1%B0%EC%99%80%20%EC%9B%90%EB%A6%AC.md)
-- [02_네트워크 클래스](https://github.com/KangMoo/TIL/blob/master/C%23%20Network/02_%EB%84%A4%ED%8A%B8%EC%9B%8C%ED%81%AC%20%ED%81%B4%EB%9E%98%EC%8A%A4.md)
 
 ---
 
 ### C#
-- [01_데이터형 및 문법 기초](https://github.com/KangMoo/TIL/blob/master/C%23/01_%EB%8D%B0%EC%9D%B4%ED%84%B0%ED%98%95%20%EB%B0%8F%20%EB%AC%B8%EB%B2%95%20%EA%B8%B0%EC%B4%88.md)
-- [02_파일입출력](https://github.com/KangMoo/TIL/blob/master/C%23/02_%ED%8C%8C%EC%9D%BC%EC%9E%85%EC%B6%9C%EB%A0%A5.md)
-- [03_클래스](https://github.com/KangMoo/TIL/blob/master/C%23/03_%ED%81%B4%EB%9E%98%EC%8A%A4.md)
-- [04_속성과 인덱서](https://github.com/KangMoo/TIL/blob/master/C%23/04_%EC%86%8D%EC%84%B1%EA%B3%BC%20%EC%9D%B8%EB%8D%B1%EC%84%9C.md)
-- [05_델리게이트와 이벤트](https://github.com/KangMoo/TIL/blob/master/C%23/05_%EB%8D%B8%EB%A6%AC%EA%B2%8C%EC%9D%B4%ED%8A%B8%EC%99%80%20%EC%9D%B4%EB%B2%A4%ED%8A%B8.md)
-- [06_상속](https://github.com/KangMoo/TIL/blob/master/C%23/06_%EC%83%81%EC%86%8D.md)
-- [07_인터페이스](https://github.com/KangMoo/TIL/blob/master/C%23/07_%EC%9D%B8%ED%84%B0%ED%8E%98%EC%9D%B4%EC%8A%A4.md)
-- [08_윈도우 프로그래밍 및 이벤트 핸들러](https://github.com/KangMoo/TIL/blob/master/C%23/08_%EC%9C%88%EB%8F%84%EC%9A%B0%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D%20%EB%B0%8F%20%EC%9D%B4%EB%B2%A4%ED%8A%B8%20%ED%95%B8%EB%93%A4%EB%9F%AC.md)
-- [09_키보드, 마우스](https://github.com/KangMoo/TIL/blob/master/C%23/09_%ED%82%A4%EB%B3%B4%EB%93%9C%2C%20%EB%A7%88%EC%9A%B0%EC%8A%A4.md)
-- [10_GDI](https://github.com/KangMoo/TIL/blob/master/C%23/10_GDI.md)
-- [11_이미지](https://github.com/KangMoo/TIL/blob/master/C%23/11_%EC%9D%B4%EB%AF%B8%EC%A7%80.md)
-- [12_폼과 타이머 이벤트](https://github.com/KangMoo/TIL/blob/master/C%23/12_%ED%8F%BC%EA%B3%BC%20%ED%83%80%EC%9D%B4%EB%A8%B8%20%EC%9D%B4%EB%B2%A4%ED%8A%B8.md)
-- [13_메뉴 다루기](https://github.com/KangMoo/TIL/blob/master/C%23/13_%EB%A9%94%EB%89%B4%20%EB%8B%A4%EB%A3%A8%EA%B8%B0.md)
-- [14_기본 컨트롤](https://github.com/KangMoo/TIL/blob/master/C%23/14_%EA%B8%B0%EB%B3%B8%20%EC%BB%A8%ED%8A%B8%EB%A1%A4.md)
-- [15_고급 컨트롤](https://github.com/KangMoo/TIL/blob/master/C%23/15_%EA%B3%A0%EA%B8%89%20%EC%BB%A8%ED%8A%B8%EB%A1%A4.md)
-- [16_대화상자](https://github.com/KangMoo/TIL/blob/master/C%23/16_%EB%8C%80%ED%99%94%EC%83%81%EC%9E%90.md)
-- [17_폼 분할](https://github.com/KangMoo/TIL/blob/master/C%23/17_%ED%8F%BC%20%EB%B6%84%ED%95%A0.md)
+- [01_데이터형 및 문법 기초](https://github.com/KangMoo/TIL/blob/master/C)
+- [02_파일입출력](https://github.com/KangMoo/TIL/blob/master/C)
+- [03_클래스](https://github.com/KangMoo/TIL/blob/master/C)
+- [04_속성과 인덱서](https://github.com/KangMoo/TIL/blob/master/C)
+- [05_델리게이트와 이벤트](https://github.com/KangMoo/TIL/blob/master/C)
+- [06_상속](https://github.com/KangMoo/TIL/blob/master/C)
+- [07_인터페이스](https://github.com/KangMoo/TIL/blob/master/C)
+- [08_윈도우 프로그래밍 및 이벤트 핸들러](https://github.com/KangMoo/TIL/blob/master/C)
+- [09_키보드, 마우스](https://github.com/KangMoo/TIL/blob/master/C)
+- [10_GDI](https://github.com/KangMoo/TIL/blob/master/C)
+- [11_이미지](https://github.com/KangMoo/TIL/blob/master/C)
+- [12_폼과 타이머 이벤트](https://github.com/KangMoo/TIL/blob/master/C)
+- [13_메뉴 다루기](https://github.com/KangMoo/TIL/blob/master/C)
+- [14_기본 컨트롤](https://github.com/KangMoo/TIL/blob/master/C)
+- [15_고급 컨트롤](https://github.com/KangMoo/TIL/blob/master/C)
+- [16_대화상자](https://github.com/KangMoo/TIL/blob/master/C)
+- [17_폼 분할](https://github.com/KangMoo/TIL/blob/master/C)
+
+---
+
+### C# Network
+- [01_네트워크 기본 구조와 원리](https://github.com/KangMoo/TIL/blob/master/C)
+- [02_네트워크 클래스](https://github.com/KangMoo/TIL/blob/master/C)
 
 ---
 
@@ -122,33 +119,6 @@ Today I Learned
 - [H264](https://github.com/KangMoo/TIL/blob/master/Codec/H264.md)
 - [H265_HEVC](https://github.com/KangMoo/TIL/blob/master/Codec/H265_HEVC.md)
 - [VP9](https://github.com/KangMoo/TIL/blob/master/Codec/VP9.md)
-
----
-
-### Computer Graphics and Vision
-- [2017-04장 지역 특징 검출](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/2017-04%EC%9E%A5%20%EC%A7%80%EC%97%AD%20%ED%8A%B9%EC%A7%95%20%EA%B2%80%EC%B6%9C.pptx)
-- [2017-07장 매칭](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/2017-07%EC%9E%A5%20%EB%A7%A4%EC%B9%AD.pptx)
-- [CGV - 2018 - 02장 영상처리 - 2017 CV 자료 (1)](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV%20-%202018%20-%2002%EC%9E%A5%20%EC%98%81%EC%83%81%EC%B2%98%EB%A6%AC%20-%202017%20CV%20%EC%9E%90%EB%A3%8C%20%281%29.pptx)
-- [CGV - 2018 - 02장 영상처리 - 2017 CV 자료](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV%20-%202018%20-%2002%EC%9E%A5%20%EC%98%81%EC%83%81%EC%B2%98%EB%A6%AC%20-%202017%20CV%20%EC%9E%90%EB%A3%8C.pptx)
-- [CGV - 2018 - 03장 에지 검출 - 2017 CV 자료 (1)](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV%20-%202018%20-%2003%EC%9E%A5%20%EC%97%90%EC%A7%80%20%EA%B2%80%EC%B6%9C%20-%202017%20CV%20%EC%9E%90%EB%A3%8C%20%281%29.pptx)
-- [CGV - 2018 - 03장 에지 검출 - 2017 CV 자료](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV%20-%202018%20-%2003%EC%9E%A5%20%EC%97%90%EC%A7%80%20%EA%B2%80%EC%B6%9C%20-%202017%20CV%20%EC%9E%90%EB%A3%8C.pptx)
-- [CGV-2018-06장 특징 기술](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-06%EC%9E%A5%20%ED%8A%B9%EC%A7%95%20%EA%B8%B0%EC%88%A0.pptx)
-- [CGV-2018-08장 기계 학습](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-08%EC%9E%A5%20%EA%B8%B0%EA%B3%84%20%ED%95%99%EC%8A%B5.pptx)
-- [CGV-2018-DMMbitmaps-part 1-basics](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-DMMbitmaps-part%201-basics.pptx)
-- [CGV-2018-DMMbitmaps-part 2-color](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-DMMbitmaps-part%202-color.pptx)
-- [CGV-2018-DMMbitmaps-part 3-pixel based](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-DMMbitmaps-part%203-pixel%20based.pptx)
-- [CGV-2018-DMMbitmaps-part 4-mask based](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-DMMbitmaps-part%204-mask%20based.pptx)
-- [CGV-2018-DMMbitmaps-part 5-geometrical](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-DMMbitmaps-part%205-geometrical.pptx)
-- [CGV-2018-Object-tracking-learnopencv.com](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-Object-tracking-learnopencv.com.ppt)
-- [CGV-2018-Perspective Projection](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-Perspective%20Projection.ppt)
-- [CGV-2018-opencv-SIFT-matching](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-opencv-SIFT-matching.ppt)
-- [CGV-2018-opencv-mouse-callback](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-opencv-mouse-callback.ppt)
-- [CGV-2018-영상-part 5-geometrical](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-%EC%98%81%EC%83%81-part%205-geometrical.pptx)
-- [CGV-2018-오일석-06장 특징 기술](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-%EC%98%A4%EC%9D%BC%EC%84%9D-06%EC%9E%A5%20%ED%8A%B9%EC%A7%95%20%EA%B8%B0%EC%88%A0.pptx)
-- [CGV-2018-오일석-10장 모션](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-2018-%EC%98%A4%EC%9D%BC%EC%84%9D-10%EC%9E%A5%20%EB%AA%A8%EC%85%98.pptx)
-- [CGV-xx-명함인식-결말-character segmentation-c-labelling-화상회의 project 소개](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-xx-%EB%AA%85%ED%95%A8%EC%9D%B8%EC%8B%9D-%EA%B2%B0%EB%A7%90-character%20segmentation-c-labelling-%ED%99%94%EC%83%81%ED%9A%8C%EC%9D%98%20project%20%EC%86%8C%EA%B0%9C.ppt)
-- [CGV-xx-명함인식-소개](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-xx-%EB%AA%85%ED%95%A8%EC%9D%B8%EC%8B%9D-%EC%86%8C%EA%B0%9C.ppt)
-- [CGV-xx-명함인식-중간결과](https://github.com/KangMoo/TIL/blob/master/Computer%20Graphics%20and%20Vision/CGV-xx-%EB%AA%85%ED%95%A8%EC%9D%B8%EC%8B%9D-%EC%A4%91%EA%B0%84%EA%B2%B0%EA%B3%BC.ppt)
 
 ---
 
@@ -275,21 +245,34 @@ Today I Learned
 - [JDK](https://github.com/KangMoo/TIL/blob/master/Java/JDK.md)
 - [JNI_JNA](https://github.com/KangMoo/TIL/blob/master/Java/JNI_JNA.md)
 - [Java Bean](https://github.com/KangMoo/TIL/blob/master/Java/Java%20Bean.md)
-
----
-
-### Java - Maven
-- [01_Maven](https://github.com/KangMoo/TIL/blob/master/Java/Maven/01_Maven.md)
 - [Mockito](https://github.com/KangMoo/TIL/blob/master/Java/Mockito.md)
-
----
-
-### Java - Netty
-- [01_Netty란](https://github.com/KangMoo/TIL/blob/master/Java/Netty/01_Netty%EB%9E%80.md)
-- [02_Netty기초](https://github.com/KangMoo/TIL/blob/master/Java/Netty/02_Netty%EA%B8%B0%EC%B4%88.md)
 - [PowerMock](https://github.com/KangMoo/TIL/blob/master/Java/PowerMock.md)
 - [ZGC](https://github.com/KangMoo/TIL/blob/master/Java/ZGC.md)
 - [리눅스_$JAVA_HOME환경변수 설정](https://github.com/KangMoo/TIL/blob/master/Java/%EB%A6%AC%EB%88%85%EC%8A%A4_%24JAVA_HOME%ED%99%98%EA%B2%BD%EB%B3%80%EC%88%98%20%EC%84%A4%EC%A0%95.md)
+
+---
+
+### Java/Design_Pattern
+- [01_생성_패턴](https://github.com/KangMoo/TIL/blob/master/Java/Design_Pattern/01_%EC%83%9D%EC%84%B1_%ED%8C%A8%ED%84%B4.md)
+- [02_구조_패턴](https://github.com/KangMoo/TIL/blob/master/Java/Design_Pattern/02_%EA%B5%AC%EC%A1%B0_%ED%8C%A8%ED%84%B4.md)
+- [03_행동_패턴](https://github.com/KangMoo/TIL/blob/master/Java/Design_Pattern/03_%ED%96%89%EB%8F%99_%ED%8C%A8%ED%84%B4.md)
+
+---
+
+### Java/Maven
+- [01_Maven](https://github.com/KangMoo/TIL/blob/master/Java/Maven/01_Maven.md)
+
+---
+
+### Java/Netty
+- [01_Netty란](https://github.com/KangMoo/TIL/blob/master/Java/Netty/01_Netty%EB%9E%80.md)
+- [02_Netty기초](https://github.com/KangMoo/TIL/blob/master/Java/Netty/02_Netty%EA%B8%B0%EC%B4%88.md)
+
+---
+
+### Java/RxJava
+- [01_RxJava의 기본](https://github.com/KangMoo/TIL/blob/master/Java/RxJava/01_RxJava%EC%9D%98%20%EA%B8%B0%EB%B3%B8.md)
+- [02_RxJava의 메커니즘](https://github.com/KangMoo/TIL/blob/master/Java/RxJava/02_RxJava%EC%9D%98%20%EB%A9%94%EC%BB%A4%EB%8B%88%EC%A6%98.md)
 
 ---
 
@@ -333,20 +316,20 @@ Today I Learned
 - [03_쉘](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/03_%EC%89%98.md)
 - [04_그룹 및 계정](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/04_%EA%B7%B8%EB%A3%B9%20%EB%B0%8F%20%EA%B3%84%EC%A0%95.md)
 - [05_KVM](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/05_KVM.md)
-
----
-
-### Linux(CentOS) - RPM
-- [01_RPM](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/01_RPM.md)
-- [02_RPM-GPG-KEY 파일 생성](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/02_RPM-GPG-KEY%20%ED%8C%8C%EC%9D%BC%20%EC%83%9D%EC%84%B1.md)
-- [RPM](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/RPM.md)
 - [less](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/less.md)
 - [tmux](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/tmux.md)
 - [링크파일](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EB%A7%81%ED%81%AC%ED%8C%8C%EC%9D%BC.md)
 
 ---
 
-### Linux(CentOS) - 명령어
+### Linux(CentOS)/RPM
+- [01_RPM](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/01_RPM.md)
+- [02_RPM-GPG-KEY 파일 생성](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/02_RPM-GPG-KEY%20%ED%8C%8C%EC%9D%BC%20%EC%83%9D%EC%84%B1.md)
+- [RPM](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/RPM/RPM.md)
+
+---
+
+### Linux(CentOS)/명령어
 - [Linux유용한 명령어](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EB%AA%85%EB%A0%B9%EC%96%B4/Linux%EC%9C%A0%EC%9A%A9%ED%95%9C%20%EB%AA%85%EB%A0%B9%EC%96%B4.md)
 - [awk](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EB%AA%85%EB%A0%B9%EC%96%B4/awk.md)
 - [find](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EB%AA%85%EB%A0%B9%EC%96%B4/find.md)
@@ -363,7 +346,7 @@ Today I Learned
 
 ---
 
-### Linux(CentOS) - 쉘 스크립트
+### Linux(CentOS)/쉘 스크립트
 - [01_변수](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EC%89%98%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/01_%EB%B3%80%EC%88%98.md)
 - [02_if](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EC%89%98%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/02_if.md)
 - [03_for](https://github.com/KangMoo/TIL/blob/master/Linux%28CentOS%29/%EC%89%98%20%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/03_for.md)
@@ -388,7 +371,6 @@ Today I Learned
 ---
 
 ### Media
-- [HLS](https://github.com/KangMoo/TIL/blob/master/Media/HLS.pdf)
 - [codec](https://github.com/KangMoo/TIL/blob/master/Media/codec.md)
 
 ---
@@ -426,11 +408,6 @@ Today I Learned
 
 ---
 
-### Nexus
-- [Nexus](https://github.com/KangMoo/TIL/blob/master/Nexus/Nexus.pdf)
-
----
-
 ### Nodejs
 - [01_URL 주소 분석](https://github.com/KangMoo/TIL/blob/master/Nodejs/01_URL%20%EC%A3%BC%EC%86%8C%20%EB%B6%84%EC%84%9D.md)
 - [02_파일 입출력](https://github.com/KangMoo/TIL/blob/master/Nodejs/02_%ED%8C%8C%EC%9D%BC%20%EC%9E%85%EC%B6%9C%EB%A0%A5.md)
@@ -442,47 +419,8 @@ Today I Learned
 ---
 
 ### OS
-- [L01](https://github.com/KangMoo/TIL/blob/master/OS/L01.pdf)
-- [L02](https://github.com/KangMoo/TIL/blob/master/OS/L02.pdf)
-- [L03](https://github.com/KangMoo/TIL/blob/master/OS/L03.pdf)
-- [L04](https://github.com/KangMoo/TIL/blob/master/OS/L04.pdf)
-- [L05](https://github.com/KangMoo/TIL/blob/master/OS/L05.pdf)
-- [L06](https://github.com/KangMoo/TIL/blob/master/OS/L06.pdf)
-- [L07](https://github.com/KangMoo/TIL/blob/master/OS/L07.pdf)
-- [L08](https://github.com/KangMoo/TIL/blob/master/OS/L08.pdf)
-- [L09](https://github.com/KangMoo/TIL/blob/master/OS/L09.pdf)
-- [L10](https://github.com/KangMoo/TIL/blob/master/OS/L10.pdf)
-- [L11](https://github.com/KangMoo/TIL/blob/master/OS/L11.pdf)
-- [L12](https://github.com/KangMoo/TIL/blob/master/OS/L12.pdf)
-- [L13](https://github.com/KangMoo/TIL/blob/master/OS/L13.pdf)
-- [L14](https://github.com/KangMoo/TIL/blob/master/OS/L14.pdf)
-- [L15](https://github.com/KangMoo/TIL/blob/master/OS/L15.pdf)
-- [L16](https://github.com/KangMoo/TIL/blob/master/OS/L16.pdf)
-- [L17](https://github.com/KangMoo/TIL/blob/master/OS/L17.pdf)
-- [L18](https://github.com/KangMoo/TIL/blob/master/OS/L18.pdf)
-- [L19](https://github.com/KangMoo/TIL/blob/master/OS/L19.pdf)
-- [L20](https://github.com/KangMoo/TIL/blob/master/OS/L20.pdf)
-- [L21](https://github.com/KangMoo/TIL/blob/master/OS/L21.pdf)
-- [L22](https://github.com/KangMoo/TIL/blob/master/OS/L22.pdf)
-- [L23](https://github.com/KangMoo/TIL/blob/master/OS/L23.pdf)
-- [L24](https://github.com/KangMoo/TIL/blob/master/OS/L24.pdf)
-- [L25](https://github.com/KangMoo/TIL/blob/master/OS/L25.pdf)
-- [L26](https://github.com/KangMoo/TIL/blob/master/OS/L26.pdf)
-- [L27](https://github.com/KangMoo/TIL/blob/master/OS/L27.pdf)
-- [L28](https://github.com/KangMoo/TIL/blob/master/OS/L28.pdf)
-- [L29](https://github.com/KangMoo/TIL/blob/master/OS/L29.pdf)
-- [L30](https://github.com/KangMoo/TIL/blob/master/OS/L30.pdf)
-- [L31](https://github.com/KangMoo/TIL/blob/master/OS/L31.pdf)
-- [L32](https://github.com/KangMoo/TIL/blob/master/OS/L32.pdf)
-- [L33](https://github.com/KangMoo/TIL/blob/master/OS/L33.pdf)
 - [Tread Safe](https://github.com/KangMoo/TIL/blob/master/OS/Tread%20Safe.md)
 - [User mode, Kernerl mode](https://github.com/KangMoo/TIL/blob/master/OS/User%20mode%2C%20Kernerl%20mode.md)
-- [ch1](https://github.com/KangMoo/TIL/blob/master/OS/ch1.pptx)
-- [ch2](https://github.com/KangMoo/TIL/blob/master/OS/ch2.pptx)
-- [ch3](https://github.com/KangMoo/TIL/blob/master/OS/ch3.pptx)
-- [ch4](https://github.com/KangMoo/TIL/blob/master/OS/ch4.pptx)
-- [ch5](https://github.com/KangMoo/TIL/blob/master/OS/ch5.pptx)
-- [ch6](https://github.com/KangMoo/TIL/blob/master/OS/ch6.pptx)
 - [공유메모리](https://github.com/KangMoo/TIL/blob/master/OS/%EA%B3%B5%EC%9C%A0%EB%A9%94%EB%AA%A8%EB%A6%AC.md)
 
 ---
@@ -490,7 +428,6 @@ Today I Learned
 ### Openstack
 - [01_오픈스택_소개](https://github.com/KangMoo/TIL/blob/master/Openstack/01_%EC%98%A4%ED%94%88%EC%8A%A4%ED%83%9D_%EC%86%8C%EA%B0%9C.md)
 - [02_오픈스택CLI](https://github.com/KangMoo/TIL/blob/master/Openstack/02_%EC%98%A4%ED%94%88%EC%8A%A4%ED%83%9DCLI.md)
-- [OpenStack](https://github.com/KangMoo/TIL/blob/master/Openstack/OpenStack.pdf)
 
 ---
 
@@ -506,13 +443,6 @@ Today I Learned
 - [04_Physics](https://github.com/KangMoo/TIL/blob/master/Phaser/04_Physics.md)
 - [05_Button](https://github.com/KangMoo/TIL/blob/master/Phaser/05_Button.md)
 - [06_Text](https://github.com/KangMoo/TIL/blob/master/Phaser/06_Text.md)
-
----
-
-### Portfolio
-- [Portfolio](https://github.com/KangMoo/TIL/blob/master/Portfolio/Portfolio.pptx)
-- [허강무_포트폴리오_동영상링크포함](https://github.com/KangMoo/TIL/blob/master/Portfolio/%ED%97%88%EA%B0%95%EB%AC%B4_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_%EB%8F%99%EC%98%81%EC%83%81%EB%A7%81%ED%81%AC%ED%8F%AC%ED%95%A8.pdf)
-- [허강무_포트폴리오_동영상링크포함](https://github.com/KangMoo/TIL/blob/master/Portfolio/%ED%97%88%EA%B0%95%EB%AC%B4_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_%EB%8F%99%EC%98%81%EC%83%81%EB%A7%81%ED%81%AC%ED%8F%AC%ED%95%A8.pptx)
 
 ---
 
@@ -568,8 +498,6 @@ Today I Learned
 - [29_NAT Traversal의 이해](https://github.com/KangMoo/TIL/blob/master/SIP/29_NAT%20Traversal%EC%9D%98%20%EC%9D%B4%ED%95%B4.md)
 - [30_ICE의 이해](https://github.com/KangMoo/TIL/blob/master/SIP/30_ICE%EC%9D%98%20%EC%9D%B4%ED%95%B4.md)
 - [31_SIP 보안의 이해](https://github.com/KangMoo/TIL/blob/master/SIP/31_SIP%20%EB%B3%B4%EC%95%88%EC%9D%98%20%EC%9D%B4%ED%95%B4.md)
-- [SIP RFC 표준규격](https://github.com/KangMoo/TIL/blob/master/SIP/SIP%20RFC%20%ED%91%9C%EC%A4%80%EA%B7%9C%EA%B2%A9.pdf)
-- [SIP 세미나_final](https://github.com/KangMoo/TIL/blob/master/SIP/SIP%20%EC%84%B8%EB%AF%B8%EB%82%98_final.pptx)
 
 ---
 
@@ -585,39 +513,15 @@ Today I Learned
 
 ---
 
-### Software Engineering
-- [10주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/10%EC%A3%BCcolor.pdf)
-- [11주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/11%EC%A3%BCcolor.pdf)
-- [12주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/12%EC%A3%BCcolor.pdf)
-- [13주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/13%EC%A3%BCcolor.pdf)
-- [14주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/14%EC%A3%BCcolor.pdf)
-- [15주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/15%EC%A3%BCcolor.pdf)
-- [16주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/16%EC%A3%BCcolor.pdf)
-- [17주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/17%EC%A3%BCcolor.pdf)
-- [1주](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/1%EC%A3%BC.pdf)
-- [2주](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/2%EC%A3%BC.pdf)
-- [3주](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/3%EC%A3%BC.pdf)
-- [4주bw](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/4%EC%A3%BCbw.pdf)
-- [5주bw](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/5%EC%A3%BCbw.pdf)
-- [6주 시스템 소개bw](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/6%EC%A3%BC%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EC%86%8C%EA%B0%9Cbw.pdf)
-- [6주bw](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/6%EC%A3%BCbw.pdf)
-- [6주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/6%EC%A3%BCcolor.pdf)
-- [7주bw](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/7%EC%A3%BCbw.pdf)
-- [7주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/7%EC%A3%BCcolor.pdf)
-- [8주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/8%EC%A3%BCcolor.pdf)
-- [9주color](https://github.com/KangMoo/TIL/blob/master/Software%20Engineering/9%EC%A3%BCcolor.pdf)
+### TEST
+- [Software_Testing](https://github.com/KangMoo/TIL/blob/master/TEST/Software_Testing.md)
 
 ---
 
-### TEST - AWS
+### TEST/AWS
 - [01_EC2](https://github.com/KangMoo/TIL/blob/master/TEST/AWS/01_EC2.md)
 - [02_NoSQL](https://github.com/KangMoo/TIL/blob/master/TEST/AWS/02_NoSQL.md)
 - [03_Elastic_Beanstalk](https://github.com/KangMoo/TIL/blob/master/TEST/AWS/03_Elastic_Beanstalk.md)
-
----
-
-### TEST
-- [Software_Testing](https://github.com/KangMoo/TIL/blob/master/TEST/Software_Testing.md)
 
 ---
 
@@ -702,4 +606,3 @@ Today I Learned
 - [CSCF](https://github.com/KangMoo/TIL/blob/master/%ED%86%B5%EC%8B%A0/CSCF.md)
 - [IBCF](https://github.com/KangMoo/TIL/blob/master/%ED%86%B5%EC%8B%A0/IBCF.md)
 - [IMS](https://github.com/KangMoo/TIL/blob/master/%ED%86%B5%EC%8B%A0/IMS.md)
-
