@@ -78,6 +78,7 @@ Subscription은 Publisher와 Subscriber 사이에서 중계하는 역할을 한�
 위 interface를 토대로 아래 와같은 flow를 만들 수 있다.
 
 ![](./image/19_1.png)
+---
 ![](./image/19_2.png)
 
 1. Publish에 본인이 소유할 Subscription을 구현하고 publishing할 data를 만든다

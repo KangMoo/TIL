@@ -27,7 +27,7 @@
 
 - ByteBuffer에는 위치를 나타내는 네가지 포인터가 있다.
   -  **position, limit, capacity, mark**
-  - **0 <= mark <= position <= limit <= capacity **
+  - **0 <= mark <= position <= limit <= capacity**
 - **position** : 현재 읽을 위치나 현재 쓸 위치를 가리킨다. ByteBuffer에서 get()함수로 읽기를 시도할 경우 position 위치부터 읽기 시작하여, put()함수로 ByteBuffer에 쓰기를 시도할 경우 position 위치부터 쓰기를 시작한다. 읽거나 쓸 때마다 position의 위치는 자동으로 이동한다
 - **limit** : 현재 ByteBuffer의 유요한 쓰기 위치나 유효한 읽기 위치를 나타낸다. 다시 말해 "이 버퍼는 여기까지 읽을 수 있습니다" 혹은 "여기까지 쓸 수 있습니다"를 나타낸다.
 - **capacity** : ByteBuffer의 용량을 나타낸다. 따라서 항상 ByteBuffer의 맨 마지막을 가리키고 있다. 그 때문에 position과 limit와는 달리 그 위치를 바꿀 필요가 없다
