@@ -59,58 +59,6 @@
 * Dockerfile하나 당 컨테이너 하나! (FROM 하나!)
   * 추가적인 설치는 RUN명령어 등을 사용
 
-
-
-#### Dockerfile 사용법 예제
-
-* 일반적인 개발 방식 예시
-
-  > 1. Node 설치
-  > 2. 개발
-  > 3. `npm install`
-  > 4. `npm start`
-
-* docker를 사용한 개발 방식 예시
-
-  > 1. Dockerfile 생성
-  >
-  > >Dockerfile 예제1
-  > >
-  > >```dockerfile
-  > >FROM alpine
-  > >WORKDIR [dir]
-  > >COPY [소스][대상]
-  > >RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-  > >RUN npm install
-  > >CMD ["npm", "start"]
-  > >```
-  >
-  > > Dockerfile 예제2
-  > >
-  > > ```dockerfile
-  > > FROM node:alpine
-  > > WORKDIR [dir]
-  > > COPY [소스][대상]
-  > > RUN npm install
-  > > CMD ["npm", "start"]
-  > > ```
-  >
-  >   2. Docker이미지 생성
-  >
-  > > 예시
-  > >
-  > > `docker build -t hkm0629/simpleweb:latest .`
-  >
-  > 3. 컨테이너 생성
-  >
-  > > 예시
-  > >
-  > > `docker run -d -p 8080 hkm0629/simpleweb:latest`
-
-  
-
-
-
 #### 코드로 관리하는 인프라 와 불변 인프라
 
 * Infrastructure as Code & Immutable Insfrastructure
